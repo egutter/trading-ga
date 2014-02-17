@@ -21,6 +21,7 @@ public class BollingerBands implements TradingDecision {
     private final StockPrices closePrices;
     private final Range sellThreshold;
     private Map<LocalDate, Double> percentageB = new HashMap<LocalDate, Double>();
+
     private Range buyThreshold;
     private int movingAverageDays;
     private MAType movingAverageType;
@@ -92,7 +93,7 @@ public class BollingerBands implements TradingDecision {
         }
     }
 
-    private MAType movingAverageType() {
+    public MAType movingAverageType() {
         return this.movingAverageType;
     }
 
@@ -104,8 +105,16 @@ public class BollingerBands implements TradingDecision {
         return 2;
     }
 
-    private int movingAverageDays() {
+    public int movingAverageDays() {
         return this.movingAverageDays;
+    }
+
+    public Range getBuyThreshold() {
+        return buyThreshold;
+    }
+
+    public Range getSellThreshold() {
+        return sellThreshold;
     }
 
     private int endIndex(List<Double> closePrices) {

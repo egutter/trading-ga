@@ -1,10 +1,12 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import org.joda.time.LocalDate;
 
 import java.util.List;
 
+import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Lists.transform;
 
 /**
@@ -14,35 +16,35 @@ public class StockPrices {
 
     private String stockName;
 
-    private List<DailyPrice> dailyPrices;
+    private List<DailyQuote> dailyQuotes;
 
-    public StockPrices(String stockName, List<DailyPrice> dailyPrices) {
+    public StockPrices(String stockName, List<DailyQuote> dailyQuotes) {
         this.stockName = stockName;
-        this.dailyPrices = dailyPrices;
+        this.dailyQuotes = dailyQuotes;
     }
 
     public List<Double> getAdjustedClosePrices() {
-        return transform(dailyPrices, collectAdjustedClosePrice());
+        return transform(dailyQuotes, collectAdjustedClosePrice());
     }
 
     public List<LocalDate> getTradingDates() {
-        return transform(dailyPrices, collectTradingDates());
+        return transform(dailyQuotes, collectTradingDates());
     }
 
-    private Function<DailyPrice, LocalDate> collectTradingDates() {
-        return new Function<DailyPrice, LocalDate>() {
+    private Function<DailyQuote, LocalDate> collectTradingDates() {
+        return new Function<DailyQuote, LocalDate>() {
             @Override
-            public LocalDate apply(DailyPrice dailyPrice) {
-                return dailyPrice.getTradingDate();
+            public LocalDate apply(DailyQuote dailyQuote) {
+                return dailyQuote.getTradingDate();
             }
         };
     }
 
-    private Function<DailyPrice, Double> collectAdjustedClosePrice() {
-        return new Function<DailyPrice, Double>() {
+    private Function<DailyQuote, Double> collectAdjustedClosePrice() {
+        return new Function<DailyQuote, Double>() {
             @Override
-            public Double apply(DailyPrice dailyPrice) {
-                return dailyPrice.getAdjustedClosePrice();
+            public Double apply(DailyQuote dailyQuote) {
+                return dailyQuote.getAdjustedClosePrice();
             }
         };
     }
@@ -51,13 +53,13 @@ public class StockPrices {
         return stockName;
     }
 
-    public List<DailyPrice> getDailyPrices() {
-        return dailyPrices;
+    public void forEachDailyPrice(Function<DailyQuote, Object> function) {
+        for (DailyQuote dailyQuote : dailyQuotes) {
+            function.apply(dailyQuote);
+        }
     }
 
-    public void forEachDailyPrice(Function<DailyPrice, Object> function) {
-        for (DailyPrice dailyPrice : dailyPrices) {
-            function.apply(dailyPrice);
-        }
+    public LocalDate getLastTradingDate() {
+        return getLast(dailyQuotes).getTradingDate();
     }
 }

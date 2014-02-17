@@ -1,7 +1,7 @@
 package com.egutter.trading.order;
 
-import com.egutter.trading.stock.DailyPrice;
-import com.egutter.trading.stock.StockPortfolio;
+import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.Portfolio;
 
 import java.math.BigDecimal;
 
@@ -11,21 +11,21 @@ import java.math.BigDecimal;
 public class SellOrder implements MarketOrder {
 
     private final String stockName;
-    private final DailyPrice dailyPrice;
+    private final DailyQuote dailyQuote;
     private final int numberOfSharesFor;
 
-    public SellOrder(String stockName, DailyPrice dailyPrice, int numberOfSharesFor) {
+    public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor) {
         this.stockName = stockName;
-        this.dailyPrice = dailyPrice;
+        this.dailyQuote = dailyQuote;
         this.numberOfSharesFor = numberOfSharesFor;
     }
 
     @Override
-    public void execute(StockPortfolio stockPortfolio) {
-        BigDecimal priceToCollect = BigDecimal.valueOf(dailyPrice.getAdjustedClosePrice() * numberOfSharesFor);
+    public void execute(Portfolio portfolio) {
+        BigDecimal priceToCollect = BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfSharesFor);
 
-        stockPortfolio.addCash(priceToCollect);
-        stockPortfolio.removeStock(stockName);
+        portfolio.addCash(priceToCollect);
+        portfolio.removeStock(stockName);
     }
 
 }

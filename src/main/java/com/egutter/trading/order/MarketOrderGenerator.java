@@ -1,8 +1,8 @@
 package com.egutter.trading.order;
 
 import com.egutter.trading.decision.TradingDecision;
-import com.egutter.trading.stock.DailyPrice;
-import com.egutter.trading.stock.StockPortfolio;
+import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.Portfolio;
 
 /**
  * Created by egutter on 2/12/14.
@@ -10,22 +10,22 @@ import com.egutter.trading.stock.StockPortfolio;
 public class MarketOrderGenerator {
 
     private final String stockName;
-    private final StockPortfolio stockPortfolio;
+    private final Portfolio portfolio;
     private final TradingDecision tradingDecision;
-    private final DailyPrice dailyPrice;
+    private final DailyQuote dailyQuote;
     private int numberOfShares;
 
     public MarketOrderGenerator(String stockName,
-                                StockPortfolio stockPortfolio,
+                                Portfolio portfolio,
                                 TradingDecision tradingDecision,
-                                DailyPrice dailyPrice,
+                                DailyQuote dailyQuote,
                                 int numberOfShares) {
 
 
         this.stockName = stockName;
-        this.stockPortfolio = stockPortfolio;
+        this.portfolio = portfolio;
         this.tradingDecision = tradingDecision;
-        this.dailyPrice = dailyPrice;
+        this.dailyQuote = dailyQuote;
         this.numberOfShares = numberOfShares;
     }
 
@@ -33,18 +33,18 @@ public class MarketOrderGenerator {
 
         OrderBook marketOrders = new OrderBook();
 
-        if (tradingDecision.shouldBuyOn(dailyPrice.getTradingDate())) {
+        if (tradingDecision.shouldBuyOn(dailyQuote.getTradingDate())) {
             marketOrders.add(
                     new BuyOrder(stockName,
-                            dailyPrice,
+                            dailyQuote,
                             numberOfShares));
         };
 
-        if (tradingDecision.shouldSellOn(dailyPrice.getTradingDate())) {
+        if (tradingDecision.shouldSellOn(dailyQuote.getTradingDate())) {
             marketOrders.add(
                     new SellOrder(stockName,
-                        dailyPrice,
-                        stockPortfolio.getNumberOfSharesFor(stockName)));
+                            dailyQuote,
+                        portfolio.getNumberOfSharesFor(stockName)));
         };
 
         return marketOrders;

@@ -1,12 +1,12 @@
-package com.egutter.trading;
+package com.egutter.trading.stock;
 
 import com.egutter.trading.decision.TradingDecision;
-import com.egutter.trading.decision.generator.TradingDecisionGenerator;
+import com.egutter.trading.decision.generator.TradingDecisionGeneratorBuilder;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
-import com.egutter.trading.stock.DailyPrice;
+import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockMarket;
-import com.egutter.trading.stock.StockPortfolio;
+import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Function;
 
@@ -17,18 +17,18 @@ public class Trader {
 
     public static final int NUMBER_OF_SHARES = 100;
     private StockMarket stockMarket;
-    private TradingDecisionGenerator tradingDecisionGenerator;
-    private StockPortfolio stockPortfolio;
+    private TradingDecisionGeneratorBuilder tradingDecisionGenerator;
+    private Portfolio portfolio;
     private OrderBook orderBook;
 
     public Trader(StockMarket stockMarket,
-                  TradingDecisionGenerator tradingDecisionGenerator,
-                  StockPortfolio stockPortfolio,
+                  TradingDecisionGeneratorBuilder tradingDecisionGenerator,
+                  Portfolio portfolio,
                   OrderBook orderBook) {
 
         this.stockMarket = stockMarket;
         this.tradingDecisionGenerator = tradingDecisionGenerator;
-        this.stockPortfolio = stockPortfolio;
+        this.portfolio = portfolio;
         this.orderBook = orderBook;
     }
 
@@ -41,23 +41,23 @@ public class Trader {
         }
     }
 
-    private Function<DailyPrice, Object> executeMarketOrders(final StockPrices stockPrices, final TradingDecision tradingDecision) {
-        return new Function<DailyPrice, Object>() {
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingDecision tradingDecision) {
+        return new Function<DailyQuote, Object>() {
             @Override
-            public Object apply(DailyPrice dailyPrice) {
-                OrderBook newMarketOrders = marketOrderGenerator(stockPrices, tradingDecision, dailyPrice).generateOrders();
-                newMarketOrders.execute(stockPortfolio);
+            public Object apply(DailyQuote dailyQuote) {
+                OrderBook newMarketOrders = marketOrderGenerator(stockPrices, tradingDecision, dailyQuote).generateOrders();
+                newMarketOrders.execute(portfolio);
                 orderBook.append(newMarketOrders);
                 return orderBook;
             }
         };
     }
 
-    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, TradingDecision tradingDecision, DailyPrice dailyPrice) {
+    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, TradingDecision tradingDecision, DailyQuote dailyQuote) {
         return new MarketOrderGenerator(stockPrices.getStockName(),
-                            stockPortfolio,
+                portfolio,
                             tradingDecision,
-                            dailyPrice,
+                dailyQuote,
                             NUMBER_OF_SHARES);
     }
 

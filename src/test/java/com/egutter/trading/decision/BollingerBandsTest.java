@@ -1,6 +1,6 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.stock.DailyPrice;
+import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Range;
 import com.tictactec.ta.lib.MAType;
@@ -22,7 +22,7 @@ public class BollingerBandsTest {
     public void should_sell_when_percentage_b_is_above_threshold() {
 
         // GIVEN SMA for first 3 days is 20.0 AND 4th Day price is 21.0
-        List<DailyPrice> dailyPrices = Arrays.asList(dailyPrice(1, 10.0),
+        List<DailyQuote> dailyQuotes = Arrays.asList(dailyPrice(1, 10.0),
                 dailyPrice(2, 10.0),
                 dailyPrice(3, 10.0),
                 dailyPrice(4, 10.0),
@@ -40,7 +40,7 @@ public class BollingerBandsTest {
         // AND SMA days
         int movingAverageDays = 10;
 
-        StockPrices stockPrices = new StockPrices("YPF", dailyPrices);
+        StockPrices stockPrices = new StockPrices("YPF", dailyQuotes);
         TradingDecision tradingDecision = new BollingerBands(stockPrices,
                 buyThreshold,
                 sellThreshold,
@@ -53,7 +53,7 @@ public class BollingerBandsTest {
 
     @Test
     public void should_buy_when_percentage_b_is_under_threshold() {
-        List<DailyPrice> dailyPrices = Arrays.asList(dailyPrice(1, 10.0),
+        List<DailyQuote> dailyQuotes = Arrays.asList(dailyPrice(1, 10.0),
                 dailyPrice(2, 20.0),
                 dailyPrice(3, 20.0),
                 dailyPrice(4, 20.0),
@@ -71,7 +71,7 @@ public class BollingerBandsTest {
         // AND SMA days
         int movingAverageDays = 10;
 
-        StockPrices stockPrices = new StockPrices("YPF", dailyPrices);
+        StockPrices stockPrices = new StockPrices("YPF", dailyQuotes);
         TradingDecision tradingDecision = new BollingerBands(stockPrices,
                 buyThreshold,
                 sellThreshold,
@@ -85,7 +85,7 @@ public class BollingerBandsTest {
     @Test
     public void should_not_buy_nor_sell_when_percentage_b_is_between_threshold() {
         // GIVEN SMA for first 3 days is 20.0 AND 4th Day price is 21.0
-        List<DailyPrice> dailyPrices = Arrays.asList(dailyPrice(1, 10.0),
+        List<DailyQuote> dailyQuotes = Arrays.asList(dailyPrice(1, 10.0),
                 dailyPrice(2, 20.0),
                 dailyPrice(3, 20.0),
                 dailyPrice(4, 20.0),
@@ -104,7 +104,7 @@ public class BollingerBandsTest {
         // AND SMA days
         int movingAverageDays = 10;
 
-        StockPrices stockPrices = new StockPrices("YPF", dailyPrices);
+        StockPrices stockPrices = new StockPrices("YPF", dailyQuotes);
         TradingDecision tradingDecision = new BollingerBands(stockPrices,
                 buyThreshold,
                 sellThreshold,
@@ -115,8 +115,8 @@ public class BollingerBandsTest {
         assertThat(tradingDecision.shouldBuyOn(lastTradingDate), equalTo(false));
     }
 
-    private DailyPrice dailyPrice(int day, double adjustedClosePrice) {
-        return new DailyPrice(new LocalDate(2014, 1, day), 0,0, adjustedClosePrice, 0, 0, 0);
+    private DailyQuote dailyPrice(int day, double adjustedClosePrice) {
+        return new DailyQuote(new LocalDate(2014, 1, day), 0,0, adjustedClosePrice, 0, 0, 0);
     }
 
 }

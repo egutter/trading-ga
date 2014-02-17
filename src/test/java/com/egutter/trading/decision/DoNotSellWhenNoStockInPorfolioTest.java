@@ -1,7 +1,7 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.stock.DailyPrice;
-import com.egutter.trading.stock.StockPortfolio;
+import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 import org.junit.Test;
@@ -9,6 +9,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.egutter.trading.helper.TestHelper.aListOfDailyQuotes;
+import static com.egutter.trading.helper.TestHelper.aTradingDate;
+import static com.egutter.trading.helper.TestHelper.buyOneHundredShares;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -20,27 +23,27 @@ public class DoNotSellWhenNoStockInPorfolioTest {
     @Test
     public void should_not_sell_when_no_stock_is_in_portfolio() throws Exception {
 
-        StockPortfolio stockPorfolio = new StockPortfolio();
-        stockPorfolio.addStock("YPF", 100);
+        Portfolio stockPorfolio = new Portfolio();
+        stockPorfolio.addStock("YPF", buyOneHundredShares());
 
         DoNotSellWhenNoStockInPorfolio decision = new DoNotSellWhenNoStockInPorfolio(stockPorfolio,
-                new StockPrices("GAL", getDailyPrices()),
+                new StockPrices("GAL", aListOfDailyQuotes()),
                 getTradingDecision());
 
-        assertThat(decision.shouldSellOn(new LocalDate(2014, 1, 1)), equalTo(false));
+        assertThat(decision.shouldSellOn(aTradingDate()), equalTo(false));
     }
 
     @Test
     public void should_sell_when_stock_is_in_portfolio() throws Exception {
 
-        StockPortfolio stockPorfolio = new StockPortfolio();
-        stockPorfolio.addStock("YPF", 100);
+        Portfolio stockPorfolio = new Portfolio();
+        stockPorfolio.addStock("YPF", buyOneHundredShares());
 
         DoNotSellWhenNoStockInPorfolio decision = new DoNotSellWhenNoStockInPorfolio(stockPorfolio,
-                new StockPrices("YPF", getDailyPrices()),
+                new StockPrices("YPF", aListOfDailyQuotes()),
                 getTradingDecision());
 
-        assertThat(decision.shouldSellOn(new LocalDate(2014, 1, 1)), equalTo(true));
+        assertThat(decision.shouldSellOn(aTradingDate()), equalTo(true));
     }
 
     private TradingDecision getTradingDecision() {
@@ -57,7 +60,4 @@ public class DoNotSellWhenNoStockInPorfolioTest {
         };
     }
 
-    public List<DailyPrice> getDailyPrices() {
-        return Arrays.asList(new DailyPrice(new LocalDate(2014, 1, 1), 0, 0, 10.0, 0, 0, 0));
-    }
 }

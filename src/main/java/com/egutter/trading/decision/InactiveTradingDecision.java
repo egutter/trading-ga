@@ -1,0 +1,19 @@
+package com.egutter.trading.decision;
+
+import org.joda.time.LocalDate;
+
+/**
+ * Created by egutter on 2/13/14.
+ */
+public class InactiveTradingDecision implements TradingDecision{
+
+    @Override
+    public boolean shouldBuyOn(LocalDate tradingDate) {
+        return false;
+    }
+
+    @Override
+    public boolean shouldSellOn(LocalDate tradingDate) {
+        return false;
+    }
+}

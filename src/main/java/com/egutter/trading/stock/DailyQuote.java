@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 /**
  * Created by egutter on 2/12/14.
  */
-public class DailyPrice {
+public class DailyQuote {
 
     private LocalDate tradingDate;
     private double openPrice;
@@ -15,7 +15,7 @@ public class DailyPrice {
     private double highPrice;
     private double volume;
 
-    public DailyPrice(LocalDate tradingDate,
+    public DailyQuote(LocalDate tradingDate,
                       double openPrice,
                       double closePrice,
                       double adjustedClosePrice,

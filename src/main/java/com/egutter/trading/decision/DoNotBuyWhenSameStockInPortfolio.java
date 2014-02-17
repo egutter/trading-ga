@@ -1,6 +1,6 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.stock.StockPortfolio;
+import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 
@@ -10,11 +10,11 @@ import org.joda.time.LocalDate;
 public class DoNotBuyWhenSameStockInPortfolio implements TradingDecision {
 
 
-    private StockPortfolio portfolio;
+    private Portfolio portfolio;
     private StockPrices stockPrices;
     private TradingDecision wrappedTradingDecision;
 
-    public DoNotBuyWhenSameStockInPortfolio(StockPortfolio portfolio,
+    public DoNotBuyWhenSameStockInPortfolio(Portfolio portfolio,
                                             StockPrices stockPrices,
                                             TradingDecision wrappedTradingDecision) {
         this.portfolio = portfolio;

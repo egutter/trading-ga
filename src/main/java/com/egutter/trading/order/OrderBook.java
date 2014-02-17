@@ -1,6 +1,6 @@
 package com.egutter.trading.order;
 
-import com.egutter.trading.stock.StockPortfolio;
+import com.egutter.trading.stock.Portfolio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ public class OrderBook implements MarketOrder {
     private List<MarketOrder> orders = new ArrayList<MarketOrder>();
 
     @Override
-    public void execute(StockPortfolio stockPortfolio) {
+    public void execute(Portfolio portfolio) {
         for (MarketOrder order: orders) {
-            order.execute(stockPortfolio);
+            order.execute(portfolio);
         }
     }
 

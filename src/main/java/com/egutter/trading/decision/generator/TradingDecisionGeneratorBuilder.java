@@ -27,26 +27,13 @@ public class TradingDecisionGeneratorBuilder implements TradingDecisionGenerator
     }
 
     public TradingDecision generate(StockPrices stockPrices) {
-        TradingDecisionComposite tradingDecisionComposite = new TradingDecisionComposite(portfolio, stockPrices);
+        TradingDecisionComposite tradingDecisionComposite = new TradingDecisionComposite();
         for (TradingDecisionGenerator tradingDecisionGenerator: generatorChain) {
 
             tradingDecisionComposite.add(buildWrappedTradingDecision(stockPrices, tradingDecisionGenerator.generate(stockPrices)));
         }
 
         return tradingDecisionComposite;
-        // generate trading decisions from genome
-
-//        BollingerBands bollingerBands = new BollingerBands(stockPrices,
-//                Range.atMost(0.1),
-//                Range.atLeast(0.9),
-//                20,
-//                MAType.Sma);
-//
-//        DoNotBuyWhenSameStockInPortfolio doNotBuyWhenSameStockInPortfolio = new DoNotBuyWhenSameStockInPortfolio(portfolio,
-//                stockPrices,
-//                bollingerBands);
-//
-//        return new DoNotSellWhenNoStockInPorfolio(portfolio, stockPrices, doNotBuyWhenSameStockInPortfolio);
     }
 
     private DoNotSellWhenNoStockInPorfolio buildWrappedTradingDecision(StockPrices stockPrices, TradingDecision tradingDecision) {
@@ -65,8 +52,7 @@ public class TradingDecisionGeneratorBuilder implements TradingDecisionGenerator
 
     private TradingDecisionGenerator sellAfterAFixedNumberOfDaysGenerator() {
         BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();
-        TradingDecisionGenerator sellAfterDaysGenerator = new SellAfterAFixedNumberOfDaysGenerator(sellAfterDaysChromosome, portfolio);
-        return new InactiveTradingDecisionGenerator(sellAfterDaysGenerator, sellAfterDaysChromosome);
+        return new SellAfterAFixedNumberOfDaysGenerator(sellAfterDaysChromosome, portfolio);
     }
 
 }

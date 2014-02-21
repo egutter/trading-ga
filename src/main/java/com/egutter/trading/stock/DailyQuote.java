@@ -13,7 +13,7 @@ public class DailyQuote {
     private double adjustedClosePrice;
     private double lowPrice;
     private double highPrice;
-    private double volume;
+    private long volume;
 
     public DailyQuote(LocalDate tradingDate,
                       double openPrice,
@@ -21,7 +21,7 @@ public class DailyQuote {
                       double adjustedClosePrice,
                       double lowPrice,
                       double highPrice,
-                      double volume) {
+                      long volume) {
         this.tradingDate = tradingDate;
         this.openPrice = openPrice;
         this.closePrice = closePrice;
@@ -52,7 +52,7 @@ public class DailyQuote {
         return highPrice;
     }
 
-    public double getVolume() {
+    public long getVolume() {
         return volume;
     }
 

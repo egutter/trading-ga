@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.transform;
 public class StockMarket {
 
     private List<StockPrices> stockPrices;
+
     private StockPrices marketIndexPrices;
 
     public StockMarket(List<StockPrices> stockPrices, StockPrices marketIndexPrices) {
@@ -27,4 +28,9 @@ public class StockMarket {
     public List<StockPrices> getStockPrices() {
         return stockPrices;
     }
+
+    public StockPrices getMarketIndexPrices() {
+        return marketIndexPrices;
+    }
+
 }

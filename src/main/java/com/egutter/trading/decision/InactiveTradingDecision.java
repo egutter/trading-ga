@@ -16,4 +16,9 @@ public class InactiveTradingDecision implements TradingDecision{
     public boolean shouldSellOn(LocalDate tradingDate) {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Inactive Trading Decision";
+    }
 }

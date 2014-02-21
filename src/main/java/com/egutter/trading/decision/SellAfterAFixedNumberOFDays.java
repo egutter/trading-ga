@@ -2,6 +2,7 @@ package com.egutter.trading.decision;
 
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
+import com.google.common.base.Joiner;
 import org.joda.time.LocalDate;
 
 /**
@@ -23,7 +24,8 @@ public class SellAfterAFixedNumberOFDays implements TradingDecision {
 
     @Override
     public boolean shouldBuyOn(LocalDate tradingDate) {
-        return false;
+        // Currently TradingDecisionComposite requires all TD to be true in order to trigger a Buy decision
+        return true;
     }
 
     @Override
@@ -37,5 +39,10 @@ public class SellAfterAFixedNumberOFDays implements TradingDecision {
 
     private int getNumberOfDays() {
         return numberOfDays;
+    }
+
+    @Override
+    public String toString() {
+        return Joiner.on(": ").join(this.getClass().getName(), this.getNumberOfDays());
     }
 }

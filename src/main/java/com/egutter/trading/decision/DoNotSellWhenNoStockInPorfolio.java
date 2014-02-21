@@ -34,4 +34,9 @@ public class DoNotSellWhenNoStockInPorfolio implements TradingDecision {
     public boolean shouldBuyOn(LocalDate tradingDate) {
         return wrappedTradingDecision.shouldBuyOn(tradingDate);
     }
+
+    @Override
+    public String toString() {
+        return wrappedTradingDecision.toString();
+    }
 }

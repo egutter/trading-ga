@@ -5,13 +5,14 @@ import org.uncommons.maths.binary.BitString;
 /**
  * Genome
  *
- * 0-20 BollingerBands
- * 21-26 SellAfterAFixedNumberOfDays
+ * 0-1 TradingComposite applies All or Any
+ * 2-22 BollingerBands
+ * 23-28 SellAfterAFixedNumberOfDays
  *
  * Created by egutter on 2/16/14.
  */
 public class TradingDecisionGenome {
-    public static final int SIZE = 25;
+    public static final int SIZE = 29;
 
     private BitString genomeBits;
 
@@ -19,13 +20,16 @@ public class TradingDecisionGenome {
         this.genomeBits = genomeBits;
     }
 
-    public BitString extractBollingerBandsChromosome() {
-        return extractChromosome(0, 21);
+    public BitString extractTradingDecisionCompositeChromosome() {
+        return extractChromosome(0, 2);
     }
 
+    public BitString extractBollingerBandsChromosome() {
+        return extractChromosome(2, 23);
+    }
 
     public BitString extractSellAfterAFixedNumberOfDaysChromosome() {
-        return extractChromosome(21, 27);
+        return extractChromosome(23, 29);
     }
 
     private BitString extractChromosome(int startIndex, int endIndex) {

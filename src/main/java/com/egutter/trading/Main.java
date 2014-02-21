@@ -1,15 +1,13 @@
 package com.egutter.trading;
 
-import com.egutter.trading.decision.BollingerBands;
-import com.egutter.trading.decision.TradingDecision;
+import com.egutter.trading.decision.generator.TradingDecisionGeneratorBuilder;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
 import com.egutter.trading.genetic.TradingDecisionGenome;
-import com.egutter.trading.stock.StockMarket;
-import com.egutter.trading.stock.StockPrices;
-import com.google.common.collect.Range;
+import com.egutter.trading.stock.*;
 import com.mongodb.*;
-import com.tictactec.ta.lib.MAType;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.Seconds;
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.maths.number.ConstantGenerator;
 import org.uncommons.maths.random.MersenneTwisterRNG;
@@ -21,7 +19,6 @@ import org.uncommons.watchmaker.framework.operators.BitStringMutation;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
-import org.uncommons.watchmaker.framework.termination.TargetFitness;
 
 import java.net.UnknownHostException;
 import java.util.*;
@@ -29,6 +26,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws UnknownHostException {
+        LocalTime startTime = LocalTime.now();
         CandidateFactory<BitString> candidateFactory = new BitStringFactory(TradingDecisionGenome.SIZE);
 
         List<EvolutionaryOperator<BitString>> operators
@@ -36,9 +34,10 @@ public class Main {
         operators.add(new BitStringCrossover());
         operators.add(new BitStringMutation(new ConstantGenerator<Probability>(new Probability(0.02)),
                 new ConstantGenerator<Integer>(1)));
+
         EvolutionaryOperator<BitString> pipeline = new EvolutionPipeline<BitString>(operators);
 
-        StockMarket stockMarket = new StockMarket(null, null);
+        StockMarket stockMarket = new StockMarketBuilder().build();
 
         SelectionStrategy<Object> selectionStrategy = new RouletteWheelSelection();
 
@@ -46,12 +45,16 @@ public class Main {
         EvolutionEngine<BitString> engine
                 = new GenerationalEvolutionEngine<BitString>(candidateFactory,
                 pipeline,
-                new StockTradingFitnessEvaluator(stockMarket),
+                new CachingFitnessEvaluator(new StockTradingFitnessEvaluator(stockMarket)),
                 selectionStrategy,
                 rng);
 
-        BitString result = engine.evolve(100, 1, new GenerationCount(10));
+        BitString result = engine.evolve(1000, 10, new GenerationCount(100));
+
         System.out.println(result);
+        System.out.println("trading decisions");
+        System.out.println(new TradingDecisionGeneratorBuilder(new Portfolio(), result).generate(stockMarket.getMarketIndexPrices()));
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()));
     }
     public static void main2(String[] args) throws UnknownHostException {
 

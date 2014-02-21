@@ -34,4 +34,9 @@ public class DoNotBuyWhenSameStockInPortfolio implements TradingDecision {
     public boolean shouldSellOn(LocalDate tradingDate) {
         return wrappedTradingDecision.shouldSellOn(tradingDate);
     }
+
+    @Override
+    public String toString() {
+        return wrappedTradingDecision.toString();
+    }
 }

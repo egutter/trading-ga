@@ -1,6 +1,7 @@
 package com.egutter.trading.decision;
 
 import com.egutter.trading.stock.StockPrices;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Range;
 import com.google.common.primitives.Doubles;
 import com.tictactec.ta.lib.CoreAnnotated;
@@ -124,4 +125,18 @@ public class BollingerBands implements TradingDecision {
     private int startIndex() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return Joiner.on(": ").join(this.getClass().getName(),
+                "buy threshold",
+                this.getBuyThreshold(),
+                "sell threshold",
+                this.getSellThreshold(),
+                "moving avg days",
+                this.movingAverageDays,
+                "moving avg type",
+                this.movingAverageType);
+    }
+
 }

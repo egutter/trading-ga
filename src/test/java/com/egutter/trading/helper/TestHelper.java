@@ -2,6 +2,7 @@ package com.egutter.trading.helper;
 
 import com.egutter.trading.order.BuyOrder;
 import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 
@@ -12,6 +13,10 @@ import java.util.List;
  * Created by egutter on 2/13/14.
  */
 public class TestHelper {
+
+    public static Portfolio aStockPortfolio() {
+        return new Portfolio();
+    }
 
     public static StockPrices aStockPrices() {
         return new StockPrices(aStockName(), aListOfDailyQuotes());

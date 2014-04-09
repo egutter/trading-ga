@@ -41,14 +41,13 @@ public class BollingerBandsTest {
         int movingAverageDays = 10;
 
         StockPrices stockPrices = new StockPrices("YPF", dailyQuotes);
-        TradingDecision tradingDecision = new BollingerBands(stockPrices,
+        SellTradingDecision tradingDecision = new BollingerBands(stockPrices,
                 buyThreshold,
                 sellThreshold,
                 movingAverageDays, MAType.Sma);
 
         LocalDate lastTradingDate = new LocalDate(2014, 1, 10);
         assertThat(tradingDecision.shouldSellOn(lastTradingDate), equalTo(true));
-        assertThat(tradingDecision.shouldBuyOn(lastTradingDate), equalTo(false));
     }
 
     @Test
@@ -72,13 +71,12 @@ public class BollingerBandsTest {
         int movingAverageDays = 10;
 
         StockPrices stockPrices = new StockPrices("YPF", dailyQuotes);
-        TradingDecision tradingDecision = new BollingerBands(stockPrices,
+        BuyTradingDecision tradingDecision = new BollingerBands(stockPrices,
                 buyThreshold,
                 sellThreshold,
                 movingAverageDays, MAType.Sma);
 
         LocalDate lastTradingDate = new LocalDate(2014, 1, 10);
-        assertThat(tradingDecision.shouldSellOn(lastTradingDate), equalTo(false));
         assertThat(tradingDecision.shouldBuyOn(lastTradingDate), equalTo(true));
     }
 
@@ -111,8 +109,8 @@ public class BollingerBandsTest {
                 movingAverageDays, MAType.Sma);
 
         LocalDate lastTradingDate = new LocalDate(2014, 1, 10);
-        assertThat(tradingDecision.shouldSellOn(lastTradingDate), equalTo(false));
-        assertThat(tradingDecision.shouldBuyOn(lastTradingDate), equalTo(false));
+        assertThat(((SellTradingDecision)tradingDecision).shouldSellOn(lastTradingDate), equalTo(false));
+        assertThat(((BuyTradingDecision)tradingDecision).shouldBuyOn(lastTradingDate), equalTo(false));
     }
 
     private DailyQuote dailyPrice(int day, double adjustedClosePrice) {

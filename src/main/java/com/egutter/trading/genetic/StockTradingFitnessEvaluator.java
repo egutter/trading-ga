@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString> {
 
-    private static final BigDecimal INITIAL_CASH = new BigDecimal(1000000.00);
+    public static final BigDecimal INITIAL_CASH = new BigDecimal(1000000.00);
 
     private StockMarket stockMarket;
 
@@ -27,13 +27,34 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     @Override
     public double getFitness(BitString candidate, List<? extends BitString> population) {
         Portfolio portfolio = new Portfolio(INITIAL_CASH);
-        OrderBook orderBook = new OrderBook();
 
-        Trader trader = new Trader(stockMarket, new TradingDecisionGeneratorBuilder(portfolio, candidate), portfolio, orderBook);
-        trader.trade();
+        if (candidateValidator(tradingDecisionGenerator(candidate)).isInvalid()) {
+            return 0;
+        }
+
+        buildTrader(portfolio, candidate).trade();
 
         // TODO: Weight portfolio value by a risk profile (e.g. Sortino ratio)
         return portfolio.getCash().doubleValue();
+    }
+
+    public Trader buildTrader(Portfolio portfolio, BitString candidate) {
+        OrderBook orderBook = new OrderBook();
+
+        return new Trader(stockMarket, tradingDecisionGenerator(portfolio, candidate), portfolio, orderBook);
+    }
+
+
+    private TradingDecisionGeneratorBuilder tradingDecisionGenerator(BitString candidate) {
+        return tradingDecisionGenerator(new Portfolio(INITIAL_CASH), candidate);
+    }
+
+    private TradingDecisionGeneratorBuilder tradingDecisionGenerator(Portfolio portfolio, BitString candidate) {
+        return new TradingDecisionGeneratorBuilder(portfolio, candidate);
+    }
+
+    private GenomeCandidateValidator candidateValidator(TradingDecisionGeneratorBuilder tradingDecisionGenerator) {
+        return new GenomeCandidateValidator(tradingDecisionGenerator);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import org.joda.time.LocalDate;
 
 import java.util.List;

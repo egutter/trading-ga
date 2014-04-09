@@ -7,16 +7,16 @@ import org.joda.time.LocalDate;
 /**
  * Created by egutter on 2/12/14.
  */
-public class DoNotSellWhenNoStockInPorfolio implements TradingDecision {
+public class DoNotSellWhenNoStockInPorfolio implements SellTradingDecision {
 
 
     private Portfolio portfolio;
     private StockPrices stockPrices;
-    private TradingDecision wrappedTradingDecision;
+    private SellTradingDecision wrappedTradingDecision;
 
     public DoNotSellWhenNoStockInPorfolio(Portfolio portfolio,
                                             StockPrices stockPrices,
-                                            TradingDecision wrappedTradingDecision) {
+                                            SellTradingDecision wrappedTradingDecision) {
         this.portfolio = portfolio;
         this.stockPrices = stockPrices;
         this.wrappedTradingDecision = wrappedTradingDecision;
@@ -28,11 +28,6 @@ public class DoNotSellWhenNoStockInPorfolio implements TradingDecision {
             return false;
         }
         return wrappedTradingDecision.shouldSellOn(tradingDate);
-    }
-
-    @Override
-    public boolean shouldBuyOn(LocalDate tradingDate) {
-        return wrappedTradingDecision.shouldBuyOn(tradingDate);
     }
 
     @Override

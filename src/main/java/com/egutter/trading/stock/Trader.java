@@ -1,13 +1,10 @@
 package com.egutter.trading.stock;
 
-import com.egutter.trading.decision.TradingDecision;
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.generator.TradingDecisionGeneratorBuilder;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
-import com.egutter.trading.stock.DailyQuote;
-import com.egutter.trading.stock.StockMarket;
-import com.egutter.trading.stock.Portfolio;
-import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Function;
 
 /**
@@ -35,17 +32,19 @@ public class Trader {
 
     public void trade() {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            TradingDecision tradingDecision = tradingDecisionGenerator.generate(stockPrices);
+            BuyTradingDecision buyTradingDecision = tradingDecisionGenerator.generateBuyDecision(stockPrices);
+            SellTradingDecision sellTradingDecision = tradingDecisionGenerator.generateSellDecision(stockPrices);
 
-            stockPrices.forEachDailyPrice(executeMarketOrders(stockPrices, tradingDecision));
+            stockPrices.forEachDailyPrice(executeMarketOrders(stockPrices, buyTradingDecision, sellTradingDecision));
         }
     }
 
-    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingDecision tradingDecision) {
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final BuyTradingDecision buyTradingDecision, final SellTradingDecision sellTradingDecision) {
         return new Function<DailyQuote, Object>() {
             @Override
             public Object apply(DailyQuote dailyQuote) {
-                OrderBook newMarketOrders = marketOrderGenerator(stockPrices, tradingDecision, dailyQuote).generateOrders();
+                MarketOrderGenerator marketOrderGenerator = marketOrderGenerator(stockPrices, buyTradingDecision, sellTradingDecision, dailyQuote);
+                OrderBook newMarketOrders = marketOrderGenerator.generateOrders();
                 newMarketOrders.execute(portfolio);
                 orderBook.append(newMarketOrders);
                 return orderBook;
@@ -53,12 +52,16 @@ public class Trader {
         };
     }
 
-    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, TradingDecision tradingDecision, DailyQuote dailyQuote) {
+    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, BuyTradingDecision buyTradingDecision, SellTradingDecision sellTradingDecision, DailyQuote dailyQuote) {
         return new MarketOrderGenerator(stockPrices.getStockName(),
                 portfolio,
-                            tradingDecision,
+                buyTradingDecision,
+                sellTradingDecision,
                 dailyQuote,
-                            NUMBER_OF_SHARES);
+                NUMBER_OF_SHARES);
     }
 
+    public int ordersExecuted() {
+        return orderBook.getOrders().size();
+    }
 }

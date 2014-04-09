@@ -42,19 +42,28 @@ public class Main {
         SelectionStrategy<Object> selectionStrategy = new RouletteWheelSelection();
 
         Random rng = new MersenneTwisterRNG();
+        StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket);
+
         EvolutionEngine<BitString> engine
                 = new GenerationalEvolutionEngine<BitString>(candidateFactory,
                 pipeline,
-                new CachingFitnessEvaluator(new StockTradingFitnessEvaluator(stockMarket)),
+                new CachingFitnessEvaluator(stockTradingFitnessEvaluator),
                 selectionStrategy,
                 rng);
 
         BitString result = engine.evolve(1000, 10, new GenerationCount(100));
 
+        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+        Trader trader = stockTradingFitnessEvaluator.buildTrader(portfolio, result);
+        trader.trade();
+
         System.out.println(result);
         System.out.println("trading decisions");
-        System.out.println(new TradingDecisionGeneratorBuilder(new Portfolio(), result).generate(stockMarket.getMarketIndexPrices()));
-        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()));
+        System.out.println("Buy Trading Decisions "+ new TradingDecisionGeneratorBuilder(new Portfolio(), result).generateBuyDecision(stockMarket.getMarketIndexPrices()));
+        System.out.println("Sell Trading Decisions "+ new TradingDecisionGeneratorBuilder(new Portfolio(), result).generateSellDecision(stockMarket.getMarketIndexPrices()));
+        System.out.println("Final Cash "+ portfolio.getCash());
+        System.out.println("Orders executed "+ trader.ordersExecuted());
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
     public static void main2(String[] args) throws UnknownHostException {
 
@@ -84,7 +93,7 @@ public class Main {
         }
 /*
         StockPrices stockPrices = new StockPrices(coll.getName(), closePrices);
-        TradingDecision tradingDecision = new BollingerBands(stockPrices,
+        BuyTradingDecision tradingDecision = new BollingerBands(stockPrices,
                 Range.atMost(0.2),
                 Range.atLeast(0.8), 20, MAType.Sma);
 
@@ -111,7 +120,7 @@ public class Main {
 //        List<Double> percentageBs = new ArrayList<Double>();
 //        for (int i = 0; i < outNBElement.value; i++) {
 //            double pctB = (closePricesArray[i]-outRealLowerBand[i])/(outRealUpperBand[i]-outRealLowerBand[i]);
-//            percentageBs.add(pctB);
+//            percentageBs.addBuyTradingDecision(pctB);
 //        }
 //        System.out.println("outBegIdx is "+outBegIdx.value + " and outNBElement "+ outNBElement.value);
 //        System.out.println("Prices are "+Doubles.join(", ", closePricesArray));

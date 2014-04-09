@@ -1,7 +1,8 @@
 package com.egutter.trading.decision.generator;
 
+import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.InactiveTradingDecision;
-import com.egutter.trading.decision.TradingDecision;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockPrices;
 import org.uncommons.maths.binary.BitString;
 
@@ -20,11 +21,20 @@ public class InactiveTradingDecisionGenerator implements TradingDecisionGenerato
     }
 
     @Override
-    public TradingDecision generate(StockPrices stockPrices) {
+    public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
         boolean active = chromosome.getBit(chromosome.getLength() - 1);
         if (!active) {
             return new InactiveTradingDecision();
         }
-        return wrappedTradingDecisionGenerator.generate(stockPrices);
+        return wrappedTradingDecisionGenerator.generateBuyDecision(stockPrices);
+    }
+
+    @Override
+    public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
+        boolean active = chromosome.getBit(chromosome.getLength() - 1);
+        if (!active) {
+            return new InactiveTradingDecision();
+        }
+        return wrappedTradingDecisionGenerator.generateSellDecision(stockPrices);
     }
 }

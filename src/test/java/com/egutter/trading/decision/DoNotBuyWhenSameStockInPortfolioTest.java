@@ -1,14 +1,9 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.order.BuyOrder;
-import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.egutter.trading.helper.TestHelper.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -45,16 +40,11 @@ public class DoNotBuyWhenSameStockInPortfolioTest {
         assertThat(decision.shouldBuyOn(aTradingDate()), equalTo(true));
     }
 
-    private TradingDecision getTradingDecision() {
-        return new TradingDecision() {
+    private BuyTradingDecision getTradingDecision() {
+        return new BuyTradingDecision() {
                 @Override
                 public boolean shouldBuyOn(LocalDate tradingDate) {
                     return true;
-                }
-
-                @Override
-                public boolean shouldSellOn(LocalDate tradingDate) {
-                    return false;
                 }
             };
     }

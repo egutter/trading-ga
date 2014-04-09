@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by egutter on 2/13/14.
  */
-public class InactiveTradingDecisionTest {
+public class InactiveBuyTradingDecisionTest {
 
     @Test
     public void should_always_return_false() throws Exception {

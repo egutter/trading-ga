@@ -5,7 +5,7 @@ import org.joda.time.LocalDate;
 /**
  * Created by egutter on 2/13/14.
  */
-public class InactiveTradingDecision implements TradingDecision{
+public class InactiveTradingDecision implements BuyTradingDecision, SellTradingDecision {
 
     @Override
     public boolean shouldBuyOn(LocalDate tradingDate) {

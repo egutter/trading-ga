@@ -17,15 +17,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class SellAfterAFixedNumberOFDaysTest {
 
     @Test
-    public void should_never_buy() throws Exception {
-        SellAfterAFixedNumberOFDays decision = new SellAfterAFixedNumberOFDays(new Portfolio(), aStockPrices(), 5);
-
-        assertThat(decision.shouldBuyOn(aTradingDate()), equalTo(false));
-    }
-
-
-
-    @Test
     public void should_not_sell_before_the_given_number_of_days() throws Exception {
         Portfolio portfolio = new Portfolio();
         LocalDate purchaseDate = new LocalDate(2014, 1, 1);

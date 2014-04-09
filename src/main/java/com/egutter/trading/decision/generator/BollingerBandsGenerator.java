@@ -1,7 +1,8 @@
 package com.egutter.trading.decision.generator;
 
 import com.egutter.trading.decision.BollingerBands;
-import com.egutter.trading.decision.TradingDecision;
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Range;
 import com.tictactec.ta.lib.MAType;
@@ -41,7 +42,16 @@ public class BollingerBandsGenerator implements TradingDecisionGenerator {
      * @param stockPrices
      * @return
      */
-    public TradingDecision generate(StockPrices stockPrices) {
+    public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
+        return new BollingerBands(stockPrices,
+                this.buyThreshold,
+                this.sellThreshold,
+                this.movingAverageDays,
+                this.movingAverageType);
+    }
+
+    @Override
+    public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
         return new BollingerBands(stockPrices,
                 this.buyThreshold,
                 this.sellThreshold,
@@ -50,7 +60,7 @@ public class BollingerBandsGenerator implements TradingDecisionGenerator {
     }
 
     private MAType generateMovingAverageType(BitString chromosome) {
-        int typeNumber = new BitString(chromosome.toString().substring(18, 21)).toNumber().intValue();
+        int typeNumber = new BitString(chromosome.toString().substring(13, 16)).toNumber().intValue();
         switch (typeNumber) {
             case 0:
                 return MAType.Sma;
@@ -75,13 +85,25 @@ public class BollingerBandsGenerator implements TradingDecisionGenerator {
     }
 
     private int generateMovingAverageDays(BitString chromosome) {
-        int days = new BitString(chromosome.toString().substring(13, 18)).toNumber().intValue();
-        return days + 2;
+        int days = new BitString(chromosome.toString().substring(9, 13)).toNumber().intValue();
+        return days + 12;
     }
 
     private Range<Double> generateBuyThreshold(BitString chromosome) {
-        int index = new BitString(chromosome.toString().substring(1, 5)).toNumber().intValue();
-        double buyThresholdValue = truncate(min((index * 0.25) - 2.0, 2.0));
+        return generateThreshold(chromosome, 1, 5);
+    }
+
+    private Range<Double> generateSellThreshold(BitString chromosome) {
+        return generateThreshold(chromosome, 5, 9);
+    }
+
+    private Range<Double> generateThreshold(BitString chromosome, int start, int end) {
+        int index = new BitString(chromosome.toString().substring(start, end)).toNumber().intValue();
+        double adjustBy = 2.0;
+        if (index >= 8) {
+            adjustBy -= 0.25;
+        }
+        double buyThresholdValue = truncate(min((index * 0.25) - adjustBy, 2.0));
 
         return atLeast(buyThresholdValue);
     }
@@ -89,12 +111,5 @@ public class BollingerBandsGenerator implements TradingDecisionGenerator {
     private double truncate(double value) {
         int roundMethod = (value > 0) ? BigDecimal.ROUND_FLOOR : BigDecimal.ROUND_CEILING;
         return new BigDecimal(String.valueOf(value)).setScale(2, roundMethod).doubleValue();
-    }
-
-    private Range<Double> generateSellThreshold(BitString chromosome) {
-        int index = new BitString(chromosome.toString().substring(5, 9)).toNumber().intValue();
-        double buyThresholdValue = truncate(min((index * 0.25) - 2.0, 2.0));
-
-        return atLeast(buyThresholdValue);
     }
 }

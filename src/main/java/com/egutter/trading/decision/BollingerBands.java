@@ -17,11 +17,11 @@ import java.util.Map;
 /**
  * Created by egutter on 2/10/14.
  */
-public class BollingerBands implements TradingDecision {
+public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
 
-    private final StockPrices closePrices;
+    private final StockPrices stockPrices;
     private final Range sellThreshold;
-    private Map<LocalDate, Double> percentageB = new HashMap<LocalDate, Double>();
+    private Map<LocalDate, Double> percentageB;
 
     private Range buyThreshold;
     private int movingAverageDays;
@@ -32,33 +32,40 @@ public class BollingerBands implements TradingDecision {
                           Range sellThreshold,
                           int movingAverageDays,
                           MAType movingAverageType) {
-        this.closePrices = stockPrices;
+        this.stockPrices = stockPrices;
         this.buyThreshold = buyThreshold;
         this.sellThreshold = sellThreshold;
         this.movingAverageDays = movingAverageDays;
         this.movingAverageType = movingAverageType;
-        calculateBollingerBands(stockPrices);
     }
 
     @Override
     public boolean shouldBuyOn(LocalDate tradingDate) {
-        if (!percentageB.containsKey(tradingDate)) {
+        if (!getPercentageB().containsKey(tradingDate)) {
             return false;
         }
-        Double percentageBAtDay = percentageB.get(tradingDate);
+        Double percentageBAtDay = getPercentageB().get(tradingDate);
         return buyThreshold.contains(percentageBAtDay);
     }
 
     @Override
     public boolean shouldSellOn(LocalDate tradingDate) {
-        if (!percentageB.containsKey(tradingDate)) {
+        if (!getPercentageB().containsKey(tradingDate)) {
             return false;
         }
-        Double percentageBAtDay = percentageB.get(tradingDate);
+        Double percentageBAtDay = getPercentageB().get(tradingDate);
         return sellThreshold.contains(percentageBAtDay);
     }
 
-    private void calculateBollingerBands(StockPrices stockPrices) {
+    private synchronized Map<LocalDate, Double> getPercentageB() {
+        if (this.percentageB == null) {
+            calculateBollingerBands();
+        }
+        return this.percentageB;
+    }
+
+    private void calculateBollingerBands() {
+        this.percentageB = new HashMap<LocalDate, Double>();
         List<Double>closePrices = stockPrices.getAdjustedClosePrices();
 
         MInteger outBegIdx = new MInteger();
@@ -128,7 +135,7 @@ public class BollingerBands implements TradingDecision {
 
     @Override
     public String toString() {
-        return Joiner.on(": ").join(this.getClass().getName(),
+        return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy threshold",
                 this.getBuyThreshold(),
                 "sell threshold",

@@ -8,7 +8,7 @@ import org.joda.time.LocalDate;
 /**
  * Created by egutter on 2/13/14.
  */
-public class SellAfterAFixedNumberOFDays implements TradingDecision {
+public class SellAfterAFixedNumberOFDays implements SellTradingDecision {
 
     private Portfolio portfolio;
     private StockPrices stockPrices;
@@ -20,12 +20,6 @@ public class SellAfterAFixedNumberOFDays implements TradingDecision {
         this.portfolio = portfolio;
         this.stockPrices = stockPrices;
         this.numberOfDays = numberOfDays;
-    }
-
-    @Override
-    public boolean shouldBuyOn(LocalDate tradingDate) {
-        // Currently TradingDecisionComposite requires all TD to be true in order to trigger a Buy decision
-        return true;
     }
 
     @Override
@@ -43,6 +37,6 @@ public class SellAfterAFixedNumberOFDays implements TradingDecision {
 
     @Override
     public String toString() {
-        return Joiner.on(": ").join(this.getClass().getName(), this.getNumberOfDays());
+        return Joiner.on(": ").join(this.getClass().getSimpleName(), this.getNumberOfDays());
     }
 }

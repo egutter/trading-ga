@@ -1,13 +1,9 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.egutter.trading.helper.TestHelper.aListOfDailyQuotes;
 import static com.egutter.trading.helper.TestHelper.aTradingDate;
@@ -46,13 +42,8 @@ public class DoNotSellWhenNoStockInPorfolioTest {
         assertThat(decision.shouldSellOn(aTradingDate()), equalTo(true));
     }
 
-    private TradingDecision getTradingDecision() {
-        return new TradingDecision() {
-            @Override
-            public boolean shouldBuyOn(LocalDate tradingDate) {
-                return true;
-            }
-
+    private SellTradingDecision getTradingDecision() {
+        return new SellTradingDecision() {
             @Override
             public boolean shouldSellOn(LocalDate tradingDate) {
                 return true;

@@ -1,7 +1,8 @@
 package com.egutter.trading.decision.generator;
 
+import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellAfterAFixedNumberOFDays;
-import com.egutter.trading.decision.TradingDecision;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.uncommons.maths.binary.BitString;
@@ -22,7 +23,12 @@ public class SellAfterAFixedNumberOfDaysGenerator implements TradingDecisionGene
     }
 
     @Override
-    public TradingDecision generate(StockPrices stockPrices) {
+    public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
+        throw new UnsupportedOperationException("This generator does not support Buy Decisions");
+    }
+
+    @Override
+    public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
         return new SellAfterAFixedNumberOFDays(portfolio, stockPrices, numberOfDays);
     }
 

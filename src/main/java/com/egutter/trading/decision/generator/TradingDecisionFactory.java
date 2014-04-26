@@ -12,22 +12,24 @@ import java.util.List;
 /**
  * Created by egutter on 2/12/14.
  */
-public class TradingDecisionGeneratorBuilder {
+public class TradingDecisionFactory {
 
-    private final List<TradingDecisionGenerator> buyGeneratorChain;
-    private final List<TradingDecisionGenerator> sellGeneratorChain;
+    private final List<TradingDecisionGenerator> buyGeneratorChain = new ArrayList<TradingDecisionGenerator>();
+    private final List<TradingDecisionGenerator> sellGeneratorChain = new ArrayList<TradingDecisionGenerator>();
     private Portfolio portfolio;
     private TradingDecisionGenome genome;
 
-    public TradingDecisionGeneratorBuilder(Portfolio portfolio, BitString genome) {
+    public TradingDecisionFactory(Portfolio portfolio, BitString genome) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
-
-        this.buyGeneratorChain = new ArrayList<TradingDecisionGenerator>();
-        this.sellGeneratorChain = new ArrayList<TradingDecisionGenerator>();
         this.buyGeneratorChain.add(buildBollingerBandsGenerator());
+        this.buyGeneratorChain.add(buildMoneyFlowGenerator());
         this.sellGeneratorChain.add(buildBollingerBandsGenerator());
+        this.sellGeneratorChain.add(buildMoneyFlowGenerator());
         this.sellGeneratorChain.add(sellAfterAFixedNumberOfDaysGenerator());
+    }
+
+    protected TradingDecisionFactory() {
     }
 
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
@@ -52,7 +54,7 @@ public class TradingDecisionGeneratorBuilder {
         DoNotBuyWhenSameStockInPortfolio doNotBuyWhenSameStockInPortfolio = new DoNotBuyWhenSameStockInPortfolio(portfolio,
                 stockPrices,
                 tradingDecision);
-        
+
         return new DoNotBuyInTheLastBuyTradingDays(stockPrices,
                 sellAfterAFixedNumberOfDaysGenerator(),
                 doNotBuyWhenSameStockInPortfolio);
@@ -67,6 +69,13 @@ public class TradingDecisionGeneratorBuilder {
         BollingerBandsGenerator bbGenerator = new BollingerBandsGenerator(bbChromosome);
         return new InactiveTradingDecisionGenerator(bbGenerator, bbChromosome);
     }
+
+    private TradingDecisionGenerator buildMoneyFlowGenerator() {
+        BitString mfiChromosome = genome.extractMoneyFlowIndexChromosome();
+        MoneyFlowIndexGenerator mfiGenerator = new MoneyFlowIndexGenerator(mfiChromosome);
+        return new InactiveTradingDecisionGenerator(mfiGenerator, mfiChromosome);
+    }
+
 
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator() {
         BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();

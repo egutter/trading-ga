@@ -2,8 +2,8 @@ package com.egutter.trading.genetic;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.InactiveTradingDecision;
+import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.TradingDecisionGenerator;
-import com.egutter.trading.decision.generator.TradingDecisionGeneratorBuilder;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Predicate;
@@ -16,9 +16,9 @@ import static com.google.common.collect.Iterables.all;
  * Created by egutter on 3/20/14.
  */
 public class GenomeCandidateValidator {
-    private TradingDecisionGeneratorBuilder tradingDecisionGenerator;
+    private TradingDecisionFactory tradingDecisionGenerator;
 
-    public GenomeCandidateValidator(TradingDecisionGeneratorBuilder tradingDecisionGenerator) {
+    public GenomeCandidateValidator(TradingDecisionFactory tradingDecisionGenerator) {
         this.tradingDecisionGenerator = tradingDecisionGenerator;
     }
 

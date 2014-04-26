@@ -4,10 +4,7 @@ import com.egutter.trading.stock.Portfolio;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
-import static com.egutter.trading.helper.TestHelper.aStockPrices;
-import static com.egutter.trading.helper.TestHelper.aStockName;
-import static com.egutter.trading.helper.TestHelper.buyOneHundredSharesOn;
-import static com.egutter.trading.helper.TestHelper.aTradingDate;
+import static com.egutter.trading.helper.TestHelper.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -20,7 +17,7 @@ public class SellAfterAFixedNumberOFDaysTest {
     public void should_not_sell_before_the_given_number_of_days() throws Exception {
         Portfolio portfolio = new Portfolio();
         LocalDate purchaseDate = new LocalDate(2014, 1, 1);
-        portfolio.addStock(aStockName(), buyOneHundredSharesOn(purchaseDate));
+        portfolio.buyStock(aStockName(), buyOneHundredSharesOn(purchaseDate).amountPaid(), buyOneHundredSharesOn(purchaseDate));
 
         SellAfterAFixedNumberOFDays decision = new SellAfterAFixedNumberOFDays(portfolio, aStockPrices(), 4);
 
@@ -34,7 +31,7 @@ public class SellAfterAFixedNumberOFDaysTest {
     public void should_sell_after_the_given_number_of_days() throws Exception {
         Portfolio portfolio = new Portfolio();
         LocalDate purchaseDate = new LocalDate(2014, 1, 1);
-        portfolio.addStock(aStockName(), buyOneHundredSharesOn(purchaseDate));
+        portfolio.buyStock(aStockName(), buyOneHundredSharesOn(purchaseDate).amountPaid(), buyOneHundredSharesOn(purchaseDate));
 
         SellAfterAFixedNumberOFDays decision = new SellAfterAFixedNumberOFDays(portfolio, aStockPrices(), 4);
 

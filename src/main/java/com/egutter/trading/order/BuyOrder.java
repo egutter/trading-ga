@@ -22,10 +22,11 @@ public class BuyOrder implements MarketOrder {
 
     @Override
     public void execute(Portfolio portfolio) {
-        BigDecimal priceToPay = BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfShares);
+        portfolio.buyStock(stockName, amountPaid(), this);
+    }
 
-        portfolio.removeCash(priceToPay);
-        portfolio.addStock(stockName, this);
+    public BigDecimal amountPaid() {
+        return BigDecimal.valueOf(dailyQuote.getClosePrice() * numberOfShares);
     }
 
     public int getNumberOfShares() {
@@ -38,5 +39,9 @@ public class BuyOrder implements MarketOrder {
 
     public LocalDate getTradingDate() {
         return dailyQuote.getTradingDate();
+    }
+
+    public String getStockName() {
+        return stockName;
     }
 }

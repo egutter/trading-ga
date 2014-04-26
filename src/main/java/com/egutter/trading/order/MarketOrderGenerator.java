@@ -2,6 +2,7 @@ package com.egutter.trading.order;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.decision.TradingStrategy;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 
@@ -12,23 +13,20 @@ public class MarketOrderGenerator {
 
     private final String stockName;
     private final Portfolio portfolio;
-    private final BuyTradingDecision buyTradingDecision;
-    private SellTradingDecision sellTradingDecision;
+    private TradingStrategy tradingStrategy;
     private final DailyQuote dailyQuote;
     private int numberOfShares;
 
     public MarketOrderGenerator(String stockName,
                                 Portfolio portfolio,
-                                BuyTradingDecision buyTradingDecision,
-                                SellTradingDecision sellTradingDecision,
+                                TradingStrategy tradingStrategy,
                                 DailyQuote dailyQuote,
                                 int numberOfShares) {
 
 
         this.stockName = stockName;
         this.portfolio = portfolio;
-        this.buyTradingDecision = buyTradingDecision;
-        this.sellTradingDecision = sellTradingDecision;
+        this.tradingStrategy = tradingStrategy;
         this.dailyQuote = dailyQuote;
         this.numberOfShares = numberOfShares;
     }
@@ -37,14 +35,14 @@ public class MarketOrderGenerator {
 
         OrderBook marketOrders = new OrderBook();
 
-        if (buyTradingDecision.shouldBuyOn(dailyQuote.getTradingDate())) {
+        if (tradingStrategy.shouldBuyOn(dailyQuote.getTradingDate())) {
             marketOrders.add(
                     new BuyOrder(stockName,
                             dailyQuote,
                             numberOfShares));
         };
 
-        if (sellTradingDecision.shouldSellOn(dailyQuote.getTradingDate())) {
+        if (tradingStrategy.shouldSellOn(dailyQuote.getTradingDate())) {
             marketOrders.add(
                     new SellOrder(stockName,
                             dailyQuote,

@@ -20,7 +20,7 @@ public class DoNotSellWhenNoStockInPorfolioTest {
     public void should_not_sell_when_no_stock_is_in_portfolio() throws Exception {
 
         Portfolio stockPorfolio = new Portfolio();
-        stockPorfolio.addStock("YPF", buyOneHundredShares());
+        stockPorfolio.buyStock("YPF", buyOneHundredShares().amountPaid(), buyOneHundredShares());
 
         DoNotSellWhenNoStockInPorfolio decision = new DoNotSellWhenNoStockInPorfolio(stockPorfolio,
                 new StockPrices("GAL", aListOfDailyQuotes()),
@@ -33,7 +33,7 @@ public class DoNotSellWhenNoStockInPorfolioTest {
     public void should_sell_when_stock_is_in_portfolio() throws Exception {
 
         Portfolio stockPorfolio = new Portfolio();
-        stockPorfolio.addStock("YPF", buyOneHundredShares());
+        stockPorfolio.buyStock("YPF", buyOneHundredShares().amountPaid(), buyOneHundredShares());
 
         DoNotSellWhenNoStockInPorfolio decision = new DoNotSellWhenNoStockInPorfolio(stockPorfolio,
                 new StockPrices("YPF", aListOfDailyQuotes()),

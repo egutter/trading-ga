@@ -22,10 +22,14 @@ public class SellOrder implements MarketOrder {
 
     @Override
     public void execute(Portfolio portfolio) {
-        BigDecimal priceToCollect = BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfSharesFor);
-
-        portfolio.addCash(priceToCollect);
-        portfolio.removeStock(stockName);
+        portfolio.sellStock(stockName, amountEarned(), this);
     }
 
+    public BigDecimal amountEarned() {
+        return BigDecimal.valueOf(dailyQuote.getClosePrice() * numberOfSharesFor);
+    }
+
+    public DailyQuote getDailyQuote() {
+        return dailyQuote;
+    }
 }

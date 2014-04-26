@@ -1,9 +1,13 @@
 package com.egutter.trading;
 
-import com.egutter.trading.decision.generator.TradingDecisionGeneratorBuilder;
+import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
+import com.egutter.trading.genetic.TraderEvolutionObserver;
 import com.egutter.trading.genetic.TradingDecisionGenome;
-import com.egutter.trading.stock.*;
+import com.egutter.trading.stock.Portfolio;
+import com.egutter.trading.stock.StockMarket;
+import com.egutter.trading.stock.StockMarketBuilder;
+import com.egutter.trading.stock.Trader;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -19,6 +23,7 @@ import org.uncommons.watchmaker.framework.operators.BitStringMutation;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
+import org.uncommons.watchmaker.framework.termination.Stagnation;
 
 import java.net.UnknownHostException;
 import java.util.*;
@@ -51,20 +56,34 @@ public class Main {
                 selectionStrategy,
                 rng);
 
-        BitString result = engine.evolve(1000, 10, new GenerationCount(100));
+        EvolutionObserver<? super BitString> observer = new TraderEvolutionObserver();
+        engine.addEvolutionObserver(observer);
+        BitString result = engine.evolve(1000, 10, new GenerationCount(100), new Stagnation(20, true));
 
+        printResults(startTime, stockMarket, stockTradingFitnessEvaluator, result);
+    }
+
+    private static void printResults(LocalTime startTime, StockMarket stockMarket, StockTradingFitnessEvaluator stockTradingFitnessEvaluator, BitString result) {
         Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
         Trader trader = stockTradingFitnessEvaluator.buildTrader(portfolio, result);
         trader.trade();
 
         System.out.println(result);
-        System.out.println("trading decisions");
-        System.out.println("Buy Trading Decisions "+ new TradingDecisionGeneratorBuilder(new Portfolio(), result).generateBuyDecision(stockMarket.getMarketIndexPrices()));
-        System.out.println("Sell Trading Decisions "+ new TradingDecisionGeneratorBuilder(new Portfolio(), result).generateSellDecision(stockMarket.getMarketIndexPrices()));
-        System.out.println("Final Cash "+ portfolio.getCash());
+        System.out.println("Buy Trading Decisions "+ new TradingDecisionFactory(new Portfolio(), result).generateBuyDecision(stockMarket.getMarketIndexPrices()));
+        System.out.println("Sell Trading Decisions "+ new TradingDecisionFactory(new Portfolio(), result).generateSellDecision(stockMarket.getMarketIndexPrices()));
+        System.out.println("Final Cash $"+ portfolio.getCash());
+        System.out.println("Most popular 5 stocks "+ portfolio.getStats().mostPopularStocks(5));
+        System.out.println("Num of orders which won "+ portfolio.getStats().countOrdersWon());
+        System.out.println("Num of orders which lost "+ portfolio.getStats().countOrdersLost());
+        System.out.println("Num of orders which even "+ portfolio.getStats().countOrdersEven());
+        System.out.println("Order return average "+ portfolio.getStats().allOrdersAverageReturn());
+
+//        System.out.println("Amount Invested $" + trader.amountInvested());
+//        System.out.println("Portolio Performance " + portfolio.getCash().divide(trader.amountInvested()).multiply(BigDecimal.valueOf(100)).subtract(BigDecimal.valueOf(100)));
         System.out.println("Orders executed "+ trader.ordersExecuted());
         System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
+
     public static void main2(String[] args) throws UnknownHostException {
 
 

@@ -1,9 +1,12 @@
 package com.egutter.trading.stock;
 
 import com.egutter.trading.order.BuyOrder;
+import com.egutter.trading.order.SellOrder;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +17,7 @@ public class Portfolio {
 
     Map<String, BuyOrder> stocks = new HashMap<String, BuyOrder>();
     BigDecimal cash;
+    private PortfolioStats stats = new PortfolioStats();
 
     public Portfolio() {
         this(new BigDecimal(0.0));
@@ -23,23 +27,8 @@ public class Portfolio {
         this.cash = cashInPortfolio;
     }
 
-    public void addCash(BigDecimal cash) {
-        this.cash.add(cash);
-    }
-
-    public void removeCash(BigDecimal cash) {
-        this.cash.subtract(cash);
-    }
     public boolean hasStock(String stockName) {
         return stocks.containsKey(stockName);
-    }
-
-    public void addStock(String stockName, BuyOrder order) {
-        stocks.put(stockName, order);
-    }
-
-    public void removeStock(String stockName) {
-        stocks.remove(stockName);
     }
 
     public int getNumberOfSharesFor(String stockName) {
@@ -59,5 +48,37 @@ public class Portfolio {
         }
 
         return stocks.get(stockName).getTradingDate();
+    }
+
+    public void buyStock(String stockName, BigDecimal amount, BuyOrder order) {
+        this.removeCash(amount);
+        this.addStock(stockName, order);
+    }
+
+    public void sellStock(String stockName, BigDecimal amountEarned, SellOrder sellOrder) {
+        this.addCash(amountEarned);
+        BuyOrder buyOrder = this.removeStock(stockName);
+        stats.addStatsFor(buyOrder, sellOrder);
+
+    }
+
+    private void addStock(String stockName, BuyOrder order) {
+        stocks.put(stockName, order);
+    }
+
+    private BuyOrder removeStock(String stockName) {
+        return stocks.remove(stockName);
+    }
+
+    private void addCash(BigDecimal anAmount) {
+        this.cash = this.cash.add(anAmount);
+    }
+
+    private void removeCash(BigDecimal anAmount) {
+        this.cash = this.cash.subtract(anAmount);
+    }
+
+    public PortfolioStats getStats() {
+        return stats;
     }
 }

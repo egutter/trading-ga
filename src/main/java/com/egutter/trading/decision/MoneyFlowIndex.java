@@ -21,23 +21,22 @@ import java.util.Map;
 /**
  * Created by egutter on 2/10/14.
  */
-public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
+public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
 
     private final StockPrices stockPrices;
     private final Range sellThreshold;
-    private Map<LocalDate, Double> percentageB;
+    private Map<LocalDate, Double> moneyFlowIndex;
 
     private Range buyThreshold;
-    private int movingAverageDays;
-    private MAType movingAverageType;
+    private int days;
 
     public static void main(String[] args) {
         StockMarket stockMarket = new StockMarketBuilder().build();
         List<Double> maxes = new ArrayList<Double>();
         List<Double> minis = new ArrayList<Double>();
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            BollingerBands bb = new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(0.0), 22, MAType.Ema);
-            Map<LocalDate, Double> indexes = bb.getPercentageB();
+            MoneyFlowIndex mfi = new MoneyFlowIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 20);
+            Map<LocalDate, Double> indexes = mfi.getMoneyFlowIndex();
             maxes.add(Ordering.natural().max(indexes.values()));
             minis.add(Ordering.natural().min(indexes.values()));
         }
@@ -45,94 +44,79 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
         System.out.println("Min value " + Ordering.natural().min(minis));
     }
 
-    public BollingerBands(StockPrices stockPrices,
+    public MoneyFlowIndex(StockPrices stockPrices,
                           Range buyThreshold,
                           Range sellThreshold,
-                          int movingAverageDays,
-                          MAType movingAverageType) {
+                          int days) {
         this.stockPrices = stockPrices;
         this.buyThreshold = buyThreshold;
         this.sellThreshold = sellThreshold;
-        this.movingAverageDays = movingAverageDays;
-        this.movingAverageType = movingAverageType;
+        this.days = days;
     }
 
     @Override
     public boolean shouldBuyOn(LocalDate tradingDate) {
-        if (!getPercentageB().containsKey(tradingDate)) {
+        if (!getMoneyFlowIndex().containsKey(tradingDate)) {
             return false;
         }
-        Double percentageBAtDay = getPercentageB().get(tradingDate);
-        return buyThreshold.contains(percentageBAtDay);
+        Double mfiAtDay = getMoneyFlowIndex().get(tradingDate);
+        return buyThreshold.contains(mfiAtDay);
     }
 
     @Override
     public boolean shouldSellOn(LocalDate tradingDate) {
-        if (!getPercentageB().containsKey(tradingDate)) {
+        if (!getMoneyFlowIndex().containsKey(tradingDate)) {
             return false;
         }
-        Double percentageBAtDay = getPercentageB().get(tradingDate);
-        return sellThreshold.contains(percentageBAtDay);
+        Double mfiAtDay = getMoneyFlowIndex().get(tradingDate);
+        return sellThreshold.contains(mfiAtDay);
     }
 
-    private synchronized Map<LocalDate, Double> getPercentageB() {
-        if (this.percentageB == null) {
-            calculateBollingerBands();
+    private synchronized Map<LocalDate, Double> getMoneyFlowIndex() {
+        if (this.moneyFlowIndex == null) {
+            calculateMoneyFlowIndex();
         }
-        return this.percentageB;
+        return this.moneyFlowIndex;
     }
 
-    private void calculateBollingerBands() {
-        this.percentageB = new HashMap<LocalDate, Double>();
+    private void calculateMoneyFlowIndex() {
+        this.moneyFlowIndex = new HashMap<LocalDate, Double>();
         List<Double>closePrices = stockPrices.getAdjustedClosePrices();
 
         MInteger outBegIdx = new MInteger();
         MInteger outNBElement = new MInteger();
-        double outRealUpperBand[] = new double[closePrices.size()];
-        double outRealMiddleBand[] = new double[closePrices.size()];
-        double outRealLowerBand[] = new double[closePrices.size()];
+        double outReal[] = new double[closePrices.size()];
+        double[] hiPricesArray = Doubles.toArray(closePrices);
+        double[] lowPricesArray = Doubles.toArray(closePrices);
         double[] closePricesArray = Doubles.toArray(closePrices);
-        RetCode returnCode = new CoreAnnotated().bbands(startIndex(),
+        double[] volumeArray = Doubles.toArray(closePrices);
+
+        RetCode returnCode = new CoreAnnotated().mfi(startIndex(),
                 endIndex(closePrices),
+                hiPricesArray,
+                lowPricesArray,
                 closePricesArray,
-                movingAverageDays(),
-                upperNumberOfStdDev(),
-                lowerNumberOfStdDev(),
-                movingAverageType(),
+                volumeArray,
+                days(),
                 outBegIdx,
                 outNBElement,
-                outRealUpperBand,
-                outRealMiddleBand,
-                outRealLowerBand);
+                outReal);
 
         if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Bollinger Bands " + returnCode);
+            throw new RuntimeException("Error calculating Money Flow Index " + returnCode);
         }
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
 
         for (int i = 0; i < outNBElement.value; i++) {
-            int movingAverageDaysOffset = i + movingAverageDays() - 1;
-            double pctB = (closePricesArray[movingAverageDaysOffset]-outRealLowerBand[i])/(outRealUpperBand[i]-outRealLowerBand[i]);
-            LocalDate tradingDate = tradingDates.get(movingAverageDaysOffset);
-            this.percentageB.put(tradingDate, pctB);
+            int daysOffset = i + days() - 1;
+            LocalDate tradingDate = tradingDates.get(daysOffset);
+            this.moneyFlowIndex.put(tradingDate, outReal[i]);
         }
     }
 
-    public MAType movingAverageType() {
-        return this.movingAverageType;
-    }
-
-    private double lowerNumberOfStdDev() {
-        return 2;
-    }
-
-    private double upperNumberOfStdDev() {
-        return 2;
-    }
-
-    public int movingAverageDays() {
-        return this.movingAverageDays;
+    public int days() {
+        return this.days;
     }
 
     public Range getBuyThreshold() {
@@ -158,10 +142,8 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
                 this.getBuyThreshold(),
                 "sell threshold",
                 this.getSellThreshold(),
-                "moving avg days",
-                this.movingAverageDays,
-                "moving avg type",
-                this.movingAverageType);
+                "MFI days",
+                this.days);
     }
 
 }

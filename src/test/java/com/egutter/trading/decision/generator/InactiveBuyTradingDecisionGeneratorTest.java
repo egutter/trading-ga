@@ -1,6 +1,6 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.BollingerBands;
+import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.InactiveTradingDecision;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class InactiveBuyTradingDecisionGeneratorTest {
 
     }
 
-    private TradingDecisionGenerator inactiveTradingDecisionGenerator(BitString chromosome) {
+    private BuyTradingDecisionGenerator inactiveTradingDecisionGenerator(BitString chromosome) {
         BollingerBandsGenerator bollingerBandsGenerator = new BollingerBandsGenerator(chromosome);
         return new InactiveTradingDecisionGenerator(bollingerBandsGenerator, chromosome);
     }

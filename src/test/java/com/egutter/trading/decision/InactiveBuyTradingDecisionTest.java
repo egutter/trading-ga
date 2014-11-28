@@ -12,10 +12,10 @@ import static org.junit.Assert.assertThat;
 public class InactiveBuyTradingDecisionTest {
 
     @Test
-    public void should_always_return_false() throws Exception {
+    public void should_always_return_neutral() throws Exception {
         InactiveTradingDecision decision = new InactiveTradingDecision();
 
-        assertThat(decision.shouldSellOn(new LocalDate(2014, 1, 1)), equalTo(false));
-        assertThat(decision.shouldBuyOn(new LocalDate(2014, 1, 1)), equalTo(false));
+        assertThat(decision.shouldSellOn(new LocalDate(2014, 1, 1)), equalTo(DecisionResult.NEUTRAL));
+        assertThat(decision.shouldBuyOn(new LocalDate(2014, 1, 1)), equalTo(DecisionResult.NEUTRAL));
     }
 }

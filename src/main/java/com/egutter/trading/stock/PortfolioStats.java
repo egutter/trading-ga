@@ -43,16 +43,18 @@ public class PortfolioStats {
     }
 
     public int countOrdersWon() {
-        return from(stats).filter(new Predicate<Pair<BuyOrder, SellOrder>>() {
-            @Override
-            public boolean apply(Pair<BuyOrder, SellOrder> pair) {
-                return pair.getFirst().amountPaid().doubleValue() < pair.getSecond().amountEarned().doubleValue();
-            }
-        }).size();
+        return ordersWon().size();
     }
 
     public int countOrdersLost() {
         return ordersLost().size();
+    }
+
+    public BigDecimal percentageOfOrdersWon() {
+        if (stats.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+        return BigDecimal.valueOf(countOrdersWon()).divide(BigDecimal.valueOf(stats.size()), 2, RoundingMode.HALF_EVEN);
     }
 
     public int countOrdersEven() {
@@ -100,6 +102,16 @@ public class PortfolioStats {
             }
         }).toList();
     }
+
+    private FluentIterable<Pair<BuyOrder, SellOrder>> ordersWon() {
+        return from(stats).filter(new Predicate<Pair<BuyOrder, SellOrder>>() {
+            @Override
+            public boolean apply(Pair<BuyOrder, SellOrder> pair) {
+                return pair.getFirst().amountPaid().doubleValue() < pair.getSecond().amountEarned().doubleValue();
+            }
+        });
+    }
+
 
 
 }

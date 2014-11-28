@@ -1,5 +1,10 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.technicalanalysis;
 
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.decision.TradingDecision;
+import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Range;
@@ -47,7 +52,7 @@ public class BollingerBandsTest {
                 movingAverageDays, MAType.Sma);
 
         LocalDate lastTradingDate = new LocalDate(2014, 1, 10);
-        assertThat(tradingDecision.shouldSellOn(lastTradingDate), equalTo(true));
+        assertThat(tradingDecision.shouldSellOn(lastTradingDate), equalTo(DecisionResult.YES));
     }
 
     @Test
@@ -77,7 +82,7 @@ public class BollingerBandsTest {
                 movingAverageDays, MAType.Sma);
 
         LocalDate lastTradingDate = new LocalDate(2014, 1, 10);
-        assertThat(tradingDecision.shouldBuyOn(lastTradingDate), equalTo(true));
+        assertThat(tradingDecision.shouldBuyOn(lastTradingDate), equalTo(DecisionResult.YES));
     }
 
     @Test
@@ -109,8 +114,8 @@ public class BollingerBandsTest {
                 movingAverageDays, MAType.Sma);
 
         LocalDate lastTradingDate = new LocalDate(2014, 1, 10);
-        assertThat(((SellTradingDecision)tradingDecision).shouldSellOn(lastTradingDate), equalTo(false));
-        assertThat(((BuyTradingDecision)tradingDecision).shouldBuyOn(lastTradingDate), equalTo(false));
+        assertThat(((SellTradingDecision)tradingDecision).shouldSellOn(lastTradingDate), equalTo(DecisionResult.NO));
+        assertThat(((BuyTradingDecision)tradingDecision).shouldBuyOn(lastTradingDate), equalTo(DecisionResult.NO));
     }
 
     private DailyQuote dailyPrice(int day, double adjustedClosePrice) {

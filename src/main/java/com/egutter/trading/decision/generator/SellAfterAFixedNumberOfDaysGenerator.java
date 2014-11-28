@@ -1,7 +1,6 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.BuyTradingDecision;
-import com.egutter.trading.decision.SellAfterAFixedNumberOFDays;
+import com.egutter.trading.decision.constraint.SellAfterAFixedNumberOFDays;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
@@ -12,7 +11,7 @@ import org.uncommons.maths.binary.BitString;
  * 0-4 => Number of days to hold stock and sell it
  * Created by egutter on 2/16/14.
  */
-public class SellAfterAFixedNumberOfDaysGenerator implements TradingDecisionGenerator {
+public class SellAfterAFixedNumberOfDaysGenerator implements SellTradingDecisionGenerator {
 
     private final int numberOfDays;
     private Portfolio portfolio;
@@ -20,11 +19,6 @@ public class SellAfterAFixedNumberOfDaysGenerator implements TradingDecisionGene
     public SellAfterAFixedNumberOfDaysGenerator(BitString sellAfterDaysChromosome, Portfolio portfolio) {
         this.portfolio = portfolio;
         this.numberOfDays = sellAfterDaysChromosome.toNumber().intValue() + 1;
-    }
-
-    @Override
-    public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
-        throw new UnsupportedOperationException("This generator does not support Buy Decisions");
     }
 
     @Override

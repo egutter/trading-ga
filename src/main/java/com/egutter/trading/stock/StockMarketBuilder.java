@@ -14,8 +14,7 @@ import java.util.Set;
  */
 public class StockMarketBuilder {
 
-    // TODO: Receive Repository and from/to Dates
-    public StockMarket build() {
+    public static void main(String[] args) {
         try {
             Mongo client = new Mongo();
             DB db = client.getDB("merval-stats");
@@ -28,12 +27,61 @@ public class StockMarketBuilder {
                 if (stockName.equals("system.indexes")) {
                     continue;
                 }
-                DBCollection coll = db.getCollection(stockName);
-                DBObject first = coll.findOne();
+                DBObject query = new BasicDBObject();
+                LocalDate fromDate = new LocalDate(2013, 2, 21);
+                LocalDate toDate = new LocalDate(2013, 2, 28);
+                query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).add("$lte", toDate.toDate()).get());
 
-                System.out.println("name " + stockName + " date: " + first.get("date"));
+                DBCursor cursor = db.getCollection(stockName).find(query);
+                System.out.println("name " + stockName);
+                List<DailyQuote> dailyPrices = new ArrayList<DailyQuote>();
+                try {
+                    while (cursor.hasNext()) {
+                        DBObject object = cursor.next();
+                        LocalDate tradingDate = LocalDate.fromDateFields((Date) object.get("date"));
+                        Double adjustedClose = Double.valueOf(((String) object.get("adjusted_close")));
+                        Double open = Double.valueOf(((String) object.get("open")));
+                        Double low = Double.valueOf(((String) object.get("low")));
+                        Double high = Double.valueOf(((String) object.get("high")));
+                        Double close = Double.valueOf(((String) object.get("close")));
+                        Long volume = Long.valueOf(((String) object.get("volume")));
+                        System.out.println("date " + tradingDate + " close " + close);
 
-                DBCursor cursor = coll.find();
+                        dailyPrices.add(new DailyQuote(tradingDate, open, close, adjustedClose, low, high, volume));
+                    }
+                } finally {
+                    cursor.close();
+                }
+                if (stockName.equals("%5EMERV")) {
+                    marketIndexPrices = new StockPrices("MERVAL", dailyPrices);
+                } else {
+                    stockPrices.add(new StockPrices(stockName, dailyPrices));
+                }
+            }
+
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // TODO: Receive Repository and from/to Dates
+    public StockMarket build(LocalDate fromDate, LocalDate toDate) {
+        try {
+            Mongo client = new Mongo();
+            DB db = client.getDB("merval-stats");
+
+            Set<String> colls = db.getCollectionNames();
+
+            List<StockPrices> stockPrices = new ArrayList<StockPrices>();
+            StockPrices marketIndexPrices = null;
+            for (String stockName : colls) {
+                if (stockName.equals("system.indexes")) {
+                    continue;
+                }
+                DBObject query = new BasicDBObject();
+                query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).add("$lte", toDate.toDate()).get());
+
+                DBCursor cursor = db.getCollection(stockName).find(query).sort(new BasicDBObject("date" , 1));
 
                 List<DailyQuote> dailyPrices = new ArrayList<DailyQuote>();
                 try {

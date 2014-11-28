@@ -2,8 +2,8 @@ package com.egutter.trading.genetic;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.InactiveTradingDecision;
+import com.egutter.trading.decision.generator.BuyTradingDecisionGenerator;
 import com.egutter.trading.decision.generator.TradingDecisionFactory;
-import com.egutter.trading.decision.generator.TradingDecisionGenerator;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Predicate;
@@ -27,9 +27,9 @@ public class GenomeCandidateValidator {
     }
 
     private boolean allBuyDecisionsAreInactive() {
-        return all(tradingDecisionGenerator.getBuyGeneratorChain(), new Predicate<TradingDecisionGenerator>() {
+        return all(tradingDecisionGenerator.getBuyGeneratorChain(), new Predicate<BuyTradingDecisionGenerator>() {
             @Override
-            public boolean apply(TradingDecisionGenerator tradingDecisionGenerator) {
+            public boolean apply(BuyTradingDecisionGenerator tradingDecisionGenerator) {
                 return isInactive(tradingDecisionGenerator.generateBuyDecision(emptyStockPrices()));
             }
         });

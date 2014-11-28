@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 public class Trader {
 
-    public static final int NUMBER_OF_SHARES = 100;
+    public static final BigDecimal AMOUNT_TO_INVEST = BigDecimal.valueOf(10000.00);
     private StockMarket stockMarket;
     private TradingDecisionFactory tradingDecisionFactory;
     private Portfolio portfolio;
@@ -56,7 +56,7 @@ public class Trader {
                 portfolio,
                 tradingStrategy,
                 dailyQuote,
-                NUMBER_OF_SHARES);
+                AMOUNT_TO_INVEST);
     }
 
     public int ordersExecuted() {

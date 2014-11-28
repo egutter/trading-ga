@@ -1,5 +1,7 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.constraint;
 
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
@@ -12,26 +14,23 @@ public class DoNotSellWhenNoStockInPorfolio implements SellTradingDecision {
 
     private Portfolio portfolio;
     private StockPrices stockPrices;
-    private SellTradingDecision wrappedTradingDecision;
 
     public DoNotSellWhenNoStockInPorfolio(Portfolio portfolio,
-                                            StockPrices stockPrices,
-                                            SellTradingDecision wrappedTradingDecision) {
+                                            StockPrices stockPrices) {
         this.portfolio = portfolio;
         this.stockPrices = stockPrices;
-        this.wrappedTradingDecision = wrappedTradingDecision;
     }
 
     @Override
-    public boolean shouldSellOn(LocalDate tradingDate) {
+    public DecisionResult shouldSellOn(LocalDate tradingDate) {
         if (!portfolio.hasStock(stockPrices.getStockName())) {
-            return false;
+            return DecisionResult.NO;
         }
-        return wrappedTradingDecision.shouldSellOn(tradingDate);
+        return DecisionResult.NEUTRAL;
     }
 
     @Override
     public String toString() {
-        return wrappedTradingDecision.toString();
+        return null;
     }
 }

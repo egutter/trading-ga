@@ -10,7 +10,7 @@ import org.uncommons.maths.binary.BitString;
  * Most significant bit always flags active or inactive
  * Created by egutter on 2/15/14.
  */
-public class InactiveTradingDecisionGenerator implements TradingDecisionGenerator {
+public class InactiveTradingDecisionGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator {
 
     private TradingDecisionGenerator wrappedTradingDecisionGenerator;
     private BitString chromosome;
@@ -26,7 +26,7 @@ public class InactiveTradingDecisionGenerator implements TradingDecisionGenerato
         if (!active) {
             return new InactiveTradingDecision();
         }
-        return wrappedTradingDecisionGenerator.generateBuyDecision(stockPrices);
+        return ((BuyTradingDecisionGenerator) wrappedTradingDecisionGenerator).generateBuyDecision(stockPrices);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class InactiveTradingDecisionGenerator implements TradingDecisionGenerato
         if (!active) {
             return new InactiveTradingDecision();
         }
-        return wrappedTradingDecisionGenerator.generateSellDecision(stockPrices);
+        return ((SellTradingDecisionGenerator) wrappedTradingDecisionGenerator).generateSellDecision(stockPrices);
     }
 }

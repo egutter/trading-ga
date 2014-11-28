@@ -1,6 +1,6 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.BollingerBands;
+import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.google.common.collect.Range;
 import com.tictactec.ta.lib.MAType;
 import org.junit.Test;

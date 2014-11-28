@@ -1,10 +1,13 @@
 package com.egutter.trading.order;
 
 import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.TradingStrategy;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
+
+import java.math.BigDecimal;
 
 /**
  * Created by egutter on 2/12/14.
@@ -15,34 +18,34 @@ public class MarketOrderGenerator {
     private final Portfolio portfolio;
     private TradingStrategy tradingStrategy;
     private final DailyQuote dailyQuote;
-    private int numberOfShares;
+    private BigDecimal amountToInvest;
 
     public MarketOrderGenerator(String stockName,
                                 Portfolio portfolio,
                                 TradingStrategy tradingStrategy,
                                 DailyQuote dailyQuote,
-                                int numberOfShares) {
+                                BigDecimal amountToInvest) {
 
 
         this.stockName = stockName;
         this.portfolio = portfolio;
         this.tradingStrategy = tradingStrategy;
         this.dailyQuote = dailyQuote;
-        this.numberOfShares = numberOfShares;
+        this.amountToInvest = amountToInvest;
     }
 
     public OrderBook generateOrders() {
 
         OrderBook marketOrders = new OrderBook();
 
-        if (tradingStrategy.shouldBuyOn(dailyQuote.getTradingDate())) {
+        if (DecisionResult.YES.equals(tradingStrategy.shouldBuyOn(dailyQuote.getTradingDate()))) {
             marketOrders.add(
                     new BuyOrder(stockName,
                             dailyQuote,
-                            numberOfShares));
+                            amountToInvest));
         };
 
-        if (tradingStrategy.shouldSellOn(dailyQuote.getTradingDate())) {
+        if (DecisionResult.YES.equals(tradingStrategy.shouldSellOn(dailyQuote.getTradingDate()))) {
             marketOrders.add(
                     new SellOrder(stockName,
                             dailyQuote,

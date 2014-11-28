@@ -26,6 +26,18 @@ public class StockPrices {
         return transform(dailyQuotes, collectAdjustedClosePrice());
     }
 
+    public List<Double> getHighPrices() {
+        return transform(dailyQuotes, collectHighPrice());
+    }
+
+    public List<Double> getLowPrices() {
+        return transform(dailyQuotes, collectLowPrice());
+    }
+
+    public List<? extends Number> getVolumes() {
+        return transform(dailyQuotes, collectVolume());
+    }
+
     public List<LocalDate> getTradingDates() {
         return transform(dailyQuotes, collectTradingDates());
     }
@@ -48,6 +60,33 @@ public class StockPrices {
         };
     }
 
+    private Function<DailyQuote, Double> collectHighPrice() {
+        return new Function<DailyQuote, Double>() {
+            @Override
+            public Double apply(DailyQuote dailyQuote) {
+                return dailyQuote.getHighPrice();
+            }
+        };
+    }
+
+    private Function<? super DailyQuote, ? extends Number> collectVolume() {
+        return new Function<DailyQuote, Long>() {
+            @Override
+            public Long apply(DailyQuote dailyQuote) {
+                return dailyQuote.getVolume();
+            }
+        };
+    }
+
+    private Function<DailyQuote, Double> collectLowPrice() {
+        return new Function<DailyQuote, Double>() {
+            @Override
+            public Double apply(DailyQuote dailyQuote) {
+                return dailyQuote.getLowPrice();
+            }
+        };
+    }
+
     public String getStockName() {
         return stockName;
     }
@@ -61,4 +100,5 @@ public class StockPrices {
     public LocalDate getLastTradingDate() {
         return getLast(dailyQuotes).getTradingDate();
     }
+
 }

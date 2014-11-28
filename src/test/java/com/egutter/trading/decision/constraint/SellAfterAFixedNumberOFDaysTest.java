@@ -1,5 +1,7 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.constraint;
 
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.constraint.SellAfterAFixedNumberOFDays;
 import com.egutter.trading.stock.Portfolio;
 import org.joda.time.LocalDate;
 import org.junit.Test;
@@ -21,11 +23,11 @@ public class SellAfterAFixedNumberOFDaysTest {
 
         SellAfterAFixedNumberOFDays decision = new SellAfterAFixedNumberOFDays(portfolio, aStockPrices(), 4);
 
-        assertThat(decision.shouldSellOn(purchaseDate), equalTo(false));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(1)), equalTo(false));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(2)), equalTo(false));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(3)), equalTo(false));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(4)), equalTo(false));
+        assertThat(decision.shouldSellOn(purchaseDate), equalTo(DecisionResult.NEUTRAL));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(1)), equalTo(DecisionResult.NEUTRAL));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(2)), equalTo(DecisionResult.NEUTRAL));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(3)), equalTo(DecisionResult.NEUTRAL));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(4)), equalTo(DecisionResult.NEUTRAL));
     }
     @Test
     public void should_sell_after_the_given_number_of_days() throws Exception {
@@ -35,10 +37,10 @@ public class SellAfterAFixedNumberOFDaysTest {
 
         SellAfterAFixedNumberOFDays decision = new SellAfterAFixedNumberOFDays(portfolio, aStockPrices(), 4);
 
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(5)), equalTo(true));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(6)), equalTo(true));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(7)), equalTo(true));
-        assertThat(decision.shouldSellOn(purchaseDate.plusDays(24)), equalTo(true));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(5)), equalTo(DecisionResult.YES));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(6)), equalTo(DecisionResult.YES));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(7)), equalTo(DecisionResult.YES));
+        assertThat(decision.shouldSellOn(purchaseDate.plusDays(24)), equalTo(DecisionResult.YES));
     }
 
 }

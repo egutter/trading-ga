@@ -5,6 +5,7 @@ import com.egutter.trading.stock.Portfolio;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by egutter on 2/12/14.
@@ -14,10 +15,10 @@ public class BuyOrder implements MarketOrder {
     private final DailyQuote dailyQuote;
     private final int numberOfShares;
 
-    public BuyOrder(String stockName, DailyQuote dailyQuote, int numberOfShares) {
+    public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
-        this.numberOfShares = numberOfShares;
+        this.numberOfShares = amountToInvest.divide(BigDecimal.valueOf(dailyQuote.getClosePrice()), RoundingMode.DOWN).intValue();
     }
 
     @Override

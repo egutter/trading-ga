@@ -1,5 +1,8 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.technicalanalysis;
 
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
@@ -32,7 +35,7 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
     private MAType movingAverageType;
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build();
+        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
         List<Double> maxes = new ArrayList<Double>();
         List<Double> minis = new ArrayList<Double>();
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
@@ -58,21 +61,24 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
     }
 
     @Override
-    public boolean shouldBuyOn(LocalDate tradingDate) {
-        if (!getPercentageB().containsKey(tradingDate)) {
-            return false;
-        }
-        Double percentageBAtDay = getPercentageB().get(tradingDate);
-        return buyThreshold.contains(percentageBAtDay);
+    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
+        return shouldTradeOn(tradingDate, buyThreshold);
     }
 
     @Override
-    public boolean shouldSellOn(LocalDate tradingDate) {
+    public DecisionResult shouldSellOn(LocalDate tradingDate) {
+        return shouldTradeOn(tradingDate, sellThreshold);
+    }
+
+    private DecisionResult shouldTradeOn(LocalDate tradingDate, Range tradeThreshold) {
         if (!getPercentageB().containsKey(tradingDate)) {
-            return false;
+            return DecisionResult.NEUTRAL;
         }
         Double percentageBAtDay = getPercentageB().get(tradingDate);
-        return sellThreshold.contains(percentageBAtDay);
+        if (tradeThreshold.contains(percentageBAtDay)) {
+            return DecisionResult.YES;
+        }
+        return DecisionResult.NO;
     }
 
     private synchronized Map<LocalDate, Double> getPercentageB() {

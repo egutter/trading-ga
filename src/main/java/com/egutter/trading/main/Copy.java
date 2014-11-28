@@ -1,14 +1,14 @@
-package com.egutter.trading;
+package com.egutter.trading.main;
 
 import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
-import com.egutter.trading.genetic.TraderEvolutionObserver;
 import com.egutter.trading.genetic.TradingDecisionGenome;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.Trader;
 import com.mongodb.*;
+import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Seconds;
@@ -18,6 +18,8 @@ import org.uncommons.maths.random.MersenneTwisterRNG;
 import org.uncommons.maths.random.Probability;
 import org.uncommons.watchmaker.framework.*;
 import org.uncommons.watchmaker.framework.factories.BitStringFactory;
+import org.uncommons.watchmaker.framework.islands.IslandEvolution;
+import org.uncommons.watchmaker.framework.islands.RingMigration;
 import org.uncommons.watchmaker.framework.operators.BitStringCrossover;
 import org.uncommons.watchmaker.framework.operators.BitStringMutation;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
@@ -28,10 +30,66 @@ import org.uncommons.watchmaker.framework.termination.Stagnation;
 import java.net.UnknownHostException;
 import java.util.*;
 
-public class Main {
+public class Copy {
+
 
     public static void main(String[] args) throws UnknownHostException {
         LocalTime startTime = LocalTime.now();
+
+        List<Pair<LocalDate, LocalDate>> years = new ArrayList<Pair<LocalDate, LocalDate>>();
+//        years.add(new Pair(new LocalDate(2012, 1, 1), new LocalDate(2012, 4, 30)));
+//        years.add(new Pair(new LocalDate(2012, 5, 1), new LocalDate(2012, 8, 31)));
+//        years.add(new Pair(new LocalDate(2012, 9, 1), new LocalDate(2012, 12, 31)));
+//
+//        years.add(new Pair(new LocalDate(2013, 1, 1), new LocalDate(2013, 4, 30)));
+//        years.add(new Pair(new LocalDate(2013, 5, 1), new LocalDate(2013, 8, 31)));
+//        years.add(new Pair(new LocalDate(2013, 9, 1), new LocalDate(2013, 12, 31)));
+//        years.add(new Pair(new LocalDate(2012, 1, 1), new LocalDate(2012, 12, 31)));
+//        years.add(new Pair(new LocalDate(2013, 1, 1), new LocalDate(2013, 12, 31)));
+        years.add(new Pair(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31)));
+
+        List<BitString> winners = new ArrayList<BitString>();
+        for (Pair<LocalDate, LocalDate> quarter : years) {
+            System.out.println("Quarter "+ quarter.getFirst() + " - " + quarter.getSecond());
+
+            StockMarket stockMarket = new StockMarketBuilder().build(quarter.getFirst(), quarter.getSecond());
+            StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket);
+
+            Copy main = new Copy();
+
+//            BitString result1 = main.run(stockTradingFitnessEvaluator, new TournamentSelection(new Probability(0.51)), true);
+//            winners.add(result1);
+
+//            printResults(startTime, stockMarket, stockTradingFitnessEvaluator, result1);
+
+            BitString result2 = main.run(stockTradingFitnessEvaluator, new RouletteWheelSelection(), false);
+            winners.add(result2);
+//            printResults(startTime, stockMarket, stockTradingFitnessEvaluator, result2);
+        }
+
+        System.out.println("Running winners from every quarter");
+        for (BitString winnerResult : winners) {
+            StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2014, 1, 1), LocalDate.now());
+            StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket);
+            printResults(stockMarket, stockTradingFitnessEvaluator, winnerResult);
+        }
+
+//        System.out.println("Running winners from past queries");
+//        List<BitString> pastWinners = Arrays.asList(new BitString("01100110110011011101010110100001110"), new BitString("01111110110011011101010110100001110"), new BitString("11011000110011011101010110100011111"));
+//        for (BitString winnerResult : pastWinners) {
+//            StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2014, 1, 1), LocalDate.now());
+//            StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket);
+//            printResults(startTime, stockMarket, stockTradingFitnessEvaluator, winnerResult);
+//        }
+
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
+    }
+
+    public Copy() {
+    }
+
+    public BitString run(StockTradingFitnessEvaluator stockTradingFitnessEvaluator, SelectionStrategy<Object> selectionStrategy, boolean islandEvolution) {
+
         CandidateFactory<BitString> candidateFactory = new BitStringFactory(TradingDecisionGenome.SIZE);
 
         List<EvolutionaryOperator<BitString>> operators
@@ -42,30 +100,43 @@ public class Main {
 
         EvolutionaryOperator<BitString> pipeline = new EvolutionPipeline<BitString>(operators);
 
-        StockMarket stockMarket = new StockMarketBuilder().build();
-
-        SelectionStrategy<Object> selectionStrategy = new RouletteWheelSelection();
-
         Random rng = new MersenneTwisterRNG();
-        StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket);
 
-        EvolutionEngine<BitString> engine
-                = new GenerationalEvolutionEngine<BitString>(candidateFactory,
-                pipeline,
-                new CachingFitnessEvaluator(stockTradingFitnessEvaluator),
-                selectionStrategy,
-                rng);
+        if (islandEvolution) {
+            IslandEvolution<BitString> engine
+                    = new IslandEvolution<BitString>(5, // Number of islands.
+                    new RingMigration(),
+                    candidateFactory,
+                    pipeline,
+                    new CachingFitnessEvaluator(stockTradingFitnessEvaluator),
+                    selectionStrategy,
+                    rng);
 
-        EvolutionObserver<? super BitString> observer = new TraderEvolutionObserver();
-        engine.addEvolutionObserver(observer);
-        BitString result = engine.evolve(1000, 10, new GenerationCount(100), new Stagnation(20, true));
+//            IslandEvolutionObserver<? super BitString> observer = new TraderEvolutionObserver();
+//            engine.addEvolutionObserver(observer);
 
-        printResults(startTime, stockMarket, stockTradingFitnessEvaluator, result);
+            return engine.evolve(100, // Population size per island.
+                    5, // Elitism for each island.
+                    20, // Epoch length (no. generations).
+                    3, // Migrations from each island at each epoch.
+                    new GenerationCount(10), new Stagnation(5, true));
+        } else {
+            EvolutionEngine<BitString> engine
+                    = new GenerationalEvolutionEngine<BitString>(candidateFactory,
+                    pipeline,
+                    new CachingFitnessEvaluator(stockTradingFitnessEvaluator),
+                    selectionStrategy,
+                    rng);
+
+            return engine.evolve(1000, 10, new GenerationCount(100), new Stagnation(20, true));
+        }
+
+
     }
 
-    private static void printResults(LocalTime startTime, StockMarket stockMarket, StockTradingFitnessEvaluator stockTradingFitnessEvaluator, BitString result) {
+    private static void printResults(StockMarket stockMarket, StockTradingFitnessEvaluator stockTradingFitnessEvaluator, BitString result) {
         Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
-        Trader trader = stockTradingFitnessEvaluator.buildTrader(portfolio, result);
+        Trader trader = stockTradingFitnessEvaluator.buildTrader(portfolio, new TradingDecisionFactory(portfolio, result));
         trader.trade();
 
         System.out.println(result);
@@ -76,12 +147,8 @@ public class Main {
         System.out.println("Num of orders which won "+ portfolio.getStats().countOrdersWon());
         System.out.println("Num of orders which lost "+ portfolio.getStats().countOrdersLost());
         System.out.println("Num of orders which even "+ portfolio.getStats().countOrdersEven());
+        System.out.println("Percentage of orders which won "+ portfolio.getStats().percentageOfOrdersWon());
         System.out.println("Order return average "+ portfolio.getStats().allOrdersAverageReturn());
-
-//        System.out.println("Amount Invested $" + trader.amountInvested());
-//        System.out.println("Portolio Performance " + portfolio.getCash().divide(trader.amountInvested()).multiply(BigDecimal.valueOf(100)).subtract(BigDecimal.valueOf(100)));
-        System.out.println("Orders executed "+ trader.ordersExecuted());
-        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
 
     public static void main2(String[] args) throws UnknownHostException {

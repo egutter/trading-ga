@@ -1,9 +1,7 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.BollingerBands;
-import com.egutter.trading.decision.MoneyFlowIndex;
+import com.egutter.trading.decision.technicalanalysis.MoneyFlowIndex;
 import com.google.common.collect.Range;
-import com.tictactec.ta.lib.MAType;
 import org.junit.Test;
 import org.uncommons.maths.binary.BitString;
 

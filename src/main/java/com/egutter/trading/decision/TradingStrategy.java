@@ -17,11 +17,11 @@ public class TradingStrategy {
         this.sellTradingDecision = tradingDecisionFactory.generateSellDecision(stockPrices);
     }
 
-    public boolean shouldBuyOn(LocalDate tradingDate) {
+    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
         return buyTradingDecision.shouldBuyOn(tradingDate);
     }
 
-    public boolean shouldSellOn(LocalDate tradingDate) {
+    public DecisionResult shouldSellOn(LocalDate tradingDate) {
         return sellTradingDecision.shouldSellOn(tradingDate);
     }
 }

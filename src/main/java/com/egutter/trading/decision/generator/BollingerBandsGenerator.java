@@ -1,14 +1,16 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.BollingerBands;
+import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockPrices;
+import com.google.common.collect.MapMaker;
 import com.google.common.collect.Range;
 import com.tictactec.ta.lib.MAType;
 import org.uncommons.maths.binary.BitString;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ConcurrentMap;
 
 import static com.google.common.collect.Range.atLeast;
 import static com.google.common.collect.Range.atMost;
@@ -17,15 +19,18 @@ import static com.google.common.primitives.Doubles.min;
 /**
  * Created by egutter on 2/12/14.
  */
-public class BollingerBandsGenerator implements TradingDecisionGenerator {
+public class BollingerBandsGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator {
 
     private final Range<Double> buyThreshold;
     private final Range<Double> sellThreshold;
     private final int movingAverageDays;
     private final MAType movingAverageType;
 
+    private static final transient ConcurrentMap<String, BollingerBands> cache = new MapMaker().weakKeys().makeMap();
+    private BitString chromosome;
 
     public BollingerBandsGenerator(BitString chromosome) {
+        this.chromosome = chromosome;
         this.buyThreshold = generateBuyThreshold(chromosome);
         this.sellThreshold = generateSellThreshold(chromosome);
         this.movingAverageDays = generateMovingAverageDays(chromosome);
@@ -46,20 +51,27 @@ public class BollingerBandsGenerator implements TradingDecisionGenerator {
      * @return
      */
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
-        return new BollingerBands(stockPrices,
-                this.buyThreshold,
-                this.sellThreshold,
-                this.movingAverageDays,
-                this.movingAverageType);
+        return generateBollingerBands(stockPrices);
     }
+
 
     @Override
     public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
-        return new BollingerBands(stockPrices,
-                this.buyThreshold,
-                this.sellThreshold,
-                this.movingAverageDays,
-                this.movingAverageType);
+        return generateBollingerBands(stockPrices);
+    }
+
+    private BollingerBands generateBollingerBands(StockPrices stockPrices) {
+        String key = stockPrices.getStockName() + chromosome.toString();
+        BollingerBands bbands = cache.get(key);
+        if (bbands == null) {
+            bbands = new BollingerBands(stockPrices,
+                    this.buyThreshold,
+                    this.sellThreshold,
+                    this.movingAverageDays,
+                    this.movingAverageType);
+            cache.put(key, bbands);
+        }
+        return bbands;
     }
 
     private MAType generateMovingAverageType(BitString chromosome) {

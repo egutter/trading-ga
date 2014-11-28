@@ -1,5 +1,7 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.constraint;
 
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Joiner;
@@ -23,8 +25,11 @@ public class SellAfterAFixedNumberOFDays implements SellTradingDecision {
     }
 
     @Override
-    public boolean shouldSellOn(LocalDate tradingDate) {
-        return tradingDate.isAfter(dayStockWasBought().plusDays(getNumberOfDays()));
+    public DecisionResult shouldSellOn(LocalDate tradingDate) {
+        if (tradingDate.isAfter(dayStockWasBought().plusDays(getNumberOfDays()))) {
+            return DecisionResult.YES;
+        }
+        return DecisionResult.NEUTRAL;
     }
 
     private LocalDate dayStockWasBought() {

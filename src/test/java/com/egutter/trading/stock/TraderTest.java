@@ -1,6 +1,7 @@
 package com.egutter.trading.stock;
 
 import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.order.OrderBook;
@@ -54,7 +55,10 @@ public class TraderTest {
 
         trader.trade();
 
-        double amountPaid = Trader.NUMBER_OF_SHARES * ypfStockClosePrice;
+        int numberOfShares = Trader.AMOUNT_TO_INVEST.divide(BigDecimal.valueOf(ypfStockClosePrice)).intValue();
+        double sharesPrice = ypfStockClosePrice * numberOfShares;
+        double sellCommision = sharesPrice * Portfolio.COMMISION;
+        double amountPaid = sharesPrice + sellCommision;
         assertThat(portfolio.getCash().doubleValue(), equalTo(INITIAL_CASH.doubleValue() - amountPaid));
     }
 
@@ -64,8 +68,8 @@ public class TraderTest {
             public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
                 return new BuyTradingDecision() {
                     @Override
-                    public boolean shouldBuyOn(LocalDate tradingDate) {
-                        return true;
+                    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
+                        return DecisionResult.YES;
                     }
                 };
             }
@@ -74,8 +78,8 @@ public class TraderTest {
             public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
                 return new SellTradingDecision() {
                     @Override
-                    public boolean shouldSellOn(LocalDate tradingDate) {
-                        return false;
+                    public DecisionResult shouldSellOn(LocalDate tradingDate) {
+                        return DecisionResult.NO;
                     }
                 };
             }

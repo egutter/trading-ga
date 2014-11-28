@@ -1,8 +1,9 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.constraint;
 
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.constraint.DoNotSellWhenNoStockInPorfolio;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
-import org.joda.time.LocalDate;
 import org.junit.Test;
 
 import static com.egutter.trading.helper.TestHelper.aListOfDailyQuotes;
@@ -23,32 +24,21 @@ public class DoNotSellWhenNoStockInPorfolioTest {
         stockPorfolio.buyStock("YPF", buyOneHundredShares().amountPaid(), buyOneHundredShares());
 
         DoNotSellWhenNoStockInPorfolio decision = new DoNotSellWhenNoStockInPorfolio(stockPorfolio,
-                new StockPrices("GAL", aListOfDailyQuotes()),
-                getTradingDecision());
+                new StockPrices("GAL", aListOfDailyQuotes()));
 
-        assertThat(decision.shouldSellOn(aTradingDate()), equalTo(false));
+        assertThat(decision.shouldSellOn(aTradingDate()), equalTo(DecisionResult.NO));
     }
 
     @Test
-    public void should_sell_when_stock_is_in_portfolio() throws Exception {
+    public void should_be_neutral_when_stock_is_in_portfolio() throws Exception {
 
         Portfolio stockPorfolio = new Portfolio();
         stockPorfolio.buyStock("YPF", buyOneHundredShares().amountPaid(), buyOneHundredShares());
 
         DoNotSellWhenNoStockInPorfolio decision = new DoNotSellWhenNoStockInPorfolio(stockPorfolio,
-                new StockPrices("YPF", aListOfDailyQuotes()),
-                getTradingDecision());
+                new StockPrices("YPF", aListOfDailyQuotes()));
 
-        assertThat(decision.shouldSellOn(aTradingDate()), equalTo(true));
-    }
-
-    private SellTradingDecision getTradingDecision() {
-        return new SellTradingDecision() {
-            @Override
-            public boolean shouldSellOn(LocalDate tradingDate) {
-                return true;
-            }
-        };
+        assertThat(decision.shouldSellOn(aTradingDate()), equalTo(DecisionResult.NEUTRAL));
     }
 
 }

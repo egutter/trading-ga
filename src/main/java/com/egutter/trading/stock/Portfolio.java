@@ -5,8 +5,6 @@ import com.egutter.trading.order.SellOrder;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +13,7 @@ import java.util.Map;
  */
 public class Portfolio {
 
+    public static final double COMMISION = 0.010951;
     Map<String, BuyOrder> stocks = new HashMap<String, BuyOrder>();
     BigDecimal cash;
     private PortfolioStats stats = new PortfolioStats();
@@ -51,12 +50,12 @@ public class Portfolio {
     }
 
     public void buyStock(String stockName, BigDecimal amount, BuyOrder order) {
-        this.removeCash(amount);
+        this.removeCash(amount.add(buyOrSellCommision(amount)));
         this.addStock(stockName, order);
     }
 
     public void sellStock(String stockName, BigDecimal amountEarned, SellOrder sellOrder) {
-        this.addCash(amountEarned);
+        this.addCash(amountEarned.subtract(buyOrSellCommision(amountEarned)));
         BuyOrder buyOrder = this.removeStock(stockName);
         stats.addStatsFor(buyOrder, sellOrder);
 
@@ -81,4 +80,9 @@ public class Portfolio {
     public PortfolioStats getStats() {
         return stats;
     }
+
+    private BigDecimal buyOrSellCommision(BigDecimal amount) {
+        return BigDecimal.valueOf(COMMISION).multiply(amount);
+    }
+
 }

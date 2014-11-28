@@ -1,6 +1,9 @@
 package com.egutter.trading.decision.generator;
 
 import com.egutter.trading.decision.*;
+import com.egutter.trading.decision.consensus.BuyWhenNoOppositionsTradingDecision;
+import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
+import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
 import com.egutter.trading.genetic.TradingDecisionGenome;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
@@ -14,54 +17,56 @@ import java.util.List;
  */
 public class TradingDecisionFactory {
 
-    private final List<TradingDecisionGenerator> buyGeneratorChain = new ArrayList<TradingDecisionGenerator>();
-    private final List<TradingDecisionGenerator> sellGeneratorChain = new ArrayList<TradingDecisionGenerator>();
+    private final List<BuyTradingDecisionGenerator> buyGeneratorChain = new ArrayList<BuyTradingDecisionGenerator>();
+    private final List<SellTradingDecisionGenerator> sellGeneratorChain = new ArrayList<SellTradingDecisionGenerator>();
+    private final SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator;
     private Portfolio portfolio;
     private TradingDecisionGenome genome;
 
     public TradingDecisionFactory(Portfolio portfolio, BitString genome) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
-        this.buyGeneratorChain.add(buildBollingerBandsGenerator());
-        this.buyGeneratorChain.add(buildMoneyFlowGenerator());
-        this.sellGeneratorChain.add(buildBollingerBandsGenerator());
-        this.sellGeneratorChain.add(buildMoneyFlowGenerator());
-        this.sellGeneratorChain.add(sellAfterAFixedNumberOfDaysGenerator());
+        this.sellAfterAFixedNumberOfDaysGenerator = sellAfterAFixedNumberOfDaysGenerator();
+
+        this.buyGeneratorChain.add(buildDoNotBuyWhenSameStockInPortfolioGenerator());
+        this.buyGeneratorChain.add(buildDoNotBuyInTheLastBuyTradingDaysGenerator());
+        this.buyGeneratorChain.add((BuyTradingDecisionGenerator)buildBollingerBandsGenerator());
+        this.buyGeneratorChain.add((BuyTradingDecisionGenerator) buildMoneyFlowGenerator());
+        this.buyGeneratorChain.add((BuyTradingDecisionGenerator) buildAroonGenerator());
+
+        this.sellGeneratorChain.add(buildDoNotSellWhenNoStockInPorfolioGenerator());
+        this.sellGeneratorChain.add((SellTradingDecisionGenerator) buildBollingerBandsGenerator());
+        this.sellGeneratorChain.add((SellTradingDecisionGenerator) buildMoneyFlowGenerator());
+        this.sellGeneratorChain.add((SellTradingDecisionGenerator) buildAroonGenerator());
+
     }
 
     protected TradingDecisionFactory() {
+        sellAfterAFixedNumberOfDaysGenerator = sellAfterAFixedNumberOfDaysGenerator();
     }
 
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
-        BuyTradingDecisionComposite tradingDecisionComposite = new BuyTradingDecisionComposite();
-        for (TradingDecisionGenerator tradingDecisionGenerator: buyGeneratorChain) {
-            tradingDecisionComposite.addBuyTradingDecision(buildBuyWrappedTradingDecision(stockPrices,
-                    tradingDecisionGenerator.generateBuyDecision(stockPrices)));
+        BuyWhenNoOppositionsTradingDecision tradingDecisionComposite = new BuyWhenNoOppositionsTradingDecision();
+        for (BuyTradingDecisionGenerator tradingDecisionGenerator: buyGeneratorChain) {
+            tradingDecisionComposite.addBuyTradingDecision(tradingDecisionGenerator.generateBuyDecision(stockPrices));
         }
         return tradingDecisionComposite;
     }
 
     public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
-        SellTradingDecisionComposite tradingDecisionComposite = new SellTradingDecisionComposite();
-        for (TradingDecisionGenerator tradingDecisionGenerator: sellGeneratorChain) {
-            tradingDecisionComposite.addSellTradingDecision(buildSellWrappedTradingDecision(stockPrices,
-                    tradingDecisionGenerator.generateSellDecision(stockPrices)));
+        SellWhenNoOppositionsTradingDecision tradingDecisionComposite = new SellWhenNoOppositionsTradingDecision();
+        for (SellTradingDecisionGenerator tradingDecisionGenerator: sellGeneratorChain) {
+            tradingDecisionComposite.addSellTradingDecision(tradingDecisionGenerator.generateSellDecision(stockPrices));
         }
-        return tradingDecisionComposite;
-    }
 
-    private BuyTradingDecision buildBuyWrappedTradingDecision(StockPrices stockPrices, BuyTradingDecision tradingDecision) {
-        DoNotBuyWhenSameStockInPortfolio doNotBuyWhenSameStockInPortfolio = new DoNotBuyWhenSameStockInPortfolio(portfolio,
-                stockPrices,
-                tradingDecision);
+        SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = new SellWhenNoOppositionsTradingDecision();
+        sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(buildDoNotSellWhenNoStockInPorfolioGenerator().generateSellDecision(stockPrices));
+        sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysGenerator.generateSellDecision(stockPrices));
 
-        return new DoNotBuyInTheLastBuyTradingDays(stockPrices,
-                sellAfterAFixedNumberOfDaysGenerator(),
-                doNotBuyWhenSameStockInPortfolio);
-    }
-
-    private SellTradingDecision buildSellWrappedTradingDecision(StockPrices stockPrices, SellTradingDecision tradingDecision) {
-        return new DoNotSellWhenNoStockInPorfolio(portfolio, stockPrices, tradingDecision);
+        SellWhenAnyAgreeTradingDecision orTradingDecisionComposite = new SellWhenAnyAgreeTradingDecision();
+        orTradingDecisionComposite.addSellTradingDecision(tradingDecisionComposite);
+        orTradingDecisionComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysComposite);
+        return orTradingDecisionComposite;
     }
 
     private TradingDecisionGenerator buildBollingerBandsGenerator() {
@@ -76,17 +81,34 @@ public class TradingDecisionFactory {
         return new InactiveTradingDecisionGenerator(mfiGenerator, mfiChromosome);
     }
 
+    private TradingDecisionGenerator buildAroonGenerator() {
+        BitString aroonChromosome = genome.extractAroonChromosome();
+        AroonOscilatorGenerator aroonGenerator = new AroonOscilatorGenerator(aroonChromosome);
+        return new InactiveTradingDecisionGenerator(aroonGenerator, aroonChromosome);
+    }
 
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator() {
         BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();
         return new SellAfterAFixedNumberOfDaysGenerator(sellAfterDaysChromosome, portfolio);
     }
 
-    public List<TradingDecisionGenerator> getBuyGeneratorChain() {
+    private BuyTradingDecisionGenerator buildDoNotBuyWhenSameStockInPortfolioGenerator() {
+        return new DoNotBuyWhenSameStockInPortfolioGenerator(portfolio);
+    }
+
+    private BuyTradingDecisionGenerator buildDoNotBuyInTheLastBuyTradingDaysGenerator() {
+        return new DoNotBuyInTheLastBuyTradingDaysGenerator(sellAfterAFixedNumberOfDaysGenerator);
+    }
+
+    private SellTradingDecisionGenerator buildDoNotSellWhenNoStockInPorfolioGenerator() {
+        return new DoNotSellWhenNoStockInPorfolioGenerator(portfolio);
+    }
+
+    public List<BuyTradingDecisionGenerator> getBuyGeneratorChain() {
         return buyGeneratorChain;
     }
 
-    public List<TradingDecisionGenerator> getSellGeneratorChain() {
+    public List<SellTradingDecisionGenerator> getSellGeneratorChain() {
         return sellGeneratorChain;
     }
 

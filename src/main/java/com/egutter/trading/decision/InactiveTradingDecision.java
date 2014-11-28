@@ -8,17 +8,17 @@ import org.joda.time.LocalDate;
 public class InactiveTradingDecision implements BuyTradingDecision, SellTradingDecision {
 
     @Override
-    public boolean shouldBuyOn(LocalDate tradingDate) {
-        return false;
+    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
+        return DecisionResult.NEUTRAL;
     }
 
     @Override
-    public boolean shouldSellOn(LocalDate tradingDate) {
-        return false;
+    public DecisionResult shouldSellOn(LocalDate tradingDate) {
+        return DecisionResult.NEUTRAL;
     }
 
     @Override
     public String toString() {
-        return "Inactive Trading Decision";
+        return null;
     }
 }

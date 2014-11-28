@@ -1,5 +1,7 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.constraint;
 
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.generator.SellAfterAFixedNumberOfDaysGenerator;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
@@ -13,20 +15,20 @@ public class DoNotBuyInTheLastBuyTradingDays implements BuyTradingDecision {
 
     private StockPrices stockPrices;
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator;
-    private BuyTradingDecision wrappedDecision;
 
     public DoNotBuyInTheLastBuyTradingDays(StockPrices stockPrices,
-                                           SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator,
-                                           BuyTradingDecision wrappedDecision) {
+                                           SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator) {
         this.stockPrices = stockPrices;
         this.sellAfterAFixedNumberOfDaysGenerator = sellAfterAFixedNumberOfDaysGenerator;
-        this.wrappedDecision = wrappedDecision;
     }
 
 
     @Override
-    public boolean shouldBuyOn(LocalDate tradingDate) {
-        return tradingDate.isBefore(getLastAvailableTradingDate()) && wrappedDecision.shouldBuyOn(tradingDate);
+    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
+        if (tradingDate.isBefore(getLastAvailableTradingDate())) {
+            return DecisionResult.NEUTRAL;
+        }
+        return DecisionResult.NO;
     }
 
     private LocalDate getLastAvailableTradingDate() {
@@ -35,7 +37,7 @@ public class DoNotBuyInTheLastBuyTradingDays implements BuyTradingDecision {
 
     @Override
     public String toString() {
-        return wrappedDecision.toString();
+        return null;
     }
 
 }

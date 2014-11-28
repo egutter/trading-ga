@@ -1,5 +1,8 @@
-package com.egutter.trading.decision;
+package com.egutter.trading.decision.technicalanalysis;
 
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
@@ -8,15 +11,11 @@ import com.google.common.collect.Ordering;
 import com.google.common.collect.Range;
 import com.google.common.primitives.Doubles;
 import com.tictactec.ta.lib.CoreAnnotated;
-import com.tictactec.ta.lib.MAType;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by egutter on 2/10/14.
@@ -31,10 +30,11 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
     private int days;
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build();
+        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
         List<Double> maxes = new ArrayList<Double>();
         List<Double> minis = new ArrayList<Double>();
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
+            System.out.println("Stock " + stockPrices.getStockName());
             MoneyFlowIndex mfi = new MoneyFlowIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 20);
             Map<LocalDate, Double> indexes = mfi.getMoneyFlowIndex();
             maxes.add(Ordering.natural().max(indexes.values()));
@@ -55,21 +55,24 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
     }
 
     @Override
-    public boolean shouldBuyOn(LocalDate tradingDate) {
-        if (!getMoneyFlowIndex().containsKey(tradingDate)) {
-            return false;
-        }
-        Double mfiAtDay = getMoneyFlowIndex().get(tradingDate);
-        return buyThreshold.contains(mfiAtDay);
+    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
+        return shouldTradeOn(tradingDate, buyThreshold);
     }
 
     @Override
-    public boolean shouldSellOn(LocalDate tradingDate) {
+    public DecisionResult shouldSellOn(LocalDate tradingDate) {
+        return shouldTradeOn(tradingDate, sellThreshold);
+    }
+
+    private DecisionResult shouldTradeOn(LocalDate tradingDate, Range tradeThreshold) {
         if (!getMoneyFlowIndex().containsKey(tradingDate)) {
-            return false;
+            return DecisionResult.NEUTRAL;
         }
         Double mfiAtDay = getMoneyFlowIndex().get(tradingDate);
-        return sellThreshold.contains(mfiAtDay);
+        if (tradeThreshold.contains(mfiAtDay)) {
+            return DecisionResult.YES;
+        }
+        return DecisionResult.NO;
     }
 
     private synchronized Map<LocalDate, Double> getMoneyFlowIndex() {
@@ -82,14 +85,17 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
     private void calculateMoneyFlowIndex() {
         this.moneyFlowIndex = new HashMap<LocalDate, Double>();
         List<Double>closePrices = stockPrices.getAdjustedClosePrices();
+        List<Double>hiPrices = stockPrices.getHighPrices();
+        List<Double>lowPrices = stockPrices.getLowPrices();
+        List<? extends Number> volume = stockPrices.getVolumes();
 
         MInteger outBegIdx = new MInteger();
         MInteger outNBElement = new MInteger();
         double outReal[] = new double[closePrices.size()];
-        double[] hiPricesArray = Doubles.toArray(closePrices);
-        double[] lowPricesArray = Doubles.toArray(closePrices);
+        double[] hiPricesArray = Doubles.toArray(hiPrices);
+        double[] lowPricesArray = Doubles.toArray(lowPrices);
         double[] closePricesArray = Doubles.toArray(closePrices);
-        double[] volumeArray = Doubles.toArray(closePrices);
+        double[] volumeArray = Doubles.toArray(volume);
 
         RetCode returnCode = new CoreAnnotated().mfi(startIndex(),
                 endIndex(closePrices),

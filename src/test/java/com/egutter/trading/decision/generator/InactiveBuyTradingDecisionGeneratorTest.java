@@ -1,6 +1,5 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.InactiveTradingDecision;
 import org.junit.Test;
@@ -18,11 +17,10 @@ public class InactiveBuyTradingDecisionGeneratorTest {
 
 
     @Test
-    public void should_generate_a_bollinger_band() throws Exception {
+    public void should_generate_an_inactive_tradicing_decision() throws Exception {
         BitString chromosome = new BitString("111111111111111111111");
         BuyTradingDecision decision = inactiveTradingDecisionGenerator(chromosome).generateBuyDecision(aStockPrices());
-        assertThat(decision, is(instanceOf(BollingerBands.class)));
-
+        assertThat(decision, is(instanceOf(InactiveTradingDecision.class)));
     }
 
 

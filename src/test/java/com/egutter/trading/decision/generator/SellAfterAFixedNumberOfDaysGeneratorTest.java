@@ -14,11 +14,11 @@ public class SellAfterAFixedNumberOfDaysGeneratorTest {
     @Test
     public void should_set_fixed_number_of_days_to_sell() throws Exception {
 
-        assertThat(sellAfterAFixedNumberOfDays("11111").getNumberOfDays(), equalTo(32));
-        assertThat(sellAfterAFixedNumberOfDays("00000").getNumberOfDays(), equalTo(1));
-        assertThat(sellAfterAFixedNumberOfDays("00001").getNumberOfDays(), equalTo(2));
-        assertThat(sellAfterAFixedNumberOfDays("10001").getNumberOfDays(), equalTo(18));
-        assertThat(sellAfterAFixedNumberOfDays("01010").getNumberOfDays(), equalTo(11));
+        assertThat(sellAfterAFixedNumberOfDays("11111").getNumberOfDays(), equalTo(36));
+        assertThat(sellAfterAFixedNumberOfDays("00000").getNumberOfDays(), equalTo(5));
+        assertThat(sellAfterAFixedNumberOfDays("00001").getNumberOfDays(), equalTo(6));
+        assertThat(sellAfterAFixedNumberOfDays("10001").getNumberOfDays(), equalTo(22));
+        assertThat(sellAfterAFixedNumberOfDays("01010").getNumberOfDays(), equalTo(15));
 
     }
 

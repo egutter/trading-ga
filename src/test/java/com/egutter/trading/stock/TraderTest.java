@@ -8,6 +8,7 @@ import com.egutter.trading.order.OrderBook;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
+import org.uncommons.maths.binary.BitString;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -98,6 +99,7 @@ public class TraderTest {
 
     private class TestTradingDecisionGeneratorBuilder extends TradingDecisionFactory {
         public TestTradingDecisionGeneratorBuilder() {
+            super();
         }
     }
 }

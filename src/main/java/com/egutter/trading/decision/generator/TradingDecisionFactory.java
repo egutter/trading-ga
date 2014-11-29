@@ -22,7 +22,7 @@ public class TradingDecisionFactory {
 
     private final List<BuyTradingDecisionGenerator> buyGeneratorChain = new ArrayList<BuyTradingDecisionGenerator>();
     private final List<SellTradingDecisionGenerator> sellGeneratorChain = new ArrayList<SellTradingDecisionGenerator>();
-    private final SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator;
+//    private final SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator;
     private Portfolio portfolio;
     private TradingDecisionGenome genome;
 
@@ -35,7 +35,6 @@ public class TradingDecisionFactory {
     public TradingDecisionFactory(Portfolio portfolio, BitString genome) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
-        this.sellAfterAFixedNumberOfDaysGenerator = sellAfterAFixedNumberOfDaysGenerator();
 
         this.buyGeneratorChain.add(buildDoNotBuyWhenSameStockInPortfolioGenerator());
         this.buyGeneratorChain.add(buildDoNotBuyInTheLastBuyTradingDaysGenerator());
@@ -51,7 +50,6 @@ public class TradingDecisionFactory {
     }
 
     protected TradingDecisionFactory() {
-        sellAfterAFixedNumberOfDaysGenerator = sellAfterAFixedNumberOfDaysGenerator();
     }
 
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
@@ -70,7 +68,7 @@ public class TradingDecisionFactory {
 
         SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = new SellWhenNoOppositionsTradingDecision();
         sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(buildDoNotSellWhenNoStockInPorfolioGenerator().generateSellDecision(stockPrices));
-        sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysGenerator.generateSellDecision(stockPrices));
+        sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysGenerator().generateSellDecision(stockPrices));
 
         SellWhenAnyAgreeTradingDecision orTradingDecisionComposite = new SellWhenAnyAgreeTradingDecision();
         orTradingDecisionComposite.addSellTradingDecision(tradingDecisionComposite);
@@ -104,7 +102,7 @@ public class TradingDecisionFactory {
     }
 
     private BuyTradingDecisionGenerator buildDoNotBuyInTheLastBuyTradingDaysGenerator() {
-        return new DoNotBuyInTheLastBuyTradingDaysGenerator(sellAfterAFixedNumberOfDaysGenerator);
+        return new DoNotBuyInTheLastBuyTradingDaysGenerator(sellAfterAFixedNumberOfDaysGenerator());
     }
 
     private SellTradingDecisionGenerator buildDoNotSellWhenNoStockInPorfolioGenerator() {

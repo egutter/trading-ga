@@ -4,16 +4,15 @@ import org.uncommons.maths.binary.BitString;
 
 /**
  * Genome
- * 0 1234567890123456 78901234567890 12345678901234 5678
- * 0 TradingComposite applies All or Any
- * 1-16 BollingerBands
- * 17-30 MoneyFlowIndex
- * 31-34 SellAfterAFixedNumberOfDays
+ * 0123 4567890123456 7890123456789
+ * 0-3 SellAfterAFixedNumberOfDays
+ * 4-15 First Technical Analysis Decision
+ * 16-27 Second Technical Analysis Decision
  *
  * Created by egutter on 2/16/14.
  */
 public class TradingDecisionGenome {
-    public static final int SIZE = 49;
+    public static final int SIZE = 30;
 
     private BitString genomeBits;
 
@@ -21,21 +20,16 @@ public class TradingDecisionGenome {
         this.genomeBits = genomeBits;
     }
 
-    public BitString extractBollingerBandsChromosome() {
-        return extractChromosome(1, 17);
+    public BitString extractFirstDecisionChromosome() {
+        return extractChromosome(4, 17);
     }
 
-
-    public BitString extractMoneyFlowIndexChromosome() {
-        return extractChromosome(17, 31);
-    }
-
-    public BitString extractAroonChromosome() {
-        return extractChromosome(31, 45);
+    public BitString extractSecondDecisionChromosome() {
+        return extractChromosome(17, 30);
     }
 
     public BitString extractSellAfterAFixedNumberOfDaysChromosome() {
-        return extractChromosome(45, 49);
+        return extractChromosome(0, 4);
     }
 
     private BitString extractChromosome(int startIndex, int endIndex) {

@@ -71,6 +71,11 @@ public class TraderTest {
                     public DecisionResult shouldBuyOn(LocalDate tradingDate) {
                         return DecisionResult.YES;
                     }
+
+                    @Override
+                    public String buyDecisionToString() {
+                        return null;
+                    }
                 };
             }
 
@@ -80,6 +85,11 @@ public class TraderTest {
                     @Override
                     public DecisionResult shouldSellOn(LocalDate tradingDate) {
                         return DecisionResult.NO;
+                    }
+
+                    @Override
+                    public String sellDecisionToString() {
+                        return null;
                     }
                 };
             }

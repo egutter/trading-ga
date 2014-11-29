@@ -32,12 +32,18 @@ public class SellAfterAFixedNumberOFDays implements SellTradingDecision {
         return DecisionResult.NEUTRAL;
     }
 
+
     private LocalDate dayStockWasBought() {
         return portfolio.getBoughtDateForStock(stockPrices.getStockName());
     }
 
     private int getNumberOfDays() {
         return numberOfDays;
+    }
+
+    @Override
+    public String sellDecisionToString() {
+        return toString();
     }
 
     @Override

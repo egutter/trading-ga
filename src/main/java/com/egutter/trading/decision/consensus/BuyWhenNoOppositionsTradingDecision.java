@@ -5,12 +5,14 @@ import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.TradingDecision;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.FluentIterable;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.egutter.trading.decision.consensus.TradeBasedOnConsensus.tradeWhenNoOpposition;
+import static com.google.common.collect.FluentIterable.from;
 
 /**
  * Created by egutter on 2/16/14.
@@ -37,8 +39,22 @@ public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision {
     }
 
     @Override
+    public String buyDecisionToString() {
+        return toString();
+    }
+
+    @Override
     public String toString() {
-        return Joiner.on(" AND ").skipNulls().join(buyTradingDecisionList);
+        return Joiner.on(" AND ").skipNulls().join(from(buyTradingDecisionList).transform(decisionsToString()));
+    }
+
+    private Function<TradingDecision, String> decisionsToString() {
+        return new Function<TradingDecision, String>() {
+            @Override
+            public String apply(TradingDecision tradingDecision) {
+                return ((BuyTradingDecision)tradingDecision).buyDecisionToString();
+            }
+        };
     }
 
 }

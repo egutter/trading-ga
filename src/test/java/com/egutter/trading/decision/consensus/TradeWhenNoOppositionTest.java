@@ -21,17 +21,32 @@ public class TradeWhenNoOppositionTest {
         public DecisionResult shouldBuyOn(LocalDate tradingDate) {
             return DecisionResult.NEUTRAL;
         }
+
+        @Override
+        public String buyDecisionToString() {
+            return null;
+        }
     };
     private TradingDecision yesDecision = new BuyTradingDecision() {
         @Override
         public DecisionResult shouldBuyOn(LocalDate tradingDate) {
             return DecisionResult.YES;
         }
+
+        @Override
+        public String buyDecisionToString() {
+            return null;
+        }
     };;
     private TradingDecision noDecision = new BuyTradingDecision() {
         @Override
         public DecisionResult shouldBuyOn(LocalDate tradingDate) {
             return DecisionResult.NO;
+        }
+
+        @Override
+        public String buyDecisionToString() {
+            return null;
         }
     };;
     private Function<TradingDecision, DecisionResult> buyFunction = new Function<TradingDecision, DecisionResult>() {

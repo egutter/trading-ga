@@ -6,6 +6,7 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Doubles;
 import com.tictactec.ta.lib.CoreAnnotated;
@@ -97,4 +98,14 @@ public class AverageDirectionalIndex implements BuyTradingDecision, SellTradingD
         return 0;
     }
 
+    @Override
+    public String buyDecisionToString() {
+        return "TBD";
+    }
+
+
+    @Override
+    public String sellDecisionToString() {
+        return "TBD";
+    }
 }

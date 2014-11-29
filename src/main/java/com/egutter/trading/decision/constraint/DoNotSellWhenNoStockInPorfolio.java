@@ -30,7 +30,8 @@ public class DoNotSellWhenNoStockInPorfolio implements SellTradingDecision {
     }
 
     @Override
-    public String toString() {
+    public String sellDecisionToString() {
         return null;
     }
+
 }

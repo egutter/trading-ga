@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.egutter.trading.decision.consensus.TradeBasedOnConsensus.tradeWhenYesAgreement;
+import static com.google.common.collect.FluentIterable.from;
 
 /**
  * Created by egutter on 2/16/14.
@@ -34,7 +35,21 @@ public class SellWhenAnyAgreeTradingDecision implements SellTradingDecision {
     }
 
     @Override
+    public String sellDecisionToString() {
+        return toString();
+    }
+
+    @Override
     public String toString() {
-        return Joiner.on(" OR ").skipNulls().join(sellTradingDecisionList);
+        return Joiner.on(" OR ").skipNulls().join(from(sellTradingDecisionList).transform(decisionsToString()));
+    }
+
+    private Function<TradingDecision, String> decisionsToString() {
+        return new Function<TradingDecision, String>() {
+            @Override
+            public String apply(TradingDecision tradingDecision) {
+                return ((SellTradingDecision) tradingDecision).sellDecisionToString();
+            }
+        };
     }
 }

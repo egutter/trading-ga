@@ -13,20 +13,20 @@ public class TradingDecisionGenomeTest {
 
     @Test
     public void testExtractBollingerBandsChromosome() throws Exception {
-        TradingDecisionGenome genome = new TradingDecisionGenome(chromosome("01111000011110000100000011111111111"));
-        assertThat(genome.extractBollingerBandsChromosome(), equalTo(chromosome("1111000011110000")));
+        TradingDecisionGenome genome = new TradingDecisionGenome(chromosome("010111001010111001111001000001"));
+        assertThat(genome.extractFirstDecisionChromosome(), equalTo(chromosome("1100101011100")));
     }
 
     @Test
     public void testExtractMoneyFlowIndexChromosome() throws Exception {
-        TradingDecisionGenome genome = new TradingDecisionGenome(chromosome("01111000011110000100000011111111111"));
-        assertThat(genome.extractMoneyFlowIndexChromosome(), equalTo(chromosome("10000001111111")));
+        TradingDecisionGenome genome = new TradingDecisionGenome(chromosome("010111001010111001111001000001"));
+        assertThat(genome.extractSecondDecisionChromosome(), equalTo(chromosome("1111001000001")));
     }
 
     @Test
     public void testExtractSellAfterAFixedNumberOfDaysChromosome() throws Exception {
-        TradingDecisionGenome genome = new TradingDecisionGenome(chromosome("01111000011110000100000011111111010"));
-        assertThat(genome.extractSellAfterAFixedNumberOfDaysChromosome(), equalTo(chromosome("1010")));
+        TradingDecisionGenome genome = new TradingDecisionGenome(chromosome("010111001010111001111001000001"));
+        assertThat(genome.extractSellAfterAFixedNumberOfDaysChromosome(), equalTo(chromosome("0101")));
     }
 
     private BitString chromosome(String chromosome) {

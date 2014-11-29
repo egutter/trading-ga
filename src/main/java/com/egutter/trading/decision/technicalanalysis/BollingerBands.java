@@ -141,11 +141,11 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
         return this.movingAverageDays;
     }
 
-    public Range getBuyThreshold() {
+    public Range<Double> getBuyThreshold() {
         return buyThreshold;
     }
 
-    public Range getSellThreshold() {
+    public Range<Double> getSellThreshold() {
         return sellThreshold;
     }
 
@@ -158,12 +158,22 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
     }
 
     @Override
-    public String toString() {
+    public String buyDecisionToString() {
         return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy threshold",
                 this.getBuyThreshold(),
-                "sell threshold",
-                this.getSellThreshold(),
+                "moving avg days",
+                this.movingAverageDays,
+                "moving avg type",
+                this.movingAverageType);
+    }
+
+
+    @Override
+    public String sellDecisionToString() {
+         return Joiner.on(": ").join(this.getClass().getSimpleName(),
+                 "sell threshold",
+                 this.getSellThreshold(),
                 "moving avg days",
                 this.movingAverageDays,
                 "moving avg type",

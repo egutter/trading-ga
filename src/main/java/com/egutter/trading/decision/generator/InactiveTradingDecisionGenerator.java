@@ -12,29 +12,19 @@ import org.uncommons.maths.binary.BitString;
  */
 public class InactiveTradingDecisionGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator {
 
-    private TradingDecisionGenerator wrappedTradingDecisionGenerator;
-    private BitString chromosome;
+    private final BitString chromosome;
 
-    public InactiveTradingDecisionGenerator(TradingDecisionGenerator wrappedTradingDecisionGenerator, BitString chromosome) {
-        this.wrappedTradingDecisionGenerator = wrappedTradingDecisionGenerator;
+    public InactiveTradingDecisionGenerator(BitString chromosome) {
         this.chromosome = chromosome;
     }
 
     @Override
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
-        boolean active = chromosome.getBit(chromosome.getLength() - 1);
-        if (!active) {
-            return new InactiveTradingDecision();
-        }
-        return ((BuyTradingDecisionGenerator) wrappedTradingDecisionGenerator).generateBuyDecision(stockPrices);
+        return new InactiveTradingDecision();
     }
 
     @Override
     public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
-        boolean active = chromosome.getBit(chromosome.getLength() - 1);
-        if (!active) {
-            return new InactiveTradingDecision();
-        }
-        return ((SellTradingDecisionGenerator) wrappedTradingDecisionGenerator).generateSellDecision(stockPrices);
+        return new InactiveTradingDecision();
     }
 }

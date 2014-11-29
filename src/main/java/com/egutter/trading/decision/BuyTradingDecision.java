@@ -7,4 +7,6 @@ import org.joda.time.LocalDate;
  */
 public interface BuyTradingDecision extends TradingDecision {
     DecisionResult shouldBuyOn(LocalDate tradingDate);
+
+    String buyDecisionToString();
 }

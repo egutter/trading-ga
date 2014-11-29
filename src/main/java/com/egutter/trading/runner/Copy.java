@@ -1,4 +1,4 @@
-package com.egutter.trading.main;
+package com.egutter.trading.runner;
 
 import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
@@ -57,7 +57,7 @@ public class Copy {
 
             Copy main = new Copy();
 
-//            BitString result1 = main.run(stockTradingFitnessEvaluator, new TournamentSelection(new Probability(0.51)), true);
+//            BitString result1 = runner.run(stockTradingFitnessEvaluator, new TournamentSelection(new Probability(0.51)), true);
 //            winners.add(result1);
 
 //            printResults(startTime, stockMarket, stockTradingFitnessEvaluator, result1);

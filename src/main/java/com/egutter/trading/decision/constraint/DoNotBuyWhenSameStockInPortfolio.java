@@ -30,7 +30,8 @@ public class DoNotBuyWhenSameStockInPortfolio implements BuyTradingDecision {
     }
 
     @Override
-    public String toString() {
+    public String buyDecisionToString() {
         return null;
     }
+
 }

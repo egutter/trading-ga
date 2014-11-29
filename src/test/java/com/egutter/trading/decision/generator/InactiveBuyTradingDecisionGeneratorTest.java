@@ -35,8 +35,7 @@ public class InactiveBuyTradingDecisionGeneratorTest {
     }
 
     private BuyTradingDecisionGenerator inactiveTradingDecisionGenerator(BitString chromosome) {
-        BollingerBandsGenerator bollingerBandsGenerator = new BollingerBandsGenerator(chromosome);
-        return new InactiveTradingDecisionGenerator(bollingerBandsGenerator, chromosome);
+        return new InactiveTradingDecisionGenerator(chromosome);
     }
 
 }

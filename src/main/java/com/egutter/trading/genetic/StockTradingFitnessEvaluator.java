@@ -42,6 +42,7 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
     private void seeOtherWaysOfEvaluatePortfolioNotUsed() {
         // Portfolio cash weight by orders performed on total orders and also weighted by ordersWon divided by orders performed
+        // int maxBuyOrders = stockMarket.getStockPrices().size() * stockMarket.getTradingDays().size();
         // BigDecimal weightByOrdersPerformedPctg = BigDecimal.valueOf(portfolio.getStats().countOrdersWon() / maxBuyOrders()).add(BigDecimal.ONE);
         // BigDecimal weightByOrdersWonPctg = portfolio.getStats().percentageOfOrdersWon().add(BigDecimal.ONE);
         // return portfolio.getCash().multiply(weightByOrdersWonPctg).multiply(weightByOrdersPerformedPctg).doubleValue();
@@ -57,14 +58,8 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
     }
 
-    private int maxBuyOrders() {
-        return stockMarket.getStockPrices().size() * stockMarket.getTradingDays().size();
-    }
-
     public Trader buildTrader(Portfolio portfolio, TradingDecisionFactory tradingDecisionFactory) {
-        OrderBook orderBook = new OrderBook();
-
-        return new Trader(stockMarket, tradingDecisionFactory, portfolio, orderBook);
+        return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
     }
 
     private TradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {

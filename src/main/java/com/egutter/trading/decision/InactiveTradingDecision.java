@@ -12,9 +12,20 @@ public class InactiveTradingDecision implements BuyTradingDecision, SellTradingD
         return DecisionResult.NEUTRAL;
     }
 
+
     @Override
     public DecisionResult shouldSellOn(LocalDate tradingDate) {
         return DecisionResult.NEUTRAL;
+    }
+
+    @Override
+    public String buyDecisionToString() {
+        return toString();
+    }
+
+    @Override
+    public String sellDecisionToString() {
+        return toString();
     }
 
     @Override

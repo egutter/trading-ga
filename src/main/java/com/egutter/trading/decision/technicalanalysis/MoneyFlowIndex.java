@@ -125,11 +125,11 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
         return this.days;
     }
 
-    public Range getBuyThreshold() {
+    public Range<Double> getBuyThreshold() {
         return buyThreshold;
     }
 
-    public Range getSellThreshold() {
+    public Range<Double> getSellThreshold() {
         return sellThreshold;
     }
 
@@ -142,13 +142,21 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
     }
 
     @Override
-    public String toString() {
+    public String buyDecisionToString() {
         return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy threshold",
                 this.getBuyThreshold(),
+                "days",
+                this.days);
+    }
+
+
+    @Override
+    public String sellDecisionToString() {
+        return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "sell threshold",
                 this.getSellThreshold(),
-                "MFI days",
+                "days",
                 this.days);
     }
 

@@ -18,7 +18,7 @@ public class SellAfterAFixedNumberOfDaysGenerator implements SellTradingDecision
 
     public SellAfterAFixedNumberOfDaysGenerator(BitString sellAfterDaysChromosome, Portfolio portfolio) {
         this.portfolio = portfolio;
-        this.numberOfDays = sellAfterDaysChromosome.toNumber().intValue() + 1;
+        this.numberOfDays = sellAfterDaysChromosome.toNumber().intValue() + 5;
     }
 
     @Override

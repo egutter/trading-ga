@@ -150,14 +150,18 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
     }
 
     @Override
-    public String toString() {
+    public String buyDecisionToString() {
         return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy threshold",
-                this.getBuyThreshold(),
+                this.getBuyThreshold());
+    }
+
+
+    @Override
+    public String sellDecisionToString() {
+        return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "sell threshold",
-                this.getSellThreshold(),
-                "moving avg days",
-                this.fastPeriod);
+                this.getSellThreshold());
     }
 
 }

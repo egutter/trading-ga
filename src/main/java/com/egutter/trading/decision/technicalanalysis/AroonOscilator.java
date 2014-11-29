@@ -127,22 +127,32 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision {
     }
 
     @Override
-    public String toString() {
+    public String buyDecisionToString() {
         return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy threshold",
                 this.getBuyThreshold(),
-                "sell threshold",
-                this.getSellThreshold(),
                 "days",
                 this.days);
     }
 
 
-    public Range getBuyThreshold() {
+    @Override
+    public String sellDecisionToString() {
+        return Joiner.on(": ").join(this.getClass().getSimpleName(),
+                "sell threshold",
+                this.getSellThreshold(),
+                "days",
+                this.days);
+    }
+    public Range<Double> getBuyThreshold() {
         return buyThreshold;
     }
 
-    public Range getSellThreshold() {
+    public Range<Double> getSellThreshold() {
         return sellThreshold;
+    }
+
+    public int days() {
+        return days;
     }
 }

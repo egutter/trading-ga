@@ -33,12 +33,11 @@ public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, Sel
 
     /**
      * Bits
-     * 0 => Active (1) or Inactive (0)
-     * 1 => Buy Threshold range style (0: at least, 1: at most)
-     * 2-5 => Buy Threshold value from -90 to 90 by 10 steps skips -10,0,10
-     * 6 => Sell Threshold range style (0: at least, 1: at most)
-     * 7-10 => Sell Threshold value from -90 to 90 by 10 steps skips -10,0,10
-     * 11-13 => Days from 21 to 28
+     * 0 => Buy Threshold range style (0: at least, 1: at most)
+     * 1-4 => Buy Threshold value from -90 to 90 by 10 steps skips -10,0,10
+     * 5 => Sell Threshold range style (0: at least, 1: at most)
+     * 6-9 => Sell Threshold value from -90 to 90 by 10 steps skips -10,0,10
+     * 10-12 => Days from 21 to 28
      *
      * @param stockPrices
      * @return
@@ -67,16 +66,16 @@ public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, Sel
     }
 
     private int generateDays(BitString chromosome) {
-        int days = new BitString(chromosome.toString().substring(11, 14)).toNumber().intValue();
+        int days = new BitString(chromosome.toString().substring(10, 13)).toNumber().intValue();
         return days + 21;
     }
 
     private Range<Double> generateBuyThreshold(BitString chromosome) {
-        return generateThreshold(chromosome, 2, 6, chromosome.getBit(12));
+        return generateThreshold(chromosome, 1, 5, chromosome.getBit(12));
     }
 
     private Range<Double> generateSellThreshold(BitString chromosome) {
-        return generateThreshold(chromosome, 7, 11, chromosome.getBit(7));
+        return generateThreshold(chromosome, 6, 10, chromosome.getBit(7));
     }
 
     private Range<Double> generateThreshold(BitString chromosome, int start, int end, boolean atMostRange) {

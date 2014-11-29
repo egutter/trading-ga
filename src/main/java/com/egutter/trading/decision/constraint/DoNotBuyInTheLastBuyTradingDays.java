@@ -31,12 +31,13 @@ public class DoNotBuyInTheLastBuyTradingDays implements BuyTradingDecision {
         return DecisionResult.NO;
     }
 
+
     private LocalDate getLastAvailableTradingDate() {
         return stockPrices.getLastTradingDate().minusDays(sellAfterAFixedNumberOfDaysGenerator.getNumberOfDays());
     }
 
     @Override
-    public String toString() {
+    public String buyDecisionToString() {
         return null;
     }
 

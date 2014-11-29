@@ -34,18 +34,16 @@ public class BollingerBandsGenerator implements BuyTradingDecisionGenerator, Sel
         this.buyThreshold = generateBuyThreshold(chromosome);
         this.sellThreshold = generateSellThreshold(chromosome);
         this.movingAverageDays = generateMovingAverageDays(chromosome);
-        this.movingAverageType = generateMovingAverageType(chromosome);
+        this.movingAverageType = generateMovingAverageType();
     }
 
     /**
      * Bits
-     * 0 => Active (1) or Inactive (0)
-     * 1 => Buy Threshold range style (0: at least, 1: at most)
-     * 2-5 => Buy Threshold value from -2 to 2 by 0,25 steps
-     * 6 => Sell Threshold range style (0: at least, 1: at most)
-     * 7-10 => Sell Threshold value from -2 to 2 by 0,25 steps
-     * 11-13 => Moving Average Days from 15 to 22
-     * 14 => Moving Average Type (0: Sma, 1: Wma)
+     * 0 => Buy Threshold range style (0: at least, 1: at most)
+     * 1-4 => Buy Threshold value from -2 to 2 by 0,25 steps
+     * 5 => Sell Threshold range style (0: at least, 1: at most)
+     * 6-9 => Sell Threshold value from -2 to 2 by 0,25 steps
+     * 10-12 => Moving Average Days from 15 to 22
      *
      * @param stockPrices
      * @return
@@ -74,30 +72,21 @@ public class BollingerBandsGenerator implements BuyTradingDecisionGenerator, Sel
         return bbands;
     }
 
-    private MAType generateMovingAverageType(BitString chromosome) {
-        int typeNumber = new BitString(chromosome.toString().substring(14, 15)).toNumber().intValue();
-        switch (typeNumber) {
-            case 0:
-                return MAType.Sma;
-            case 1:
-                return MAType.Wma;
-            default:
-                return MAType.Sma;
-        }
-
+    private MAType generateMovingAverageType() {
+        return MAType.Wma;
     }
 
     private int generateMovingAverageDays(BitString chromosome) {
-        int days = new BitString(chromosome.toString().substring(11, 14)).toNumber().intValue();
+        int days = new BitString(chromosome.toString().substring(10, 13)).toNumber().intValue();
         return days + 15;
     }
 
     private Range<Double> generateBuyThreshold(BitString chromosome) {
-        return generateThreshold(chromosome, 2, 6, chromosome.getBit(13));
+        return generateThreshold(chromosome, 1, 5, chromosome.getBit(12));
     }
 
     private Range<Double> generateSellThreshold(BitString chromosome) {
-        return generateThreshold(chromosome, 7, 11, chromosome.getBit(8));
+        return generateThreshold(chromosome, 6, 10, chromosome.getBit(7));
     }
 
     private Range<Double> generateThreshold(BitString chromosome, int start, int end, boolean atMostRange) {

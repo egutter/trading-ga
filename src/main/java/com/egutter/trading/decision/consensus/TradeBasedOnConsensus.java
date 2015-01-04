@@ -15,26 +15,18 @@ import static com.egutter.trading.decision.consensus.ConsensusCondition.isNeutra
  */
 public class TradeBasedOnConsensus {
 
-    private List<TradingDecision> tradingDecisions;
     private ConsensusCondition consensusCondition;
 
-    public TradeBasedOnConsensus(List<TradingDecision> tradingDecisions, ConsensusCondition consensusCondition) {
-        this.tradingDecisions = tradingDecisions;
+    public TradeBasedOnConsensus(ConsensusCondition consensusCondition) {
         this.consensusCondition = consensusCondition;
     }
 
-    public static TradeBasedOnConsensus tradeWhenNoOpposition(List<TradingDecision> tradingDecisions) {
-        ConsensusCondition consensusCondition = isAnyNoCondition().next(isAnyYesCondition().next(isNeutralCondition()));
-        return new TradeBasedOnConsensus(tradingDecisions, consensusCondition);
-    }
+    public static TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(isAnyNoCondition().next(isAnyYesCondition().next(isNeutralCondition())));
 
-    public static TradeBasedOnConsensus tradeWhenYesAgreement(List<TradingDecision> tradingDecisions) {
-        ConsensusCondition consensusCondition = isAnyYesCondition().next(isAnyNoCondition().next(isNeutralCondition()));
-        return new TradeBasedOnConsensus(tradingDecisions, consensusCondition);
-    }
+    public static TradeBasedOnConsensus tradeWhenYesAgreement = new TradeBasedOnConsensus(isAnyYesCondition().next(isAnyNoCondition().next(isNeutralCondition())));
 
-    public DecisionResult shouldTradeOn(final Function<TradingDecision, DecisionResult> shouldTrade) {
-        return consensusCondition.consentWith(this.tradingDecisions, shouldTrade);
+    public DecisionResult shouldTradeOn(List<TradingDecision> tradingDecisions, Function<TradingDecision, DecisionResult> shouldTrade) {
+        return consensusCondition.consentWith(tradingDecisions, shouldTrade);
     }
 
 }

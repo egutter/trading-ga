@@ -12,7 +12,11 @@ import org.uncommons.maths.binary.BitString;
  * Created by egutter on 2/16/14.
  */
 public class TradingDecisionGenome {
-    public static final int SIZE = 30;
+//    public static final int SIZE = 17;
+//    public static final int SIZE = 30;
+    public static final int START_POSITION = 4;
+    public static final int LENGTH = 13;
+    public static final int HEAD_LENGTH = START_POSITION;
 
     private BitString genomeBits;
 
@@ -34,5 +38,9 @@ public class TradingDecisionGenome {
 
     private BitString extractChromosome(int startIndex, int endIndex) {
         return new BitString(this.genomeBits.toString().substring(startIndex, endIndex));
+    }
+
+    public BitString extractChromosome(int index) {
+        return extractChromosome(START_POSITION + (LENGTH * index), (LENGTH + START_POSITION) + (LENGTH * index) );
     }
 }

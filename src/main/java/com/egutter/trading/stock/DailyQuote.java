@@ -1,5 +1,6 @@
 package com.egutter.trading.stock;
 
+import com.google.common.base.Joiner;
 import org.joda.time.LocalDate;
 
 /**
@@ -58,5 +59,18 @@ public class DailyQuote {
 
     public LocalDate getTradingDate() {
         return tradingDate;
+    }
+
+    @Override
+    public String toString() {
+        return Joiner.on(" ").join(tradingDate, closePrice);
+    }
+
+    public boolean isOn(LocalDate tradingDate) {
+        return this.tradingDate.equals(tradingDate);
+    }
+
+    public static DailyQuote empty() {
+        return new DailyQuote(LocalDate.now(), 1, 1, 1, 1, 1, 1);
     }
 }

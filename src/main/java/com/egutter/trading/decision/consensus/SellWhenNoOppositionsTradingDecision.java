@@ -27,7 +27,7 @@ public class SellWhenNoOppositionsTradingDecision implements SellTradingDecision
 
     @Override
     public DecisionResult shouldSellOn(final LocalDate tradingDate) {
-        return tradeWhenNoOpposition(sellTradingDecisionList).shouldTradeOn(new Function<TradingDecision, DecisionResult>() {
+        return tradeWhenNoOpposition.shouldTradeOn(sellTradingDecisionList, new Function<TradingDecision, DecisionResult>() {
             @Override
             public DecisionResult apply(TradingDecision tradingDecision) {
                 return ((SellTradingDecision) tradingDecision).shouldSellOn(tradingDate);

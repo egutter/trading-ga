@@ -2,6 +2,7 @@ package com.egutter.trading.order;
 
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
+import com.google.common.base.Joiner;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -16,9 +17,13 @@ public class BuyOrder implements MarketOrder {
     private final int numberOfShares;
 
     public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest) {
+        this(stockName, dailyQuote, amountToInvest.divide(BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice()), RoundingMode.DOWN).intValue());
+    }
+
+    public BuyOrder(String stockName, DailyQuote dailyQuote, int numberOfShares) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
-        this.numberOfShares = amountToInvest.divide(BigDecimal.valueOf(dailyQuote.getClosePrice()), RoundingMode.DOWN).intValue();
+        this.numberOfShares = numberOfShares;
     }
 
     @Override
@@ -27,7 +32,7 @@ public class BuyOrder implements MarketOrder {
     }
 
     public BigDecimal amountPaid() {
-        return BigDecimal.valueOf(dailyQuote.getClosePrice() * numberOfShares);
+        return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfShares);
     }
 
     public int getNumberOfShares() {
@@ -44,5 +49,14 @@ public class BuyOrder implements MarketOrder {
 
     public String getStockName() {
         return stockName;
+    }
+
+    @Override
+    public String toString() {
+        return Joiner.on(" ").join("BUY", stockName, numberOfShares, dailyQuote);
+    }
+
+    public static BuyOrder empty() {
+        return new BuyOrder("N/A", DailyQuote.empty(), BigDecimal.ZERO);
     }
 }

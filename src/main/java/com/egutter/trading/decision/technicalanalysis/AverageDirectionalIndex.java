@@ -68,8 +68,9 @@ public class AverageDirectionalIndex implements BuyTradingDecision, SellTradingD
         }
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
 
+        int lookBack = new CoreAnnotated().adxLookback(days);
         for (int i = 0; i < outNBElement.value; i++) {
-            int daysOffset = i + days - 1;
+            int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);
             this.averageDirectionalIndex.put(tradingDate, outReal[i]);
             System.out.println("Day ["+tradingDate+"] ADX ["+outReal[i]+"]");

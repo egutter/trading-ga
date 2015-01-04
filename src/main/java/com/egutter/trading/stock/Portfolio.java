@@ -2,6 +2,7 @@ package com.egutter.trading.stock;
 
 import com.egutter.trading.order.BuyOrder;
 import com.egutter.trading.order.SellOrder;
+import com.google.common.base.Joiner;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -13,7 +14,8 @@ import java.util.Map;
  */
 public class Portfolio {
 
-    public static final double COMMISION = 0.010951;
+    public static final double COMMISION = 0.01325071;
+    private final BigDecimal initialCash;
     Map<String, BuyOrder> stocks = new HashMap<String, BuyOrder>();
     BigDecimal cash;
     private PortfolioStats stats = new PortfolioStats();
@@ -23,6 +25,7 @@ public class Portfolio {
     }
 
     public Portfolio(BigDecimal cashInPortfolio) {
+        this.initialCash = cashInPortfolio;
         this.cash = cashInPortfolio;
     }
 
@@ -39,6 +42,9 @@ public class Portfolio {
 
     public BigDecimal getCash() {
         return cash;
+    }
+    public BigDecimal getProfit() {
+        return cash.subtract(initialCash);
     }
 
     public LocalDate getBoughtDateForStock(String stockName) {
@@ -83,6 +89,15 @@ public class Portfolio {
 
     private BigDecimal buyOrSellCommision(BigDecimal amount) {
         return BigDecimal.valueOf(COMMISION).multiply(amount);
+    }
+
+    public Map<String, BuyOrder> getStocks() {
+        return stocks;
+    }
+
+    @Override
+    public String toString() {
+        return Joiner.on(" ").join("CASH:", cash, "STOCKS:", stocks);
     }
 
 }

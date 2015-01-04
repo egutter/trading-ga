@@ -30,7 +30,7 @@ public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision {
 
     @Override
     public DecisionResult shouldBuyOn(final LocalDate tradingDate) {
-        return tradeWhenNoOpposition(buyTradingDecisionList).shouldTradeOn(new Function<TradingDecision, DecisionResult>() {
+        return tradeWhenNoOpposition.shouldTradeOn(buyTradingDecisionList, new Function<TradingDecision, DecisionResult>() {
             @Override
             public DecisionResult apply(TradingDecision tradingDecision) {
                 return ((BuyTradingDecision) tradingDecision).shouldBuyOn(tradingDate);

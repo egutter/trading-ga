@@ -9,9 +9,9 @@ import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Range;
+import com.google.common.math.DoubleMath;
 import com.google.common.primitives.Doubles;
 import com.tictactec.ta.lib.CoreAnnotated;
-import com.tictactec.ta.lib.MAType;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
@@ -24,40 +24,41 @@ import java.util.Map;
 /**
  * Created by egutter on 2/10/14.
  */
-public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
+public class RelativeStrengthIndex implements BuyTradingDecision, SellTradingDecision {
 
     private final StockPrices stockPrices;
     private final Range sellThreshold;
-    private Map<LocalDate, Double> percentageB;
+    private Map<LocalDate, Double> relativeStrengthIndex;
 
     private Range buyThreshold;
-    private int movingAverageDays;
-    private MAType movingAverageType;
+    private int days;
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
+        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2012, 1, 1), new LocalDate(2014, 12, 31));
         List<Double> maxes = new ArrayList<Double>();
         List<Double> minis = new ArrayList<Double>();
+        List<Double> means = new ArrayList<Double>();
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            BollingerBands bb = new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(0.0), 22, MAType.Ema);
-            Map<LocalDate, Double> indexes = bb.getPercentageB();
+            System.out.println("Stock " + stockPrices.getStockName());
+            RelativeStrengthIndex mfi = new RelativeStrengthIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 14);
+            Map<LocalDate, Double> indexes = mfi.getRelativeStrengthIndex();
             maxes.add(Ordering.natural().max(indexes.values()));
             minis.add(Ordering.natural().min(indexes.values()));
+            means.add(DoubleMath.mean(indexes.values()));
         }
         System.out.println("Max value " + Ordering.natural().max(maxes));
         System.out.println("Min value " + Ordering.natural().min(minis));
+        System.out.println("Mean value " + DoubleMath.mean(means));
     }
 
-    public BollingerBands(StockPrices stockPrices,
-                          Range buyThreshold,
-                          Range sellThreshold,
-                          int movingAverageDays,
-                          MAType movingAverageType) {
+    public RelativeStrengthIndex(StockPrices stockPrices,
+                                 Range buyThreshold,
+                                 Range sellThreshold,
+                                 int days) {
         this.stockPrices = stockPrices;
         this.buyThreshold = buyThreshold;
         this.sellThreshold = sellThreshold;
-        this.movingAverageDays = movingAverageDays;
-        this.movingAverageType = movingAverageType;
+        this.days = days;
     }
 
     @Override
@@ -71,74 +72,55 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
     }
 
     private DecisionResult shouldTradeOn(LocalDate tradingDate, Range tradeThreshold) {
-        if (!getPercentageB().containsKey(tradingDate)) {
+        if (!getRelativeStrengthIndex().containsKey(tradingDate)) {
             return DecisionResult.NEUTRAL;
         }
-        Double percentageBAtDay = getPercentageB().get(tradingDate);
-        if (tradeThreshold.contains(percentageBAtDay)) {
+        Double mfiAtDay = getRelativeStrengthIndex().get(tradingDate);
+        if (tradeThreshold.contains(mfiAtDay)) {
             return DecisionResult.YES;
         }
         return DecisionResult.NO;
     }
 
-    private synchronized Map<LocalDate, Double> getPercentageB() {
-        if (this.percentageB == null) {
-            calculateBollingerBands();
+    private synchronized Map<LocalDate, Double> getRelativeStrengthIndex() {
+        if (this.relativeStrengthIndex == null) {
+            calculateRelativeStrengthIndex();
         }
-        return this.percentageB;
+        return this.relativeStrengthIndex;
     }
 
-    private void calculateBollingerBands() {
-        this.percentageB = new HashMap<LocalDate, Double>();
+    private void calculateRelativeStrengthIndex() {
+        this.relativeStrengthIndex = new HashMap<LocalDate, Double>();
         List<Double>closePrices = stockPrices.getAdjustedClosePrices();
 
         MInteger outBegIdx = new MInteger();
         MInteger outNBElement = new MInteger();
-        double outRealUpperBand[] = new double[closePrices.size()];
-        double outRealMiddleBand[] = new double[closePrices.size()];
-        double outRealLowerBand[] = new double[closePrices.size()];
+        double outReal[] = new double[closePrices.size()];
         double[] closePricesArray = Doubles.toArray(closePrices);
-        RetCode returnCode = new CoreAnnotated().bbands(startIndex(),
+
+        RetCode returnCode = new CoreAnnotated().rsi(startIndex(),
                 endIndex(closePrices),
                 closePricesArray,
-                movingAverageDays(),
-                upperNumberOfStdDev(),
-                lowerNumberOfStdDev(),
-                movingAverageType(),
+                days(),
                 outBegIdx,
                 outNBElement,
-                outRealUpperBand,
-                outRealMiddleBand,
-                outRealLowerBand);
+                outReal);
 
         if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Bollinger Bands " + returnCode);
+            throw new RuntimeException("Error calculating Relative Strength Index " + returnCode);
         }
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
-        int lookBack = new CoreAnnotated().bbandsLookback(movingAverageDays(), upperNumberOfStdDev(), lowerNumberOfStdDev(), movingAverageType());
+        int lookBack = new CoreAnnotated().rsiLookback(days());
         for (int i = 0; i < outNBElement.value; i++) {
-            int movingAverageDaysOffset = i + lookBack;
-            double pctB = (closePricesArray[movingAverageDaysOffset]-outRealLowerBand[i])/(outRealUpperBand[i]-outRealLowerBand[i]);
-            LocalDate tradingDate = tradingDates.get(movingAverageDaysOffset);
-            this.percentageB.put(tradingDate, pctB);
+            int daysOffset = i + lookBack;
+            LocalDate tradingDate = tradingDates.get(daysOffset);
+            this.relativeStrengthIndex.put(tradingDate, outReal[i]);
         }
     }
 
-    public MAType movingAverageType() {
-        return this.movingAverageType;
-    }
-
-    private double lowerNumberOfStdDev() {
-        return 2;
-    }
-
-    private double upperNumberOfStdDev() {
-        return 2;
-    }
-
-    public int movingAverageDays() {
-        return this.movingAverageDays;
+    public int days() {
+        return this.days;
     }
 
     public Range<Double> getBuyThreshold() {
@@ -162,22 +144,18 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
         return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy threshold",
                 this.getBuyThreshold(),
-                "moving avg days",
-                this.movingAverageDays,
-                "moving avg type",
-                this.movingAverageType);
+                "days",
+                this.days);
     }
 
 
     @Override
     public String sellDecisionToString() {
-         return Joiner.on(": ").join(this.getClass().getSimpleName(),
-                 "sell threshold",
-                 this.getSellThreshold(),
-                "moving avg days",
-                this.movingAverageDays,
-                "moving avg type",
-                this.movingAverageType);
+        return Joiner.on(": ").join(this.getClass().getSimpleName(),
+                "sell threshold",
+                this.getSellThreshold(),
+                "days",
+                this.days);
     }
 
 }

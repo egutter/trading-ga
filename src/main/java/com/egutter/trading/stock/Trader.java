@@ -5,6 +5,7 @@ import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
 import com.google.common.base.Function;
+import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
 
@@ -38,6 +39,13 @@ public class Trader {
         }
     }
 
+    public void tradeOn(LocalDate tradingDate) {
+        for (StockPrices stockPrices : stockMarket.getStockPrices()) {
+            TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
+            stockPrices.withDailyPriceOn(tradingDate, executeMarketOrders(stockPrices, tradingStrategy));
+        }
+    }
+
     private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingStrategy tradingStrategy) {
         return new Function<DailyQuote, Object>() {
             @Override
@@ -65,5 +73,9 @@ public class Trader {
 
     public BigDecimal amountInvested() {
         return orderBook.amountInvested();
+    }
+
+    public OrderBook getOrderBook() {
+        return orderBook;
     }
 }

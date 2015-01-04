@@ -2,6 +2,7 @@ package com.egutter.trading.order;
 
 import com.egutter.trading.stock.Portfolio;
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
@@ -56,7 +57,12 @@ public class OrderBook implements MarketOrder {
             }).toList();
     }
 
-    private FluentIterable<BuyOrder> buyOrders() {
+    public FluentIterable<BuyOrder> buyOrders() {
         return FluentIterable.from(orders).filter(BuyOrder.class);
+    }
+
+    @Override
+    public String toString() {
+        return Joiner.on(" ").join("ORDERS IN BOOK:", orders);
     }
 }

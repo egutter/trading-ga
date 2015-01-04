@@ -26,7 +26,7 @@ public class SellWhenAnyAgreeTradingDecision implements SellTradingDecision {
 
     @Override
     public DecisionResult shouldSellOn(final LocalDate tradingDate) {
-        return tradeWhenYesAgreement(sellTradingDecisionList).shouldTradeOn(new Function<TradingDecision, DecisionResult>() {
+        return tradeWhenYesAgreement.shouldTradeOn(sellTradingDecisionList, new Function<TradingDecision, DecisionResult>() {
             @Override
             public DecisionResult apply(TradingDecision tradingDecision) {
                 return ((SellTradingDecision) tradingDecision).shouldSellOn(tradingDate);

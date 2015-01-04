@@ -1,10 +1,14 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Iterables.getFirst;
 import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Lists.transform;
 
@@ -97,8 +101,25 @@ public class StockPrices {
         }
     }
 
+    public void withDailyPriceOn(LocalDate tradingDate, Function<DailyQuote, Object> function) {
+        DailyQuote quote = Iterables.find(dailyQuotes, new Predicate<DailyQuote>() {
+            @Override
+            public boolean apply(DailyQuote dailyQuote) {
+                return dailyQuote.isOn(tradingDate);
+            }
+        });
+        function.apply(quote);
+    }
+
     public LocalDate getLastTradingDate() {
         return getLast(dailyQuotes).getTradingDate();
+    }
+    public LocalDate getFirstTradingDate() {
+        return dailyQuotes.get(0).getTradingDate();
+    }
+
+    public List<DailyQuote> getDailyQuotes() {
+        return dailyQuotes;
     }
 
 }

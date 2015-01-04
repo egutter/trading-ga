@@ -1,6 +1,6 @@
 package com.egutter.trading.genetic;
 
-import com.egutter.trading.decision.generator.TradingDecisionFactory;
+import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.stock.Trader;
 import com.egutter.trading.order.OrderBook;
 import com.egutter.trading.stock.StockMarket;
@@ -18,10 +18,15 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
     public static final BigDecimal INITIAL_CASH = new BigDecimal(1000000.00);
 
+
     private StockMarket stockMarket;
 
-    public StockTradingFitnessEvaluator(StockMarket stockMarket) {
+    private List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators;
+
+    public StockTradingFitnessEvaluator(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionsGenerators) {
         this.stockMarket = stockMarket;
+        this.tradingDecisionGenerators = tradingDecisionsGenerators;
+
     }
 
     @Override
@@ -37,7 +42,22 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
         seeOtherWaysOfEvaluatePortfolioNotUsed();
 
-        return portfolio.getCash().doubleValue();
+        if (shouldDiscardCandidate(portfolio)) {
+            return 0;
+        }
+        BigDecimal ordersWonPctgWeight = portfolio.getStats().percentageOfOrdersWon();
+        if (ordersWonPctgWeight.compareTo(BigDecimal.valueOf(0.75)) < 0) {
+            return 0;
+        }
+        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(Math.log(portfolio.getStats().countOrdersWon()));
+        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
+//        return portfolio.getCash().doubleValue();
+    }
+
+    private boolean shouldDiscardCandidate(Portfolio portfolio) {
+        if (portfolio.getCash().doubleValue() <= 0 || portfolio.getStats().countOrdersWon() == 0 || portfolio.getProfit().compareTo(BigDecimal.ZERO) < 1)
+            return true;
+        return false;
     }
 
     private void seeOtherWaysOfEvaluatePortfolioNotUsed() {
@@ -63,7 +83,7 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     }
 
     private TradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
-        return new TradingDecisionFactory(portfolio, candidate);
+        return new TradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, true);
     }
 
     private GenomeCandidateValidator candidateValidator(TradingDecisionFactory tradingDecisionGenerator) {

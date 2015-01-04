@@ -1,5 +1,7 @@
 package com.egutter.trading.genetic;
 
+import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.genetic.cache.CachedFitnesseEvaluatorDecorator;
 import com.egutter.trading.stock.StockMarket;
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.maths.number.ConstantGenerator;
@@ -13,6 +15,9 @@ import org.uncommons.watchmaker.framework.operators.BitStringCrossover;
 import org.uncommons.watchmaker.framework.operators.BitStringMutation;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
+import org.uncommons.watchmaker.framework.selection.SigmaScaling;
+import org.uncommons.watchmaker.framework.selection.TournamentSelection;
+import org.uncommons.watchmaker.framework.selection.TruncationSelection;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
 import org.uncommons.watchmaker.framework.termination.Stagnation;
 
@@ -20,16 +25,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import static java.util.Arrays.asList;
+
 /**
  * Created by egutter on 11/29/14.
  */
 public class Experiment {
 
+    private List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators;
+
+    public Experiment(List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+        this.tradingDecisionGenerators = tradingDecisionGenerators;
+    }
+
     public BitString run(StockMarket stockMarket) {
 
-        StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket);
+//        FitnessEvaluator stockTradingFitnessEvaluator = new CachedFitnesseEvaluatorDecorator(new StockTradingFitnessEvaluator(stockMarket, tradingDecisions()),
+//                stockMarket, tradingDecisions());
+        FitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket, this.tradingDecisionGenerators);
 
-        CandidateFactory<BitString> candidateFactory = new BitStringFactory(TradingDecisionGenome.SIZE);
+        CandidateFactory<BitString> candidateFactory = new BitStringFactory(genomeSize());
 
         List<EvolutionaryOperator<BitString>> operators
                 = new LinkedList<EvolutionaryOperator<BitString>>();
@@ -41,12 +56,15 @@ public class Experiment {
 
         Random rng = new MersenneTwisterRNG();
 
-        return buildEvolutionEngine(stockTradingFitnessEvaluator, candidateFactory, pipeline, rng);
+//        return runIslandEvolutionEngine(stockTradingFitnessEvaluator, candidateFactory, pipeline, rng);
+        return runEvolutionExperiment(stockTradingFitnessEvaluator, candidateFactory, pipeline, rng);
     }
 
+    private int genomeSize() {
+        return (TradingDecisionGenome.LENGTH * this.tradingDecisionGenerators.size()) + TradingDecisionGenome.HEAD_LENGTH;
+    }
 
-    private BitString buildEvolutionEngine(StockTradingFitnessEvaluator stockTradingFitnessEvaluator, CandidateFactory<BitString> candidateFactory, EvolutionaryOperator<BitString> pipeline, Random rng) {
-        // You can also try an IslandEvolution with buildIslandEvolutionEngine(stockTradingFitnessEvaluator, candidateFactory, pipeline, rng)
+    private BitString runEvolutionExperiment(FitnessEvaluator stockTradingFitnessEvaluator, CandidateFactory<BitString> candidateFactory, EvolutionaryOperator<BitString> pipeline, Random rng) {
         EvolutionEngine<BitString> engine
                 = new GenerationalEvolutionEngine<BitString>(candidateFactory,
                 pipeline,
@@ -54,15 +72,17 @@ public class Experiment {
                 getSelectionStrategy(),
                 rng);
 
-        return engine.evolve(1000, 10, new GenerationCount(100), new Stagnation(20, true));
+        return engine.evolve(1000, 10, new GenerationCount(200), new Stagnation(20, true));
     }
 
     public SelectionStrategy<? super BitString> getSelectionStrategy() {
         // You can also try a new TournamentSelection(new Probability(0.51))
+//        return new TournamentSelection(new Probability(0.51));
         return new RouletteWheelSelection();
+//        return new SigmaScaling();
     }
 
-    private BitString buildIslandEvolutionEngine(StockTradingFitnessEvaluator stockTradingFitnessEvaluator, CandidateFactory<BitString> candidateFactory, EvolutionaryOperator<BitString> pipeline, Random rng) {
+    private BitString runIslandEvolutionEngine(FitnessEvaluator stockTradingFitnessEvaluator, CandidateFactory<BitString> candidateFactory, EvolutionaryOperator<BitString> pipeline, Random rng) {
         IslandEvolution<BitString> engine
                 = new IslandEvolution<BitString>(5, // Number of islands.
                 new RingMigration(),

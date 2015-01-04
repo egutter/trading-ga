@@ -111,9 +111,9 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision {
             throw new RuntimeException("Error calculating Aroon Oscilator" + returnCode);
         }
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
-
+        int lookBack = new CoreAnnotated().aroonLookback(days());
         for (int i = 0; i < outNBElement.value; i++) {
-            int daysOffset = i + days - 1;
+            int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);
             this.aroonOscilator.put(tradingDate, outReal[i]);
         }

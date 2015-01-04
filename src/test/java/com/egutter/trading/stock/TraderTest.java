@@ -28,7 +28,7 @@ public class TraderTest {
     private StockMarket stockMarket;
     private Portfolio portfolio;
     private StockPrices ypfStockPrices = new StockPrices("YPF", asList(aDailyQuote()));
-    private double ypfStockClosePrice = aDailyQuote().getClosePrice();
+    private double ypfStockClosePrice = aDailyQuote().getAdjustedClosePrice();
 
     @Before
     public void setUp() throws Exception {

@@ -113,9 +113,9 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
         }
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
-
+        int lookBack = new CoreAnnotated().mfiLookback(days());
         for (int i = 0; i < outNBElement.value; i++) {
-            int daysOffset = i + days() - 1;
+            int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);
             this.moneyFlowIndex.put(tradingDate, outReal[i]);
         }

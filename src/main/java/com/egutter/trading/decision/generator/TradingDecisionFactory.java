@@ -22,31 +22,29 @@ public class TradingDecisionFactory {
 
     private final List<BuyTradingDecisionGenerator> buyGeneratorChain = new ArrayList<BuyTradingDecisionGenerator>();
     private final List<SellTradingDecisionGenerator> sellGeneratorChain = new ArrayList<SellTradingDecisionGenerator>();
-//    private final SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator;
     private Portfolio portfolio;
     private TradingDecisionGenome genome;
 
-    private List<? extends Class<? extends BuyTradingDecisionGenerator>> availableTradingDecisionGenerators =
-            asList(InactiveTradingDecisionGenerator.class,
-                    BollingerBandsGenerator.class,
-                    MoneyFlowIndexGenerator.class,
-                    AroonOscilatorGenerator.class);
-
-    public TradingDecisionFactory(Portfolio portfolio, BitString genome) {
+    public TradingDecisionFactory(Portfolio portfolio,
+                                  BitString genome,
+                                  List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators, boolean onExperiment) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
 
         this.buyGeneratorChain.add(buildDoNotBuyWhenSameStockInPortfolioGenerator());
-        this.buyGeneratorChain.add(buildDoNotBuyInTheLastBuyTradingDaysGenerator());
-
-        this.buyGeneratorChain.add((BuyTradingDecisionGenerator) buildBollingerBandsGenerator(this.genome.extractFirstDecisionChromosome()));
-        this.buyGeneratorChain.add((BuyTradingDecisionGenerator) buildMoneyFlowGenerator(this.genome.extractSecondDecisionChromosome()));
-
+        if (onExperiment) {
+            this.buyGeneratorChain.add(buildDoNotBuyInTheLastBuyTradingDaysGenerator());
+        }
 
         this.sellGeneratorChain.add(buildDoNotSellWhenNoStockInPorfolioGenerator());
 
-        this.sellGeneratorChain.add((SellTradingDecisionGenerator) buildBollingerBandsGenerator(this.genome.extractFirstDecisionChromosome()));
-        this.sellGeneratorChain.add((SellTradingDecisionGenerator) buildMoneyFlowGenerator(this.genome.extractSecondDecisionChromosome()));
+        int index = 0;
+        for (Class<? extends TradingDecisionGenerator> tradingDecisionGeneratorClass : tradingDecisionGenerators) {
+            TradingDecisionGenerator tradingDecisionGenerator = getGenerator(tradingDecisionGeneratorClass, this.genome.extractChromosome(index));
+            this.buyGeneratorChain.add((BuyTradingDecisionGenerator) tradingDecisionGenerator);
+            this.sellGeneratorChain.add((SellTradingDecisionGenerator) tradingDecisionGenerator);
+            index++;
+        }
     }
 
     protected TradingDecisionFactory() {
@@ -76,22 +74,6 @@ public class TradingDecisionFactory {
         return orTradingDecisionComposite;
     }
 
-    private TradingDecisionGenerator buildBollingerBandsGenerator(BitString chromosome) {
-        return new BollingerBandsGenerator(chromosome);
-    }
-
-    private TradingDecisionGenerator buildMoneyFlowGenerator(BitString chromosome) {
-        return new MoneyFlowIndexGenerator(chromosome);
-    }
-
-    private TradingDecisionGenerator buildAroonGenerator(BitString chromosome) {
-        return new AroonOscilatorGenerator(chromosome);
-    }
-
-    private InactiveTradingDecisionGenerator buildInactiveGenerator() {
-        return new InactiveTradingDecisionGenerator(null);
-    }
-
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator() {
         BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();
         return new SellAfterAFixedNumberOfDaysGenerator(sellAfterDaysChromosome, portfolio);
@@ -113,14 +95,9 @@ public class TradingDecisionFactory {
         return buyGeneratorChain;
     }
 
-    public List<SellTradingDecisionGenerator> getSellGeneratorChain() {
-        return sellGeneratorChain;
-    }
-
-    public TradingDecisionGenerator getGenerator(BitString chromosome) {
-        int index = new Random().nextInt(availableTradingDecisionGenerators.size());
+    public TradingDecisionGenerator getGenerator(Class<? extends TradingDecisionGenerator> generatorClass, BitString chromosome) {
         try {
-            return availableTradingDecisionGenerators.get(index).getConstructor(BitString.class).newInstance(chromosome);
+            return generatorClass.getConstructor(BitString.class).newInstance(chromosome);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

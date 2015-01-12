@@ -25,7 +25,7 @@ public class HistoricPriceRepository {
         List<LocalDate> maxDates = new ArrayList<LocalDate>();
 
         forEachStock(stockName -> {
-            DBCursor cursor = conn().getCollection((String) stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
+            DBCursor cursor = conn().getCollection(stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
 
             try {
                 while (cursor.hasNext()) {
@@ -54,7 +54,7 @@ public class HistoricPriceRepository {
         }
     }
 
-    public void forEachStock(Consumer applyBlock) {
+    public void forEachStock(Consumer<String> applyBlock) {
         Set<String> colls = conn().getCollectionNames();
         for (String stockName : colls) {
             if (stockName.equals("system.indexes")) {
@@ -92,6 +92,13 @@ public class HistoricPriceRepository {
         DBCollection collection = conn().getCollection(stockName);
         DBObject query = new BasicDBObject();
         collection.remove(query);
+    }
+
+    public void removeAll() {
+        forEachStock(stockName -> {
+            DBCollection collection = conn().getCollection(stockName);
+            collection.drop();
+        });
     }
 
     public void removeAllFrom(String stockName, LocalDate fromDate) {

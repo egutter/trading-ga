@@ -1,11 +1,15 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.decision.generator.BuyTradingDecisionGenerator;
+import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.repository.PortfolioRepository;
+import com.egutter.trading.runner.TradeOneDayRunner;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import org.uncommons.maths.binary.BitString;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.base.Joiner.on;
 import static com.google.common.collect.Lists.transform;
@@ -18,6 +22,15 @@ public class Candidate {
     private String description;
     private BitString chromosome;
     private List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators;
+
+    private static Map<Class, String> generatorsKeyMap = new HashMap<Class, String>();
+    static {
+        generatorsKeyMap.put(BollingerBandsGenerator.class, "BB");
+        generatorsKeyMap.put(MovingAverageConvergenceDivergenceGenerator.class, "MACD");
+        generatorsKeyMap.put(MoneyFlowIndexGenerator.class, "MFI");
+        generatorsKeyMap.put(RelativeStrengthIndexGenerator.class, "RSI");
+        generatorsKeyMap.put(AroonOscilatorGenerator.class, "AROO");
+    }
 
     public Candidate(String description, String chromosome, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
         this(description, new BitString(chromosome), tradingDecisionGenerators);
@@ -41,7 +54,7 @@ public class Candidate {
         return new Function<Class<? extends BuyTradingDecisionGenerator>, String>() {
             @Override
             public String apply(Class<? extends BuyTradingDecisionGenerator> aClass) {
-                return aClass.getSimpleName();
+                return generatorsKeyMap.getOrDefault(aClass, aClass.getSimpleName());
             }
         };
     }

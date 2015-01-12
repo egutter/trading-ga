@@ -14,6 +14,7 @@ import org.joda.time.LocalDate;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+import java.util.function.Consumer;
 
 import static com.google.common.collect.FluentIterable.from;
 
@@ -142,6 +143,10 @@ public class PortfolioStats {
     public BuySellOperation biggestWin() {
         if (ordersWon().isEmpty()) return BuySellOperation.empty();
         return buySellOperationOrdering().max(ordersWon());
+    }
+
+    public void forEachStat(Consumer<BuySellOperation> applyBlock) {
+        stats.forEach(buySellOperation -> applyBlock.accept(buySellOperation));
     }
 
     private Ordering<BuySellOperation> buySellOperationOrdering() {

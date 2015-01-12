@@ -48,31 +48,38 @@ public class StockMarket {
 
     public static String[] stockSymbols() {
         return new String[]{
+                // MERVAL 25
                 "ALUA.BA", // ALUAR ALUMINIO
                 "APBR.BA", // PETROBRAS ORDINARIAS
                 "BHIP.BA", // BANCO HIPOTECARIO
                 "BMA.BA", // BANCO MACRO
+                "BRIO.BA", // Banco Santander Rio S.A.
+                "CECO2.BA", // Endesa Costanera SA
+                "CELU.BA", // Celulosa Argentina S.A.
                 "CEPU2.BA", // CENTRAL PUERTO
                 "COME.BA", // COMERCIAL DEL PLATA
-                "CRES.BA", // CRESUD
                 "EDN.BA", // EDENOR
                 "ERAR.BA", // SIDERAR
                 "FRAN.BA", // BCO.FRANCES S.A.
                 "GGAL.BA", // GRUPO FINANCIERO GALICIA
                 "INDU.BA", // SOLVAY INDUPA SAI
-                "IRSA.BA", // IRSA
-                "LEDE.BA", // LEDESMA
-                "MIRG.BA", // MIRGOR
+                "MIRG.BA", // Mirgor S.A.C.I.F.I.A.
                 "MOLI.BA", // MOLINOS
                 "PAMP.BA", // FRIGORIFICO LA PAMPA
                 "PESA.BA", // PETROBRAS ENERGIA
-                "STD.BA", // BANCO SANTANDER
+                "PETR.BA", // Petrolera Pampa S.A.
                 "TECO2.BA", // TELECOM ARGENTINA
-                "TEF.BA", // TELEFONICA
                 "TGNO4.BA", // TRANSPORT GAS NORTE
+                "TGSU2.BA", // Transportadora de Gas Del Sur S.A.
                 "TRAN.BA", // CIA.TRANSP.EN.ELECTRICIDAD
                 "TS.BA", // TENARIS
                 "YPFD.BA", // YPF
+                // OTRAS
+//                "CRES.BA", // CRESUD
+//                "IRSA.BA", // IRSA
+//                "LEDE.BA", // LEDESMA
+//                "STD.BA", // BANCO SANTANDER
+//                "TEF.BA", // TELEFONICA
                 MERVAL_MARKET_INDEX};
     }
 

@@ -75,7 +75,4 @@ public class Trader {
         return orderBook.amountInvested();
     }
 
-    public OrderBook getOrderBook() {
-        return orderBook;
-    }
 }

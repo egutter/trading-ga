@@ -63,7 +63,7 @@ public class DailyQuote {
 
     @Override
     public String toString() {
-        return Joiner.on(" ").join(tradingDate, closePrice);
+        return Joiner.on(" ").join(tradingDate, adjustedClosePrice);
     }
 
     public boolean isOn(LocalDate tradingDate) {

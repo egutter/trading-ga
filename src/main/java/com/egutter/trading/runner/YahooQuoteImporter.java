@@ -9,11 +9,13 @@ import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
+import yahoofinance.quotes.stock.StockQuote;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import static com.egutter.trading.stock.StockMarket.stockSymbols;
 
@@ -25,9 +27,37 @@ public class YahooQuoteImporter {
     private HistoricPriceRepository repository = new HistoricPriceRepository();
 
     public static void main(String[] args) {
-        new YahooQuoteImporter().runImport(new LocalDate(2015, 1, 1));
+//        new YahooQuoteImporter().runImport();
+        DailyQuote lastQuote = new YahooQuoteImporter().getLastQuote("YPFD.BA");
+        System.out.println(lastQuote.getTradingDate().isAfter(new HistoricPriceRepository().getMaxTradingDate()));
     }
 
+    public DailyQuote getLastQuote(String stockName) {
+        Stock stock = YahooFinance.get(stockName);
+        StockQuote quote = stock.getQuote();
+        System.out.println("Fetched " + stock.getSymbol() + " - " + stock.getName() + " quote " + stock.getQuote());
+        return new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
+                quote.getOpen(),
+                quote.getPrice(),
+                quote.getPrice(),
+                quote.getDayLow(),
+                quote.getDayHigh(),
+                quote.getVolume());
+    }
+
+    public void forEachLastQuote(BiConsumer<String, DailyQuote> applyBlok) {
+        YahooFinance.get(stockSymbols()).forEach((symbol, stock) -> {
+            StockQuote quote = stock.getQuote();
+            DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
+                    quote.getOpen(),
+                    quote.getPrice(),
+                    quote.getPrice(),
+                    quote.getDayLow(),
+                    quote.getDayHigh(),
+                    quote.getVolume());
+            applyBlok.accept(symbol, dailyQuote);
+        });
+    }
     public void runImport() {
         LocalDate fromDate = repository.getMaxTradingDate().plusDays(1);
         runImport(fromDate);

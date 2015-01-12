@@ -1,6 +1,7 @@
 package com.egutter.trading.stock;
 
 import com.egutter.trading.repository.HistoricPriceRepository;
+import com.egutter.trading.runner.YahooQuoteImporter;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
 
@@ -14,6 +15,9 @@ import java.util.Set;
  * Created by egutter on 2/17/14.
  */
 public class StockMarketBuilder {
+
+    private YahooQuoteImporter yahooQuoteImporter = new YahooQuoteImporter();;
+    private HistoricPriceRepository repository = new HistoricPriceRepository();;
 
     public static void main(String[] args) {
         try {
@@ -65,22 +69,36 @@ public class StockMarketBuilder {
         }
     }
 
+
     public StockMarket build(LocalDate fromDate, LocalDate toDate) {
+        return build(fromDate, toDate, false);
+    }
+
+    public StockMarket build(LocalDate fromDate, LocalDate toDate, boolean runImport) {
+        if (runImport) yahooQuoteImporter.runImport();
         List<StockPrices> stockPrices = new ArrayList<StockPrices>();
         List<DailyQuote> marketIndexPrices = new ArrayList<DailyQuote>();
 
-        HistoricPriceRepository repository = new HistoricPriceRepository();
         repository.forEachStock(stockName -> {
             List<DailyQuote> dailyPrices = new ArrayList<DailyQuote>();
-            repository.forEachDailyQuote(fromDate, toDate, (String) stockName, (dailyQuote) -> {
+            repository.forEachDailyQuote(fromDate, toDate, stockName, (dailyQuote) -> {
                 dailyPrices.add((DailyQuote) dailyQuote);
             });
-            if (((String)stockName).endsWith("MERV")) {
+            if (runImport) appendLastQuoteFromMarket(stockName, dailyPrices);
+            if (((String) stockName).endsWith("MERV")) {
                 marketIndexPrices.addAll(dailyPrices);
             } else {
                 stockPrices.add(new StockPrices((String) stockName, dailyPrices));
             }
         });
         return new StockMarket(stockPrices, new StockPrices("MERVAL", marketIndexPrices));
+    }
+
+    private void appendLastQuoteFromMarket(String stockName, List<DailyQuote> dailyPrices) {
+        DailyQuote lastQuote = yahooQuoteImporter.getLastQuote(stockName);
+        if (lastQuote.getTradingDate().isAfter(repository.getMaxTradingDate())) {
+            System.out.println("Add last quote to market " + lastQuote.getTradingDate() + " " + lastQuote);
+            dailyPrices.add(lastQuote);
+        }
     }
 }

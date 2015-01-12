@@ -35,6 +35,16 @@ public class SellOrder implements MarketOrder {
         return dailyQuote;
     }
 
+    @Override
+    public String getStockName() {
+        return this.stockName;
+    }
+
+    @Override
+    public int getNumberOfShares() {
+        return this.numberOfSharesFor;
+    }
+
     public LocalDate getTradingDate() {
         return dailyQuote.getTradingDate();
     }

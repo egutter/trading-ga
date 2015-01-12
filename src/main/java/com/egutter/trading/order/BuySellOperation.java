@@ -3,6 +3,7 @@ package com.egutter.trading.order;
 import com.google.common.base.Joiner;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by egutter on 12/31/14.
@@ -34,6 +35,12 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
         return amountEarned.subtract(amountPaid);
     }
 
+    public BigDecimal profitPctg() {
+        BigDecimal amountEarned = sellOrder.amountEarned();
+        BigDecimal amountPaid = buyOrder.amountPaid();
+        return amountEarned.divide(amountPaid, 2, RoundingMode.HALF_EVEN).subtract(BigDecimal.ONE).multiply(BigDecimal.valueOf(100));
+    }
+
     public boolean isLost() {
         return buyOrder.amountPaid().doubleValue() > sellOrder.amountEarned().doubleValue();
     }
@@ -49,7 +56,7 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
 
     @Override
     public String toString() {
-        return Joiner.on(" ").join("Buy Order:", buyOrder, "- Sell Order:", sellOrder, "- Profit:", profit());
+        return Joiner.on(" ").join("Buy Order:", buyOrder, "- Sell Order:", sellOrder, "- Profit: $" + profit(), profitPctg() + "%");
     }
 
     public static BuySellOperation empty() {

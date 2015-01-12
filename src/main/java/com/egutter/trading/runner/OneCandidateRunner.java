@@ -3,6 +3,7 @@ package com.egutter.trading.runner;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.decision.technicalanalysis.MovingAverageConvergenceDivergence;
 import com.egutter.trading.decision.technicalanalysis.RelativeStrengthIndex;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
@@ -31,6 +32,7 @@ public class OneCandidateRunner {
     private final Portfolio portfolio;
     private final Trader trader;
     private final TradingDecisionFactory tradingDecisionFactory;
+    private final OrderBook orderBook;
     private StockMarket stockMarket;
     private final BitString candidate;
 
@@ -42,7 +44,8 @@ public class OneCandidateRunner {
         this.stockMarket = stockMarket;
         this.candidate = candidate;
         this.portfolio = portfolio;
-        this.trader = new Trader(stockMarket, new TradingDecisionFactory(portfolio, candidate, tradingDecisionGenerators, onExperiment), portfolio, new OrderBook());
+        this.orderBook = new OrderBook();
+        this.trader = new Trader(stockMarket, new TradingDecisionFactory(portfolio, candidate, tradingDecisionGenerators, onExperiment), portfolio, orderBook);
         this.tradingDecisionFactory = new TradingDecisionFactory(new Portfolio(), candidate, tradingDecisionGenerators, onExperiment);
     }
 
@@ -111,17 +114,23 @@ public class OneCandidateRunner {
     }
 
     public static void main(String[] args) {
-        LocalDate fromDate = new LocalDate(2013, 1, 1);
+        LocalDate fromDate = new LocalDate(2012, 12, 1);
         LocalDate toDate = LocalDate.now();
 
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
 
-        BitString candidate = new BitString("110011000110001101100100100001");
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
-        runner.run();
+        new TradeOneDayRunner(fromDate, toDate).candidates().forEach(candidate -> {
+            System.out.println("==========================================");
+            System.out.println("******************************************");
+            System.out.println("==========================================");
+            System.out.println(candidate.getDescription() + ": " + candidate.key());
+            OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
+            runner.run();
+        });
+//        BitString candidate = new BitString("10011000000011101");
     }
 
     public OrderBook getOrderBook() {
-        return trader.getOrderBook();
+        return this.orderBook;
     }
 }

@@ -1,5 +1,6 @@
 package com.egutter.trading.order;
 
+import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 
 /**
@@ -7,4 +8,10 @@ import com.egutter.trading.stock.Portfolio;
  */
 public interface MarketOrder {
     void execute(Portfolio portfolio);
+
+    DailyQuote getDailyQuote();
+
+    String getStockName();
+
+    int getNumberOfShares();
 }

@@ -13,11 +13,10 @@ import java.util.List;
 /**
  * Created by egutter on 2/12/14.
  */
-public class OrderBook implements MarketOrder {
+public class OrderBook {
 
     private List<MarketOrder> orders = new ArrayList<MarketOrder>();
 
-    @Override
     public void execute(Portfolio portfolio) {
         for (MarketOrder order: orders) {
             order.execute(portfolio);

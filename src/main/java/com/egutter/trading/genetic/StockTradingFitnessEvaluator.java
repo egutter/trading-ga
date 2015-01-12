@@ -49,9 +49,9 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
         if (ordersWonPctgWeight.compareTo(BigDecimal.valueOf(0.75)) < 0) {
             return 0;
         }
-        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(Math.log(portfolio.getStats().countOrdersWon()));
-        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
-//        return portfolio.getCash().doubleValue();
+//        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(Math.log10(portfolio.getStats().countOrdersWon()));
+//        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
+        return portfolio.getCash().doubleValue();
     }
 
     private boolean shouldDiscardCandidate(Portfolio portfolio) {

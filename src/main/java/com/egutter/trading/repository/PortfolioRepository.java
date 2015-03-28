@@ -111,7 +111,7 @@ public class PortfolioRepository {
         });
     }
 
-    private void forEachStockCollection(Consumer<String> applyBlock) {
+    public void forEachStockCollection(Consumer<String> applyBlock) {
         Set<String> colls = stockPortfolioConn().getCollectionNames();
         for (String stockName : colls) {
             if (stockName.equals("system.indexes")) {
@@ -205,21 +205,39 @@ public class PortfolioRepository {
 
     private DB stockPortfolioConn() {
         if (stockPortfolioConn == null) {
-            stockPortfolioConn = conn("stock-portfolio");
+            stockPortfolioConn = conn("stock-portfolio", "STOCK_PORTFOLIO_URI");
         }
         return stockPortfolioConn;
     }
 
     private DB statsPortfolioConn() {
         if (statsPortfolioConn == null) {
-            statsPortfolioConn = conn("stats-portfolio");
+            statsPortfolioConn = conn("stats-portfolio", "STATS_PORTFOLIO_URI");
         }
         return statsPortfolioConn;
     }
 
-    private DB conn(String dbName) {
+    private DB conn(String dbName, String uriEnv) {
+        String dbUri = System.getenv().get(uriEnv);
+        if (dbUri != null) {
+            return externalConn(dbName, uriEnv);
+        }
+        return localConn(dbName);
+    }
+
+    private DB externalConn(String dbName, String dbUri) {
         try {
-            Mongo client = new Mongo();
+            MongoClientURI uri = new MongoClientURI(dbUri);
+            MongoClient client = new MongoClient(uri);
+            return client.getDB(dbName);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private DB localConn(String dbName) {
+        try {
+            MongoClient client = new MongoClient();
             return client.getDB(dbName);
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);

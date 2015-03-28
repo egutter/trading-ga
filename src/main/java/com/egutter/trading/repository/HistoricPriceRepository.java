@@ -23,7 +23,7 @@ public class HistoricPriceRepository {
 
     private DB dbConn;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println(new HistoricPriceRepository().getMaxTradingDate());
     }
 
@@ -132,12 +132,31 @@ public class HistoricPriceRepository {
     }
 
     private DB conn() {
-        try {
-            if (dbConn == null) {
-                Mongo client = new Mongo();
-                dbConn = client.getDB("merval-stats");
+        if (dbConn == null) {
+            String dbUri = System.getenv().get("MERVAL_STATS_URI");
+            if (dbUri != null) {
+                dbConn = externalConn(dbUri);
             }
-            return dbConn;
+            dbConn = localConn();
+        }
+        return dbConn;
+
+    }
+
+    private DB externalConn(String dbUri) {
+        try {
+            MongoClientURI uri = new MongoClientURI(dbUri);
+            MongoClient client = new MongoClient(uri);
+            return client.getDB("merval-stats");
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private DB localConn() {
+        try {
+            MongoClient client = new MongoClient();
+            return client.getDB("merval-stats");
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }

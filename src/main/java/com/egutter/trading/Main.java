@@ -3,8 +3,13 @@ package com.egutter.trading;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
+import com.egutter.trading.repository.HistoricPriceRepository;
+import com.egutter.trading.repository.PortfolioRepository;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.*;
+
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
@@ -23,7 +28,16 @@ public class Main extends HttpServlet {
 
   private void showHome(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    resp.getWriter().print("Hello from Java!");
+    PrintWriter writer = resp.getWriter();
+    writer.print("Checking DB status");
+    writer.print("Stats collections");
+    PortfolioRepository portfolioRepository = new PortfolioRepository();
+    portfolioRepository.forEachStatCollection(name -> writer.print("<li>" + name + "</li>"));
+    writer.print("Stock collections");
+    portfolioRepository.forEachStockCollection(name -> writer.print("<li>" + name + "</li>"));
+    writer.print("Merval collections");
+    new HistoricPriceRepository().forEachStock(name -> writer.print("<li>" + name + "</li>"));
+
   }
 
   private void showDatabase(HttpServletRequest req, HttpServletResponse resp)

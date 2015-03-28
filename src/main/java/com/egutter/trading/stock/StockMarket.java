@@ -18,7 +18,7 @@ public class StockMarket {
 
     private StockPrices marketIndexPrices;
 
-    private static String MERVAL_MARKET_INDEX = "%5EMERV";
+    public static String MERVAL_MARKET_INDEX = "%5EMERV";
 
     public StockMarket(List<StockPrices> stockPrices, StockPrices marketIndexPrices) {
         this.stockPrices = stockPrices;
@@ -32,6 +32,11 @@ public class StockMarket {
     public List<StockPrices> getStockPrices() {
         return stockPrices;
     }
+
+    public StockPrices getStockPricesFor(String stockName) {
+        return stockPrices.stream().filter(stockPrices -> stockPrices.getStockName().equals(stockName)).findFirst().get();
+    }
+
     public LocalDate getLastTradingDay() {
         List<LocalDate> tradingDays = Lists.transform(stockPrices, new Function<StockPrices, LocalDate>() {
             @Override

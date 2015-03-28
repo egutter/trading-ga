@@ -1,10 +1,12 @@
 package com.egutter.trading.repository;
 
 import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Ordering;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
+import org.joda.time.ReadablePartial;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -21,20 +23,30 @@ public class HistoricPriceRepository {
 
     private DB dbConn;
 
+    public static void main(String[] args) {
+        System.out.println(new HistoricPriceRepository().getMaxTradingDate());
+    }
+
+    public LocalDate getMaxTradingDate(String stockName) {
+        DBCursor cursor = conn().getCollection(stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
+
+        LocalDate maxDate = LocalDate.now();
+        try {
+            while (cursor.hasNext()) {
+                DBObject object = cursor.next();
+                maxDate = LocalDate.fromDateFields((Date) object.get("date"));
+            }
+        } finally {
+            cursor.close();
+        }
+        return maxDate;
+    }
+
     public LocalDate getMaxTradingDate() {
         List<LocalDate> maxDates = new ArrayList<LocalDate>();
 
         forEachStock(stockName -> {
-            DBCursor cursor = conn().getCollection(stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
-
-            try {
-                while (cursor.hasNext()) {
-                    DBObject object = cursor.next();
-                    maxDates.add(LocalDate.fromDateFields((Date) object.get("date")));
-                }
-            } finally {
-                cursor.close();
-            }
+            if (!stockName.equals("^MERV")) maxDates.add(getMaxTradingDate(stockName));
         });
 
         return Ordering.natural().max(maxDates);
@@ -107,6 +119,16 @@ public class HistoricPriceRepository {
 
         DBCollection collection = conn().getCollection(stockName);
         collection.remove(query);
+    }
+
+    public void removeAllAt(LocalDate fromDate) {
+        forEachStock(stockName -> {
+            DBObject query = new BasicDBObject();
+            query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).get());
+
+            DBCollection collection = conn().getCollection(stockName);
+            collection.remove(query);
+        });
     }
 
     private DB conn() {

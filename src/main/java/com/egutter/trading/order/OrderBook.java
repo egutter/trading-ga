@@ -59,6 +59,9 @@ public class OrderBook {
     public FluentIterable<BuyOrder> buyOrders() {
         return FluentIterable.from(orders).filter(BuyOrder.class);
     }
+    public FluentIterable<SellOrder> sellOrders() {
+        return FluentIterable.from(orders).filter(SellOrder.class);
+    }
 
     @Override
     public String toString() {

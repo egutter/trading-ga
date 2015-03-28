@@ -3,6 +3,8 @@ package com.egutter.trading.stock;
 import com.google.common.base.Joiner;
 import org.joda.time.LocalDate;
 
+import java.math.BigDecimal;
+
 /**
  * Created by egutter on 2/12/14.
  */
@@ -32,6 +34,21 @@ public class DailyQuote {
         this.volume = volume;
     }
 
+    public DailyQuote(LocalDate tradingDate,
+                      BigDecimal openPrice,
+                      BigDecimal closePrice,
+                      BigDecimal adjustedClosePrice,
+                      BigDecimal lowPrice,
+                      BigDecimal highPrice,
+                      long volume) {
+        this.tradingDate = tradingDate;
+        this.openPrice = openPrice.doubleValue();
+        this.closePrice = closePrice.doubleValue();
+        this.adjustedClosePrice = adjustedClosePrice.doubleValue();
+        this.lowPrice = lowPrice.doubleValue();
+        this.highPrice = highPrice.doubleValue();
+        this.volume = volume;
+    }
 
     public double getOpenPrice() {
         return openPrice;

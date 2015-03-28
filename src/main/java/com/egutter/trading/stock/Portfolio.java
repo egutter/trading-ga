@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Portfolio {
 
-    public static final double COMMISION = 0.01325071;
+    public static final BigDecimal COMMISION = BigDecimal.valueOf(0.01325071);
     private final BigDecimal initialCash;
     Map<String, BuyOrder> stocks = new HashMap<String, BuyOrder>();
     BigDecimal cash;
@@ -38,6 +38,13 @@ public class Portfolio {
             return 0;
         }
         return stocks.get(stockName).getNumberOfShares();
+    }
+
+    public int getNumberOfMarketSharesFor(String stockName) {
+        if (!hasStock(stockName)) {
+            return 0;
+        }
+        return stocks.get(stockName).getMarketNumberOfShares();
     }
 
     public BigDecimal getCash() {
@@ -88,7 +95,7 @@ public class Portfolio {
     }
 
     private BigDecimal buyOrSellCommision(BigDecimal amount) {
-        return BigDecimal.valueOf(COMMISION).multiply(amount);
+        return COMMISION.multiply(amount);
     }
 
     public Map<String, BuyOrder> getStocks() {

@@ -6,6 +6,7 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.TradingStrategy;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
+import com.google.common.base.Optional;
 
 import java.math.BigDecimal;
 
@@ -19,19 +20,20 @@ public class MarketOrderGenerator {
     private TradingStrategy tradingStrategy;
     private final DailyQuote dailyQuote;
     private BigDecimal amountToInvest;
+    private Optional<DailyQuote> marketQuote;
 
     public MarketOrderGenerator(String stockName,
                                 Portfolio portfolio,
                                 TradingStrategy tradingStrategy,
                                 DailyQuote dailyQuote,
-                                BigDecimal amountToInvest) {
-
-
+                                BigDecimal amountToInvest,
+                                Optional<DailyQuote> marketQuote) {
         this.stockName = stockName;
         this.portfolio = portfolio;
         this.tradingStrategy = tradingStrategy;
         this.dailyQuote = dailyQuote;
         this.amountToInvest = amountToInvest;
+        this.marketQuote = marketQuote;
     }
 
     public OrderBook generateOrders() {
@@ -42,14 +44,17 @@ public class MarketOrderGenerator {
             marketOrders.add(
                     new BuyOrder(stockName,
                             dailyQuote,
-                            amountToInvest));
+                            amountToInvest,
+                            this.marketQuote));
         };
 
         if (DecisionResult.YES.equals(tradingStrategy.shouldSellOn(dailyQuote.getTradingDate()))) {
             marketOrders.add(
                     new SellOrder(stockName,
                             dailyQuote,
-                        portfolio.getNumberOfSharesFor(stockName)));
+                            portfolio.getNumberOfSharesFor(stockName),
+                            this.marketQuote,
+                            portfolio.getNumberOfMarketSharesFor(stockName)));
         };
 
         return marketOrders;

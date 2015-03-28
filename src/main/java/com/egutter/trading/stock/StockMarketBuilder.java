@@ -6,10 +6,7 @@ import com.mongodb.*;
 import org.joda.time.LocalDate;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by egutter on 2/17/14.
@@ -71,10 +68,10 @@ public class StockMarketBuilder {
 
 
     public StockMarket build(LocalDate fromDate, LocalDate toDate) {
-        return build(fromDate, toDate, false);
+        return build(fromDate, toDate, false, false);
     }
 
-    public StockMarket build(LocalDate fromDate, LocalDate toDate, boolean runImport) {
+    public StockMarket build(LocalDate fromDate, LocalDate toDate, boolean runImport, boolean appendLastQuoteFromMarket) {
         if (runImport) yahooQuoteImporter.runImport();
         List<StockPrices> stockPrices = new ArrayList<StockPrices>();
         List<DailyQuote> marketIndexPrices = new ArrayList<DailyQuote>();
@@ -84,7 +81,7 @@ public class StockMarketBuilder {
             repository.forEachDailyQuote(fromDate, toDate, stockName, (dailyQuote) -> {
                 dailyPrices.add((DailyQuote) dailyQuote);
             });
-            if (runImport) appendLastQuoteFromMarket(stockName, dailyPrices);
+            if (appendLastQuoteFromMarket) appendLastQuoteFromMarket(stockName, dailyPrices);
             if (((String) stockName).endsWith("MERV")) {
                 marketIndexPrices.addAll(dailyPrices);
             } else {
@@ -95,10 +92,12 @@ public class StockMarketBuilder {
     }
 
     private void appendLastQuoteFromMarket(String stockName, List<DailyQuote> dailyPrices) {
-        DailyQuote lastQuote = yahooQuoteImporter.getLastQuote(stockName);
-        if (lastQuote.getTradingDate().isAfter(repository.getMaxTradingDate())) {
-            System.out.println("Add last quote to market " + lastQuote.getTradingDate() + " " + lastQuote);
-            dailyPrices.add(lastQuote);
-        }
+        Optional<DailyQuote> potentialLastQuote = yahooQuoteImporter.getLastQuote(stockName);
+        potentialLastQuote.ifPresent( lastQuote -> {
+            if (lastQuote.getTradingDate().isAfter(repository.getMaxTradingDate(stockName))) {
+                System.out.println("Add last quote to market " + lastQuote.getTradingDate() + " " + lastQuote);
+                dailyPrices.add(lastQuote);
+            }
+        });
     }
 }

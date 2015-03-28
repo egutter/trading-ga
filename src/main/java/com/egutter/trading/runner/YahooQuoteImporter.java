@@ -11,10 +11,7 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 import static com.egutter.trading.stock.StockMarket.stockSymbols;
@@ -28,21 +25,24 @@ public class YahooQuoteImporter {
 
     public static void main(String[] args) {
 //        new YahooQuoteImporter().runImport();
-        DailyQuote lastQuote = new YahooQuoteImporter().getLastQuote("YPFD.BA");
-        System.out.println(lastQuote.getTradingDate().isAfter(new HistoricPriceRepository().getMaxTradingDate()));
+        Optional<DailyQuote> lastQuote = new YahooQuoteImporter().getLastQuote("YPFD.BA");
+        System.out.println(lastQuote.get().getTradingDate().isAfter(new HistoricPriceRepository().getMaxTradingDate()));
     }
 
-    public DailyQuote getLastQuote(String stockName) {
+    public Optional<DailyQuote> getLastQuote(String stockName) {
         Stock stock = YahooFinance.get(stockName);
+        if (stock == null) return Optional.empty();
+
         StockQuote quote = stock.getQuote();
+
         System.out.println("Fetched " + stock.getSymbol() + " - " + stock.getName() + " quote " + stock.getQuote());
-        return new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
+        return Optional.of(new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
                 quote.getOpen(),
                 quote.getPrice(),
                 quote.getPrice(),
                 quote.getDayLow(),
                 quote.getDayHigh(),
-                quote.getVolume());
+                quote.getVolume()));
     }
 
     public void forEachLastQuote(BiConsumer<String, DailyQuote> applyBlok) {

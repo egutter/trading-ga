@@ -35,10 +35,11 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
     private MAType movingAverageType;
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
+        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2014, 1, 1), LocalDate.now());
         List<Double> maxes = new ArrayList<Double>();
         List<Double> minis = new ArrayList<Double>();
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
+        System.out.println(stockPrices.getAdjustedClosePrices());
             BollingerBands bb = new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(0.0), 22, MAType.Ema);
             Map<LocalDate, Double> indexes = bb.getPercentageB();
             maxes.add(Ordering.natural().max(indexes.values()));

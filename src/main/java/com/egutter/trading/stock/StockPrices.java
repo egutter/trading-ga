@@ -1,12 +1,15 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import static com.google.common.collect.Iterables.getFirst;
 import static com.google.common.collect.Iterables.getLast;
@@ -20,6 +23,7 @@ public class StockPrices {
     private String stockName;
 
     private List<DailyQuote> dailyQuotes;
+    private Map<LocalDate, Optional<DailyQuote>> quoteCache = new WeakHashMap<LocalDate, Optional<DailyQuote>>();
 
     public StockPrices(String stockName, List<DailyQuote> dailyQuotes) {
         this.stockName = stockName;
@@ -102,13 +106,22 @@ public class StockPrices {
     }
 
     public void withDailyPriceOn(LocalDate tradingDate, Function<DailyQuote, Object> function) {
-        DailyQuote quote = Iterables.find(dailyQuotes, new Predicate<DailyQuote>() {
+        Optional<DailyQuote> quote = dailyPriceOn(tradingDate);
+        if (quote.isPresent()) function.apply(quote.get());
+    }
+
+    public Optional<DailyQuote> dailyPriceOn(LocalDate tradingDate) {
+        if (quoteCache.containsKey(tradingDate)) return quoteCache.get(tradingDate);
+
+        Optional<DailyQuote> quoteFound = Iterables.tryFind(dailyQuotes, new Predicate<DailyQuote>() {
             @Override
             public boolean apply(DailyQuote dailyQuote) {
                 return dailyQuote.isOn(tradingDate);
             }
         });
-        function.apply(quote);
+        quoteCache.put(tradingDate, quoteFound);
+
+        return quoteFound;
     }
 
     public LocalDate getLastTradingDate() {

@@ -64,7 +64,7 @@ public class TestHelper {
     public static DailyQuote aDailyQuote(int closePrice) {
         return new DailyQuote(aTradingDate(), 100,
                 closePrice,
-                200,
+                closePrice,
                 50,
                 300,
                 1000);

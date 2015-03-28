@@ -5,6 +5,7 @@ import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -60,11 +61,13 @@ public class Trader {
     }
 
     private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, DailyQuote dailyQuote, TradingStrategy tradingStrategy) {
+        Optional<DailyQuote> marketQuote = stockMarket.getMarketIndexPrices().dailyPriceOn(dailyQuote.getTradingDate());
         return new MarketOrderGenerator(stockPrices.getStockName(),
                 portfolio,
                 tradingStrategy,
                 dailyQuote,
-                AMOUNT_TO_INVEST);
+                AMOUNT_TO_INVEST,
+                marketQuote);
     }
 
     public int ordersExecuted() {

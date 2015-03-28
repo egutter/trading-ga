@@ -58,7 +58,7 @@ public class TraderTest {
 
         int numberOfShares = Trader.AMOUNT_TO_INVEST.divide(BigDecimal.valueOf(ypfStockClosePrice)).intValue();
         double sharesPrice = ypfStockClosePrice * numberOfShares;
-        double sellCommision = sharesPrice * Portfolio.COMMISION;
+        double sellCommision = sharesPrice * Portfolio.COMMISION.doubleValue();
         double amountPaid = sharesPrice + sellCommision;
         assertThat(portfolio.getCash().doubleValue(), equalTo(INITIAL_CASH.doubleValue() - amountPaid));
     }

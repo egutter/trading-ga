@@ -39,20 +39,18 @@ public class PortfolioRepository {
         }
     }
 
-    public void forEachStat(BiConsumer<String, BuySellOperation> applyBlock) {
-        forEachStatCollection(key -> {
-            DBCursor cursor = statsPortfolioConn().getCollection(key).find();
-            try {
-                while (cursor.hasNext()) {
-                    DBObject object = cursor.next();
-                    BuyOrder buyOrder = (BuyOrder) buildMarketOrder((DBObject) object.get("buyOrder"), BuyOrder.class);
-                    SellOrder sellOrder = (SellOrder) buildMarketOrder((DBObject) object.get("sellOrder"), SellOrder.class);
-                    applyBlock.accept(key, new BuySellOperation(buyOrder, sellOrder));
-                }
-            } finally {
-                cursor.close();
+    public void forEachStat(String key, Consumer<BuySellOperation> applyBlock) {
+        DBCursor cursor = statsPortfolioConn().getCollection(key).find();
+        try {
+            while (cursor.hasNext()) {
+                DBObject object = cursor.next();
+                BuyOrder buyOrder = (BuyOrder) buildMarketOrder((DBObject) object.get("buyOrder"), BuyOrder.class);
+                SellOrder sellOrder = (SellOrder) buildMarketOrder((DBObject) object.get("sellOrder"), SellOrder.class);
+                applyBlock.accept(new BuySellOperation(buyOrder, sellOrder));
             }
-        });
+        } finally {
+            cursor.close();
+        }
     }
 
     public void forEachStock(BiConsumer<String, BuyOrder> applyBlock) {
@@ -84,6 +82,27 @@ public class PortfolioRepository {
         }
     }
 
+
+    public void removeAllStatsSoldAt(LocalDate dayToRollback) {
+        forEachStatCollection(key -> {
+            forEachStat(key, buySellOperation -> {
+                DBCollection collection = statsPortfolioConn().getCollection(key);
+                DBObject query = new BasicDBObject();
+                query.put("date", dayToRollback.toDate());
+                collection.remove(query);
+            });
+        });
+    }
+
+    public void removeAllStocksAt(LocalDate dayToRollback) {
+        forEachStockCollection(collectionName -> {
+            DBCollection collection = stockPortfolioConn().getCollection(collectionName);
+            DBObject query = new BasicDBObject();
+            query.put("date", dayToRollback.toDate());
+            collection.remove(query);
+        });
+    }
+
     public void removeAll() {
         forEachStockCollection(collectionName -> {
             DBCollection collection = stockPortfolioConn().getCollection(collectionName);
@@ -102,13 +121,13 @@ public class PortfolioRepository {
         }
     }
 
-    private void forEachStatCollection(Consumer<String> applyBlock) {
+    public void forEachStatCollection(Consumer<String> applyBlock) {
         Set<String> colls = statsPortfolioConn().getCollectionNames();
-        for (String stockName : colls) {
-            if (stockName.equals("system.indexes")) {
+        for (String key : colls) {
+            if (key.equals("system.indexes")) {
                 continue;
             }
-            applyBlock.accept(stockName);
+            applyBlock.accept(key);
         }
     }
 

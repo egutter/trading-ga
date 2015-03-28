@@ -29,6 +29,7 @@ public class Candidate {
         generatorsKeyMap.put(MovingAverageConvergenceDivergenceGenerator.class, "MACD");
         generatorsKeyMap.put(MoneyFlowIndexGenerator.class, "MFI");
         generatorsKeyMap.put(RelativeStrengthIndexGenerator.class, "RSI");
+        generatorsKeyMap.put(AverageDirectionalIndexGenerator.class, "ADX");
         generatorsKeyMap.put(AroonOscilatorGenerator.class, "AROO");
     }
 
@@ -69,5 +70,10 @@ public class Candidate {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String toString() {
+        return this.getDescription() + ": " + this.key();
     }
 }

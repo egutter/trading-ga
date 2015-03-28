@@ -24,14 +24,7 @@ import java.util.Map;
 /**
  * Created by egutter on 2/10/14.
  */
-public class RelativeStrengthIndex implements BuyTradingDecision, SellTradingDecision {
-
-    private final StockPrices stockPrices;
-    private final Range sellThreshold;
-    private Map<LocalDate, Double> relativeStrengthIndex;
-
-    private Range buyThreshold;
-    private int days;
+public class RelativeStrengthIndex extends MomentumOscillator {
 
     public static void main(String[] args) {
         StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2012, 1, 1), new LocalDate(2014, 12, 31));
@@ -41,7 +34,7 @@ public class RelativeStrengthIndex implements BuyTradingDecision, SellTradingDec
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
             System.out.println("Stock " + stockPrices.getStockName());
             RelativeStrengthIndex mfi = new RelativeStrengthIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 14);
-            Map<LocalDate, Double> indexes = mfi.getRelativeStrengthIndex();
+            Map<LocalDate, Double> indexes = mfi.getMomentumOscillatorIndex();
             maxes.add(Ordering.natural().max(indexes.values()));
             minis.add(Ordering.natural().min(indexes.values()));
             means.add(DoubleMath.mean(indexes.values()));
@@ -51,46 +44,13 @@ public class RelativeStrengthIndex implements BuyTradingDecision, SellTradingDec
         System.out.println("Mean value " + DoubleMath.mean(means));
     }
 
-    public RelativeStrengthIndex(StockPrices stockPrices,
-                                 Range buyThreshold,
-                                 Range sellThreshold,
-                                 int days) {
-        this.stockPrices = stockPrices;
-        this.buyThreshold = buyThreshold;
-        this.sellThreshold = sellThreshold;
-        this.days = days;
+    public RelativeStrengthIndex(StockPrices stockPrices, Range buyThreshold, Range sellThreshold, Integer days) {
+        super(stockPrices, buyThreshold, sellThreshold, days);
     }
 
     @Override
-    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
-        return shouldTradeOn(tradingDate, buyThreshold);
-    }
-
-    @Override
-    public DecisionResult shouldSellOn(LocalDate tradingDate) {
-        return shouldTradeOn(tradingDate, sellThreshold);
-    }
-
-    private DecisionResult shouldTradeOn(LocalDate tradingDate, Range tradeThreshold) {
-        if (!getRelativeStrengthIndex().containsKey(tradingDate)) {
-            return DecisionResult.NEUTRAL;
-        }
-        Double mfiAtDay = getRelativeStrengthIndex().get(tradingDate);
-        if (tradeThreshold.contains(mfiAtDay)) {
-            return DecisionResult.YES;
-        }
-        return DecisionResult.NO;
-    }
-
-    private synchronized Map<LocalDate, Double> getRelativeStrengthIndex() {
-        if (this.relativeStrengthIndex == null) {
-            calculateRelativeStrengthIndex();
-        }
-        return this.relativeStrengthIndex;
-    }
-
-    private void calculateRelativeStrengthIndex() {
-        this.relativeStrengthIndex = new HashMap<LocalDate, Double>();
+    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
+        Map<LocalDate, Double> relativeStrengthIndex = new HashMap<LocalDate, Double>();
         List<Double>closePrices = stockPrices.getAdjustedClosePrices();
 
         MInteger outBegIdx = new MInteger();
@@ -115,47 +75,10 @@ public class RelativeStrengthIndex implements BuyTradingDecision, SellTradingDec
         for (int i = 0; i < outNBElement.value; i++) {
             int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);
-            this.relativeStrengthIndex.put(tradingDate, outReal[i]);
+            relativeStrengthIndex.put(tradingDate, outReal[i]);
         }
+        return relativeStrengthIndex;
     }
 
-    public int days() {
-        return this.days;
-    }
-
-    public Range<Double> getBuyThreshold() {
-        return buyThreshold;
-    }
-
-    public Range<Double> getSellThreshold() {
-        return sellThreshold;
-    }
-
-    private int endIndex(List<Double> closePrices) {
-        return closePrices.size() - 1;
-    }
-
-    private int startIndex() {
-        return 0;
-    }
-
-    @Override
-    public String buyDecisionToString() {
-        return Joiner.on(": ").join(this.getClass().getSimpleName(),
-                "buy threshold",
-                this.getBuyThreshold(),
-                "days",
-                this.days);
-    }
-
-
-    @Override
-    public String sellDecisionToString() {
-        return Joiner.on(": ").join(this.getClass().getSimpleName(),
-                "sell threshold",
-                this.getSellThreshold(),
-                "days",
-                this.days);
-    }
 
 }

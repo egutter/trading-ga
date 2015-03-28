@@ -20,14 +20,7 @@ import java.util.*;
 /**
  * Created by egutter on 2/10/14.
  */
-public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
-
-    private final StockPrices stockPrices;
-    private final Range sellThreshold;
-    private Map<LocalDate, Double> moneyFlowIndex;
-
-    private Range buyThreshold;
-    private int days;
+public class MoneyFlowIndex extends MomentumOscillator {
 
     public static void main(String[] args) {
         StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
@@ -36,7 +29,7 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
             System.out.println("Stock " + stockPrices.getStockName());
             MoneyFlowIndex mfi = new MoneyFlowIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 20);
-            Map<LocalDate, Double> indexes = mfi.getMoneyFlowIndex();
+            Map<LocalDate, Double> indexes = mfi.getMomentumOscillatorIndex();
             maxes.add(Ordering.natural().max(indexes.values()));
             minis.add(Ordering.natural().min(indexes.values()));
         }
@@ -44,46 +37,13 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
         System.out.println("Min value " + Ordering.natural().min(minis));
     }
 
-    public MoneyFlowIndex(StockPrices stockPrices,
-                          Range buyThreshold,
-                          Range sellThreshold,
-                          int days) {
-        this.stockPrices = stockPrices;
-        this.buyThreshold = buyThreshold;
-        this.sellThreshold = sellThreshold;
-        this.days = days;
+    public MoneyFlowIndex(StockPrices stockPrices, Range buyThreshold, Range sellThreshold, Integer days) {
+        super(stockPrices, buyThreshold, sellThreshold, days);
     }
 
     @Override
-    public DecisionResult shouldBuyOn(LocalDate tradingDate) {
-        return shouldTradeOn(tradingDate, buyThreshold);
-    }
-
-    @Override
-    public DecisionResult shouldSellOn(LocalDate tradingDate) {
-        return shouldTradeOn(tradingDate, sellThreshold);
-    }
-
-    private DecisionResult shouldTradeOn(LocalDate tradingDate, Range tradeThreshold) {
-        if (!getMoneyFlowIndex().containsKey(tradingDate)) {
-            return DecisionResult.NEUTRAL;
-        }
-        Double mfiAtDay = getMoneyFlowIndex().get(tradingDate);
-        if (tradeThreshold.contains(mfiAtDay)) {
-            return DecisionResult.YES;
-        }
-        return DecisionResult.NO;
-    }
-
-    private synchronized Map<LocalDate, Double> getMoneyFlowIndex() {
-        if (this.moneyFlowIndex == null) {
-            calculateMoneyFlowIndex();
-        }
-        return this.moneyFlowIndex;
-    }
-
-    private void calculateMoneyFlowIndex() {
-        this.moneyFlowIndex = new HashMap<LocalDate, Double>();
+    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
+        Map<LocalDate, Double> moneyFlowIndex = new HashMap<LocalDate, Double>();
         List<Double>closePrices = stockPrices.getAdjustedClosePrices();
         List<Double>hiPrices = stockPrices.getHighPrices();
         List<Double>lowPrices = stockPrices.getLowPrices();
@@ -117,47 +77,9 @@ public class MoneyFlowIndex implements BuyTradingDecision, SellTradingDecision {
         for (int i = 0; i < outNBElement.value; i++) {
             int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);
-            this.moneyFlowIndex.put(tradingDate, outReal[i]);
+            moneyFlowIndex.put(tradingDate, outReal[i]);
         }
-    }
-
-    public int days() {
-        return this.days;
-    }
-
-    public Range<Double> getBuyThreshold() {
-        return buyThreshold;
-    }
-
-    public Range<Double> getSellThreshold() {
-        return sellThreshold;
-    }
-
-    private int endIndex(List<Double> closePrices) {
-        return closePrices.size() - 1;
-    }
-
-    private int startIndex() {
-        return 0;
-    }
-
-    @Override
-    public String buyDecisionToString() {
-        return Joiner.on(": ").join(this.getClass().getSimpleName(),
-                "buy threshold",
-                this.getBuyThreshold(),
-                "days",
-                this.days);
-    }
-
-
-    @Override
-    public String sellDecisionToString() {
-        return Joiner.on(": ").join(this.getClass().getSimpleName(),
-                "sell threshold",
-                this.getSellThreshold(),
-                "days",
-                this.days);
+        return moneyFlowIndex;
     }
 
 }

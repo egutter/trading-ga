@@ -3,6 +3,7 @@ package com.egutter.trading.order;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -14,16 +15,29 @@ import java.math.RoundingMode;
 public class BuyOrder implements MarketOrder {
     private final String stockName;
     private final DailyQuote dailyQuote;
+    private final int marketNumberOfShares;
+    private Optional<DailyQuote> marketQuote;
     private final int numberOfShares;
 
     public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest) {
-        this(stockName, dailyQuote, amountToInvest.divide(BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice()), RoundingMode.DOWN).intValue());
+        this(stockName, dailyQuote, amountToInvest, Optional.absent());
     }
 
     public BuyOrder(String stockName, DailyQuote dailyQuote, int numberOfShares) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
         this.numberOfShares = numberOfShares;
+        this.marketNumberOfShares = 0;
+    }
+
+    public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest, Optional<DailyQuote> marketQuote) {
+        this.stockName = stockName;
+        this.dailyQuote = dailyQuote;
+        this.marketQuote = marketQuote;
+        this.numberOfShares = amountToInvest.divide(BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice()), RoundingMode.DOWN).intValue();
+        this.marketNumberOfShares = marketQuote.isPresent()
+                ? amountToInvest.divide(BigDecimal.valueOf(marketQuote.get().getAdjustedClosePrice()), RoundingMode.DOWN).intValue()
+                : 0;
     }
 
     @Override
@@ -37,6 +51,9 @@ public class BuyOrder implements MarketOrder {
 
     public int getNumberOfShares() {
         return numberOfShares;
+    }
+    public int getMarketNumberOfShares() {
+        return marketNumberOfShares;
     }
 
     public DailyQuote getDailyQuote() {
@@ -58,5 +75,11 @@ public class BuyOrder implements MarketOrder {
 
     public static BuyOrder empty() {
         return new BuyOrder("N/A", DailyQuote.empty(), BigDecimal.ZERO);
+    }
+
+    public BigDecimal marketAmountPaid() {
+        return marketQuote.isPresent()
+                ? BigDecimal.valueOf(marketQuote.get().getAdjustedClosePrice() * marketNumberOfShares)
+                : BigDecimal.ZERO;
     }
 }

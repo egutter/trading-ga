@@ -3,6 +3,7 @@ package com.egutter.trading.order;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -15,11 +16,19 @@ public class SellOrder implements MarketOrder {
     private final String stockName;
     private final DailyQuote dailyQuote;
     private final int numberOfSharesFor;
+    private final Optional<DailyQuote> marketQuote;
+    private final int marketNumberOfSharesFor;
 
     public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor) {
+        this(stockName, dailyQuote, numberOfSharesFor, Optional.absent(), 0);
+    }
+
+    public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor, Optional<DailyQuote> marketQuote, int marketNumberOfSharesFor) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
         this.numberOfSharesFor = numberOfSharesFor;
+        this.marketQuote = marketQuote;
+        this.marketNumberOfSharesFor = marketNumberOfSharesFor;
     }
 
     @Override
@@ -29,6 +38,12 @@ public class SellOrder implements MarketOrder {
 
     public BigDecimal amountEarned() {
         return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfSharesFor);
+    }
+
+    public BigDecimal marketAmountEarned() {
+        return marketQuote.isPresent()
+                ? BigDecimal.valueOf(marketQuote.get().getAdjustedClosePrice() * marketNumberOfSharesFor) :
+                BigDecimal.ZERO;
     }
 
     public DailyQuote getDailyQuote() {
@@ -57,4 +72,5 @@ public class SellOrder implements MarketOrder {
     public static SellOrder empty() {
         return new SellOrder("N/A", DailyQuote.empty(), 0);
     }
+
 }

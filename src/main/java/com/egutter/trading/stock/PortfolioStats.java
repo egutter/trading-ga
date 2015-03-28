@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.FluentIterable.from;
 
@@ -26,7 +27,11 @@ public class PortfolioStats {
     private List<BuySellOperation> stats = new ArrayList<BuySellOperation>();
     private ImmutableList<BuySellOperation> ordersWon;
     private ImmutableList<BuySellOperation> ordersLost;
+    private ImmutableList<BuySellOperation> ordersAboveMarket;
 
+    public void removeStat(BuySellOperation buySellOperation) {
+        this.stats.remove(buySellOperation);
+    }
     public void addStatsFor(BuyOrder buyOrder, SellOrder sellOrder) {
         this.stats.add(new BuySellOperation(buyOrder, sellOrder));
     }
@@ -50,6 +55,10 @@ public class PortfolioStats {
         return ordersWon().size();
     }
 
+    private int countOrdersAboveMarket() {
+        return ordersAboveMarket().size();
+    }
+
     public double countOrdersWonMinusLost() {
         return countOrdersWon()-stats.size();
     }
@@ -63,6 +72,13 @@ public class PortfolioStats {
             return BigDecimal.ZERO;
         }
         return BigDecimal.valueOf(countOrdersWon()).divide(BigDecimal.valueOf(stats.size()), 2, RoundingMode.HALF_EVEN);
+    }
+
+    public BigDecimal percentageOfOrdersAboveMarket() {
+        if (stats.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+        return BigDecimal.valueOf(countOrdersAboveMarket()).divide(BigDecimal.valueOf(stats.size()), 2, RoundingMode.HALF_EVEN);
     }
 
     public BigDecimal percentageOfOrdersNotLost() {
@@ -106,6 +122,18 @@ public class PortfolioStats {
         return total.divide(BigDecimal.valueOf(dailyReturns.size()), RoundingMode.HALF_EVEN);
     }
 
+    public BigDecimal average30daysReturn() {
+        List<BigDecimal> returnPctg = stats.stream().map(BuySellOperation::profitPctg30).collect(Collectors.toList());
+        BigDecimal total = BigDecimal.ZERO;
+        for (BigDecimal dailyReturn : returnPctg) {
+            total = total.add(dailyReturn);
+        }
+        if (returnPctg.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+        return total.divide(BigDecimal.valueOf(returnPctg.size()), RoundingMode.HALF_EVEN);
+    }
+
     public int totalOrdersCount() {
         return stats.size();
     }
@@ -133,6 +161,17 @@ public class PortfolioStats {
         return ordersWon;
     }
 
+    private List<BuySellOperation> ordersAboveMarket() {
+        if (this.ordersAboveMarket == null) {
+            this.ordersAboveMarket = from(stats).filter(new Predicate<BuySellOperation>() {
+                @Override
+                public boolean apply(BuySellOperation operation) {
+                    return operation.isAboveMarket();
+                }
+            }).toList();
+        }
+        return ordersAboveMarket;
+    }
 
     public BuySellOperation biggestLost() {
        if (ordersLost().isEmpty()) return BuySellOperation.empty();

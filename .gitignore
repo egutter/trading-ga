@@ -1,6 +1,6 @@
 .DS_Store
 .idea/
-out/
+./out/
 trading-ga.iml
 lib/
 target/

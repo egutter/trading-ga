@@ -1,12 +1,10 @@
 package com.egutter.trading.repository;
 
 import com.egutter.trading.stock.DailyQuote;
-import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Ordering;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
-import org.joda.time.ReadablePartial;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -14,12 +12,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * Created by egutter on 2/10/14.
  */
-public class HistoricPriceRepository {
+public class HistoricPriceRepository extends MongoRepository {
 
     private static DB dbConn;
 
@@ -38,7 +35,7 @@ public class HistoricPriceRepository {
     }
 
     public LocalDate getMaxTradingDate(String stockName) {
-        DBCursor cursor = conn().getCollection(stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
+        DBCursor cursor = historicPriceConn().getCollection(stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
 
         LocalDate maxDate = LocalDate.now();
         try {
@@ -63,7 +60,7 @@ public class HistoricPriceRepository {
     }
 
     public void insertStockPrices(StockPrices prices) {
-        DBCollection collection = conn().getCollection(prices.getStockName());
+        DBCollection collection = historicPriceConn().getCollection(prices.getStockName());
         for (DailyQuote quote : prices.getDailyQuotes()) {
             BasicDBObject doc = new BasicDBObject("date", quote.getTradingDate().toDate())
                     .append("adjusted_close", quote.getAdjustedClosePrice())
@@ -77,7 +74,7 @@ public class HistoricPriceRepository {
     }
 
     public void forEachStock(Consumer<String> applyBlock) {
-        Set<String> colls = conn().getCollectionNames();
+        Set<String> colls = historicPriceConn().getCollectionNames();
         for (String stockName : colls) {
             if (stockName.equals("system.indexes")) {
                 continue;
@@ -90,7 +87,7 @@ public class HistoricPriceRepository {
         DBObject query = new BasicDBObject();
         query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).add("$lte", toDate.toDate()).get());
 
-        DBCursor cursor = conn().getCollection(stockName).find(query).sort(new BasicDBObject("date", 1));
+        DBCursor cursor = historicPriceConn().getCollection(stockName).find(query).sort(new BasicDBObject("date", 1));
 
         try {
             while (cursor.hasNext()) {
@@ -111,14 +108,14 @@ public class HistoricPriceRepository {
     }
 
     public void removeAll(String stockName) {
-        DBCollection collection = conn().getCollection(stockName);
+        DBCollection collection = historicPriceConn().getCollection(stockName);
         DBObject query = new BasicDBObject();
         collection.remove(query);
     }
 
     public void removeAll() {
         forEachStock(stockName -> {
-            DBCollection collection = conn().getCollection(stockName);
+            DBCollection collection = historicPriceConn().getCollection(stockName);
             collection.drop();
         });
     }
@@ -127,7 +124,7 @@ public class HistoricPriceRepository {
         DBObject query = new BasicDBObject();
         query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).get());
 
-        DBCollection collection = conn().getCollection(stockName);
+        DBCollection collection = historicPriceConn().getCollection(stockName);
         collection.remove(query);
     }
 
@@ -136,41 +133,16 @@ public class HistoricPriceRepository {
             DBObject query = new BasicDBObject();
             query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).get());
 
-            DBCollection collection = conn().getCollection(stockName);
+            DBCollection collection = historicPriceConn().getCollection(stockName);
             collection.remove(query);
         });
     }
 
-    private synchronized DB conn() {
+    private synchronized DB historicPriceConn() {
         if (dbConn == null) {
-            String dbUri = System.getenv().get("MONGOLAB_URI");
-            System.out.println("dbURI is: " + dbUri);
-            if (dbUri != null) {
-                dbConn = externalConn(dbUri);
-            }
-            dbConn = localConn();
+            dbConn = conn("merval-stats", "MERVAL_STATS_URI");
         }
         return dbConn;
-
-    }
-
-    private DB externalConn(String dbUri) {
-        try {
-            MongoClientURI uri = new MongoClientURI(dbUri, new MongoClientOptions.Builder().connectTimeout(50000));
-            MongoClient client = new MongoClient(uri);
-            return client.getDB("heroku_app35328737");
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private DB localConn() {
-        try {
-            MongoClient client = new MongoClient();
-            return client.getDB("merval-stats");
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

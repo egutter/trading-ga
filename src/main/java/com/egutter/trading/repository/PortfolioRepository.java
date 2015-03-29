@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 /**
  * Created by egutter on 2/10/14.
  */
-public class PortfolioRepository {
+public class PortfolioRepository extends MongoRepository {
 
     private static DB stockPortfolioConn;
     private static DB statsPortfolioConn;
@@ -215,33 +215,6 @@ public class PortfolioRepository {
             statsPortfolioConn = conn("stats-portfolio", "STATS_PORTFOLIO_URI");
         }
         return statsPortfolioConn;
-    }
-
-    private DB conn(String dbName, String uriEnv) {
-        String dbUri = System.getenv().get(uriEnv);
-        if (dbUri != null) {
-            return externalConn(dbName, uriEnv);
-        }
-        return localConn(dbName);
-    }
-
-    private DB externalConn(String dbName, String dbUri) {
-        try {
-            MongoClientURI uri = new MongoClientURI(dbUri);
-            MongoClient client = new MongoClient(uri);
-            return client.getDB(dbName);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private DB localConn(String dbName) {
-        try {
-            MongoClient client = new MongoClient();
-            return client.getDB(dbName);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

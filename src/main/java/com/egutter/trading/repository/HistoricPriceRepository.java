@@ -156,7 +156,7 @@ public class HistoricPriceRepository {
 
     private DB externalConn(String dbUri) {
         try {
-            MongoClientURI uri = new MongoClientURI(dbUri);
+            MongoClientURI uri = new MongoClientURI(dbUri, new MongoClientOptions.Builder().connectTimeout(50000));
             MongoClient client = new MongoClient(uri);
             return client.getDB("heroku_app35328737");
         } catch (UnknownHostException e) {

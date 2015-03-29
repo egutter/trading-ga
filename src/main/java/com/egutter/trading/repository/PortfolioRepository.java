@@ -21,8 +21,8 @@ import java.util.function.Consumer;
  */
 public class PortfolioRepository {
 
-    private DB stockPortfolioConn;
-    private DB statsPortfolioConn;
+    private static DB stockPortfolioConn;
+    private static DB statsPortfolioConn;
 
 
     public void forEachStatOn(String key, Consumer<BuySellOperation> applyBlock) {
@@ -203,14 +203,14 @@ public class PortfolioRepository {
         collection.remove(query);
     }
 
-    private DB stockPortfolioConn() {
+    private synchronized DB stockPortfolioConn() {
         if (stockPortfolioConn == null) {
             stockPortfolioConn = conn("stock-portfolio", "STOCK_PORTFOLIO_URI");
         }
         return stockPortfolioConn;
     }
 
-    private DB statsPortfolioConn() {
+    private synchronized DB statsPortfolioConn() {
         if (statsPortfolioConn == null) {
             statsPortfolioConn = conn("stats-portfolio", "STATS_PORTFOLIO_URI");
         }

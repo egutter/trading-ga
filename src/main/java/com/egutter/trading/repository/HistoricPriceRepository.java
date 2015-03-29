@@ -21,7 +21,7 @@ import java.util.function.Function;
  */
 public class HistoricPriceRepository {
 
-    private DB dbConn;
+    private static DB dbConn;
 
     public static void main(String[] args) throws Exception {
         System.out.println(new HistoricPriceRepository().getMaxTradingDate());
@@ -131,7 +131,7 @@ public class HistoricPriceRepository {
         });
     }
 
-    private DB conn() {
+    private synchronized DB conn() {
         if (dbConn == null) {
             String dbUri = System.getenv().get("MERVAL_STATS_URI");
             if (dbUri != null) {

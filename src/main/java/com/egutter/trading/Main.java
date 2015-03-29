@@ -31,6 +31,10 @@ public class Main extends HttpServlet {
     PrintWriter writer = resp.getWriter();
     try {
       writer.print("<p>Checking DB status</p>");
+      writer.print("<p>Merval collections</p>");
+      writer.print("<ul>");
+      new HistoricPriceRepository().forEachStock(name -> writer.print("<li>" + name + "</li>"));
+      writer.print("</ul>");
       writer.print("<p>Stats collections</p>");
       PortfolioRepository portfolioRepository = new PortfolioRepository();
       writer.print("<ul>");
@@ -39,9 +43,6 @@ public class Main extends HttpServlet {
       writer.print("<p>Stock collections</p>");
       writer.print("<ul>");
       portfolioRepository.forEachStockCollection(name -> writer.print("<li>" + name + "</li>"));
-      writer.print("</ul>");
-      writer.print("<p>Merval collections</p>");
-      new HistoricPriceRepository().forEachStock(name -> writer.print("<li>" + name + "</li>"));
       writer.print("</ul>");
     } catch (Exception e) {
       writer.print("Error");

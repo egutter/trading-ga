@@ -24,7 +24,17 @@ public class HistoricPriceRepository {
     private static DB dbConn;
 
     public static void main(String[] args) throws Exception {
-        System.out.println(new HistoricPriceRepository().getMaxTradingDate());
+//        System.out.println(new HistoricPriceRepository().getMaxTradingDate());
+        MongoClientURI uri = new MongoClientURI("mongodb://heroku_app35328737:o0oc7dgtftks5k028g8p3ao7tp@ds029117.mongolab.com:29117/heroku_app35328737");
+        MongoClient client = new MongoClient(uri);
+        DB conn = client.getDB("heroku_app35328737");
+        Set<String> colls = conn.getCollectionNames();
+        for (String stockName : colls) {
+            if (stockName.equals("system.indexes")) {
+                continue;
+            }
+            System.out.println(stockName);
+        }
     }
 
     public LocalDate getMaxTradingDate(String stockName) {
@@ -133,7 +143,8 @@ public class HistoricPriceRepository {
 
     private synchronized DB conn() {
         if (dbConn == null) {
-            String dbUri = System.getenv().get("MERVAL_STATS_URI");
+            String dbUri = System.getenv().get("MONGOLAB_URI");
+            System.out.println("dbURI is: " + dbUri);
             if (dbUri != null) {
                 dbConn = externalConn(dbUri);
             }
@@ -147,7 +158,7 @@ public class HistoricPriceRepository {
         try {
             MongoClientURI uri = new MongoClientURI(dbUri);
             MongoClient client = new MongoClient(uri);
-            return client.getDB("merval-stats");
+            return client.getDB("heroku_app35328737");
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }

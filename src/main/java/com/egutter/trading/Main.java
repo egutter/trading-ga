@@ -29,15 +29,19 @@ public class Main extends HttpServlet {
   private void showHome(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     PrintWriter writer = resp.getWriter();
-    writer.print("Checking DB status");
-    writer.print("Stats collections");
-    PortfolioRepository portfolioRepository = new PortfolioRepository();
-    portfolioRepository.forEachStatCollection(name -> writer.print("<li>" + name + "</li>"));
-    writer.print("Stock collections");
-    portfolioRepository.forEachStockCollection(name -> writer.print("<li>" + name + "</li>"));
-    writer.print("Merval collections");
-    new HistoricPriceRepository().forEachStock(name -> writer.print("<li>" + name + "</li>"));
-
+    try {
+      writer.print("Checking DB status");
+      writer.print("Stats collections");
+      PortfolioRepository portfolioRepository = new PortfolioRepository();
+      portfolioRepository.forEachStatCollection(name -> writer.print("<li>" + name + "</li>"));
+      writer.print("Stock collections");
+      portfolioRepository.forEachStockCollection(name -> writer.print("<li>" + name + "</li>"));
+      writer.print("Merval collections");
+      new HistoricPriceRepository().forEachStock(name -> writer.print("<li>" + name + "</li>"));
+    } catch (Exception e) {
+      writer.print("Error");
+      writer.print(e.getStackTrace());
+    }
   }
 
   private void showDatabase(HttpServletRequest req, HttpServletResponse resp)

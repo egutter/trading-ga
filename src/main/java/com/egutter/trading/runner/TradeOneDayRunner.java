@@ -28,11 +28,13 @@ public class TradeOneDayRunner {
     private final LocalDate fromDate;
     private final LocalDate toDate;
     private final PortfolioRepository portfolioRepository;
+    private final List<String> resultBuffer;
 
     public TradeOneDayRunner(LocalDate fromDate, LocalDate toDate) {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.portfolioRepository = new PortfolioRepository();
+        this.resultBuffer = new ArrayList<String>();
     }
 
     public static void main(String[] args) {
@@ -40,12 +42,13 @@ public class TradeOneDayRunner {
         LocalDate toDate = LocalDate.now();
         TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
         runner.run(true);
+        System.out.println(runner.runOutput("\n"));
     }
 
     public void run(boolean printStats) {
 
         LocalDate currentLastTradingDate = currentLastTradingDate();
-        System.out.println("Current last trading date " + currentLastTradingDate);
+        resultBuffer.add("Current last trading date " + currentLastTradingDate);
 
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
         Map<String, Pair<Integer, List<Candidate>>> countStockSold = new HashMap<String, Pair<Integer, List<Candidate>>>();
@@ -53,10 +56,10 @@ public class TradeOneDayRunner {
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
         LocalDate lastTradingDay = stockMarket.getLastTradingDay(); //new LocalDate(2015, 3, 17);//
 
-        System.out.println("New last trading date " + lastTradingDay);
+        resultBuffer.add("New last trading date " + lastTradingDay);
 
         if (!lastTradingDay.isAfter(currentLastTradingDate)) {
-            System.out.println("Nothing imported. Returning without running the trader");
+            resultBuffer.add("Nothing imported. Returning without running the trader");
             return;
         }
 
@@ -67,23 +70,23 @@ public class TradeOneDayRunner {
 
             portfolioRepository.update(candidate.key(), portfolio);
             if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
-                System.out.println(candidate);
-                System.out.println("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
-                System.out.println("==========================================");
+                resultBuffer.add(candidate.toString());
+                resultBuffer.add("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
+                resultBuffer.add("==========================================");
             }
             countStocksBought(countStockBought, oneCandidateRunner, candidate);
             countStocksSold(countStockSold, oneCandidateRunner, candidate);
         });
 
-        System.out.println("==========================================");
-        System.out.println("ALL STOCKS BOUGHT");
+        resultBuffer.add("==========================================");
+        resultBuffer.add("ALL STOCKS BOUGHT");
         countStockBought.forEach((stockName, pair) -> {
-            System.out.println("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + pair.getSecond());
+            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + pair.getSecond());
         });
-        System.out.println("==========================================");
-        System.out.println("ALL STOCKS SOLD");
+        resultBuffer.add("==========================================");
+        resultBuffer.add("ALL STOCKS SOLD");
         countStockSold.forEach((stockName, pair) -> {
-            System.out.println("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + pair.getSecond());
+            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + pair.getSecond());
         });
         if (printStats) {
             new StatsPrinter(portfolioRepository, stockMarket, candidates()).printStatsAndPortfolio(lastTradingDay);
@@ -294,4 +297,13 @@ public class TradeOneDayRunner {
 
         );
     }
+
+    public List<String> getResultBuffer() {
+        return resultBuffer;
+    }
+
+    public String runOutput(String separator) {
+        return String.join(separator, this.getResultBuffer());
+    }
+
 }

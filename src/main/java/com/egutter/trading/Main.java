@@ -10,6 +10,8 @@ import com.egutter.trading.repository.PortfolioRepository;
 import com.egutter.trading.runner.TradeOneDayRunner;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
+import com.sendgrid.SendGrid;
+import com.sendgrid.SendGridException;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.*;
 import org.eclipse.jetty.util.component.LifeCycle;
@@ -40,6 +42,24 @@ public class Main extends HttpServlet {
     runner.run(false);
     PrintWriter writer = resp.getWriter();
     writer.print("<h1>Success!</h1>");
+    writer.print(runner.runOutput("<br/>"));
+    sendEmail(runner.runOutput("<br />"));
+  }
+
+  private void sendEmail(String text) {
+    SendGrid sendgrid = new SendGrid(System.getenv().get("SENDGRID_USERNAME"), System.getenv().get("SENDGRID_PASSWORD"));
+
+    SendGrid.Email email = new SendGrid.Email();
+    email.addTo("egutter@gmail.com");
+    email.setFrom("egutter@gmail.com");
+    email.setSubject("One day trader runner");
+    email.setText(text);
+
+    try {
+      SendGrid.Response response = sendgrid.send(email);
+    } catch (SendGridException e) {
+      System.out.println(e);
+    }
   }
 
   private void showStats(HttpServletRequest req, HttpServletResponse resp)

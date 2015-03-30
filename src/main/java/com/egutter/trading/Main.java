@@ -51,7 +51,7 @@ public class Main extends HttpServlet {
 
     SendGrid.Email email = new SendGrid.Email();
     email.addTo("egutter@gmail.com");
-    email.setFrom("egutter@gmail.com");
+    email.setFrom("your@trader.com");
     email.setSubject("One day trader runner");
     email.setText(text);
 

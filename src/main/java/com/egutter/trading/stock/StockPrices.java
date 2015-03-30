@@ -1,17 +1,13 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.WeakHashMap;
 
-import static com.google.common.collect.Iterables.getFirst;
 import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Lists.transform;
 
@@ -113,12 +109,7 @@ public class StockPrices {
     public Optional<DailyQuote> dailyPriceOn(LocalDate tradingDate) {
         if (quoteCache.containsKey(tradingDate)) return quoteCache.get(tradingDate);
 
-        Optional<DailyQuote> quoteFound = Iterables.tryFind(dailyQuotes, new Predicate<DailyQuote>() {
-            @Override
-            public boolean apply(DailyQuote dailyQuote) {
-                return dailyQuote.isOn(tradingDate);
-            }
-        });
+        Optional<DailyQuote> quoteFound = dailyQuotes.stream().filter(dailyQuote -> dailyQuote.isOn(tradingDate)).findFirst();
         quoteCache.put(tradingDate, quoteFound);
 
         return quoteFound;

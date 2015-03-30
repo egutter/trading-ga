@@ -1,14 +1,12 @@
 package com.egutter.trading.order;
 
-import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
-import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.TradingStrategy;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
-import com.google.common.base.Optional;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * Created by egutter on 2/12/14.

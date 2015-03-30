@@ -3,10 +3,10 @@ package com.egutter.trading.order;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * Created by egutter on 2/12/14.
@@ -20,7 +20,7 @@ public class SellOrder implements MarketOrder {
     private final int marketNumberOfSharesFor;
 
     public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor) {
-        this(stockName, dailyQuote, numberOfSharesFor, Optional.absent(), 0);
+        this(stockName, dailyQuote, numberOfSharesFor, Optional.empty(), 0);
     }
 
     public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor, Optional<DailyQuote> marketQuote, int marketNumberOfSharesFor) {

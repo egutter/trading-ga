@@ -4,11 +4,16 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.egutter.trading.out.StatsPrinter;
 import com.egutter.trading.repository.HistoricPriceRepository;
 import com.egutter.trading.repository.PortfolioRepository;
+import com.egutter.trading.runner.TradeOneDayRunner;
+import com.egutter.trading.stock.StockMarket;
+import com.egutter.trading.stock.StockMarketBuilder;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.*;
 import org.eclipse.jetty.util.component.LifeCycle;
+import org.joda.time.LocalDate;
 
 import java.io.PrintWriter;
 import java.net.URI;
@@ -19,7 +24,22 @@ public class Main extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    if (req.getRequestURI().endsWith("/stats")) {
+      showStats(req, resp);
+    } else {
       showHome(req,resp);
+    }
+  }
+
+  private void showStats(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    LocalDate fromDate = new LocalDate(2014, 1, 1);
+    LocalDate toDate = LocalDate.now();
+    PortfolioRepository portfolioRepository = new PortfolioRepository();
+    StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+    LocalDate lastTradingDay = stockMarket.getLastTradingDay();
+    PrintWriter writer = resp.getWriter();
+    new StatsPrinter(portfolioRepository, stockMarket, new TradeOneDayRunner(fromDate, toDate).candidates()).htmlStatsAndPortfolioOn(lastTradingDay, writer);
   }
 
   private void showHome(HttpServletRequest req, HttpServletResponse resp)

@@ -5,10 +5,10 @@ import com.egutter.trading.decision.generator.TradingDecisionFactory;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * Created by egutter on 2/12/14.

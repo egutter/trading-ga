@@ -82,10 +82,10 @@ public class StockMarketBuilder {
                 dailyPrices.add((DailyQuote) dailyQuote);
             });
             if (appendLastQuoteFromMarket) appendLastQuoteFromMarket(stockName, dailyPrices);
-            if (((String) stockName).endsWith("MERV")) {
+            if (stockName.endsWith("MERV")) {
                 marketIndexPrices.addAll(dailyPrices);
             } else {
-                stockPrices.add(new StockPrices((String) stockName, dailyPrices));
+                stockPrices.add(new StockPrices(stockName, dailyPrices));
             }
         });
         return new StockMarket(stockPrices, new StockPrices("MERVAL", marketIndexPrices));

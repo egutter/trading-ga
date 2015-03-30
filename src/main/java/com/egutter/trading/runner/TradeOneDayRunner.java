@@ -39,31 +39,41 @@ public class TradeOneDayRunner {
         LocalDate fromDate = new LocalDate(2014, 1, 1);
         LocalDate toDate = LocalDate.now();
         TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
-        runner.run();
+        runner.run(true);
     }
 
-    private void run() {
-//        portfolioRepository.removeAll();
+    public void run(boolean printStats) {
+
+        LocalDate currentLastTradingDate = currentLastTradingDate();
+        System.out.println("Current last trading date " + currentLastTradingDate);
 
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
         Map<String, Pair<Integer, List<Candidate>>> countStockSold = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
         LocalDate lastTradingDay = stockMarket.getLastTradingDay(); //new LocalDate(2015, 3, 17);//
-        candidates().stream().forEach(candidate -> {
-            Portfolio portfolio = new PortfolioBuilder(portfolioRepository).build(candidate.key());
-            OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, candidate.getTradingDecisionGenerators(), false);
-            oneCandidateRunner.runOn(lastTradingDay);
 
-            portfolioRepository.update(candidate.key(), portfolio);
-            if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
-                System.out.println(candidate);
-                System.out.println("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
-                System.out.println("==========================================");
-            }
-            countStocksBought(countStockBought, oneCandidateRunner, candidate);
-            countStocksSold(countStockSold, oneCandidateRunner, candidate);
-        });
+        System.out.println("New last trading date " + lastTradingDay);
+
+        if (!lastTradingDay.isAfter(currentLastTradingDate)) {
+            System.out.println("Nothing imported. Returning without running the trader");
+            return;
+        }
+
+//        candidates().stream().forEach(candidate -> {
+//            Portfolio portfolio = new PortfolioBuilder(portfolioRepository).build(candidate.key());
+//            OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, candidate.getTradingDecisionGenerators(), false);
+//            oneCandidateRunner.runOn(lastTradingDay);
+//
+//            portfolioRepository.update(candidate.key(), portfolio);
+//            if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
+//                System.out.println(candidate);
+//                System.out.println("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
+//                System.out.println("==========================================");
+//            }
+//            countStocksBought(countStockBought, oneCandidateRunner, candidate);
+//            countStocksSold(countStockSold, oneCandidateRunner, candidate);
+//        });
 
         System.out.println("==========================================");
         System.out.println("ALL STOCKS BOUGHT");
@@ -75,7 +85,13 @@ public class TradeOneDayRunner {
         countStockSold.forEach((stockName, pair) -> {
             System.out.println("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + pair.getSecond());
         });
-        new StatsPrinter(portfolioRepository, stockMarket, candidates()).printStatsAndPortfolio(lastTradingDay);
+        if (printStats) {
+            new StatsPrinter(portfolioRepository, stockMarket, candidates()).printStatsAndPortfolio(lastTradingDay);
+        }
+    }
+
+    private LocalDate currentLastTradingDate() {
+        return new StockMarketBuilder().build(fromDate, toDate).getLastTradingDay();
     }
 
     private void countStocksBought(Map<String, Pair<Integer, List<Candidate>>> countStockBought, OneCandidateRunner oneCandidateRunner, Candidate candidate) {

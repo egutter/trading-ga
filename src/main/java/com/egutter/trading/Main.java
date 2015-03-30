@@ -26,9 +26,18 @@ public class Main extends HttpServlet {
       throws ServletException, IOException {
     if (req.getRequestURI().endsWith("/stats")) {
       showStats(req, resp);
+    } else if (req.getRequestURI().endsWith("/trade-one-day")) {
+      tradeOneDay();
     } else {
       showHome(req,resp);
     }
+  }
+
+  private void tradeOneDay() {
+    LocalDate fromDate = new LocalDate(2014, 1, 1);
+    LocalDate toDate = LocalDate.now();
+    TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
+    runner.run(false);
   }
 
   private void showStats(HttpServletRequest req, HttpServletResponse resp)

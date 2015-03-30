@@ -27,17 +27,19 @@ public class Main extends HttpServlet {
     if (req.getRequestURI().endsWith("/stats")) {
       showStats(req, resp);
     } else if (req.getRequestURI().endsWith("/trade-one-day")) {
-      tradeOneDay();
+      tradeOneDay(req, resp);
     } else {
       showHome(req,resp);
     }
   }
 
-  private void tradeOneDay() {
+  private void tradeOneDay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     LocalDate fromDate = new LocalDate(2014, 1, 1);
     LocalDate toDate = LocalDate.now();
     TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
     runner.run(false);
+    PrintWriter writer = resp.getWriter();
+    writer.print("<h1>Success!</h1>");
   }
 
   private void showStats(HttpServletRequest req, HttpServletResponse resp)

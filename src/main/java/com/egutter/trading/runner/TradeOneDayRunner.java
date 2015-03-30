@@ -60,20 +60,20 @@ public class TradeOneDayRunner {
             return;
         }
 
-//        candidates().stream().forEach(candidate -> {
-//            Portfolio portfolio = new PortfolioBuilder(portfolioRepository).build(candidate.key());
-//            OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, candidate.getTradingDecisionGenerators(), false);
-//            oneCandidateRunner.runOn(lastTradingDay);
-//
-//            portfolioRepository.update(candidate.key(), portfolio);
-//            if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
-//                System.out.println(candidate);
-//                System.out.println("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
-//                System.out.println("==========================================");
-//            }
-//            countStocksBought(countStockBought, oneCandidateRunner, candidate);
-//            countStocksSold(countStockSold, oneCandidateRunner, candidate);
-//        });
+        candidates().stream().forEach(candidate -> {
+            Portfolio portfolio = new PortfolioBuilder(portfolioRepository).build(candidate.key());
+            OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, candidate.getTradingDecisionGenerators(), false);
+            oneCandidateRunner.runOn(lastTradingDay);
+
+            portfolioRepository.update(candidate.key(), portfolio);
+            if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
+                System.out.println(candidate);
+                System.out.println("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
+                System.out.println("==========================================");
+            }
+            countStocksBought(countStockBought, oneCandidateRunner, candidate);
+            countStocksSold(countStockSold, oneCandidateRunner, candidate);
+        });
 
         System.out.println("==========================================");
         System.out.println("ALL STOCKS BOUGHT");

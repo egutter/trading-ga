@@ -57,6 +57,7 @@ public class Main extends HttpServlet {
 
     try {
       SendGrid.Response response = sendgrid.send(email);
+      System.out.println("Email response " + response.getMessage() + " - " + response.getCode() + " - " + response.getStatus());
     } catch (SendGridException e) {
       System.out.println(e);
     }

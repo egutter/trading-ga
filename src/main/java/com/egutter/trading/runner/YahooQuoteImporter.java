@@ -3,7 +3,6 @@ package com.egutter.trading.runner;
 import com.egutter.trading.repository.HistoricPriceRepository;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
-import com.mongodb.WriteResult;
 import org.joda.time.LocalDate;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
@@ -14,7 +13,7 @@ import yahoofinance.quotes.stock.StockQuote;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-import static com.egutter.trading.stock.StockMarket.stockSymbols;
+import static com.egutter.trading.stock.StockMarket.allStockSymbols;
 
 /**
  * Created by egutter on 11/29/14.
@@ -24,8 +23,8 @@ public class YahooQuoteImporter {
     private HistoricPriceRepository repository = new HistoricPriceRepository();
 
     public static void main(String[] args) {
-//        new YahooQuoteImporter().runImport();
-        Optional<DailyQuote> lastQuote = new YahooQuoteImporter().getLastQuote("YPFD.BA");
+        new YahooQuoteImporter().runImport(new LocalDate(2014, 1, 1), allStockSymbols());
+        Optional<DailyQuote> lastQuote = new YahooQuoteImporter().getLastQuote("IRSA.BA");
         System.out.println(lastQuote.get().getTradingDate().isAfter(new HistoricPriceRepository().getMaxTradingDate()));
     }
 
@@ -46,7 +45,7 @@ public class YahooQuoteImporter {
     }
 
     public void forEachLastQuote(BiConsumer<String, DailyQuote> applyBlok) {
-        YahooFinance.get(stockSymbols()).forEach((symbol, stock) -> {
+        YahooFinance.get(allStockSymbols()).forEach((symbol, stock) -> {
             StockQuote quote = stock.getQuote();
             DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
                     quote.getOpen(),
@@ -60,10 +59,10 @@ public class YahooQuoteImporter {
     }
     public void runImport() {
         LocalDate fromDate = repository.getMaxTradingDate().plusDays(1);
-        runImport(fromDate);
+        runImport(fromDate, allStockSymbols());
     }
 
-    public void runImport(LocalDate fromDate) {
+    public void runImport(LocalDate fromDate, String[] stockSymbols) {
         Calendar to = Calendar.getInstance();
 
         Calendar from = Calendar.getInstance();
@@ -72,7 +71,7 @@ public class YahooQuoteImporter {
         from.set(Calendar.MONTH, fromDate.getMonthOfYear() - 1);
         from.set(Calendar.DAY_OF_MONTH, fromDate.getDayOfMonth());
 
-        Map<String, Stock> stocks = YahooFinance.get(stockSymbols(), from, to, Interval.DAILY);
+        Map<String, Stock> stocks = YahooFinance.get(stockSymbols, from, to, Interval.DAILY);
 
         System.out.println("Start import from " + from.getTime() + " to " + to.getTime());
         for (Stock stock : stocks.values()) {

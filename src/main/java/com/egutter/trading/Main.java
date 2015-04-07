@@ -8,6 +8,7 @@ import com.egutter.trading.out.StatsPrinter;
 import com.egutter.trading.repository.HistoricPriceRepository;
 import com.egutter.trading.repository.PortfolioRepository;
 import com.egutter.trading.runner.TradeOneDayRunner;
+import com.egutter.trading.runner.YahooQuoteImporter;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.sendgrid.SendGrid;
@@ -23,6 +24,7 @@ import java.net.URISyntaxException;
 import java.sql.*;
 
 public class Main extends HttpServlet {
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -30,12 +32,20 @@ public class Main extends HttpServlet {
       showStats(req, resp);
     } else if (req.getRequestURI().endsWith("/trade-one-day")) {
       tradeOneDay(req, resp);
+    } else if (req.getRequestURI().endsWith("/run-alt-stocks-import")) {
+      importAltStocks(req, resp);
     } else {
       showHome(req,resp);
     }
   }
 
-  private void tradeOneDay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void importAltStocks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        YahooQuoteImporter yahooQuoteImporter = new YahooQuoteImporter();
+        yahooQuoteImporter.runImport();
+        showHome(req,resp);
+    }
+
+    private void tradeOneDay(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     LocalDate fromDate = new LocalDate(2014, 1, 1);
     LocalDate toDate = LocalDate.now();
     TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
@@ -46,14 +56,15 @@ public class Main extends HttpServlet {
     sendEmail(runner.runOutput("<br />"));
   }
 
-  private void sendEmail(String text) {
+  private void sendEmail(String html) {
     SendGrid sendgrid = new SendGrid(System.getenv().get("SENDGRID_USERNAME"), System.getenv().get("SENDGRID_PASSWORD"));
 
-    SendGrid.Email email = new SendGrid.Email();
-    email.addTo("egutter@gmail.com");
-    email.setFrom("your@trader.com");
-    email.setSubject("One day trader runner");
-    email.setText(text);
+    SendGrid.Email email = new SendGrid.Email().
+            addTo("egutter@gmail.com").
+            setFrom("your@trader.com").
+            setSubject("One day trader runner").
+            setHtml(html).
+            setText(html);
 
     try {
       SendGrid.Response response = sendgrid.send(email);

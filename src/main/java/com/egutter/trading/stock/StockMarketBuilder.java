@@ -13,8 +13,8 @@ import java.util.*;
  */
 public class StockMarketBuilder {
 
-    private YahooQuoteImporter yahooQuoteImporter = new YahooQuoteImporter();;
-    private HistoricPriceRepository repository = new HistoricPriceRepository();;
+    private YahooQuoteImporter yahooQuoteImporter = new YahooQuoteImporter();
+    private HistoricPriceRepository repository = new HistoricPriceRepository();
 
     public static void main(String[] args) {
         try {

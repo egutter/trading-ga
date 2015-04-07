@@ -1,17 +1,15 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import org.joda.time.LocalDate;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 
-/**
- * Created by egutter on 2/12/14.
- */
 public class StockMarket {
 
     private List<StockPrices> stockPrices;
@@ -51,7 +49,12 @@ public class StockMarket {
         return marketIndexPrices;
     }
 
-    public static String[] stockSymbols() {
+    public static String[] allStockSymbols() {
+        return Stream.concat(Arrays.stream(merval25StockSymbols()), Arrays.stream(altStockSymbols()))
+                .toArray(String[]::new);
+    }
+
+    public static String[] merval25StockSymbols() {
         return new String[]{
                 // MERVAL 25
                 "ALUA.BA", // ALUAR ALUMINIO
@@ -79,13 +82,58 @@ public class StockMarket {
                 "TRAN.BA", // CIA.TRANSP.EN.ELECTRICIDAD
                 "TS.BA", // TENARIS
                 "YPFD.BA", // YPF
+                MERVAL_MARKET_INDEX
+        };
+    }
+
+    public static String[] altStockSymbols() {
+        return new String[]{
                 // OTRAS
-//                "CRES.BA", // CRESUD
-//                "IRSA.BA", // IRSA
-//                "LEDE.BA", // LEDESMA
-//                "STD.BA", // BANCO SANTANDER
-//                "TEF.BA", // TELEFONICA
-                MERVAL_MARKET_INDEX};
+                "AGRO.BA",
+                "APSA.BA",
+                "AUSO.BA",
+                "BPAT.BA",
+                "BOLT.BA",
+                "CADO.BA",
+                "CAPU.BA",
+                "CAPX.BA",
+                "CARC.BA",
+                "CGPA2.BA",
+                "COLO.BA",
+                "CRES.BA", // CRESUD
+                "CTIO.BA",
+                "DYCA.BA",
+                "ESME.BA",
+                "ESTR.BA",
+                "FERR.BA",
+                "FIPL.BA",
+                "GARO.BA",
+                "GBAN.BA",
+                "GCLA.BA",
+                "GRIM.BA",
+                "INTR.BA",
+                "INVJ.BA",
+                "IRSA.BA",
+                "JMIN.BA",
+                "LEDE.BA",
+                "LONG.BA",
+                "METR.BA",
+                "MORI.BA",
+                "OEST.BA",
+                "PATA.BA",
+                "PATY.BA",
+                "POLL.BA",
+                "PSUR.BA",
+                "REP.BA",
+                "REP.BA",
+                "RIGO.BA",
+                "ROSE.BA",
+                "SAMI.BA",
+                "SEMI.BA",
+                "STD.BA",
+                "TEF.BA",
+                "TGLT.BA",
+        };
     }
 
 }

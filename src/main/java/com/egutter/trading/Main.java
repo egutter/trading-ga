@@ -11,6 +11,7 @@ import com.egutter.trading.runner.TradeOneDayRunner;
 import com.egutter.trading.runner.YahooQuoteImporter;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
+import com.egutter.trading.stock.StockPrices;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import org.eclipse.jetty.server.Server;
@@ -22,6 +23,7 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
+import java.util.stream.Stream;
 
 public class Main extends HttpServlet {
 
@@ -102,6 +104,14 @@ public class Main extends HttpServlet {
       writer.print("<p>Stock collections</p>");
       writer.print("<ul>");
       portfolioRepository.forEachStockCollection(name -> writer.print("<li>" + name + "</li>"));
+      writer.print("</ul>");
+
+      writer.print("<p>Market</p>");
+      writer.print("<ul>");
+      LocalDate fromDate = new LocalDate(2014, 1, 1);
+      LocalDate toDate = LocalDate.now();
+      Stream<StockPrices> stockPricesStream = new StockMarketBuilder().build(fromDate, toDate).getStockPrices().stream();
+      stockPricesStream.forEach(stockPrice -> writer.print("<li>" + stockPrice.getStockName() + " - " + stockPrice.getDailyQuotes().size() + "</li>"));
       writer.print("</ul>");
     } catch (Exception e) {
       writer.print("Error");

@@ -17,6 +17,12 @@ public class StockMarketBuilder {
     private HistoricPriceRepository repository = new HistoricPriceRepository();
 
     public static void main(String[] args) {
+        LocalDate fromDate = new LocalDate(2014, 1, 1);
+        LocalDate toDate = LocalDate.now();
+        new StockMarketBuilder().build(fromDate, toDate).getStockPrices().stream().forEach(stockPrice -> System.out.println(stockPrice.getStockName() + " - " + stockPrice.getDailyQuotes().size()));
+    }
+
+    public static void main2(String[] args) {
         try {
             Mongo client = new Mongo();
             DB db = client.getDB("merval-stats");

@@ -41,7 +41,7 @@ public class TradeOneDayRunner {
         LocalDate fromDate = new LocalDate(2014, 1, 1);
         LocalDate toDate = LocalDate.now();
         TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
-        runner.run(true);
+        runner.run(false);
         System.out.println(runner.runOutput("\n"));
     }
 

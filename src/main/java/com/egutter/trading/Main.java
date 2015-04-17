@@ -82,7 +82,7 @@ public class Main extends HttpServlet {
     LocalDate fromDate = new LocalDate(2014, 1, 1);
     LocalDate toDate = LocalDate.now();
     PortfolioRepository portfolioRepository = new PortfolioRepository();
-    StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+    StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, true);
     LocalDate lastTradingDay = stockMarket.getLastTradingDay();
     PrintWriter writer = resp.getWriter();
     new StatsPrinter(portfolioRepository, stockMarket, new TradeOneDayRunner(fromDate, toDate).candidates()).htmlStatsAndPortfolioOn(lastTradingDay, writer);

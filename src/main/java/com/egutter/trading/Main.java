@@ -43,7 +43,8 @@ public class Main extends HttpServlet {
 
     private void importAltStocks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         YahooQuoteImporter yahooQuoteImporter = new YahooQuoteImporter();
-        yahooQuoteImporter.runImport();
+        LocalDate fromDate = new LocalDate(2014, 1, 1);
+        yahooQuoteImporter.runImport(fromDate, StockMarket.altStockSymbols());
         showHome(req,resp);
     }
 

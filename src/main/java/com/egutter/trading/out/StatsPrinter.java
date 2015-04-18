@@ -6,6 +6,8 @@ import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.SellOrder;
 import com.egutter.trading.repository.PortfolioRepository;
 import com.egutter.trading.runner.TradeOneDayRunner;
+import com.egutter.trading.stats.CandidateRanker;
+import com.egutter.trading.stats.CandidateStatsCollector;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
@@ -25,6 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class StatsPrinter {
 
 
+    private final CandidateRanker ranker;
     private PortfolioRepository portfolioRepository;
     private StockMarket stockMarket;
     private List<Candidate> candidates;
@@ -42,15 +45,18 @@ public class StatsPrinter {
         this.portfolioRepository = portfolioRepository;
         this.stockMarket = stockMarket;
         this.candidates = candidates;
+        this.ranker = new CandidateRanker(new CandidateStatsCollector(this.portfolioRepository));
     }
 
     public void printStatsAndPortfolio(LocalDate lastTradingDay) {
+
         System.out.println("==========================================");
         System.out.println("ALL STATS");
 
         portfolioRepository.forEachStatCollection(key -> {
             System.out.println("==========================================");
-            System.out.println(findCandidateByKey(key));
+
+            System.out.println(candidateNameByKey(key));
             AtomicReference<BigDecimal> averageReturn = new AtomicReference<BigDecimal>(BigDecimal.ZERO);
             AtomicInteger count = new AtomicInteger(0);
             portfolioRepository.forEachStat(key, buySellOrder -> {
@@ -85,13 +91,15 @@ public class StatsPrinter {
                 BuyOrder buyOrder = pair.getSecond();
                 SellOrder fakeSellOrder = new SellOrder(stockName, stockMarket.getStockPricesFor(stockName).dailyPriceOn(lastTradingDay).get(), buyOrder.getNumberOfShares());
                 BuySellOperation fakeOperation = new BuySellOperation(buyOrder, fakeSellOrder);
-                System.out.println(findCandidateByKey(pair.getFirst()) + " " + fakeOperation);
+                System.out.println(candidateNameByKey(pair.getFirst()) + " " + fakeOperation);
             });
         });
     }
 
-    public Candidate findCandidateByKey(String key) {
-        return candidates.stream().filter(candidate -> candidate.key().equals(key)).findFirst().orElseThrow(() -> new RuntimeException("Cannot find candidate for "+ key));
+    public String candidateNameByKey(String key) {
+        Candidate candidateFound = candidates.stream().filter(candidate -> candidate.key().equals(key)).findFirst().orElseThrow(() -> new RuntimeException("Cannot find candidate for " + key));
+
+        return ranker.rank(candidateFound) + candidateFound;
     }
 
     public void htmlStatsAndPortfolioOn(LocalDate lastTradingDay, PrintWriter writer) {
@@ -100,7 +108,7 @@ public class StatsPrinter {
         writer.print("<h1>ALL STATS</h1>");
 
         portfolioRepository.forEachStatCollection(key -> {
-            writer.print("<h2>" + findCandidateByKey(key) + "</h2>");
+            writer.print("<h2>" + candidateNameByKey(key) + "</h2>");
             AtomicReference<BigDecimal> averageReturn = new AtomicReference<BigDecimal>(BigDecimal.ZERO);
             AtomicInteger count = new AtomicInteger(0);
             writer.print("<ul>");
@@ -137,7 +145,7 @@ public class StatsPrinter {
                 DailyQuote fakeSellDailyQuote = fakeSelldailyQuoteOptional.orElse(fakeSellQuoteBasedOn(lastTradingDay, buyDailyQuote));
                 SellOrder fakeSellOrder = new SellOrder(stockName, fakeSellDailyQuote, buyOrder.getNumberOfShares());
                 BuySellOperation fakeOperation = new BuySellOperation(buyOrder, fakeSellOrder);
-                writer.print("<li>" + findCandidateByKey(pair.getFirst()) + " " + fakeOperation + "</li>");
+                writer.print("<li>" + candidateNameByKey(pair.getFirst()) + " " + fakeOperation + "</li>");
             });
             writer.print("</ul>");
         });

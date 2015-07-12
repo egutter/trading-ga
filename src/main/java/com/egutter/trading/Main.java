@@ -12,6 +12,7 @@ import com.egutter.trading.runner.YahooQuoteImporter;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
+import com.google.common.base.Joiner;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import org.eclipse.jetty.server.Server;
@@ -41,6 +42,7 @@ public class Main extends HttpServlet {
             PrintWriter writer = resp.getWriter();
             writer.print("Error");
             e.printStackTrace(writer);
+            sendEmail("Error " + e.getMessage() + "<br/>" + "Stacktrace:<br/>" + Joiner.on("<br/>").join(e.getStackTrace()));
         }
     }
 

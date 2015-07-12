@@ -21,6 +21,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.egutter.trading.stock.StockMarket.isMerval25;
+
 /**
  * Created by egutter on 1/6/15.
  */
@@ -126,13 +128,15 @@ public class StatsPrinter {
         writer.print("<h1>ALL STOCKS IN PORTFOLIO</h1>");
         Map<String, List<Pair<String, BuyOrder>>> stockMap = new HashMap<String, List<Pair<String, BuyOrder>>>();
         portfolioRepository.forEachStock((key, buyOrder) -> {
-            if (stockMap.containsKey(buyOrder.getStockName())) {
-                List<Pair<String, BuyOrder>> buyOrders = stockMap.get(buyOrder.getStockName());
-                buyOrders.add(new Pair(key, buyOrder));
-            } else {
-                List<Pair<String, BuyOrder>> buyOrders = new ArrayList<Pair<String, BuyOrder>>();
-                buyOrders.add(new Pair(key, buyOrder));
-                stockMap.put(buyOrder.getStockName(), buyOrders);
+            if (isMerval25(buyOrder.getStockName())) {
+                if (stockMap.containsKey(buyOrder.getStockName())) {
+                    List<Pair<String, BuyOrder>> buyOrders = stockMap.get(buyOrder.getStockName());
+                    buyOrders.add(new Pair(key, buyOrder));
+                } else {
+                    List<Pair<String, BuyOrder>> buyOrders = new ArrayList<Pair<String, BuyOrder>>();
+                    buyOrders.add(new Pair(key, buyOrder));
+                    stockMap.put(buyOrder.getStockName(), buyOrders);
+                }
             }
         });
         stockMap.keySet().forEach(stockName -> {

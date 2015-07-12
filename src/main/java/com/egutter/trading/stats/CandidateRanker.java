@@ -1,7 +1,6 @@
 package com.egutter.trading.stats;
 
 import com.egutter.trading.decision.Candidate;
-import com.egutter.trading.repository.PortfolioRepository;
 
 import java.math.BigDecimal;
 

@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 
 import static com.egutter.trading.stock.StockMarket.allStockSymbols;
+import static com.egutter.trading.stock.StockMarket.merval25StockSymbols;
 
 /**
  * Created by egutter on 11/29/14.
@@ -59,7 +60,7 @@ public class YahooQuoteImporter {
     }
     public void runImport() {
         LocalDate fromDate = repository.getMaxTradingDate().plusDays(1);
-        runImport(fromDate, allStockSymbols());
+        runImport(fromDate, merval25StockSymbols());
     }
 
     public void runImport(LocalDate fromDate, String[] stockSymbols) {

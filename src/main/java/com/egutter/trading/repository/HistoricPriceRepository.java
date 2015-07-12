@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Created by egutter on 2/10/14.
@@ -73,14 +74,17 @@ public class HistoricPriceRepository extends MongoRepository {
         }
     }
 
-    public void forEachStock(Consumer<String> applyBlock) {
+    public void forEachStock(Consumer<String> applyBlock, Predicate<String> filter) {
         Set<String> colls = historicPriceConn().getCollectionNames();
         for (String stockName : colls) {
-            if (stockName.equals("system.indexes")) {
+            if (stockName.equals("system.indexes") || filter.test(stockName)) {
                 continue;
             }
             applyBlock.accept(stockName);
         }
+    }
+    public void forEachStock(Consumer<String> applyBlock) {
+        forEachStock(applyBlock, stockName -> false);
     }
 
     public void forEachDailyQuote(LocalDate fromDate, LocalDate toDate, String stockName, Consumer applyBlock) {

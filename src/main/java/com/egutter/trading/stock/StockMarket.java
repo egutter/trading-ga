@@ -136,4 +136,7 @@ public class StockMarket {
         };
     }
 
+    public static boolean isMerval25(String stockName) {
+        return Arrays.asList(merval25StockSymbols()).contains(stockName);
+    }
 }

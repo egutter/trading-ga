@@ -93,7 +93,7 @@ public class StockMarketBuilder {
             } else {
                 stockPrices.add(new StockPrices(stockName, dailyPrices));
             }
-        });
+        }, stockName -> !StockMarket.isMerval25(stockName));
         return new StockMarket(stockPrices, new StockPrices("MERVAL", marketIndexPrices));
     }
 

@@ -20,9 +20,6 @@ import org.eclipse.jetty.util.component.LifeCycle;
 import org.joda.time.LocalDate;
 
 import java.io.PrintWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.*;
 import java.util.stream.Stream;
 
 public class Main extends HttpServlet {

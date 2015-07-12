@@ -61,6 +61,7 @@ public class StockMarket {
                 "APBR.BA", // PETROBRAS ORDINARIAS
                 "BHIP.BA", // BANCO HIPOTECARIO
                 "BMA.BA", // BANCO MACRO
+                "BPAT.BA", // Banco Patagonia
                 "BRIO.BA", // Banco Santander Rio S.A.
                 "CECO2.BA", // Endesa Costanera SA
                 "CELU.BA", // Celulosa Argentina S.A.
@@ -77,6 +78,7 @@ public class StockMarket {
                 "PESA.BA", // PETROBRAS ENERGIA
                 "PETR.BA", // Petrolera Pampa S.A.
                 "TECO2.BA", // TELECOM ARGENTINA
+                "TEF.BA",   // Telefonica
                 "TGNO4.BA", // TRANSPORT GAS NORTE
                 "TGSU2.BA", // Transportadora de Gas Del Sur S.A.
                 "TRAN.BA", // CIA.TRANSP.EN.ELECTRICIDAD
@@ -92,7 +94,6 @@ public class StockMarket {
                 "AGRO.BA",
                 "APSA.BA",
                 "AUSO.BA",
-                "BPAT.BA",
                 "BOLT.BA",
                 "CADO.BA",
                 "CAPU.BA",
@@ -131,7 +132,6 @@ public class StockMarket {
                 "SAMI.BA",
                 "SEMI.BA",
                 "STD.BA",
-                "TEF.BA",
                 "TGLT.BA",
         };
     }

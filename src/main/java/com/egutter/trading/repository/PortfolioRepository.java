@@ -114,7 +114,7 @@ public class PortfolioRepository extends MongoRepository {
     public void forEachStockCollection(Consumer<String> applyBlock) {
         Set<String> colls = stockPortfolioConn().getCollectionNames();
         for (String stockName : colls) {
-            if (stockName.equals("system.indexes")) {
+            if (stockName.equals("system.indexes") || stockName.equals("objectlabs-system")) {
                 continue;
             }
             applyBlock.accept(stockName);

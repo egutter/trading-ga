@@ -28,13 +28,13 @@ public class OneLongPeriodExperimentRunner {
 
     private void run() {
 
-        LocalDate fromDate = new LocalDate(2012, 12, 1);
+        LocalDate fromDate = new LocalDate(2015, 1, 1);
 //        LocalDate toDate = new LocalDate(2013, 7, 1);
 //        LocalDate fromDate = LocalDate.now().minusMonths(26);
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
         runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
         runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, AverageDirectionalIndexGenerator.class));
         runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
@@ -54,33 +54,34 @@ public class OneLongPeriodExperimentRunner {
         runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
 
         runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
-//
-//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class));
+        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
+
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class));
+
+        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
+
+        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class));
 
         // DEP
 //        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class));

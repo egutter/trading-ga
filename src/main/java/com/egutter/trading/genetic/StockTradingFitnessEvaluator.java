@@ -45,13 +45,32 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
         if (shouldDiscardCandidate(portfolio)) {
             return 0;
         }
-//        BigDecimal ordersWonPctgWeight = portfolio.getStats().percentageOfOrdersAboveMarket();
-//        if (ordersWonPctgWeight.compareTo(BigDecimal.valueOf(0.9)) < 0) {
-//            return 0;
-//        }
-        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(Math.log10(portfolio.getStats().countOrdersWon()));
-        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
+
+//        if (discardWhenBellowMarket(portfolio, 0.9)) return 0;
+        if (discardWhenOrdersLost(portfolio)) return 0;
+
+//        Fitness by Cash
 //        return portfolio.getCash().doubleValue();
+
+//      Fitness Cash weighted by Log10(Orders Won)
+//        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(Math.log10(portfolio.getStats().countOrdersWon()));
+//        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
+
+//      Fitness Cash weighted by Orders Won
+        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(portfolio.getStats().countOrdersWon());
+        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
+    }
+
+    private boolean discardWhenOrdersLost(Portfolio portfolio) {
+        return (portfolio.getStats().countOrdersLost() > 0);
+    }
+
+    private boolean discardWhenBellowMarket(Portfolio portfolio, double requiredPctgAboveMarket) {
+        BigDecimal ordersWonPctgWeight = portfolio.getStats().percentageOfOrdersAboveMarket();
+        if (ordersWonPctgWeight.compareTo(BigDecimal.valueOf(requiredPctgAboveMarket)) < 0) {
+            return true;
+        }
+        return false;
     }
 
     private boolean shouldDiscardCandidate(Portfolio portfolio) {

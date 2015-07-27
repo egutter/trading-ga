@@ -49,6 +49,7 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
     }
 
     public BigDecimal profitPctg30() {
+        if (profitPctg().equals(BigDecimal.ZERO) || daysBetween() == 0) return BigDecimal.ZERO;
         MathContext mc3 = new MathContext(3, RoundingMode.HALF_EVEN);
         BigDecimal tmp = profitPctg().divide(BigDecimal.valueOf(100), mc3).add(BigDecimal.ONE);
         return BigDecimal.valueOf(Math.pow(tmp.doubleValue(), 30.0 / daysBetween())).subtract(BigDecimal.ONE).multiply(BigDecimal.valueOf(100), mc3);

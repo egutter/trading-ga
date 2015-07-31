@@ -11,12 +11,13 @@ import java.net.UnknownHostException;
  */
 public class MongoRepository {
 
-    protected DB conn(String dbName, String uriEnv) {
+    protected DB conn(String dbNameEnv, String uriEnv) {
         String dbUri = System.getenv().get(uriEnv);
+        String dbName = System.getenv().get(dbNameEnv);
         if (dbUri != null) {
             return externalConn(dbName, dbUri);
         }
-        return localConn(dbName);
+        return localConn(dbNameEnv);
     }
 
     protected DB externalConn(String dbName, String dbUri) {

@@ -66,11 +66,11 @@ public class Main extends HttpServlet {
 
     private void sendEmail(String html) {
         SendGrid sendgrid = new SendGrid(System.getenv().get("SENDGRID_USERNAME"), System.getenv().get("SENDGRID_PASSWORD"));
-
+        String candidateFactory = System.getenv().get("CANDIDATE_FACTORY");
         SendGrid.Email email = new SendGrid.Email().
                 addTo("egutter@gmail.com").
                 setFrom("your@trader.com").
-                setSubject("One day trader runner").
+                setSubject("One day trader runner - " + candidateFactory).
                 setHtml(html).
                 setText(html);
 

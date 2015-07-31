@@ -2,16 +2,19 @@ package com.egutter.trading.runner;
 
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.genetic.Experiment;
-import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Seconds;
+import org.paukov.combinatorics.Factory;
+import org.paukov.combinatorics.Generator;
+import org.paukov.combinatorics.ICombinatoricsVector;
 import org.uncommons.maths.binary.BitString;
 
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -35,53 +38,67 @@ public class OneLongPeriodExperimentRunner {
         System.out.println("Period from " + fromDate + " to " + toDate);
 
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class, RelativeStrengthIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class));
 
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class));
+        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
+                asList(MovingAverageConvergenceDivergenceGenerator.class,
+                        RelativeStrengthIndexGenerator.class,
+                        AverageDirectionalIndexGenerator.class,
+                        BollingerBandsGenerator.class,
+                        AroonOscilatorGenerator.class,
+                        MoneyFlowIndexGenerator.class,
+                        UltimateOscillatorGenerator.class,
+                        WilliamsRGenerator.class) );
 
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class));
-        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
-
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class));
-
-        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
-
-        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class));
+        runAllCombinationsOf(stockMarket, initialVector, 3);
+        runAllCombinationsOf(stockMarket, initialVector, 2);
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class, RelativeStrengthIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AverageDirectionalIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class));
+//        runOneStrategy(stockMarket, asList(AverageDirectionalIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, RelativeStrengthIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class));
 
         // DEP
 //        runOneStrategy(stockMarket, asList(MovingAverageConvergenceDivergenceGenerator.class));
@@ -94,14 +111,28 @@ public class OneLongPeriodExperimentRunner {
 //        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class));
     }
 
+    private void runAllCombinationsOf(StockMarket stockMarket, ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector, int numOfCombinations) {
+        Generator<? extends Class<? extends BuyTradingDecisionGenerator>> gen = Factory.createSimpleCombinationGenerator(initialVector, numOfCombinations);
+
+        for (ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> combination : gen) {
+            runOneStrategy(stockMarket, combination.getVector());
+        }
+    }
+
     private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
         System.out.println("=============================================");
 
-        printResults(stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
+        printResults("Conservative 1stSem 2015", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
     }
 
 
-    private static void printResults(StockMarket stockMarket, BitString result, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+    private static void printResults(String description, StockMarket stockMarket, BitString result, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+        String tradingDecisionGeneratorsString = tradingDecisionGenerators.stream()
+                .map(Class::getSimpleName)
+                .collect(Collectors.joining(", "));
+
+        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", asList(" + tradingDecisionGeneratorsString + "))");
+
         OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
         runner.run();
     }

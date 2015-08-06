@@ -11,7 +11,6 @@ import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.PortfolioBuilder;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
-import com.google.common.base.Joiner;
 import com.google.common.collect.FluentIterable;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by egutter on 1/1/15.
@@ -100,7 +100,9 @@ public class TradeOneDayRunner {
         return ranker.rank(candidate) + candidate.toString();
     }
     private String candidateListNames(List<Candidate> candidates) {
-        return Joiner.on(" - ").join(candidates.stream().map(candidate -> candidateName(candidate)).iterator());
+        return candidates.stream()
+                .map(candidate -> candidateName(candidate))
+                .collect(Collectors.joining(" - "));
     }
 
     private LocalDate currentLastTradingDate() {
@@ -130,8 +132,11 @@ public class TradeOneDayRunner {
     public List<Candidate> candidates() {
         try {
             String candidateFactory = System.getenv().get("CANDIDATE_FACTORY");
-            return (List<Candidate>) Class.forName("com.egutter.trading.candidates." + candidateFactory).getMethod("candidates").invoke(null);
+            List<Candidate> candidates = (List<Candidate>) Class.forName("com.egutter.trading.candidates." + candidateFactory).getMethod("candidates").invoke(null);
+            System.out.println("Using candidate factory " + candidateFactory);
+            return candidates;
         } catch (Exception e) {
+            System.out.println("No Candidate factory defined. Falling to Default MixOne");
             return MixOne.candidates();
         }
     }

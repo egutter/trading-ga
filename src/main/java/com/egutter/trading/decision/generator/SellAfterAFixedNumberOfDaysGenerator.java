@@ -8,7 +8,7 @@ import org.uncommons.maths.binary.BitString;
 
 /**
  * Bits
- * 0-4 => Number of days to hold stock and sell it
+ * 0-3 => Number of days to hold stock and sell it
  * Created by egutter on 2/16/14.
  */
 public class SellAfterAFixedNumberOfDaysGenerator implements SellTradingDecisionGenerator {

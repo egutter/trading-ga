@@ -52,4 +52,9 @@ public class SellWhenAnyAgreeTradingDecision implements SellTradingDecision {
             }
         };
     }
+
+    public List<TradingDecision> getSellTradingDecisionList() {
+        return sellTradingDecisionList;
+    }
+
 }

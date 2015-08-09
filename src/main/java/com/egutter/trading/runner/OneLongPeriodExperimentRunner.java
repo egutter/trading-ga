@@ -31,7 +31,7 @@ public class OneLongPeriodExperimentRunner {
 
     private void run() {
 
-        LocalDate fromDate = new LocalDate(2015, 1, 1);
+        LocalDate fromDate = new LocalDate(2012, 1, 1);
 //        LocalDate toDate = new LocalDate(2013, 7, 1);
 //        LocalDate fromDate = LocalDate.now().minusMonths(26);
         LocalDate toDate = LocalDate.now();
@@ -129,9 +129,9 @@ public class OneLongPeriodExperimentRunner {
     private static void printResults(String description, StockMarket stockMarket, BitString result, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
         String tradingDecisionGeneratorsString = tradingDecisionGenerators.stream()
                 .map(Class::getSimpleName)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(".class, "));
 
-        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", asList(" + tradingDecisionGeneratorsString + "))");
+        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", asList(" + tradingDecisionGeneratorsString + ".class)),");
 
         OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
         runner.run();

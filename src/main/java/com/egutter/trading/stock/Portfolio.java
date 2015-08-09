@@ -37,14 +37,18 @@ public class Portfolio {
         if (!hasStock(stockName)) {
             return 0;
         }
-        return stocks.get(stockName).getNumberOfShares();
+        return getBuyOrder(stockName).getNumberOfShares();
+    }
+
+    public BuyOrder getBuyOrder(String stockName) {
+        return stocks.get(stockName);
     }
 
     public int getNumberOfMarketSharesFor(String stockName) {
         if (!hasStock(stockName)) {
             return 0;
         }
-        return stocks.get(stockName).getMarketNumberOfShares();
+        return getBuyOrder(stockName).getMarketNumberOfShares();
     }
 
     public BigDecimal getCash() {
@@ -59,7 +63,7 @@ public class Portfolio {
             throw new IllegalArgumentException("Stock ["+stockName+"] not found");
         }
 
-        return stocks.get(stockName).getTradingDate();
+        return getBuyOrder(stockName).getTradingDate();
     }
 
     public void buyStock(String stockName, BigDecimal amount, BuyOrder order) {

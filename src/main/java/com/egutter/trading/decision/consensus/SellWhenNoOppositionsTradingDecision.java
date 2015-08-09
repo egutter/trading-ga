@@ -54,4 +54,8 @@ public class SellWhenNoOppositionsTradingDecision implements SellTradingDecision
         };
     }
 
+    public List<TradingDecision> getSellTradingDecisionList() {
+        return sellTradingDecisionList;
+    }
+
 }

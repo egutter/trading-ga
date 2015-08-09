@@ -57,4 +57,8 @@ public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision {
         };
     }
 
+    public List<TradingDecision> getBuyTradingDecisionList() {
+        return buyTradingDecisionList;
+    }
+
 }

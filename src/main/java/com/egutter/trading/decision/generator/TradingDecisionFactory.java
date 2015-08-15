@@ -68,6 +68,10 @@ public class TradingDecisionFactory {
         sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(buildDoNotSellWhenNoStockInPorfolioGenerator().generateSellDecision(stockPrices));
         sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysGenerator().generateSellDecision(stockPrices));
 
+        Boolean sellByProfitThreshold = Boolean.valueOf(System.getenv().get("SELL_BY_PROFIT_THRESHOLD"));
+        if (sellByProfitThreshold)
+            sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellByProfitThresholdGenerator().generateSellDecision(stockPrices));
+
         SellWhenAnyAgreeTradingDecision orTradingDecisionComposite = new SellWhenAnyAgreeTradingDecision();
         orTradingDecisionComposite.addSellTradingDecision(tradingDecisionComposite);
         orTradingDecisionComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysComposite);
@@ -77,6 +81,11 @@ public class TradingDecisionFactory {
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator() {
         BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();
         return new SellAfterAFixedNumberOfDaysGenerator(sellAfterDaysChromosome, portfolio);
+    }
+
+    private SellByProfitThresholdGenerator sellByProfitThresholdGenerator() {
+        BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();
+        return new SellByProfitThresholdGenerator(sellAfterDaysChromosome, portfolio);
     }
 
     private BuyTradingDecisionGenerator buildDoNotBuyWhenSameStockInPortfolioGenerator() {

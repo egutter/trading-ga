@@ -5,6 +5,7 @@ import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.order.MarketOrder;
 import com.egutter.trading.out.StatsPrinter;
 import com.egutter.trading.repository.PortfolioRepository;
+import com.egutter.trading.stats.CandidateRank;
 import com.egutter.trading.stats.CandidateRanker;
 import com.egutter.trading.stats.CandidateStatsCollector;
 import com.egutter.trading.stock.Portfolio;
@@ -72,8 +73,9 @@ public class TradeOneDayRunner {
             oneCandidateRunner.runOn(lastTradingDay);
 
             portfolioRepository.update(candidate.key(), portfolio);
-            if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
-                resultBuffer.add(candidateName(candidate));
+            CandidateRank rank = ranker.rank(candidate);
+            if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty() && rank.isHighRank()) {
+                resultBuffer.add(candidateName(candidate, rank));
                 resultBuffer.add("On " + lastTradingDay + " " + oneCandidateRunner.getOrderBook());
                 resultBuffer.add("==========================================");
             }
@@ -96,12 +98,12 @@ public class TradeOneDayRunner {
         }
     }
 
-    private String candidateName(Candidate candidate) {
-        return ranker.rank(candidate) + candidate.toString();
+    private String candidateName(Candidate candidate, CandidateRank rank) {
+        return rank + candidate.toString();
     }
     private String candidateListNames(List<Candidate> candidates) {
         return candidates.stream()
-                .map(candidate -> candidateName(candidate))
+                .map(candidate -> candidateName(candidate, ranker.rank(candidate)))
                 .collect(Collectors.joining(" - "));
     }
 

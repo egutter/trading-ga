@@ -101,7 +101,7 @@ public class StatsPrinter {
     public String candidateNameByKey(String key) {
         Candidate candidateFound = candidates.stream().filter(candidate -> candidate.key().equals(key)).findFirst().orElseThrow(() -> new RuntimeException("Cannot find candidate for " + key));
 
-        return ranker.rank(candidateFound) + candidateFound;
+        return ranker.rank(candidateFound).toString() + candidateFound;
     }
 
     public void htmlStatsAndPortfolioOn(LocalDate lastTradingDay, PrintWriter writer) {

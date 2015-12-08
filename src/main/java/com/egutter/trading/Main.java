@@ -6,6 +6,7 @@ import javax.servlet.http.*;
 
 import com.egutter.trading.out.StatsPrinter;
 import com.egutter.trading.repository.HistoricPriceRepository;
+import com.egutter.trading.repository.MarketOrdersRepository;
 import com.egutter.trading.repository.PortfolioRepository;
 import com.egutter.trading.runner.TradeOneDayRunner;
 import com.egutter.trading.runner.YahooQuoteImporter;
@@ -35,6 +36,8 @@ public class Main extends HttpServlet {
                 tradeOneDay(req, resp);
             } else if (req.getRequestURI().endsWith("/run-alt-stocks-import")) {
                 importAltStocks(req, resp);
+            } else if (req.getRequestURI().endsWith("/buyStock")) {
+                buyStock(req, resp);
             } else {
                 showHome(req, resp);
             }
@@ -44,6 +47,13 @@ public class Main extends HttpServlet {
             e.printStackTrace(writer);
             sendEmail("Error " + e.getMessage() + "<br/>" + "Stacktrace:<br/>" + Joiner.on("<br/>").join(e.getStackTrace()));
         }
+    }
+
+    private void buyStock(HttpServletRequest req, HttpServletResponse resp) {
+        String key = req.getParameter("key");
+        String stockName = req.getParameter("stockName");
+        MarketOrdersRepository repository = new MarketOrdersRepository();
+        repository.storeOrder(key, stockName);
     }
 
     private void importAltStocks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,6 +67,7 @@ public class Main extends HttpServlet {
         LocalDate fromDate = new LocalDate(2014, 1, 1);
         LocalDate toDate = LocalDate.now();
         TradeOneDayRunner runner = new TradeOneDayRunner(fromDate, toDate);
+        runner.setRequestUrl(req.getServerName());
         runner.run(false);
         PrintWriter writer = resp.getWriter();
         writer.print("<h1>Success!</h1>");

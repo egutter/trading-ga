@@ -4,6 +4,7 @@ import com.egutter.trading.candidates.MixOne;
 import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.order.MarketOrder;
 import com.egutter.trading.out.StatsPrinter;
+import com.egutter.trading.repository.MarketOrdersRepository;
 import com.egutter.trading.repository.PortfolioRepository;
 import com.egutter.trading.stats.CandidateRank;
 import com.egutter.trading.stats.CandidateRanker;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -32,6 +34,8 @@ public class TradeOneDayRunner {
     private final PortfolioRepository portfolioRepository;
     private final List<String> resultBuffer;
     private final CandidateRanker ranker;
+    private final MarketOrdersRepository marketOrdersRepository;
+    private String requestUrl;
 
     public TradeOneDayRunner(LocalDate fromDate, LocalDate toDate) {
         this.fromDate = fromDate;
@@ -39,6 +43,7 @@ public class TradeOneDayRunner {
         this.portfolioRepository = new PortfolioRepository();
         this.resultBuffer = new ArrayList<String>();
         this.ranker = new CandidateRanker(new CandidateStatsCollector(this.portfolioRepository));
+        this.marketOrdersRepository = new MarketOrdersRepository();
     }
 
     public static void main(String[] args) {
@@ -86,12 +91,12 @@ public class TradeOneDayRunner {
         resultBuffer.add("==========================================");
         resultBuffer.add("ALL STOCKS BOUGHT");
         countStockBought.forEach((stockName, pair) -> {
-            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNames(pair.getSecond()));
+            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNamesWithBuyLink(stockName, pair.getSecond()));
         });
         resultBuffer.add("==========================================");
         resultBuffer.add("ALL STOCKS SOLD");
         countStockSold.forEach((stockName, pair) -> {
-            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNames(pair.getSecond()));
+            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNamesWithSoldFlag(pair.getSecond(), stockName));
         });
         if (printStats) {
             new StatsPrinter(portfolioRepository, stockMarket, candidates()).printStatsAndPortfolio(lastTradingDay);
@@ -101,9 +106,32 @@ public class TradeOneDayRunner {
     private String candidateName(Candidate candidate, CandidateRank rank) {
         return rank + candidate.toString();
     }
-    private String candidateListNames(List<Candidate> candidates) {
+
+    private String candidateListNamesWithBuyLink(String stockName, List<Candidate> candidates) {
+        return candidateListNamesWithNameFunction(candidates, candidate -> wrapWithBuyLink(candidateName(candidate, ranker.rank(candidate)), candidate, stockName));
+    }
+
+    private String wrapWithBuyLink(String name, Candidate candidate, String stockName) {
+        return "<a href='" + this.requestUrl + "/buyStock?key=" + candidate.key() + "&stockName='" + stockName + " target='_blank'>" + name + "</a>";
+    }
+
+    private String candidateListNamesWithSoldFlag(List<Candidate> candidates, String stockName) {
+        return candidateListNamesWithNameFunction(candidates, candidate -> wrapWithSoldFlag(candidateName(candidate, ranker.rank(candidate)), candidate, stockName));
+    }
+
+    private String wrapWithSoldFlag(String name, Candidate candidate, String stockName) {
+        String prefix = "";
+        String suffix = "";
+        if (marketOrdersRepository.popStock(candidate.key(), stockName)) {
+            prefix = "<b>";
+            suffix = " ****</b>";
+        }
+        return prefix + name + suffix;
+    }
+
+    private String candidateListNamesWithNameFunction(List<Candidate> candidates, Function<Candidate, String> extractName) {
         return candidates.stream()
-                .map(candidate -> candidateName(candidate, ranker.rank(candidate)))
+                .map(extractName)
                 .collect(Collectors.joining(" - "));
     }
 
@@ -151,4 +179,7 @@ public class TradeOneDayRunner {
         return String.join(separator, this.getResultBuffer());
     }
 
+    public void setRequestUrl(String requestUrl) {
+        this.requestUrl = "http://" + requestUrl;
+    }
 }

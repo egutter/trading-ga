@@ -31,6 +31,8 @@ public class Candidate {
         generatorsKeyMap.put(RelativeStrengthIndexGenerator.class, "RSI");
         generatorsKeyMap.put(AverageDirectionalIndexGenerator.class, "ADX");
         generatorsKeyMap.put(AroonOscilatorGenerator.class, "AROO");
+        generatorsKeyMap.put(WilliamsRGenerator.class, "WILLR");
+        generatorsKeyMap.put(UltimateOscillatorGenerator.class, "ULTOSC");
     }
 
     public Candidate(String description, String chromosome, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {

@@ -17,7 +17,10 @@ public class CandidateRanker {
     }
 
     public CandidateRank rank(Candidate aCandidate) {
-        CandidateStats stats = statsCollector.statsFor(aCandidate);
+        return rank(statsCollector.statsFor(aCandidate));
+    }
+
+    public CandidateRank rank(CandidateStats stats) {
         CandidateRank ranking;
 
         if (stats.isEmpty()) {
@@ -36,14 +39,14 @@ public class CandidateRanker {
 
     private CandidateRank intermediateRanking(CandidateStats stats) {
         CandidateRank ranking;
-        if (stats.getBiggestLost().compareTo(BigDecimal.valueOf(10.0)) <= 0 ) {
-            if (stats.getLostCount() < 4) {
+        if (stats.getLostPctg().compareTo(BigDecimal.valueOf(20)) <= 0) {
+            if (stats.getBiggestLost().compareTo(BigDecimal.valueOf(-20.0)) > 0 ) {
                 ranking = CandidateRank.betaRank();
             } else {
                 ranking = CandidateRank.ceRank();
             }
         } else {
-            if (stats.getLostCount() < 4) {
+            if (stats.getBiggestLost().compareTo(BigDecimal.valueOf(-20.0)) > 0 ) {
                 ranking = CandidateRank.deRank();
             } else {
                 ranking = CandidateRank.epsilonRank();

@@ -1,6 +1,7 @@
 package com.egutter.trading.stats;
 
 import com.egutter.trading.decision.Candidate;
+import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.repository.PortfolioRepository;
 
 import java.math.BigDecimal;
@@ -22,14 +23,14 @@ public class CandidateStatsCollector {
         this.portfolioRepository = portfolioRepository;
     }
 
-    public CandidateStats statsFor(Candidate aCandidate) {
+    public CandidateStats statsFor(List<BuySellOperation> buySellOrders) {
         AtomicReference<BigDecimal> profitAccum = new AtomicReference<BigDecimal>(BigDecimal.ZERO);
         AtomicInteger count = new AtomicInteger(0);
         AtomicInteger wonCount = new AtomicInteger(0);
         AtomicInteger lostCount = new AtomicInteger(0);
         List<BigDecimal> loses = new ArrayList<BigDecimal>();
 
-        portfolioRepository.forEachStat(aCandidate.key(), buySellOrder -> {
+        buySellOrders.forEach(buySellOrder -> {
             if (buySellOrder.isWon()) {
                 wonCount.getAndIncrement();
             } else if (buySellOrder.isLost()) {
@@ -46,9 +47,17 @@ public class CandidateStatsCollector {
 
         BigDecimal averageReturn = count.intValue() > 0 ? profitAccum.get().divide(BigDecimal.valueOf(count.intValue()), RoundingMode.HALF_EVEN) : BigDecimal.ZERO;
         Collections.sort(loses);
-        Collections.reverse(loses);
         BigDecimal biggestLost = loses.isEmpty() ? BigDecimal.ZERO : loses.get(0);
 
         return new CandidateStats(averageReturn, biggestLost, wonCount.intValue(), lostCount.intValue());
+    }
+
+    public CandidateStats statsFor(Candidate aCandidate) {
+        List<BuySellOperation> buySellOrders = new ArrayList<BuySellOperation>();
+        portfolioRepository.forEachStat(aCandidate.key(), buySellOrder -> {
+            buySellOrders.add(buySellOrder);
+        });
+
+        return statsFor(buySellOrders);
     }
 }

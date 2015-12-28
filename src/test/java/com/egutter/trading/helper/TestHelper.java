@@ -1,6 +1,7 @@
 package com.egutter.trading.helper;
 
 import com.egutter.trading.order.BuyOrder;
+import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.SellOrder;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
@@ -53,16 +54,15 @@ public class TestHelper {
     }
 
     public static DailyQuote aDailyQuote(LocalDate tradingDate) {
-        return new DailyQuote(tradingDate, 100,
-                200,
-                200,
-                50,
-                300,
-                1000);
+        return aDailyQuote(200, tradingDate);
     }
 
-    public static DailyQuote aDailyQuote(int closePrice) {
-        return new DailyQuote(aTradingDate(), 100,
+    public static DailyQuote aDailyQuote(double closePrice) {
+        return aDailyQuote(closePrice, aTradingDate());
+    }
+
+    public static DailyQuote aDailyQuote(double closePrice, LocalDate tradingDate) {
+        return new DailyQuote(tradingDate, 100,
                 closePrice,
                 closePrice,
                 50,
@@ -73,8 +73,18 @@ public class TestHelper {
     public static LocalDate aTradingDate() {
         return LocalDate.now();
     }
+    public static LocalDate aTradingDate(int days) {
+        return aTradingDate().plusDays(days);
+    }
 
     public static List<DailyQuote> aListOfDailyQuotes() {
         return Arrays.asList(aDailyQuote(), aDailyQuote());
     }
+
+    public static BuySellOperation buySellOperation(double buyPrice, LocalDate buyDate, double sellPrice, LocalDate sellDate) {
+        BuyOrder buyOrder = new BuyOrder(aStockName(), aDailyQuote(buyPrice, buyDate), oneThousandPesos());
+        SellOrder sellOrder = new SellOrder(aStockName(), aDailyQuote(sellPrice, sellDate), buyOrder.getNumberOfShares());
+        return new BuySellOperation(buyOrder, sellOrder);
+    }
+
 }

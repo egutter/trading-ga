@@ -1,6 +1,8 @@
 package com.egutter.trading.stats;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -33,6 +35,12 @@ public class CandidateStats {
 
     public int getLostCount() {
         return lostCount;
+    }
+
+    public BigDecimal getLostPctg() {
+        if (wonCount == 0) return BigDecimal.ZERO;
+        MathContext mc3 = new MathContext(2, RoundingMode.HALF_EVEN);
+        return BigDecimal.valueOf(lostCount).divide(BigDecimal.valueOf(wonCount), mc3).multiply(BigDecimal.valueOf(100), mc3);
     }
 
     public boolean isEmpty() {

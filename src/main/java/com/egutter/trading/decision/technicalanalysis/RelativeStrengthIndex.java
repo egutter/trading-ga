@@ -48,6 +48,10 @@ public class RelativeStrengthIndex extends MomentumOscillator {
         super(stockPrices, buyThreshold, sellThreshold, days);
     }
 
+    public static RelativeStrengthIndex empty(StockPrices stockPrices) {
+        return new RelativeStrengthIndex(stockPrices, Range.atLeast(1.0), Range.atMost(1.0), 14);
+    }
+
     @Override
     protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
         Map<LocalDate, Double> relativeStrengthIndex = new HashMap<LocalDate, Double>();

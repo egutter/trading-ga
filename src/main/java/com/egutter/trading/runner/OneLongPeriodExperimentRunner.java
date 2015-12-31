@@ -31,7 +31,7 @@ public class OneLongPeriodExperimentRunner {
 
     private void run() {
 
-        LocalDate fromDate = new LocalDate(2012, 1, 1);
+        LocalDate fromDate = new LocalDate(2015, 1, 1);
 //        LocalDate toDate = new LocalDate(2013, 7, 1);
 //        LocalDate fromDate = LocalDate.now().minusMonths(26);
         LocalDate toDate = LocalDate.now();
@@ -40,17 +40,18 @@ public class OneLongPeriodExperimentRunner {
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
 
         ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
-                asList(MovingAverageConvergenceDivergenceGenerator.class,
+                asList(
+//                        MovingAverageConvergenceDivergenceGenerator.class,
                         RelativeStrengthIndexGenerator.class,
-                        AverageDirectionalIndexGenerator.class,
+//                        AverageDirectionalIndexGenerator.class,
                         BollingerBandsGenerator.class,
-                        AroonOscilatorGenerator.class,
-                        MoneyFlowIndexGenerator.class,
-                        UltimateOscillatorGenerator.class,
+//                        AroonOscilatorGenerator.class,
+//                        MoneyFlowIndexGenerator.class,
+//                        UltimateOscillatorGenerator.class,
                         WilliamsRGenerator.class) );
 
         runAllCombinationsOf(stockMarket, initialVector, 3);
-        runAllCombinationsOf(stockMarket, initialVector, 2);
+//        runAllCombinationsOf(stockMarket, initialVector, 2);
 
     }
 
@@ -65,7 +66,7 @@ public class OneLongPeriodExperimentRunner {
     private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
         System.out.println("=============================================");
 
-        printResults("Conservative 1stSem 2015", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
+        printResults("2015-2015", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
     }
 
 

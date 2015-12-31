@@ -87,6 +87,10 @@ public class DailyQuote {
         return this.tradingDate.equals(tradingDate);
     }
 
+    public boolean isAfter(LocalDate tradingDate) {
+        return this.tradingDate.isAfter(tradingDate);
+    }
+
     public static DailyQuote empty() {
         return new DailyQuote(LocalDate.now(), 1, 1, 1, 1, 1, 1);
     }

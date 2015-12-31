@@ -17,6 +17,6 @@ public class DoNotBuyInTheLastBuyTradingDaysGenerator implements BuyTradingDecis
 
     @Override
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
-        return new DoNotBuyInTheLastBuyTradingDays(stockPrices, sellAfterAFixedNumberOfDaysGenerator);
+        return new DoNotBuyInTheLastBuyTradingDays(stockPrices, sellAfterAFixedNumberOfDaysGenerator.getNumberOfDays());
     }
 }

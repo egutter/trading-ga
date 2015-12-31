@@ -19,6 +19,10 @@ public class TradeSignal {
         this.expectedDifferenceWithPreviousDay = differenceWithPreviousDay;
     }
 
+    public static TradeSignal noChange() {
+        return new TradeSignal(SignChange.NO_CHANGE, Range.all());
+    }
+
     public DecisionResult shouldTrade(SignChange signChange, Double differenceWithPreviousDay) {
         boolean shouldTrade = expectedSignChange.equals(signChange) &&
                 expectedDifferenceWithPreviousDay.contains(differenceWithPreviousDay);

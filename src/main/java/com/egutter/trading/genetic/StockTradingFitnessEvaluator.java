@@ -1,6 +1,11 @@
 package com.egutter.trading.genetic;
 
+import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
+import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.stats.CandidateRanker;
+import com.egutter.trading.stats.CandidateStats;
+import com.egutter.trading.stock.PortfolioStats;
 import com.egutter.trading.stock.Trader;
 import com.egutter.trading.order.OrderBook;
 import com.egutter.trading.stock.StockMarket;
@@ -33,21 +38,29 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     public double getFitness(BitString candidate, List<? extends BitString> population) {
         Portfolio portfolio = new Portfolio(INITIAL_CASH);
 
-        TradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
+        GeneticsTradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
         if (candidateValidator(tradingDecisionFactory).isInvalid()) {
             return 0;
         }
 
-        buildTrader(portfolio, tradingDecisionFactory).trade();
+        buildTrader(portfolio, tradingDecisionFactory).tradeAllStocksInMarket();
 
         seeOtherWaysOfEvaluatePortfolioNotUsed();
 
         if (shouldDiscardCandidate(portfolio)) {
             return 0;
         }
+        CandidateRanker candidateRanker = new CandidateRanker(null);
+        PortfolioStats porfolioStats = portfolio.getStats();
+        CandidateStats stats = new CandidateStats(porfolioStats.average30daysReturn(),
+                porfolioStats.biggestLost().profitPctg30(),
+                porfolioStats.countOrdersWon(),
+                porfolioStats.countOrdersLost());
 
+        if (!candidateRanker.rank(stats).isHighRank()) return 0;
 //        if (discardWhenBellowMarket(portfolio, 0.9)) return 0;
-        if (discardWhenOrdersLost(portfolio)) return 0;
+
+//        if (discardWhenOrdersLost(portfolio)) return 0;
 
 //        Fitness by Cash
 //        return portfolio.getCash().doubleValue();
@@ -57,7 +70,7 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 //        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
 
 //      Fitness Cash weighted by Orders Won
-        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(portfolio.getStats().countOrdersWon());
+        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(porfolioStats.countOrdersWon());
         return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
     }
 
@@ -101,11 +114,11 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
         return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
     }
 
-    private TradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
-        return new TradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, true);
+    private GeneticsTradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
+        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, true);
     }
 
-    private GenomeCandidateValidator candidateValidator(TradingDecisionFactory tradingDecisionGenerator) {
+    private GenomeCandidateValidator candidateValidator(GeneticsTradingDecisionFactory tradingDecisionGenerator) {
         return new GenomeCandidateValidator(tradingDecisionGenerator);
     }
 

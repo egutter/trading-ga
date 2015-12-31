@@ -16,15 +16,12 @@ import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by egutter on 2/10/14.
  */
-public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
+public class BollingerBands implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
 
     private final StockPrices stockPrices;
     private final Range sellThreshold;
@@ -61,6 +58,10 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
         this.movingAverageType = movingAverageType;
     }
 
+    public static BollingerBands empty(StockPrices stockPrices) {
+        return new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(1.0), 20, MAType.Sma);
+    }
+
     @Override
     public DecisionResult shouldBuyOn(LocalDate tradingDate) {
         return shouldTradeOn(tradingDate, buyThreshold);
@@ -75,11 +76,15 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision {
         if (!getPercentageB().containsKey(tradingDate)) {
             return DecisionResult.NEUTRAL;
         }
-        Double percentageBAtDay = getPercentageB().get(tradingDate);
+        Double percentageBAtDay = getIndexAtDate(tradingDate).get();
         if (tradeThreshold.contains(percentageBAtDay)) {
             return DecisionResult.YES;
         }
         return DecisionResult.NO;
+    }
+
+    public Optional<Double> getIndexAtDate(LocalDate tradingDate) {
+        return Optional.ofNullable(getPercentageB().get(tradingDate));
     }
 
     private synchronized Map<LocalDate, Double> getPercentageB() {

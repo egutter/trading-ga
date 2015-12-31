@@ -7,6 +7,8 @@ import com.egutter.trading.decision.consensus.BuyWhenNoOppositionsTradingDecisio
 import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
 import com.egutter.trading.decision.constraint.*;
+import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
+import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.technicalanalysis.MoneyFlowIndex;
 import com.egutter.trading.decision.technicalanalysis.MovingAverageConvergenceDivergence;
 import com.egutter.trading.decision.technicalanalysis.UltimateOscillator;
@@ -21,7 +23,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
-public class TradingDecisionFactoryTest {
+public class GeneticsTradingDecisionFactoryTest {
 
     private List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators = asList(MovingAverageConvergenceDivergenceGenerator.class,
             UltimateOscillatorGenerator.class,
@@ -30,7 +32,7 @@ public class TradingDecisionFactoryTest {
     @Test
     public void should_build_buyGenerator_onExperiment() throws Exception {
 
-        TradingDecisionFactory tradingDecisionFactory = new TradingDecisionFactory(aStockPortfolio(),
+        TradingDecisionFactory tradingDecisionFactory = new GeneticsTradingDecisionFactory(aStockPortfolio(),
                 aGenome(), tradingDecisionGenerators, true);
 
         BuyTradingDecision buyTradingDecision = tradingDecisionFactory.generateBuyDecision(aStockPrices());
@@ -50,7 +52,7 @@ public class TradingDecisionFactoryTest {
     @Test
     public void should_build_buyGenerator_offExperiment() throws Exception {
 
-        TradingDecisionFactory tradingDecisionFactory = new TradingDecisionFactory(aStockPortfolio(),
+        TradingDecisionFactory tradingDecisionFactory = new GeneticsTradingDecisionFactory(aStockPortfolio(),
                 aGenome(), tradingDecisionGenerators, false);
 
         BuyTradingDecision buyTradingDecision = tradingDecisionFactory.generateBuyDecision(aStockPrices());
@@ -69,7 +71,7 @@ public class TradingDecisionFactoryTest {
     @Test
     public void should_build_sellGenerator_offExperiment() throws Exception {
 
-        TradingDecisionFactory tradingDecisionFactory = new TradingDecisionFactory(aStockPortfolio(),
+        TradingDecisionFactory tradingDecisionFactory = new GeneticsTradingDecisionFactory(aStockPortfolio(),
                 aGenome(), tradingDecisionGenerators, false);
 
         SellTradingDecision sellTradingDecision = tradingDecisionFactory.generateSellDecision(aStockPrices());
@@ -92,6 +94,26 @@ public class TradingDecisionFactoryTest {
                 instanceOf(UltimateOscillator.class),
                 instanceOf(MoneyFlowIndex.class)
                 ));
+
+        SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = (SellWhenNoOppositionsTradingDecision) sellTradingDecisionList.get(1);
+
+        assertThat(sellAfterAFixedNumberOfDaysComposite.getSellTradingDecisionList().size(), equalTo(2));
+        assertThat(sellAfterAFixedNumberOfDaysComposite.getSellTradingDecisionList(), hasItems(instanceOf(DoNotSellWhenNoStockInPorfolio.class),
+                instanceOf(SellAfterAFixedNumberOFDays.class)));
+
+    }
+
+    @Test
+    public void should_build_sellGenerator_offExperiment_with_threshold() throws Exception {
+
+        TradingDecisionFactory tradingDecisionFactory = new GeneticsTradingDecisionFactory(aStockPortfolio(),
+                aGenome(), tradingDecisionGenerators, false, true);
+
+        SellTradingDecision sellTradingDecision = tradingDecisionFactory.generateSellDecision(aStockPrices());
+
+        SellWhenAnyAgreeTradingDecision sellWhenAnyAgreeTradingDecision = (SellWhenAnyAgreeTradingDecision) sellTradingDecision;
+
+        List<TradingDecision> sellTradingDecisionList = sellWhenAnyAgreeTradingDecision.getSellTradingDecisionList();
 
         SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = (SellWhenNoOppositionsTradingDecision) sellTradingDecisionList.get(1);
 

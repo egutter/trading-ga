@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.WeakHashMap;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Iterables.getLast;
 import static com.google.common.collect.Lists.transform;
@@ -113,6 +114,10 @@ public class StockPrices {
         quoteCache.put(tradingDate, quoteFound);
 
         return quoteFound;
+    }
+
+    public List<DailyQuote> dailyQuotesFromWithLimit(LocalDate tradingDate, int max) {
+        return dailyQuotes.stream().filter(dailyQuote -> dailyQuote.isAfter(tradingDate)).limit(max).collect(Collectors.toList());
     }
 
     public LocalDate getLastTradingDate() {

@@ -14,6 +14,7 @@ import org.uncommons.watchmaker.framework.islands.RingMigration;
 import org.uncommons.watchmaker.framework.operators.BitStringCrossover;
 import org.uncommons.watchmaker.framework.operators.BitStringMutation;
 import org.uncommons.watchmaker.framework.operators.EvolutionPipeline;
+import org.uncommons.watchmaker.framework.operators.Replacement;
 import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.selection.SigmaScaling;
 import org.uncommons.watchmaker.framework.selection.TournamentSelection;
@@ -49,8 +50,9 @@ public class Experiment {
         List<EvolutionaryOperator<BitString>> operators
                 = new LinkedList<EvolutionaryOperator<BitString>>();
         operators.add(new BitStringCrossover());
-        operators.add(new BitStringMutation(new ConstantGenerator<Probability>(new Probability(0.02)),
-                new ConstantGenerator<Integer>(1)));
+        operators.add(new BitStringMutation(new ConstantGenerator<Probability>(new Probability(0.1)),
+                new ConstantGenerator<Integer>(5)));
+        operators.add(new Replacement<BitString>(candidateFactory, new Probability(0.02)));
 
         EvolutionaryOperator<BitString> pipeline = new EvolutionPipeline<BitString>(operators);
 

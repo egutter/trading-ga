@@ -14,12 +14,12 @@ import org.joda.time.LocalDate;
 public class DoNotBuyInTheLastBuyTradingDays implements BuyTradingDecision {
 
     private StockPrices stockPrices;
-    private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator;
+    private int numberOfDays;
 
     public DoNotBuyInTheLastBuyTradingDays(StockPrices stockPrices,
-                                           SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator) {
+                                           int numberOfDays) {
         this.stockPrices = stockPrices;
-        this.sellAfterAFixedNumberOfDaysGenerator = sellAfterAFixedNumberOfDaysGenerator;
+        this.numberOfDays = numberOfDays;
     }
 
 
@@ -33,7 +33,7 @@ public class DoNotBuyInTheLastBuyTradingDays implements BuyTradingDecision {
 
 
     private LocalDate getLastAvailableTradingDate() {
-        return stockPrices.getLastTradingDate().minusDays(sellAfterAFixedNumberOfDaysGenerator.getNumberOfDays());
+        return stockPrices.getLastTradingDate().minusDays(numberOfDays);
     }
 
     @Override

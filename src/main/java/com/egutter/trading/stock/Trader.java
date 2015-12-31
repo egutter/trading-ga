@@ -1,7 +1,7 @@
 package com.egutter.trading.stock;
 
 import com.egutter.trading.decision.TradingStrategy;
-import com.egutter.trading.decision.generator.TradingDecisionFactory;
+import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
 import com.google.common.base.Function;
@@ -33,11 +33,22 @@ public class Trader {
     }
 
 
-    public void trade() {
+    public void tradeAllStocksInMarketInParallel() {
+        stockMarket.getStockPrices().parallelStream().forEach(stockPrices -> {
+            System.out.println("Trading " + stockPrices.getStockName());
+            tradeOneStock(stockPrices);
+        });
+    }
+
+    public void tradeAllStocksInMarket() {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
-            stockPrices.forEachDailyPrice(executeMarketOrders(stockPrices, tradingStrategy));
+            tradeOneStock(stockPrices);
         }
+    }
+
+    private void tradeOneStock(StockPrices stockPrices) {
+        TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
+        stockPrices.forEachDailyPrice(executeMarketOrders(stockPrices, tradingStrategy));
     }
 
     public void tradeOn(LocalDate tradingDate) {

@@ -32,7 +32,7 @@ public class Main extends HttpServlet {
         try {
             if (req.getRequestURI().endsWith("/stats")) {
                 showStats(req, resp);
-            } else if (req.getRequestURI().endsWith("/trade-one-day")) {
+            } else if (req.getRequestURI().endsWith("/tradeAllStocksInMarket-one-day")) {
                 tradeOneDay(req, resp);
             } else if (req.getRequestURI().endsWith("/run-alt-stocks-import")) {
                 importAltStocks(req, resp);

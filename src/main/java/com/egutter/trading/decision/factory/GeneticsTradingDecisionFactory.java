@@ -1,9 +1,10 @@
-package com.egutter.trading.decision.generator;
+package com.egutter.trading.decision.factory;
 
 import com.egutter.trading.decision.*;
 import com.egutter.trading.decision.consensus.BuyWhenNoOppositionsTradingDecision;
 import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
+import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.genetic.TradingDecisionGenome;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
@@ -11,25 +12,33 @@ import org.uncommons.maths.binary.BitString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import static java.util.Arrays.asList;
 
 /**
  * Created by egutter on 2/12/14.
  */
-public class TradingDecisionFactory {
+public class GeneticsTradingDecisionFactory implements TradingDecisionFactory {
 
     private final List<BuyTradingDecisionGenerator> buyGeneratorChain = new ArrayList<BuyTradingDecisionGenerator>();
     private final List<SellTradingDecisionGenerator> sellGeneratorChain = new ArrayList<SellTradingDecisionGenerator>();
+    private boolean sellByProfitThreshold;
     private Portfolio portfolio;
     private TradingDecisionGenome genome;
 
-    public TradingDecisionFactory(Portfolio portfolio,
-                                  BitString genome,
-                                  List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators, boolean onExperiment) {
+    public GeneticsTradingDecisionFactory(Portfolio portfolio,
+                                          BitString genome,
+                                          List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators,
+                                          boolean onExperiment) {
+        this(portfolio, genome, tradingDecisionGenerators, onExperiment, Boolean.valueOf(System.getenv().get("SELL_BY_PROFIT_THRESHOLD")));
+    }
+
+    public GeneticsTradingDecisionFactory(Portfolio portfolio,
+                                          BitString genome,
+                                          List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators,
+                                          boolean onExperiment,
+                                          boolean sellByProfitThreshold) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
+        this.sellByProfitThreshold = sellByProfitThreshold;
 
         this.buyGeneratorChain.add(buildDoNotBuyWhenSameStockInPortfolioGenerator());
         if (onExperiment) {
@@ -47,9 +56,10 @@ public class TradingDecisionFactory {
         }
     }
 
-    protected TradingDecisionFactory() {
+    protected GeneticsTradingDecisionFactory() {
     }
 
+    @Override
     public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
         BuyWhenNoOppositionsTradingDecision tradingDecisionComposite = new BuyWhenNoOppositionsTradingDecision();
         for (BuyTradingDecisionGenerator tradingDecisionGenerator : buyGeneratorChain) {
@@ -58,6 +68,7 @@ public class TradingDecisionFactory {
         return tradingDecisionComposite;
     }
 
+    @Override
     public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
         SellWhenNoOppositionsTradingDecision tradingDecisionComposite = new SellWhenNoOppositionsTradingDecision();
         for (SellTradingDecisionGenerator tradingDecisionGenerator : sellGeneratorChain) {
@@ -68,7 +79,6 @@ public class TradingDecisionFactory {
         sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(buildDoNotSellWhenNoStockInPorfolioGenerator().generateSellDecision(stockPrices));
         sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysGenerator().generateSellDecision(stockPrices));
 
-        Boolean sellByProfitThreshold = Boolean.valueOf(System.getenv().get("SELL_BY_PROFIT_THRESHOLD"));
         if (sellByProfitThreshold)
             sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(sellByProfitThresholdGenerator().generateSellDecision(stockPrices));
 

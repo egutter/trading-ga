@@ -3,12 +3,12 @@ package com.egutter.trading.stock;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
-import com.egutter.trading.decision.generator.TradingDecisionFactory;
+import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
+import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.order.OrderBook;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
-import org.uncommons.maths.binary.BitString;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -45,7 +45,7 @@ public class TraderTest {
         OrderBook orderBook = new OrderBook();
         Trader trader = new Trader(stockMarket, alwaysBuyTradingDecisionGenerator(), portfolio, orderBook);
 
-        trader.trade();
+        trader.tradeAllStocksInMarket();
 
         assertThat(trader.ordersExecuted(), equalTo(1));
     }
@@ -54,7 +54,7 @@ public class TraderTest {
     public void should_update_porfolio_case_after_selling_one_order() throws Exception {
         Trader trader = new Trader(stockMarket, alwaysBuyTradingDecisionGenerator(), portfolio, new OrderBook());
 
-        trader.trade();
+        trader.tradeAllStocksInMarket();
 
         int numberOfShares = Trader.AMOUNT_TO_INVEST.divide(BigDecimal.valueOf(ypfStockClosePrice)).intValue();
         double sharesPrice = ypfStockClosePrice * numberOfShares;
@@ -64,7 +64,7 @@ public class TraderTest {
     }
 
     private TradingDecisionFactory alwaysBuyTradingDecisionGenerator() {
-        return new TestTradingDecisionGeneratorBuilder() {
+        return new TestGeneticsTradingDecisionGeneratorBuilder() {
             @Override
             public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
                 return new BuyTradingDecision() {
@@ -97,8 +97,8 @@ public class TraderTest {
         };
     }
 
-    private class TestTradingDecisionGeneratorBuilder extends TradingDecisionFactory {
-        public TestTradingDecisionGeneratorBuilder() {
+    private class TestGeneticsTradingDecisionGeneratorBuilder extends GeneticsTradingDecisionFactory {
+        public TestGeneticsTradingDecisionGeneratorBuilder() {
             super();
         }
     }

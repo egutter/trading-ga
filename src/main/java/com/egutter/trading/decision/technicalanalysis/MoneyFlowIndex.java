@@ -41,6 +41,10 @@ public class MoneyFlowIndex extends MomentumOscillator {
         super(stockPrices, buyThreshold, sellThreshold, days);
     }
 
+    public static MoneyFlowIndex empty(StockPrices stockPrices) {
+        return new MoneyFlowIndex(stockPrices, Range.atLeast(1.0), Range.atMost(1.0), 14);
+    }
+
     @Override
     protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
         Map<LocalDate, Double> moneyFlowIndex = new HashMap<LocalDate, Double>();

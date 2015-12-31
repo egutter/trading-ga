@@ -1,6 +1,6 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.decision.generator.TradingDecisionFactory;
+import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 

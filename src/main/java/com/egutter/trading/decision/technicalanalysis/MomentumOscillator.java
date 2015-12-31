@@ -10,11 +10,12 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by egutter on 3/1/15.
  */
-public abstract class MomentumOscillator implements BuyTradingDecision, SellTradingDecision {
+public abstract class MomentumOscillator implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
 
     protected final StockPrices stockPrices;
     protected final Range sellThreshold;
@@ -47,11 +48,15 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
         if (!getMomentumOscillatorIndex().containsKey(tradingDate)) {
             return DecisionResult.NEUTRAL;
         }
-        Double mfiAtDay = getMomentumOscillatorIndex().get(tradingDate);
+        Double mfiAtDay = getIndexAtDate(tradingDate).get();
         if (tradeThreshold.contains(mfiAtDay)) {
             return DecisionResult.YES;
         }
         return DecisionResult.NO;
+    }
+
+    public Optional<Double> getIndexAtDate(LocalDate tradingDate) {
+        return Optional.ofNullable(getMomentumOscillatorIndex().get(tradingDate));
     }
 
     protected synchronized Map<LocalDate, Double> getMomentumOscillatorIndex() {

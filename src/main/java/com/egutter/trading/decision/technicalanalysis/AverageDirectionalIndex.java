@@ -44,6 +44,10 @@ public class AverageDirectionalIndex extends MomentumOscillator {
         super(stockPrices, buyThreshold, sellThreshold, days);
     }
 
+    public static AverageDirectionalIndex empty(StockPrices stockPrices) {
+        return new AverageDirectionalIndex(stockPrices, Range.atLeast(1), Range.atMost(1), 14);
+    }
+
     @Override
     protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
         Map<LocalDate, Double> averageDirectionalIndex = new HashMap<LocalDate, Double>();;

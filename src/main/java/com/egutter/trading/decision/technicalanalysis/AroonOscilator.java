@@ -15,15 +15,12 @@ import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by egutter on 6/4/14.
  */
-public class AroonOscilator implements BuyTradingDecision, SellTradingDecision {
+public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
 
     private HashMap<LocalDate, Double> aroonOscilator;
     private final StockPrices stockPrices;
@@ -57,6 +54,10 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision {
         this.days = days;
     }
 
+    public static AroonOscilator empty(StockPrices stockPrices) {
+        return new AroonOscilator(stockPrices, Range.atLeast(1.0), Range.atMost(1.0), 14);
+    }
+
     private synchronized HashMap<LocalDate, Double> getAroonOscilator() {
         if (this.aroonOscilator == null) {
             calculateAroonOscilator();
@@ -78,11 +79,15 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision {
         if (!getAroonOscilator().containsKey(tradingDate)) {
             return DecisionResult.NEUTRAL;
         }
-        Double mfiAtDay = getAroonOscilator().get(tradingDate);
-        if (tradeThreshold.contains(mfiAtDay)) {
+        Double aroonAtDay = getIndexAtDate(tradingDate).get();
+        if (tradeThreshold.contains(aroonAtDay)) {
             return DecisionResult.YES;
         }
         return DecisionResult.NO;
+    }
+
+    public Optional<Double> getIndexAtDate(LocalDate tradingDate) {
+        return Optional.ofNullable(getAroonOscilator().get(tradingDate));
     }
 
     private void calculateAroonOscilator() {

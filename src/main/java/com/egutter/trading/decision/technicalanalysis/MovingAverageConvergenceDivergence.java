@@ -22,17 +22,14 @@ import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 import org.uncommons.maths.Maths;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 
 /**
  * Created by egutter on 2/10/14.
  */
-public class MovingAverageConvergenceDivergence implements BuyTradingDecision, SellTradingDecision {
+public class MovingAverageConvergenceDivergence implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
 
     private final StockPrices stockPrices;
     private Map<LocalDate, MacdStats> macd;
@@ -76,6 +73,10 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
         this.sellSignal = sellSignal;
     }
 
+    public static MovingAverageConvergenceDivergence empty(StockPrices stockPrices) {
+        return new MovingAverageConvergenceDivergence(stockPrices, TradeSignal.noChange(), TradeSignal.noChange());
+    }
+
     @Override
     public DecisionResult shouldBuyOn(LocalDate tradingDate) {
         return shouldTradeOn(tradingDate, buySignal);
@@ -93,6 +94,23 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
         MacdStats macdStats = getMacd().get(tradingDate);
 
         return tradeSignal.shouldTrade(macdStats.signChange(), macdStats.getDifferenceWithPreviousDay());
+    }
+
+    @Override
+    public Optional<Double> getIndexAtDate(LocalDate tradingDate) {
+        MacdStats macdStats = getMacd().get(tradingDate);
+        if (macdStats == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(macdStats.getDifferenceWithPreviousDay());
+    }
+
+    public Optional<SignChange> getSignChangeAtDate(LocalDate tradingDate) {
+        MacdStats macdStats = getMacd().get(tradingDate);
+        if (macdStats == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(macdStats.signChange());
     }
 
     private synchronized Map<LocalDate, MacdStats> getMacd() {

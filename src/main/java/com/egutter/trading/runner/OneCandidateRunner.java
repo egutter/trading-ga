@@ -1,28 +1,32 @@
 package com.egutter.trading.runner;
 
 import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.decision.consensus.BuyWhenNoOppositionsTradingDecision;
+import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
+import com.egutter.trading.decision.constraint.*;
+import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
+import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.decision.technicalanalysis.BollingerBands;
-import com.egutter.trading.decision.technicalanalysis.MovingAverageConvergenceDivergence;
 import com.egutter.trading.decision.technicalanalysis.RelativeStrengthIndex;
+import com.egutter.trading.decision.technicalanalysis.WilliamsR;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
 import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.OrderBook;
 import com.egutter.trading.out.PrintResult;
-import com.egutter.trading.stock.Portfolio;
-import com.egutter.trading.stock.StockMarket;
-import com.egutter.trading.stock.StockMarketBuilder;
-import com.egutter.trading.stock.Trader;
+import com.egutter.trading.stock.*;
+import com.google.common.collect.Range;
+import com.tictactec.ta.lib.MAType;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 import org.uncommons.maths.binary.BitString;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Arrays.asList;
 
 /**
  * Created by egutter on 11/29/14.
@@ -45,12 +49,21 @@ public class OneCandidateRunner {
         this.candidate = candidate;
         this.portfolio = portfolio;
         this.orderBook = new OrderBook();
-        this.trader = new Trader(stockMarket, new TradingDecisionFactory(portfolio, candidate, tradingDecisionGenerators, onExperiment), portfolio, orderBook);
-        this.tradingDecisionFactory = new TradingDecisionFactory(new Portfolio(), candidate, tradingDecisionGenerators, onExperiment);
+        this.trader = new Trader(stockMarket, new GeneticsTradingDecisionFactory(portfolio, candidate, tradingDecisionGenerators, onExperiment), portfolio, orderBook);
+        this.tradingDecisionFactory = new GeneticsTradingDecisionFactory(new Portfolio(), candidate, tradingDecisionGenerators, onExperiment);
+    }
+
+    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, TradingDecisionFactory tradingDecisionFactory) {
+        this.stockMarket = stockMarket;
+        this.candidate = candidate;
+        this.portfolio = portfolio;
+        this.orderBook = new OrderBook();
+        this.trader = new Trader(stockMarket, tradingDecisionFactory, portfolio, orderBook);
+        this.tradingDecisionFactory = tradingDecisionFactory;
     }
 
     public void run() {
-        trader.trade();
+        trader.tradeAllStocksInMarket();
         new PrintResult().print(this, candidate);
     }
 
@@ -113,6 +126,45 @@ public class OneCandidateRunner {
         return portfolio.getStats().allOrdersAverageReturn();
     }
 
+    public static void main2(String[] args) {
+        LocalDate fromDate = new LocalDate(2014, 12, 1);
+        LocalDate toDate = LocalDate.now();
+
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
+
+        System.out.println("==========================================");
+        System.out.println("******************************************");
+        System.out.println("==========================================");
+        Candidate candidate = new Candidate("XXX", "1111100110011000011010110110101010100110111", Arrays.asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class));
+        System.out.println(candidate.getDescription() + ": " + candidate.key());
+        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+        TradingDecisionFactory tradingDecisionFactory = new TradingDecisionFactory() {
+            @Override
+            public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
+                BuyWhenNoOppositionsTradingDecision tradingDecisionComposite = new BuyWhenNoOppositionsTradingDecision();
+                tradingDecisionComposite.addBuyTradingDecision(new DoNotBuyWhenSameStockInPortfolio(portfolio, stockPrices));
+                tradingDecisionComposite.addBuyTradingDecision(new DoNotBuyInTheLastBuyTradingDays(stockPrices, 10));
+                tradingDecisionComposite.addBuyTradingDecision(new RelativeStrengthIndex(stockPrices, Range.atLeast(75.0), Range.atMost(50.0), 14));
+                tradingDecisionComposite.addBuyTradingDecision(new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(0.5), 20, MAType.Sma));
+                tradingDecisionComposite.addBuyTradingDecision(new WilliamsR(stockPrices, Range.atMost(-70.0), Range.atLeast(-50.0), 14));
+                return tradingDecisionComposite;
+            }
+
+            @Override
+            public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
+                SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = new SellWhenNoOppositionsTradingDecision();
+                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new DoNotSellWhenNoStockInPorfolio(portfolio, stockPrices));
+                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new SellAfterAFixedNumberOFDays(portfolio, stockPrices, 10));
+
+                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new SellByProfitThreshold(portfolio, stockPrices, BigDecimal.TEN));
+
+                return sellAfterAFixedNumberOfDaysComposite;
+
+            }
+        };
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, tradingDecisionFactory);
+        runner.run();
+    }
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2012, 12, 1);
         LocalDate toDate = LocalDate.now();

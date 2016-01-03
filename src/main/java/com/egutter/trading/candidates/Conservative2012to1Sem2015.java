@@ -67,7 +67,10 @@ public class Conservative2012to1Sem2015 {
                 new Candidate("Conservative 2012-1stSem2015", "111101100000000000110110100101", asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class)),
                 new Candidate("Conservative 2012-1stSem2015", "111001110101100111101010111110", asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class)),
                 new Candidate("Conservative 2012-1stSem2015", "101001100001010111010000111011", asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class)),
-                new Candidate("Conservative 2012-1stSem2015", "111010111010100100011000100110", asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class))
+                new Candidate("Conservative 2012-1stSem2015", "111010111010100100011000100110", asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class)),
+                new Candidate("Conservative 2012-2015", "1101101001001000001001100100110101110101101", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("Conservative 2012-2015", "010101111001000011101010010011", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class)),
+                new Candidate("Conservative 2012-2015", "0100110000110100001101101010110101111010111", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class))
         );
     };
 }

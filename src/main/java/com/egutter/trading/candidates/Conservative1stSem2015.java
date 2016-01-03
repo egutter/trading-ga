@@ -260,7 +260,23 @@ public class Conservative1stSem2015 {
                 new Candidate("Conservative 1stSem 2015", "111101100011100111001101111000", asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class)),
 
                 new Candidate("Conservative 1stSem 2015", "111001001011010011001010000100", asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class)),
-                new Candidate("Conservative 1stSem 2015", "111001001100110011001001111000", asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class))
+                new Candidate("Conservative 1stSem 2015", "111001001100110011001001111000", asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class)),
+
+                new Candidate("2015-2015", "0111100110011001000111110101101001101010101", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("2015-2015", "1111100011000100000001000011111100010011000", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("High Rank 2015", "1111010110111000001011111111001111101111000", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("High Rank 2015", "1111011001010000111111000010011110101111000", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("High rank 2015", "1010101001101100011100010011111110001110000", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("HighRank-2015", "1111010011111011100111100110010101101110100", asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class)),
+                new Candidate("HighRank-2015", "1011101001110100011000010010001100110100110", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, AroonOscilatorGenerator.class)),
+                new Candidate("HighRank-2015", "1111100100101001101100100100000011111110111", asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class)),
+                new Candidate("HighRank-2015", "1011011000010101100110100110100110001000010", asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class)),
+                new Candidate("HighRank-2015", "1010101110111101110100110110001110001110000", asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("HighRank-2015", "0111101000011000100000110100100011100000011", asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class)),
+                new Candidate("HighRank-2015", "1010101001101000000111000111101111101110000", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("HighRank-2015", "1000100111100100011110100010111111101111000", asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("HighRank-2015", "1111011001000001001000010000101110101111000", asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class, WilliamsRGenerator.class)),
+                new Candidate("HighRank-2015", "101010100001110010000101001010", asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class))
         );
     }
 }

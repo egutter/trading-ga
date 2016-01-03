@@ -39,18 +39,68 @@ public class OneLongPeriodExperimentRunner {
 
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
 
-        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
-                asList(
-//                        MovingAverageConvergenceDivergenceGenerator.class,
-                        RelativeStrengthIndexGenerator.class,
-//                        AverageDirectionalIndexGenerator.class,
+        runOneStrategy(stockMarket, asList(
+                        AverageDirectionalIndexGenerator.class,
                         BollingerBandsGenerator.class,
+                        MoneyFlowIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                RelativeStrengthIndexGenerator.class,
+                BollingerBandsGenerator.class,
+                AroonOscilatorGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                MovingAverageConvergenceDivergenceGenerator.class,
+                RelativeStrengthIndexGenerator.class,
+                BollingerBandsGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                MovingAverageConvergenceDivergenceGenerator.class,
+                RelativeStrengthIndexGenerator.class,
+                MoneyFlowIndexGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                MovingAverageConvergenceDivergenceGenerator.class,
+                RelativeStrengthIndexGenerator.class,
+                WilliamsRGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                RelativeStrengthIndexGenerator.class,
+                AverageDirectionalIndexGenerator.class,
+                BollingerBandsGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                RelativeStrengthIndexGenerator.class,
+                BollingerBandsGenerator.class,
+                WilliamsRGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                RelativeStrengthIndexGenerator.class,
+                AroonOscilatorGenerator.class,
+                WilliamsRGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                RelativeStrengthIndexGenerator.class,
+                UltimateOscillatorGenerator.class,
+                WilliamsRGenerator.class));
+
+        runOneStrategy(stockMarket, asList(
+                RelativeStrengthIndexGenerator.class,
+                BollingerBandsGenerator.class));
+
+
+//        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
+//                asList(
+//                        MovingAverageConvergenceDivergenceGenerator.class,
+//                        RelativeStrengthIndexGenerator.class,
+//                        AverageDirectionalIndexGenerator.class,
+//                        BollingerBandsGenerator.class,
 //                        AroonOscilatorGenerator.class,
 //                        MoneyFlowIndexGenerator.class,
 //                        UltimateOscillatorGenerator.class,
-                        WilliamsRGenerator.class) );
-
-        runAllCombinationsOf(stockMarket, initialVector, 3);
+//                        WilliamsRGenerator.class) );
+//
+//        runAllCombinationsOf(stockMarket, initialVector, 3);
 //        runAllCombinationsOf(stockMarket, initialVector, 2);
 
     }

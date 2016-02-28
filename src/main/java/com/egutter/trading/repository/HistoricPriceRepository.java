@@ -77,7 +77,7 @@ public class HistoricPriceRepository extends MongoRepository {
     public void forEachStock(Consumer<String> applyBlock, Predicate<String> filter) {
         Set<String> colls = historicPriceConn().getCollectionNames();
         for (String stockName : colls) {
-            if (stockName.equals("system.indexes") || filter.test(stockName)) {
+            if (stockName.contains("system") || filter.test(stockName)) {
                 continue;
             }
             applyBlock.accept(stockName);

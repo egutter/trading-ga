@@ -57,16 +57,19 @@ public class StockMarket {
     public static String[] merval25StockSymbols() {
         return new String[]{
                 // MERVAL 25
+                "AGRO.BA", // ALUAR ALUMINIO
                 "ALUA.BA", // ALUAR ALUMINIO
                 "APBR.BA", // PETROBRAS ORDINARIAS
                 "BHIP.BA", // BANCO HIPOTECARIO
                 "BMA.BA", // BANCO MACRO
                 "BPAT.BA", // Banco Patagonia
                 "BRIO.BA", // Banco Santander Rio S.A.
+                "CAPU.BA", // Banco Santander Rio S.A.
                 "CECO2.BA", // Endesa Costanera SA
                 "CELU.BA", // Celulosa Argentina S.A.
-                "CEPU2.BA", // CENTRAL PUERTO
+                "CEPU.BA", // CENTRAL PUERTO
                 "COME.BA", // COMERCIAL DEL PLATA
+                "CRES.BA", // CRESUD
                 "EDN.BA", // EDENOR
                 "ERAR.BA", // SIDERAR
                 "FRAN.BA", // BCO.FRANCES S.A.
@@ -77,6 +80,8 @@ public class StockMarket {
                 "PAMP.BA", // FRIGORIFICO LA PAMPA
                 "PESA.BA", // PETROBRAS ENERGIA
                 "PETR.BA", // Petrolera Pampa S.A.
+                "SAMI.BA", // Petrolera Pampa S.A.
+                "SEMI.BA", // Petrolera Pampa S.A.
                 "TECO2.BA", // TELECOM ARGENTINA
                 "TEF.BA",   // Telefonica
                 "TGNO4.BA", // TRANSPORT GAS NORTE

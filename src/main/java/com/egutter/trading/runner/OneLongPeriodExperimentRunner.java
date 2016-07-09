@@ -31,77 +31,77 @@ public class OneLongPeriodExperimentRunner {
 
     private void run() {
 
-        LocalDate fromDate = new LocalDate(2015, 1, 1);
+//        LocalDate fromDate = new LocalDate(2015, 1, 1);
 //        LocalDate toDate = new LocalDate(2013, 7, 1);
-//        LocalDate fromDate = LocalDate.now().minusMonths(26);
+        LocalDate fromDate = LocalDate.now().minusMonths(6);
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
 
-        runOneStrategy(stockMarket, asList(
-                        AverageDirectionalIndexGenerator.class,
-                        BollingerBandsGenerator.class,
-                        MoneyFlowIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                RelativeStrengthIndexGenerator.class,
-                BollingerBandsGenerator.class,
-                AroonOscilatorGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                MovingAverageConvergenceDivergenceGenerator.class,
-                RelativeStrengthIndexGenerator.class,
-                BollingerBandsGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                MovingAverageConvergenceDivergenceGenerator.class,
-                RelativeStrengthIndexGenerator.class,
-                MoneyFlowIndexGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                MovingAverageConvergenceDivergenceGenerator.class,
-                RelativeStrengthIndexGenerator.class,
-                WilliamsRGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                RelativeStrengthIndexGenerator.class,
-                AverageDirectionalIndexGenerator.class,
-                BollingerBandsGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                RelativeStrengthIndexGenerator.class,
-                BollingerBandsGenerator.class,
-                WilliamsRGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                RelativeStrengthIndexGenerator.class,
-                AroonOscilatorGenerator.class,
-                WilliamsRGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                RelativeStrengthIndexGenerator.class,
-                UltimateOscillatorGenerator.class,
-                WilliamsRGenerator.class));
-
-        runOneStrategy(stockMarket, asList(
-                RelativeStrengthIndexGenerator.class,
-                BollingerBandsGenerator.class));
-
-
-//        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
-//                asList(
-//                        MovingAverageConvergenceDivergenceGenerator.class,
-//                        RelativeStrengthIndexGenerator.class,
+//        runOneStrategy(stockMarket, asList(
 //                        AverageDirectionalIndexGenerator.class,
 //                        BollingerBandsGenerator.class,
-//                        AroonOscilatorGenerator.class,
-//                        MoneyFlowIndexGenerator.class,
-//                        UltimateOscillatorGenerator.class,
-//                        WilliamsRGenerator.class) );
+//                        MoneyFlowIndexGenerator.class));
 //
-//        runAllCombinationsOf(stockMarket, initialVector, 3);
-//        runAllCombinationsOf(stockMarket, initialVector, 2);
+//        runOneStrategy(stockMarket, asList(
+//                RelativeStrengthIndexGenerator.class,
+//                BollingerBandsGenerator.class,
+//                AroonOscilatorGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                MovingAverageConvergenceDivergenceGenerator.class,
+//                RelativeStrengthIndexGenerator.class,
+//                BollingerBandsGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                MovingAverageConvergenceDivergenceGenerator.class,
+//                RelativeStrengthIndexGenerator.class,
+//                MoneyFlowIndexGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                MovingAverageConvergenceDivergenceGenerator.class,
+//                RelativeStrengthIndexGenerator.class,
+//                WilliamsRGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                RelativeStrengthIndexGenerator.class,
+//                AverageDirectionalIndexGenerator.class,
+//                BollingerBandsGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                RelativeStrengthIndexGenerator.class,
+//                BollingerBandsGenerator.class,
+//                WilliamsRGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                RelativeStrengthIndexGenerator.class,
+//                AroonOscilatorGenerator.class,
+//                WilliamsRGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                RelativeStrengthIndexGenerator.class,
+//                UltimateOscillatorGenerator.class,
+//                WilliamsRGenerator.class));
+//
+//        runOneStrategy(stockMarket, asList(
+//                RelativeStrengthIndexGenerator.class,
+//                BollingerBandsGenerator.class));
+
+
+        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
+                asList(
+                        MovingAverageConvergenceDivergenceGenerator.class,
+                        RelativeStrengthIndexGenerator.class,
+                        AverageDirectionalIndexGenerator.class,
+                        BollingerBandsGenerator.class,
+                        AroonOscilatorGenerator.class,
+                        MoneyFlowIndexGenerator.class,
+                        UltimateOscillatorGenerator.class,
+                        WilliamsRGenerator.class) );
+
+        runAllCombinationsOf(stockMarket, initialVector, 3);
+        runAllCombinationsOf(stockMarket, initialVector, 2);
 
     }
 

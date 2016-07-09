@@ -59,7 +59,7 @@ public class CandidateRank {
         return "[" + rankingAsString() + "] ";
     }
 
-    private String rankingAsString() {
+    public String rankingAsString() {
         return primaryRank + secondaryRank;
     }
 

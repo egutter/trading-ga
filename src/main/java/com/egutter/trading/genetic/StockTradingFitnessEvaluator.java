@@ -57,10 +57,10 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
                 porfolioStats.countOrdersWon(),
                 porfolioStats.countOrdersLost());
 
-        if (!candidateRanker.rank(stats).isHighRank()) return 0;
+//        if (!candidateRanker.rank(stats).isHighRank()) return 0;
 //        if (discardWhenBellowMarket(portfolio, 0.9)) return 0;
 
-//        if (discardWhenOrdersLost(portfolio)) return 0;
+        if (discardWhenOrdersLost(portfolio)) return 0;
 
 //        Fitness by Cash
 //        return portfolio.getCash().doubleValue();

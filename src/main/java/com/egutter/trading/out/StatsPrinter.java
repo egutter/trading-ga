@@ -11,6 +11,8 @@ import com.egutter.trading.stats.CandidateStatsCollector;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 
@@ -99,9 +101,13 @@ public class StatsPrinter {
     }
 
     public String candidateNameByKey(String key) {
-        Candidate candidateFound = candidates.stream().filter(candidate -> candidate.key().equals(key)).findFirst().orElseThrow(() -> new RuntimeException("Cannot find candidate for " + key));
+        Candidate candidateFound = candidateByKey(key);
 
         return ranker.rank(candidateFound).toString() + candidateFound;
+    }
+
+    public Candidate candidateByKey(String key) {
+        return candidates.stream().filter(candidate -> candidate.key().equals(key)).findFirst().orElseThrow(() -> new RuntimeException("Cannot find candidate for " + key));
     }
 
     public void htmlStatsAndPortfolioOn(LocalDate lastTradingDay, PrintWriter writer) {
@@ -153,6 +159,60 @@ public class StatsPrinter {
             });
             writer.print("</ul>");
         });
+    }
+
+    public Map collectCandidateStats() {
+        Map stats = new HashMap<>();
+
+        portfolioRepository.forEachStatCollection(key -> {
+            List candidateOperations = new ArrayList<>();
+
+            AtomicReference<BigDecimal> averageReturnAccum = new AtomicReference<BigDecimal>(BigDecimal.ZERO);
+            AtomicInteger count = new AtomicInteger(0);
+            portfolioRepository.forEachStat(key, buySellOrder -> {
+                candidateOperations.add(buySellOrder);
+                averageReturnAccum.getAndAccumulate(buySellOrder.profitPctg30(), (currentProfit, newProfit) -> {
+                    return currentProfit.add(newProfit);
+                });
+                count.getAndIncrement();
+            });
+            BigDecimal averageReturn = averageReturnAccum.get().divide(BigDecimal.valueOf(count.intValue()), RoundingMode.HALF_EVEN);
+            Candidate candidate = candidateByKey(key);
+            stats.put(candidate, ImmutableMap.of("OPERATIONS", candidateOperations, "AVERAGE-30", averageReturn, "RANK", ranker.rank(candidate).rankingAsString()));
+        });
+        return stats;
+    }
+
+    public Map collectStockStats() {
+        Map stats = new HashMap<>();
+        LocalDate lastTradingDay = stockMarket.getLastTradingDay();
+        Map<String, List<Pair<String, BuyOrder>>> stockMap = new HashMap<String, List<Pair<String, BuyOrder>>>();
+        portfolioRepository.forEachStock((key, buyOrder) -> {
+            if (isMerval25(buyOrder.getStockName())) {
+                if (stockMap.containsKey(buyOrder.getStockName())) {
+                    List<Pair<String, BuyOrder>> buyOrders = stockMap.get(buyOrder.getStockName());
+                    buyOrders.add(new Pair(key, buyOrder));
+                } else {
+                    List<Pair<String, BuyOrder>> buyOrders = new ArrayList<Pair<String, BuyOrder>>();
+                    buyOrders.add(new Pair(key, buyOrder));
+                    stockMap.put(buyOrder.getStockName(), buyOrders);
+                }
+            }
+        });
+        stockMap.keySet().forEach(stockName -> {
+            List stockOperations = new ArrayList();
+            stockMap.get(stockName).forEach(pair -> {
+                BuyOrder buyOrder = pair.getSecond();
+                DailyQuote buyDailyQuote = buyOrder.getDailyQuote();
+                Optional<DailyQuote> fakeSelldailyQuoteOptional = stockMarket.getStockPricesFor(stockName).dailyPriceOn(lastTradingDay);
+                DailyQuote fakeSellDailyQuote = fakeSelldailyQuoteOptional.orElse(fakeSellQuoteBasedOn(lastTradingDay, buyDailyQuote));
+                SellOrder fakeSellOrder = new SellOrder(stockName, fakeSellDailyQuote, buyOrder.getNumberOfShares());
+                BuySellOperation fakeOperation = new BuySellOperation(buyOrder, fakeSellOrder);
+                stockOperations.add(new Pair(candidateNameByKey(pair.getFirst()), fakeOperation));
+            });
+            stats.put(stockName, "</h2>");
+        });
+        return stats;
     }
 
     private DailyQuote fakeSellQuoteBasedOn(LocalDate lastTradingDay, DailyQuote buyDailyQuote) {

@@ -1,6 +1,6 @@
 package com.egutter.trading.runner;
 
-import com.egutter.trading.candidates.MixOneBest;
+import com.egutter.trading.candidates.MixOne;
 import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.order.MarketOrder;
 import com.egutter.trading.out.StatsPrinter;
@@ -167,7 +167,7 @@ public class TradeOneDayRunner {
             return candidates;
         } catch (Exception e) {
             System.out.println("No Candidate factory defined. Falling to Default MixOne");
-            return MixOneBest.candidates();
+            return MixOne.candidates();
         }
     }
 

@@ -27,6 +27,7 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, 
     private final Range buyThreshold;
     private final Range sellThreshold;
     private final int days;
+    private LocalDate startOnDate = LocalDate.now();
 
     public static void main(String[] args) {
         StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
@@ -117,6 +118,7 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, 
         }
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
         int lookBack = new CoreAnnotated().aroonLookback(days());
+        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
         for (int i = 0; i < outNBElement.value; i++) {
             int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);
@@ -138,6 +140,11 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, 
                 this.getBuyThreshold(),
                 "days",
                 this.days);
+    }
+
+    @Override
+    public LocalDate startOn() {
+        return this.startOnDate;
     }
 
 

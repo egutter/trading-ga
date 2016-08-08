@@ -43,12 +43,18 @@ public class Trader {
     public void tradeAllStocksInMarket() {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
             tradeOneStock(stockPrices);
+            if (shouldStop()) break;
         }
+    }
+
+    private boolean shouldStop() {
+        return this.portfolio.getStats().hasLostOrders();
     }
 
     private void tradeOneStock(StockPrices stockPrices) {
         TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
-        stockPrices.forEachDailyPrice(executeMarketOrders(stockPrices, tradingStrategy));
+        LocalDate startOn = tradingStrategy.startOn();
+        stockPrices.forEachDailyPrice(startOn, executeMarketOrders(stockPrices, tradingStrategy), () -> shouldStop());
     }
 
     public void tradeOn(LocalDate tradingDate) {

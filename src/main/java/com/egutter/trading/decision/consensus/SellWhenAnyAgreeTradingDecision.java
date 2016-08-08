@@ -10,7 +10,6 @@ import org.joda.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.egutter.trading.decision.consensus.TradeBasedOnConsensus.tradeWhenYesAgreement;
 import static com.google.common.collect.FluentIterable.from;
 
 /**
@@ -26,12 +25,8 @@ public class SellWhenAnyAgreeTradingDecision implements SellTradingDecision {
 
     @Override
     public DecisionResult shouldSellOn(final LocalDate tradingDate) {
-        return tradeWhenYesAgreement.shouldTradeOn(sellTradingDecisionList, new Function<TradingDecision, DecisionResult>() {
-            @Override
-            public DecisionResult apply(TradingDecision tradingDecision) {
-                return ((SellTradingDecision) tradingDecision).shouldSellOn(tradingDate);
-            }
-        });
+        TradeBasedOnConsensus tradeBasedOnConsensus = new TradeBasedOnConsensus(sellTradingDecisionList, DecisionResult.YES, DecisionResult.NO);
+        return tradeBasedOnConsensus.shouldTradeOn(tradingDecision -> ((SellTradingDecision) tradingDecision).shouldSellOn(tradingDate));
     }
 
     @Override

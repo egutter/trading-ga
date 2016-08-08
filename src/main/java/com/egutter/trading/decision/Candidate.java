@@ -76,4 +76,15 @@ public class Candidate {
     public String toString() {
         return this.getDescription() + ": " + this.key();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!obj.getClass().isAssignableFrom(Candidate.class)) return false;
+        return this.key().equals(((Candidate)obj).key());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.key().hashCode();
+    }
 }

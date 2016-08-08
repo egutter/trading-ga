@@ -74,6 +74,7 @@ public class GeneticsTradingDecisionFactory implements TradingDecisionFactory {
         for (SellTradingDecisionGenerator tradingDecisionGenerator : sellGeneratorChain) {
             tradingDecisionComposite.addSellTradingDecision(tradingDecisionGenerator.generateSellDecision(stockPrices));
         }
+        if (doNotSellAfterAFixedNumberOfDays()) return tradingDecisionComposite;
 
         SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = new SellWhenNoOppositionsTradingDecision();
         sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(buildDoNotSellWhenNoStockInPorfolioGenerator().generateSellDecision(stockPrices));
@@ -86,6 +87,10 @@ public class GeneticsTradingDecisionFactory implements TradingDecisionFactory {
         orTradingDecisionComposite.addSellTradingDecision(tradingDecisionComposite);
         orTradingDecisionComposite.addSellTradingDecision(sellAfterAFixedNumberOfDaysComposite);
         return orTradingDecisionComposite;
+    }
+
+    private boolean doNotSellAfterAFixedNumberOfDays() {
+        return Boolean.valueOf(System.getenv().get("DO_NOT_SELL_AFTER_A_FIXED_NUMBER_OF_DAYS"));
     }
 
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator() {

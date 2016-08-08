@@ -1,12 +1,11 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import org.joda.time.LocalDate;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.WeakHashMap;
+import java.util.*;
+import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Iterables.getLast;
@@ -96,9 +95,13 @@ public class StockPrices {
         return stockName;
     }
 
-    public void forEachDailyPrice(Function<DailyQuote, Object> function) {
-        for (DailyQuote dailyQuote : dailyQuotes) {
+    public void forEachDailyPrice(LocalDate startOn, Function<DailyQuote, Object> function, BooleanSupplier shouldStop) {
+        DailyQuote startOnQuote = dailyQuotes.stream().filter(quote -> quote.isOn(startOn)).findFirst().orElse(dailyQuotes.get(0));
+        int startOnIndex = dailyQuotes.indexOf(startOnQuote);
+        for (ListIterator<DailyQuote> dailyQuotesIter = dailyQuotes.listIterator(startOnIndex); dailyQuotesIter.hasNext();){
+            DailyQuote dailyQuote = dailyQuotesIter.next();
             function.apply(dailyQuote);
+            if (shouldStop.getAsBoolean()) break;
         }
     }
 

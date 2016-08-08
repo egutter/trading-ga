@@ -24,4 +24,8 @@ public class TradingStrategy {
     public DecisionResult shouldSellOn(LocalDate tradingDate) {
         return sellTradingDecision.shouldSellOn(tradingDate);
     }
+
+    public LocalDate startOn() {
+        return this.buyTradingDecision.startOn();
+    }
 }

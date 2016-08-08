@@ -23,6 +23,7 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
 
     protected Range buyThreshold;
     protected int days;
+    protected LocalDate startOnDate = LocalDate.now();
 
     public MomentumOscillator(StockPrices stockPrices,
                                  Range buyThreshold,
@@ -107,4 +108,8 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
         return 0;
     }
 
+    @Override
+    public LocalDate startOn() {
+        return this.startOnDate;
+    }
 }

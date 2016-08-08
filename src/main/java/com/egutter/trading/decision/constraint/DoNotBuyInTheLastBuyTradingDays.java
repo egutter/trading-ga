@@ -41,4 +41,9 @@ public class DoNotBuyInTheLastBuyTradingDays implements BuyTradingDecision {
         return null;
     }
 
+    @Override
+    public LocalDate startOn() {
+        return LocalDate.now();
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.decision.technicalanalysis.BollingerBands;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Range;

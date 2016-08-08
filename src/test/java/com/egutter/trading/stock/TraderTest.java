@@ -77,6 +77,11 @@ public class TraderTest {
                     public String buyDecisionToString() {
                         return null;
                     }
+
+                    @Override
+                    public LocalDate startOn() {
+                        return LocalDate.now();
+                    }
                 };
             }
 

@@ -1,6 +1,7 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.*;
+import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.technicalanalysis.AroonOscilator;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.MapMaker;
@@ -21,6 +22,7 @@ public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, Sel
     private final Range<Double> sellThreshold;
     private final int days;
 
+//    private static final Map<String, AroonOscilator> cache = new HashMap<>();
     private static final transient ConcurrentMap<String, AroonOscilator> cache = new MapMaker().weakKeys().makeMap();
     private BitString chromosome;
 

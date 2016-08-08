@@ -25,15 +25,22 @@ import static com.google.common.collect.FluentIterable.from;
 public class PortfolioStats {
 
     private List<BuySellOperation> stats = new ArrayList<BuySellOperation>();
-    private ImmutableList<BuySellOperation> ordersWon;
-    private ImmutableList<BuySellOperation> ordersLost;
+    private List<BuySellOperation> ordersWon = new ArrayList<>();
+    private List<BuySellOperation> ordersLost= new ArrayList<>();
     private ImmutableList<BuySellOperation> ordersAboveMarket;
 
     public void removeStat(BuySellOperation buySellOperation) {
         this.stats.remove(buySellOperation);
     }
+
     public void addStatsFor(BuyOrder buyOrder, SellOrder sellOrder) {
-        this.stats.add(new BuySellOperation(buyOrder, sellOrder));
+        BuySellOperation buySellOperation = new BuySellOperation(buyOrder, sellOrder);
+        if (buySellOperation.isLost()) {
+            this.ordersLost.add(buySellOperation);
+        } else if (buySellOperation.isWon()) {
+            this.ordersWon.add(buySellOperation);
+        }
+        this.stats.add(buySellOperation);
     }
 
     public List<String> mostPopularStocks(int numOfElements) {
@@ -52,7 +59,7 @@ public class PortfolioStats {
     }
 
     public int countOrdersWon() {
-        return ordersWon().size();
+        return this.ordersWon.size();
     }
 
     private int countOrdersAboveMarket() {
@@ -64,7 +71,7 @@ public class PortfolioStats {
     }
 
     public int countOrdersLost() {
-        return ordersLost().size();
+        return this.ordersLost.size();
     }
 
     public BigDecimal percentageOfOrdersWon() {
@@ -102,7 +109,7 @@ public class PortfolioStats {
     }
 
     public BigDecimal lostOrdersAverageReturn() {
-        return averageReturn(ordersLost());
+        return averageReturn(this.ordersLost);
     }
 
     public BigDecimal averageReturn(List<BuySellOperation> someStats) {
@@ -137,29 +144,6 @@ public class PortfolioStats {
     public int totalOrdersCount() {
         return stats.size();
     }
-    private List<BuySellOperation> ordersLost() {
-        if (this.ordersLost == null) {
-            this.ordersLost = from(stats).filter(new Predicate<BuySellOperation>() {
-                @Override
-                public boolean apply(BuySellOperation operation) {
-                    return operation.isLost();
-                }
-            }).toList();
-        }
-        return ordersLost;
-    }
-
-    private List<BuySellOperation> ordersWon() {
-        if (this.ordersWon == null) {
-            this.ordersWon = from(stats).filter(new Predicate<BuySellOperation>() {
-                @Override
-                public boolean apply(BuySellOperation operation) {
-                    return operation.isWon();
-                }
-            }).toList();
-        }
-        return ordersWon;
-    }
 
     private List<BuySellOperation> ordersAboveMarket() {
         if (this.ordersAboveMarket == null) {
@@ -174,14 +158,14 @@ public class PortfolioStats {
     }
 
     public BuySellOperation biggestLost() {
-       if (ordersLost().isEmpty()) return BuySellOperation.empty();
-       return buySellOperationOrdering().min(ordersLost());
+       if (this.ordersLost.isEmpty()) return BuySellOperation.empty();
+       return buySellOperationOrdering().min(this.ordersLost);
     }
 
 
     public BuySellOperation biggestWin() {
-        if (ordersWon().isEmpty()) return BuySellOperation.empty();
-        return buySellOperationOrdering().max(ordersWon());
+        if (this.ordersWon.isEmpty()) return BuySellOperation.empty();
+        return buySellOperationOrdering().max(this.ordersWon);
     }
 
     public void forEachStat(Consumer<BuySellOperation> applyBlock) {
@@ -220,4 +204,7 @@ public class PortfolioStats {
         return ordersPerDay;
     }
 
+    public boolean hasLostOrders() {
+        return this.countOrdersLost() > 0;
+    }
 }

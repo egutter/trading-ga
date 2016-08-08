@@ -71,11 +71,12 @@ public class RelativeStrengthIndex extends MomentumOscillator {
                 outReal);
 
         if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Relative Strength Index " + returnCode);
+            throw new RuntimeException("Error calculating Relative Strength Index for " + this.stockPrices.getStockName() + " error code " + returnCode);
         }
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
         int lookBack = new CoreAnnotated().rsiLookback(days());
+        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
         for (int i = 0; i < outNBElement.value; i++) {
             int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);

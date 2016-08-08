@@ -24,6 +24,11 @@ public class InactiveTradingDecision implements BuyTradingDecision, SellTradingD
     }
 
     @Override
+    public LocalDate startOn() {
+        return LocalDate.now();
+    }
+
+    @Override
     public String sellDecisionToString() {
         return toString();
     }

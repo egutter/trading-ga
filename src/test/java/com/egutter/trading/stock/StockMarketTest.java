@@ -22,7 +22,7 @@ public class StockMarketTest {
     public void should_not_be_a_merval25_stock() throws Exception {
         String[] otherStockSymbols = altStockSymbols();
         Arrays.stream(otherStockSymbols).forEach(stockName -> {
-            assertThat(isMerval25(stockName), is(false));
+            assertThat(stockName + " is not merval25", isMerval25(stockName), is(false));
         });
     }
 }

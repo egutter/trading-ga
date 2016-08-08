@@ -10,7 +10,6 @@ import com.google.common.collect.MapMaker;
 import com.google.common.collect.Range;
 import org.uncommons.maths.binary.BitString;
 
-import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentMap;
 
 import static com.google.common.collect.Range.atLeast;

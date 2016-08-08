@@ -23,10 +23,6 @@ public class StockMarket {
         this.marketIndexPrices = marketIndexPrices;
     }
 
-    public List<LocalDate> getTradingDays() {
-        return marketIndexPrices.getTradingDates();
-    }
-
     public List<StockPrices> getStockPrices() {
         return stockPrices;
     }
@@ -70,11 +66,14 @@ public class StockMarket {
                 "CEPU.BA", // CENTRAL PUERTO
                 "COME.BA", // COMERCIAL DEL PLATA
                 "CRES.BA", // CRESUD
+                "CTIO.BA",
                 "EDN.BA", // EDENOR
                 "ERAR.BA", // SIDERAR
                 "FRAN.BA", // BCO.FRANCES S.A.
                 "GGAL.BA", // GRUPO FINANCIERO GALICIA
                 "INDU.BA", // SOLVAY INDUPA SAI
+                "IRSA.BA", //Inversiones y Representaciones Sociedad Anónima
+                "LEDE.BA",
                 "MIRG.BA", // Mirgor S.A.C.I.F.I.A.
                 "MOLI.BA", // MOLINOS
                 "PAMP.BA", // FRIGORIFICO LA PAMPA
@@ -96,18 +95,14 @@ public class StockMarket {
     public static String[] altStockSymbols() {
         return new String[]{
                 // OTRAS
-                "AGRO.BA",
                 "APSA.BA",
                 "AUSO.BA",
                 "BOLT.BA",
                 "CADO.BA",
-                "CAPU.BA",
                 "CAPX.BA",
                 "CARC.BA",
                 "CGPA2.BA",
                 "COLO.BA",
-                "CRES.BA", // CRESUD
-                "CTIO.BA",
                 "DYCA.BA",
                 "ESME.BA",
                 "ESTR.BA",
@@ -119,9 +114,7 @@ public class StockMarket {
                 "GRIM.BA",
                 "INTR.BA",
                 "INVJ.BA",
-                "IRSA.BA",
                 "JMIN.BA",
-                "LEDE.BA",
                 "LONG.BA",
                 "METR.BA",
                 "MORI.BA",
@@ -134,8 +127,6 @@ public class StockMarket {
                 "REP.BA",
                 "RIGO.BA",
                 "ROSE.BA",
-                "SAMI.BA",
-                "SEMI.BA",
                 "STD.BA",
                 "TGLT.BA",
         };

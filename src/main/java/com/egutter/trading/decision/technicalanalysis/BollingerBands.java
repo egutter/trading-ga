@@ -30,6 +30,7 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision, 
     private Range buyThreshold;
     private int movingAverageDays;
     private MAType movingAverageType;
+    private LocalDate startOnDate = LocalDate.now();
 
     public static void main(String[] args) {
         StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2014, 1, 1), LocalDate.now());
@@ -123,6 +124,7 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision, 
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
         int lookBack = new CoreAnnotated().bbandsLookback(movingAverageDays(), upperNumberOfStdDev(), lowerNumberOfStdDev(), movingAverageType());
+        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
         for (int i = 0; i < outNBElement.value; i++) {
             int movingAverageDaysOffset = i + lookBack;
             double pctB = (closePricesArray[movingAverageDaysOffset]-outRealLowerBand[i])/(outRealUpperBand[i]-outRealLowerBand[i]);
@@ -172,6 +174,11 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision, 
                 this.movingAverageDays,
                 "moving avg type",
                 this.movingAverageType);
+    }
+
+    @Override
+    public LocalDate startOn() {
+        return this.startOnDate;
     }
 
 

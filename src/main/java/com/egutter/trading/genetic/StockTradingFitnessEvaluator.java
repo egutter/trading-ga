@@ -36,6 +36,10 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
     @Override
     public double getFitness(BitString candidate, List<? extends BitString> population) {
+        return getFitness(candidate);
+    }
+
+    public double getFitness(BitString candidate) {
         Portfolio portfolio = new Portfolio(INITIAL_CASH);
 
         GeneticsTradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
@@ -115,7 +119,7 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     }
 
     private GeneticsTradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
-        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, true);
+        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, false);
     }
 
     private GenomeCandidateValidator candidateValidator(GeneticsTradingDecisionFactory tradingDecisionGenerator) {

@@ -23,6 +23,7 @@ public class MomentumOscillatorGenerator<T extends MomentumOscillator> implement
     private final Range<Double> sellThreshold;
 
     private static final transient ConcurrentMap<String, MomentumOscillator> cache = new MapMaker().weakKeys().makeMap();
+//    private static final Map<String, MomentumOscillator> cache = new HashMap<>();
     private Class<T> momentumOscillatorClass;
     private BitString chromosome;
 
@@ -57,7 +58,7 @@ public class MomentumOscillatorGenerator<T extends MomentumOscillator> implement
 
     private MomentumOscillator generateMomentumOscillator(StockPrices stockPrices) {
         try {
-            String key = momentumOscillatorClass.getName() + stockPrices.getStockName() + chromosome.toString();
+            String key = momentumOscillatorClass.getSimpleName() + stockPrices.getStockName() + chromosome.toString();
             MomentumOscillator momentumOscillator = cache.get(key);
             if (momentumOscillator == null) {
                     momentumOscillator = momentumOscillatorClass.getConstructor(StockPrices.class, Range.class, Range.class, Integer.class).newInstance(stockPrices,

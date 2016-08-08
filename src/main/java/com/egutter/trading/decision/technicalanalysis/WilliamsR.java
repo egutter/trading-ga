@@ -77,6 +77,7 @@ public class WilliamsR extends MomentumOscillator {
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
         int lookBack = new CoreAnnotated().willRLookback(days());
+        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
         for (int i = 0; i < outNBElement.value; i++) {
             int daysOffset = i + lookBack;
             LocalDate tradingDate = tradingDates.get(daysOffset);

@@ -26,6 +26,11 @@ public class TradeWhenNoOppositionTest {
         public String buyDecisionToString() {
             return null;
         }
+
+        @Override
+        public LocalDate startOn() {
+            return LocalDate.now();
+        }
     };
     private TradingDecision yesDecision = new BuyTradingDecision() {
         @Override
@@ -36,6 +41,11 @@ public class TradeWhenNoOppositionTest {
         @Override
         public String buyDecisionToString() {
             return null;
+        }
+
+        @Override
+        public LocalDate startOn() {
+            return LocalDate.now();
         }
     };;
     private TradingDecision noDecision = new BuyTradingDecision() {
@@ -48,6 +58,11 @@ public class TradeWhenNoOppositionTest {
         public String buyDecisionToString() {
             return null;
         }
+
+        @Override
+        public LocalDate startOn() {
+            return LocalDate.now();
+        }
     };;
     private Function<TradingDecision, DecisionResult> buyFunction = new Function<TradingDecision, DecisionResult>() {
         @Override
@@ -59,43 +74,49 @@ public class TradeWhenNoOppositionTest {
     @Test
     public void tradeWhenNoOpposition_should_not_trade_when_at_least_one_decision_is_no() throws Exception {
         List<TradingDecision> decisions = asList(neutralDecision, yesDecision, noDecision);
-        TradeBasedOnConsensus tradeWhenNoOpposition = TradeBasedOnConsensus.tradeWhenNoOpposition;
-        assertThat(tradeWhenNoOpposition.shouldTradeOn(decisions, buyFunction), equalTo(DecisionResult.NO));
+        TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(decisions, DecisionResult.NO, DecisionResult.YES);
+
+        assertThat(tradeWhenNoOpposition.shouldTradeOn(buyFunction), equalTo(DecisionResult.NO));
     }
 
     @Test
     public void tradeWhenNoOpposition_should_trade_when_there_arent_no_decisions_and_least_one_decision_is_yes() throws Exception {
         List<TradingDecision> decisions = asList(neutralDecision, yesDecision);
-        TradeBasedOnConsensus tradeWhenNoOpposition = TradeBasedOnConsensus.tradeWhenNoOpposition;
-        assertThat(tradeWhenNoOpposition.shouldTradeOn(decisions, buyFunction), equalTo(DecisionResult.YES));
+        TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(decisions, DecisionResult.NO, DecisionResult.YES);
+
+        assertThat(tradeWhenNoOpposition.shouldTradeOn(buyFunction), equalTo(DecisionResult.YES));
     }
 
     @Test
     public void tradeWhenNoOpposition_should_be_neutral_when_there_arent_any_neither_no_nor_yes_decisions() throws Exception {
         List<TradingDecision> decisions = asList(neutralDecision);
-        TradeBasedOnConsensus tradeWhenNoOpposition = TradeBasedOnConsensus.tradeWhenNoOpposition;
-        assertThat(tradeWhenNoOpposition.shouldTradeOn(decisions, buyFunction), equalTo(DecisionResult.NEUTRAL));
+        TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(decisions, DecisionResult.NO, DecisionResult.YES);
+
+        assertThat(tradeWhenNoOpposition.shouldTradeOn(buyFunction), equalTo(DecisionResult.NEUTRAL));
     }
 
     @Test
     public void tradeWhenYesAgreement_should_trade_when_at_least_one_decision_is_yes() throws Exception {
         List<TradingDecision> decisions = asList(neutralDecision, yesDecision, noDecision);
-        TradeBasedOnConsensus tradeWhenNoOpposition = TradeBasedOnConsensus.tradeWhenYesAgreement;
-        assertThat(tradeWhenNoOpposition.shouldTradeOn(decisions, buyFunction), equalTo(DecisionResult.YES));
+        TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(decisions, DecisionResult.YES, DecisionResult.NO);
+
+        assertThat(tradeWhenNoOpposition.shouldTradeOn(buyFunction), equalTo(DecisionResult.YES));
     }
 
     @Test
     public void tradeWhenYesAgreement_should_not_trade_when_there_arent_yes_decisions_and_least_one_decision_is_no() throws Exception {
         List<TradingDecision> decisions = asList(neutralDecision, noDecision);
-        TradeBasedOnConsensus tradeWhenNoOpposition = TradeBasedOnConsensus.tradeWhenYesAgreement;
-        assertThat(tradeWhenNoOpposition.shouldTradeOn(decisions, buyFunction), equalTo(DecisionResult.NO));
+        TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(decisions, DecisionResult.YES, DecisionResult.NO);
+
+        assertThat(tradeWhenNoOpposition.shouldTradeOn(buyFunction), equalTo(DecisionResult.NO));
     }
 
     @Test
     public void tradeWhenYesAgreement_should_be_neutral_when_there_arent_any_neither_no_nor_yes_decisions() throws Exception {
         List<TradingDecision> decisions = asList(neutralDecision);
-        TradeBasedOnConsensus tradeWhenNoOpposition = TradeBasedOnConsensus.tradeWhenYesAgreement;
-        assertThat(tradeWhenNoOpposition.shouldTradeOn(decisions, buyFunction), equalTo(DecisionResult.NEUTRAL));
+        TradeBasedOnConsensus tradeWhenNoOpposition = new TradeBasedOnConsensus(decisions, DecisionResult.YES, DecisionResult.NO);
+
+        assertThat(tradeWhenNoOpposition.shouldTradeOn(buyFunction), equalTo(DecisionResult.NEUTRAL));
     }
 
 }

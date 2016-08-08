@@ -80,4 +80,9 @@ public class HitProfitTargetBuyTradingDecision implements BuyTradingDecision {
     public String buyDecisionToString() {
         return Joiner.on(": ").join(this.getClass().getSimpleName(), profitThreshold);
     }
+
+    @Override
+    public LocalDate startOn() {
+        return LocalDate.now();
+    }
 }

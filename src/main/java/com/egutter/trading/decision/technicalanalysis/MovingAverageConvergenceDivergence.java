@@ -36,6 +36,7 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
 
     private final TradeSignal sellSignal;
     private TradeSignal buySignal;
+    private LocalDate startOnDate = LocalDate.now();
 
     public static void main(String[] args) {
         StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2012, 1, 1), new LocalDate(2014, 12, 31));
@@ -132,6 +133,7 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
         double[] closePricesArray = Doubles.toArray(closePrices);
         CoreAnnotated taCore = new CoreAnnotated();
         int macdLookback = taCore.macdLookback(fastPeriod(), slowPeriod(), signalPeriod());
+
         RetCode returnCode = taCore.macd(startIndex(),
                 endIndex(closePrices),
                 closePricesArray,
@@ -149,6 +151,8 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
         }
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();
+
+        if (macdLookback < tradingDates.size()) this.startOnDate = tradingDates.get(macdLookback);
 
         double lastDay = outMacdHist[0];
         for (int index = 1; index < outNBElement.value; index++) {
@@ -192,6 +196,11 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
         return Joiner.on(": ").join(this.getClass().getSimpleName(),
                 "buy signal",
                 this.getBuySignal());
+    }
+
+    @Override
+    public LocalDate startOn() {
+        return this.startOnDate;
     }
 
 

@@ -5,13 +5,12 @@ import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.TradingDecision;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.collect.FluentIterable;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-import static com.egutter.trading.decision.consensus.TradeBasedOnConsensus.tradeWhenNoOpposition;
 import static com.google.common.collect.FluentIterable.from;
 
 /**
@@ -30,17 +29,19 @@ public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision {
 
     @Override
     public DecisionResult shouldBuyOn(final LocalDate tradingDate) {
-        return tradeWhenNoOpposition.shouldTradeOn(buyTradingDecisionList, new Function<TradingDecision, DecisionResult>() {
-            @Override
-            public DecisionResult apply(TradingDecision tradingDecision) {
-                return ((BuyTradingDecision) tradingDecision).shouldBuyOn(tradingDate);
-            }
-        });
+        TradeBasedOnConsensus tradeBasedOnConsensus = new TradeBasedOnConsensus(buyTradingDecisionList, DecisionResult.NO, DecisionResult.YES);
+        return tradeBasedOnConsensus.shouldTradeOn(tradingDecision -> ((BuyTradingDecision) tradingDecision).shouldBuyOn(tradingDate));
     }
 
     @Override
     public String buyDecisionToString() {
         return toString();
+    }
+
+    @Override
+    public LocalDate startOn() {
+        Comparator<? super LocalDate> dateComparator = (date1, date2) -> date1.compareTo(date2);
+        return buyTradingDecisionList.stream().map(decision -> ((BuyTradingDecision) decision).startOn()).min(dateComparator).get();
     }
 
     @Override

@@ -31,13 +31,13 @@ public class OneLongPeriodExperimentRunner {
 
     private void run() {
 
-//        LocalDate fromDate = new LocalDate(2015, 1, 1);
+        LocalDate fromDate = new LocalDate(2014, 1, 1);
 //        LocalDate toDate = new LocalDate(2013, 7, 1);
-        LocalDate fromDate = LocalDate.now().minusMonths(6);
+//        LocalDate fromDate = LocalDate.now().minusMonths(6);
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
 
 //        runOneStrategy(stockMarket, asList(
 //                        AverageDirectionalIndexGenerator.class,
@@ -87,7 +87,7 @@ public class OneLongPeriodExperimentRunner {
 //        runOneStrategy(stockMarket, asList(
 //                RelativeStrengthIndexGenerator.class,
 //                BollingerBandsGenerator.class));
-
+////
 
         ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
                 asList(
@@ -116,7 +116,7 @@ public class OneLongPeriodExperimentRunner {
     private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
         System.out.println("=============================================");
 
-        printResults("2015-2015", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
+        printResults("OnlyFalls 2014-2016", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
     }
 
 

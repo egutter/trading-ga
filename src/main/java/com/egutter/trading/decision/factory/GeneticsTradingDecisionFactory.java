@@ -41,6 +41,7 @@ public class GeneticsTradingDecisionFactory implements TradingDecisionFactory {
         this.sellByProfitThreshold = sellByProfitThreshold;
 
         this.buyGeneratorChain.add(buildDoNotBuyWhenSameStockInPortfolioGenerator());
+        if (onlyBuyStockPriceFalls()) this.buyGeneratorChain.add(buildOnlyBuyStockPriceFallsGenerator());
         if (onExperiment) {
             this.buyGeneratorChain.add(buildDoNotBuyInTheLastBuyTradingDaysGenerator());
         }
@@ -93,6 +94,10 @@ public class GeneticsTradingDecisionFactory implements TradingDecisionFactory {
         return Boolean.valueOf(System.getenv().get("DO_NOT_SELL_AFTER_A_FIXED_NUMBER_OF_DAYS"));
     }
 
+    private boolean onlyBuyStockPriceFalls() {
+        return Boolean.valueOf(System.getenv().get("ONLY_BUY_STOCK_WHEN_PRICE_FALLS"));
+    }
+
     private SellAfterAFixedNumberOfDaysGenerator sellAfterAFixedNumberOfDaysGenerator() {
         BitString sellAfterDaysChromosome = genome.extractSellAfterAFixedNumberOfDaysChromosome();
         return new SellAfterAFixedNumberOfDaysGenerator(sellAfterDaysChromosome, portfolio);
@@ -105,6 +110,10 @@ public class GeneticsTradingDecisionFactory implements TradingDecisionFactory {
 
     private BuyTradingDecisionGenerator buildDoNotBuyWhenSameStockInPortfolioGenerator() {
         return new DoNotBuyWhenSameStockInPortfolioGenerator(portfolio);
+    }
+
+    private BuyTradingDecisionGenerator buildOnlyBuyStockPriceFallsGenerator() {
+        return new OnlyBuyWhenStockPriceFallsGenerator();
     }
 
     private BuyTradingDecisionGenerator buildDoNotBuyInTheLastBuyTradingDaysGenerator() {

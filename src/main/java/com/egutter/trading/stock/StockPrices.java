@@ -18,77 +18,52 @@ public class StockPrices {
 
     private String stockName;
 
-    private List<DailyQuote> dailyQuotes;
-    private Map<LocalDate, Optional<DailyQuote>> quoteCache = new WeakHashMap<LocalDate, Optional<DailyQuote>>();
+    private Map<LocalDate, DailyQuote> dailyQuotes;
+    private List<DailyQuote> dailyQuotesList;
+    private List<Double> adjustedClosedPrices = new ArrayList<>();
+    private List<Double> highPrices = new ArrayList<>();
+    private List<Double> lowPrices = new ArrayList<>();
+    private List<Long> volumes = new ArrayList<>();
+    private List<LocalDate> tradingDates = new ArrayList<>();
 
-    public StockPrices(String stockName, List<DailyQuote> dailyQuotes) {
+    public StockPrices(String stockName) {
         this.stockName = stockName;
-        this.dailyQuotes = dailyQuotes;
+        this.dailyQuotes = new LinkedHashMap<LocalDate, DailyQuote>();
+    }
+
+    public StockPrices(String stockName, List<DailyQuote> dailyQuotesSource) {
+        this(stockName);
+        addAll(dailyQuotesSource);
+    }
+
+    public void addDailyQuote(LocalDate tradingDate, DailyQuote dailyQuote) {
+        dailyQuotes.put(tradingDate, dailyQuote);
+    }
+    public void addAll(List<DailyQuote> dailyQuotesSource) {
+        for (DailyQuote dailyQuote : dailyQuotesSource) {
+            dailyQuotes.put(dailyQuote.getTradingDate(), dailyQuote);
+        }
+        initLists();
     }
 
     public List<Double> getAdjustedClosePrices() {
-        return transform(dailyQuotes, collectAdjustedClosePrice());
+        return this.adjustedClosedPrices;
     }
 
     public List<Double> getHighPrices() {
-        return transform(dailyQuotes, collectHighPrice());
+        return this.highPrices;
     }
 
     public List<Double> getLowPrices() {
-        return transform(dailyQuotes, collectLowPrice());
+        return this.lowPrices;
     }
 
     public List<? extends Number> getVolumes() {
-        return transform(dailyQuotes, collectVolume());
+        return this.volumes;
     }
 
     public List<LocalDate> getTradingDates() {
-        return transform(dailyQuotes, collectTradingDates());
-    }
-
-    private Function<DailyQuote, LocalDate> collectTradingDates() {
-        return new Function<DailyQuote, LocalDate>() {
-            @Override
-            public LocalDate apply(DailyQuote dailyQuote) {
-                return dailyQuote.getTradingDate();
-            }
-        };
-    }
-
-    private Function<DailyQuote, Double> collectAdjustedClosePrice() {
-        return new Function<DailyQuote, Double>() {
-            @Override
-            public Double apply(DailyQuote dailyQuote) {
-                return dailyQuote.getAdjustedClosePrice();
-            }
-        };
-    }
-
-    private Function<DailyQuote, Double> collectHighPrice() {
-        return new Function<DailyQuote, Double>() {
-            @Override
-            public Double apply(DailyQuote dailyQuote) {
-                return dailyQuote.getHighPrice();
-            }
-        };
-    }
-
-    private Function<? super DailyQuote, ? extends Number> collectVolume() {
-        return new Function<DailyQuote, Long>() {
-            @Override
-            public Long apply(DailyQuote dailyQuote) {
-                return dailyQuote.getVolume();
-            }
-        };
-    }
-
-    private Function<DailyQuote, Double> collectLowPrice() {
-        return new Function<DailyQuote, Double>() {
-            @Override
-            public Double apply(DailyQuote dailyQuote) {
-                return dailyQuote.getLowPrice();
-            }
-        };
+        return this.tradingDates;
     }
 
     public String getStockName() {
@@ -96,13 +71,17 @@ public class StockPrices {
     }
 
     public void forEachDailyPrice(LocalDate startOn, Function<DailyQuote, Object> function, BooleanSupplier shouldStop) {
-        DailyQuote startOnQuote = dailyQuotes.stream().filter(quote -> quote.isOn(startOn)).findFirst().orElse(dailyQuotes.get(0));
-        int startOnIndex = dailyQuotes.indexOf(startOnQuote);
-        for (ListIterator<DailyQuote> dailyQuotesIter = dailyQuotes.listIterator(startOnIndex); dailyQuotesIter.hasNext();){
+        DailyQuote startOnQuote = dailyPriceOn(startOn).orElse(getFirstDailyQuote());
+        int startOnIndex = dailyQuotesList.indexOf(startOnQuote);
+        for (ListIterator<DailyQuote> dailyQuotesIter = dailyQuotesList.listIterator(startOnIndex); dailyQuotesIter.hasNext();){
             DailyQuote dailyQuote = dailyQuotesIter.next();
             function.apply(dailyQuote);
             if (shouldStop.getAsBoolean()) break;
         }
+    }
+
+    public DailyQuote getFirstDailyQuote() {
+        return dailyQuotesList.get(0);
     }
 
     public void withDailyPriceOn(LocalDate tradingDate, Function<DailyQuote, Object> function) {
@@ -111,27 +90,46 @@ public class StockPrices {
     }
 
     public Optional<DailyQuote> dailyPriceOn(LocalDate tradingDate) {
-        if (quoteCache.containsKey(tradingDate)) return quoteCache.get(tradingDate);
-
-        Optional<DailyQuote> quoteFound = dailyQuotes.stream().filter(dailyQuote -> dailyQuote.isOn(tradingDate)).findFirst();
-        quoteCache.put(tradingDate, quoteFound);
-
-        return quoteFound;
+        DailyQuote dailyQuote = dailyQuotes.get(tradingDate);
+        return Optional.ofNullable(dailyQuote);
     }
 
     public List<DailyQuote> dailyQuotesFromWithLimit(LocalDate tradingDate, int max) {
-        return dailyQuotes.stream().filter(dailyQuote -> dailyQuote.isAfter(tradingDate)).limit(max).collect(Collectors.toList());
+        return dailyQuotesList.stream().filter(dailyQuote -> dailyQuote.isAfter(tradingDate)).limit(max).collect(Collectors.toList());
     }
 
     public LocalDate getLastTradingDate() {
-        return getLast(dailyQuotes).getTradingDate();
+        return getLast(dailyQuotesList).getTradingDate();
     }
     public LocalDate getFirstTradingDate() {
-        return dailyQuotes.get(0).getTradingDate();
+        return getFirstDailyQuote().getTradingDate();
     }
 
     public List<DailyQuote> getDailyQuotes() {
-        return dailyQuotes;
+        return dailyQuotesList;
+    }
+
+    public Optional<DailyQuote> dailyPriceBefore(LocalDate tradingDate, int days) {
+        LocalDate firstTradingDate = getFirstTradingDate();
+        LocalDate dayBefore = tradingDate.minusDays(days);
+        Optional<DailyQuote> dailyQuote = dailyPriceOn(dayBefore);
+        while (!dailyQuote.isPresent() && dayBefore.isAfter(firstTradingDate)) {
+            days = days - 1;
+            dayBefore = tradingDate.minusDays(days);
+            dailyQuote = dailyPriceOn(dayBefore);
+        }
+        return dailyQuote;
+    }
+
+    private void initLists() {
+        this.dailyQuotesList = new ArrayList<>(dailyQuotes.values());
+        dailyQuotesList.stream().forEach((dailyQuote -> {
+            this.adjustedClosedPrices.add(dailyQuote.getAdjustedClosePrice());
+            this.highPrices.add(dailyQuote.getHighPrice());
+            this.lowPrices.add(dailyQuote.getLowPrice());
+            this.volumes.add(dailyQuote.getVolume());
+            this.tradingDates.add(dailyQuote.getTradingDate());
+        }));
     }
 
 }

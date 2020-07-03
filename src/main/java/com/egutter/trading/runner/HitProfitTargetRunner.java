@@ -37,7 +37,7 @@ public class HitProfitTargetRunner {
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
 
 
         Portfolio portfolio = new Portfolio(INITIAL_CASH);

@@ -89,4 +89,14 @@ public class AverageDirectionalIndex extends MomentumOscillator {
         return averageDirectionalIndex;
     }
 
+    @Override
+    protected int calculateOscillatorLookback(CoreAnnotated coreAnnotated) {
+        return 0;
+    }
+
+    @Override
+    protected RetCode calculateOscillatorValues(List<Double> closePrices, MInteger outBegIdx, MInteger outNBElement, double[] outReal, double[] hiPricesArray, double[] lowPricesArray, double[] closePricesArray, double[] volumeArray, CoreAnnotated coreAnnotated) {
+        return null;
+    }
+
 }

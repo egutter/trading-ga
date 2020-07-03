@@ -6,11 +6,7 @@ import com.google.common.collect.Ordering;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
 
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -19,9 +15,14 @@ import java.util.function.Predicate;
  */
 public class HistoricPriceRepository extends MongoRepository {
 
+    public static final String STOCK_STATS = "stock-stats";
     private static DB dbConn;
 
     public static void main(String[] args) throws Exception {
+
+    }
+
+    public static void main2(String[] args) throws Exception {
 //        System.out.println(new HistoricPriceRepository().getMaxTradingDate());
         MongoClientURI uri = new MongoClientURI("mongodb://heroku_app35328737:o0oc7dgtftks5k028g8p3ao7tp@ds029117.mongolab.com:29117/heroku_app35328737");
         MongoClient client = new MongoClient(uri);
@@ -35,14 +36,23 @@ public class HistoricPriceRepository extends MongoRepository {
         }
     }
 
-    public LocalDate getMaxTradingDate(String stockName) {
-        DBCursor cursor = historicPriceConn().getCollection(stockName).find().sort(new BasicDBObject("date", -1)).limit(1);
+    public Optional<LocalDate> getMaxTradingDate(String stockName) {
+        return getMinMaxTradingDate(stockName, -1);
+    }
 
-        LocalDate maxDate = LocalDate.now();
+    public Optional<LocalDate> getMinTradingDate(String stockName) {
+        return getMinMaxTradingDate(stockName, 1);
+    }
+
+    private Optional<LocalDate> getMinMaxTradingDate(String stockName, int order) {
+        DBCursor cursor = historicPriceConn().getCollection(stockName).find().sort(new BasicDBObject("date", order)).limit(1);
+
+        Optional<LocalDate> maxDate = Optional.empty();
         try {
             while (cursor.hasNext()) {
+
                 DBObject object = cursor.next();
-                maxDate = LocalDate.fromDateFields((Date) object.get("date"));
+                maxDate = Optional.of(LocalDate.fromDateFields((Date) object.get("date")));
             }
         } finally {
             cursor.close();
@@ -50,14 +60,16 @@ public class HistoricPriceRepository extends MongoRepository {
         return maxDate;
     }
 
-    public LocalDate getMaxTradingDate() {
+    public Optional<LocalDate> getMaxTradingDate(String[] symbols) {
         List<LocalDate> maxDates = new ArrayList<LocalDate>();
 
-        forEachStock(stockName -> {
-            if (!stockName.equals("^MERV")) maxDates.add(getMaxTradingDate(stockName));
-        });
+        for (int i = 0; i < symbols.length; i++) {
+            Optional<LocalDate> maxTradingDate = getMaxTradingDate(symbols[i]);
+            maxTradingDate.ifPresent(date -> maxDates.add(date));
+        }
 
-        return Ordering.natural().max(maxDates);
+        if (maxDates.isEmpty()) return Optional.empty();
+        return Optional.of(Ordering.natural().max(maxDates));
     }
 
     public void insertStockPrices(StockPrices prices) {
@@ -124,6 +136,14 @@ public class HistoricPriceRepository extends MongoRepository {
         });
     }
 
+    public void removeAllBetween(String stockName, LocalDate fromDate, LocalDate toDate) {
+        DBObject query = new BasicDBObject();
+        query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).add("$lte", toDate.toDate()).get());
+
+        DBCollection collection = historicPriceConn().getCollection(stockName);
+        collection.remove(query);
+    }
+
     public void removeAllFrom(String stockName, LocalDate fromDate) {
         DBObject query = new BasicDBObject();
         query.put("date", BasicDBObjectBuilder.start("$gte", fromDate.toDate()).get());
@@ -144,7 +164,7 @@ public class HistoricPriceRepository extends MongoRepository {
 
     private synchronized DB historicPriceConn() {
         if (dbConn == null) {
-            dbConn = conn("merval-stats", "MERVAL_STATS_URI");
+            dbConn = conn(STOCK_STATS, "MERVAL_STATS_URI");
         }
         return dbConn;
     }

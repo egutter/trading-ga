@@ -44,7 +44,7 @@ public class NonGeneticExperimentRunner {
 //        LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
 
 //        runOneStrategy(stockMarket, asList(AroonOscilatorGenerator.class, AverageDirectionalIndexGenerator.class));
 

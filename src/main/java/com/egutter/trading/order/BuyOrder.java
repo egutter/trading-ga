@@ -16,28 +16,46 @@ public class BuyOrder implements MarketOrder {
     private final String stockName;
     private final DailyQuote dailyQuote;
     private final int marketNumberOfShares;
+    private DailyQuote nextDailyQuote;
     private Optional<DailyQuote> marketQuote;
-    private final int numberOfShares;
+    private Optional<OrderExtraInfo> orderExtraInfo = Optional.empty();
+    private int numberOfShares;
+    private final int originalNumberOfShares;
 
     public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest) {
-        this(stockName, dailyQuote, amountToInvest, Optional.empty());
+        this(stockName, dailyQuote, dailyQuote, amountToInvest, Optional.empty(), Optional.empty());
     }
 
     public BuyOrder(String stockName, DailyQuote dailyQuote, int numberOfShares) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
+        this.nextDailyQuote = dailyQuote;
         this.numberOfShares = numberOfShares;
+        this.originalNumberOfShares = numberOfShares;
         this.marketNumberOfShares = 0;
     }
 
-    public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest, Optional<DailyQuote> marketQuote) {
+    public BuyOrder(String stockName, DailyQuote dailyQuote, DailyQuote nextDailyQuote,  BigDecimal amountToInvest, Optional<DailyQuote> marketQuote, Optional<OrderExtraInfo> orderExtraInfo) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
+        this.nextDailyQuote = nextDailyQuote;
         this.marketQuote = marketQuote;
+        this.orderExtraInfo = orderExtraInfo;
         this.numberOfShares = amountToInvest.divide(BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice()), RoundingMode.DOWN).intValue();
+        this.originalNumberOfShares = numberOfShares;
         this.marketNumberOfShares = marketQuote.isPresent()
                 ? amountToInvest.divide(BigDecimal.valueOf(marketQuote.get().getAdjustedClosePrice()), RoundingMode.DOWN).intValue()
                 : 0;
+    }
+
+    public BuyOrder(String stockName, DailyQuote dailyQuote, DailyQuote nextDailyQuote, int numberOfShares) {
+        this.stockName = stockName;
+        this.dailyQuote = dailyQuote;
+        this.nextDailyQuote = dailyQuote;
+        this.nextDailyQuote = nextDailyQuote;
+        this.numberOfShares = numberOfShares;
+        this.originalNumberOfShares = numberOfShares;
+        this.marketNumberOfShares = 0;
     }
 
     @Override
@@ -46,7 +64,10 @@ public class BuyOrder implements MarketOrder {
     }
 
     public BigDecimal amountPaid() {
-        return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfShares);
+        if (dailyQuote.getTradingDate().equals(nextDailyQuote.getTradingDate()))
+            return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfShares);
+
+        return BigDecimal.valueOf(dailyQuote.getAverageOpenLowHighPrice() * numberOfShares);
     }
 
     public int getNumberOfShares() {
@@ -60,6 +81,10 @@ public class BuyOrder implements MarketOrder {
         return dailyQuote;
     }
 
+    public DailyQuote getNextDailyQuote() {
+        return nextDailyQuote;
+    }
+
     public LocalDate getTradingDate() {
         return dailyQuote.getTradingDate();
     }
@@ -70,7 +95,8 @@ public class BuyOrder implements MarketOrder {
 
     @Override
     public String toString() {
-        return Joiner.on(" ").join("BUY", stockName, numberOfShares, dailyQuote);
+        String orderExtraInfoString = orderExtraInfo.isPresent() ? orderExtraInfo.get().toString() : "";
+        return Joiner.on(" ").join("BUY", stockName, "Shares", numberOfShares, "Quote:", dailyQuote, orderExtraInfoString);
     }
 
     public static BuyOrder empty() {
@@ -81,5 +107,25 @@ public class BuyOrder implements MarketOrder {
         return marketQuote.isPresent()
                 ? BigDecimal.valueOf(marketQuote.get().getAdjustedClosePrice() * marketNumberOfShares)
                 : BigDecimal.ZERO;
+    }
+
+    public boolean hasExtraInfo() {
+        return this.orderExtraInfo.isPresent();
+    }
+
+    public OrderExtraInfo getOrderExtraInfo() {
+        return orderExtraInfo.get();
+    }
+
+    public void updateRemaningShares(int sharesToSell) {
+        this.numberOfShares = this.numberOfShares - sharesToSell;
+    }
+
+    public int getOriginalNumberOfShares() {
+        return originalNumberOfShares;
+    }
+
+    public boolean hasSoldAllShares(SellOrder sellOrder) {
+        return this.numberOfShares == 0 || this.originalNumberOfShares == sellOrder.getNumberOfShares();
     }
 }

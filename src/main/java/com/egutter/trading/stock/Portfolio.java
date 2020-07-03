@@ -14,9 +14,9 @@ import java.util.Map;
  */
 public class Portfolio {
 
-    public static final BigDecimal COMMISION = BigDecimal.valueOf(0.01325071);
+    public static final BigDecimal COMMISION = BigDecimal.ZERO; //BigDecimal.valueOf(0.01325071);
     private final BigDecimal initialCash;
-    Map<String, BuyOrder> stocks = new HashMap<String, BuyOrder>();
+    Map<String, PortfolioAsset> stocks = new HashMap<String, PortfolioAsset>();
     BigDecimal cash;
     private PortfolioStats stats = new PortfolioStats();
 
@@ -37,10 +37,10 @@ public class Portfolio {
         if (!hasStock(stockName)) {
             return 0;
         }
-        return getBuyOrder(stockName).getNumberOfShares();
+        return getPortFolioAsset(stockName).getNumberOfShares();
     }
 
-    public BuyOrder getBuyOrder(String stockName) {
+    public PortfolioAsset getPortFolioAsset(String stockName) {
         return stocks.get(stockName);
     }
 
@@ -48,7 +48,7 @@ public class Portfolio {
         if (!hasStock(stockName)) {
             return 0;
         }
-        return getBuyOrder(stockName).getMarketNumberOfShares();
+        return getPortFolioAsset(stockName).getBuyOrder().getMarketNumberOfShares();
     }
 
     public BigDecimal getCash() {
@@ -63,27 +63,29 @@ public class Portfolio {
             throw new IllegalArgumentException("Stock ["+stockName+"] not found");
         }
 
-        return getBuyOrder(stockName).getTradingDate();
+        return getPortFolioAsset(stockName).getBuyOrder().getTradingDate();
     }
 
     public void buyStock(String stockName, BigDecimal amount, BuyOrder order) {
         this.removeCash(amount.add(buyOrSellCommision(amount)));
-        this.addStock(stockName, order);
+        PortfolioAsset portfolioAsset = new PortfolioAsset(order.getNumberOfShares(), order);
+        this.addStock(stockName, portfolioAsset);
     }
 
     public void sellStock(String stockName, BigDecimal amountEarned, SellOrder sellOrder) {
         this.addCash(amountEarned.subtract(buyOrSellCommision(amountEarned)));
-        BuyOrder buyOrder = this.removeStock(stockName);
-        stats.addStatsFor(buyOrder, sellOrder);
-
+        PortfolioAsset portfolioAsset = getPortFolioAsset(stockName);
+        this.removeStock(stockName, portfolioAsset, sellOrder);
+        stats.addStatsFor(portfolioAsset, sellOrder);
     }
 
-    private void addStock(String stockName, BuyOrder order) {
-        stocks.put(stockName, order);
+    private void removeStock(String stockName, PortfolioAsset portfolioAsset, SellOrder sellOrder) {
+        portfolioAsset.decreaseShares(sellOrder.getNumberOfShares());
+        if (portfolioAsset.soldAllShares()) stocks.remove(stockName);
     }
 
-    private BuyOrder removeStock(String stockName) {
-        return stocks.remove(stockName);
+    private void addStock(String stockName, PortfolioAsset portfolioAsset) {
+        stocks.put(stockName, portfolioAsset);
     }
 
     private void addCash(BigDecimal anAmount) {
@@ -102,7 +104,7 @@ public class Portfolio {
         return COMMISION.multiply(amount);
     }
 
-    public Map<String, BuyOrder> getStocks() {
+    public Map<String, PortfolioAsset> getStocks() {
         return stocks;
     }
 
@@ -111,4 +113,9 @@ public class Portfolio {
         return Joiner.on(" ").join("CASH:", cash, "STOCKS:", stocks);
     }
 
+    public boolean isLostAbove(BigDecimal lostPercentage) {
+        boolean lostAbove = this.cash.divide(initialCash).compareTo(lostPercentage) <= 0;
+        if (lostAbove) System.out.println("Stopping all trader");
+        return lostAbove;
+    }
 }

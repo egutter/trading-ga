@@ -33,7 +33,8 @@ public class PortfolioStatsTest {
         int sharesToSell = 100;
         SellOrder sellOrder = new SellOrder(aStockName(), aDailyQuote(10), sharesToSell);
 
-        stats.addStatsFor(buyOrder, sellOrder);
+        PortfolioAsset portfolioAsset = new PortfolioAsset(buyOrder.getNumberOfShares(), buyOrder);
+        stats.addStatsFor(portfolioAsset, sellOrder);
     }
 
     private void addStatsForWonOperation() {
@@ -41,6 +42,7 @@ public class PortfolioStatsTest {
         int sharesToSell = 100;
         SellOrder sellOrder = new SellOrder(aStockName(), aDailyQuote(15), sharesToSell);
 
-        stats.addStatsFor(buyOrder, sellOrder);
+        PortfolioAsset portfolioAsset = new PortfolioAsset(buyOrder.getNumberOfShares(), buyOrder);
+        stats.addStatsFor(portfolioAsset, sellOrder);
     }
 }

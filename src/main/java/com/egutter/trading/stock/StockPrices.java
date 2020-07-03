@@ -1,7 +1,6 @@
 package com.egutter.trading.stock;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import org.joda.time.LocalDate;
 
 import java.util.*;
@@ -9,7 +8,6 @@ import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Iterables.getLast;
-import static com.google.common.collect.Lists.transform;
 
 /**
  * Created by egutter on 2/12/14.
@@ -25,6 +23,7 @@ public class StockPrices {
     private List<Double> lowPrices = new ArrayList<>();
     private List<Long> volumes = new ArrayList<>();
     private List<LocalDate> tradingDates = new ArrayList<>();
+    private List<Double> closePrices = new ArrayList<>();
 
     public StockPrices(String stockName) {
         this.stockName = stockName;
@@ -47,7 +46,11 @@ public class StockPrices {
     }
 
     public List<Double> getAdjustedClosePrices() {
-        return this.adjustedClosedPrices;
+        return this.closePrices;
+    }
+
+    public List<Double> getClosePrices() {
+        return this.closePrices;
     }
 
     public List<Double> getHighPrices() {
@@ -114,9 +117,21 @@ public class StockPrices {
         LocalDate dayBefore = tradingDate.minusDays(days);
         Optional<DailyQuote> dailyQuote = dailyPriceOn(dayBefore);
         while (!dailyQuote.isPresent() && dayBefore.isAfter(firstTradingDate)) {
-            days = days - 1;
+            days = days + 1;
             dayBefore = tradingDate.minusDays(days);
             dailyQuote = dailyPriceOn(dayBefore);
+        }
+        return dailyQuote;
+    }
+
+    public Optional<DailyQuote> dailyPriceAfter(LocalDate tradingDate, int days) {
+        LocalDate lastTradingDate = getLastTradingDate();
+        LocalDate dayAfter = tradingDate.plusDays(days);
+        Optional<DailyQuote> dailyQuote = dailyPriceOn(dayAfter);
+        while (!dailyQuote.isPresent() && dayAfter.isBefore(lastTradingDate)) {
+            days = days + 1;
+            dayAfter = tradingDate.plusDays(days);
+            dailyQuote = dailyPriceOn(dayAfter);
         }
         return dailyQuote;
     }
@@ -125,6 +140,7 @@ public class StockPrices {
         this.dailyQuotesList = new ArrayList<>(dailyQuotes.values());
         dailyQuotesList.stream().forEach((dailyQuote -> {
             this.adjustedClosedPrices.add(dailyQuote.getAdjustedClosePrice());
+            this.closePrices.add(dailyQuote.getClosePrice());
             this.highPrices.add(dailyQuote.getHighPrice());
             this.lowPrices.add(dailyQuote.getLowPrice());
             this.volumes.add(dailyQuote.getVolume());
@@ -132,4 +148,41 @@ public class StockPrices {
         }));
     }
 
+    public DailyQuote getLastHighFrom(LocalDate tradingDate, int highLookback) {
+        return getMinMaxFrom(this.highPrices, tradingDate, highLookback, -1, (priceDiff) -> priceDiff > 0);
+    }
+
+    public DailyQuote getLastLowFrom(LocalDate tradingDate, int lowLookback) {
+        return getMinMaxFrom(this.lowPrices, tradingDate, lowLookback, Double.MAX_VALUE, (priceDiff) -> priceDiff < 0);
+    }
+
+    private DailyQuote getMinMaxFrom(List<Double> prices, LocalDate tradingDate, int lookback, double startValue, Function<Double, Boolean> compareFunc) {
+        int dateIndex = -1;
+        for (int i = 0; i < tradingDates.size(); i++) {
+            LocalDate aDate = tradingDates.get(i);
+            if (aDate.equals(tradingDate)) {
+                dateIndex = i;
+                break;
+            }
+        }
+        int indexMinusLookback = dateIndex - lookback;
+        if (dateIndex == -1 || indexMinusLookback < 0) throw new IllegalArgumentException("Date [" + tradingDate + "] not found or lookback is greater");
+
+        int from = Math.max(indexMinusLookback, 0);
+        List<LocalDate> dateSublist = tradingDates.subList(from, dateIndex + 1);
+        List<Double> priceSublist = prices.subList(from, dateIndex + 1);
+
+        int priceIndex = -1;
+        double minMaxPrice = startValue;
+        for (int i = 0; i < priceSublist.size(); i++) {
+            Double aPrice = priceSublist.get(i);
+            if (compareFunc.apply(aPrice - minMaxPrice)) {
+                minMaxPrice = aPrice;
+                priceIndex = i;
+            }
+        }
+        LocalDate dateWithMax = dateSublist.get(priceIndex);
+
+        return dailyQuotes.get(dateWithMax);
+    }
 }

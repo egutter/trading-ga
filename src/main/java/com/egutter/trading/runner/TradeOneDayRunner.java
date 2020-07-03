@@ -62,7 +62,7 @@ public class TradeOneDayRunner {
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
         Map<String, Pair<Integer, List<Candidate>>> countStockSold = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, StockMarket.sNp20());
         LocalDate lastTradingDay = stockMarket.getLastTradingDay(); //new LocalDate(2015, 3, 17);//
 
         resultBuffer.add("New last trading date " + lastTradingDay);

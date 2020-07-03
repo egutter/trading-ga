@@ -6,6 +6,7 @@ import com.egutter.trading.order.MarketOrder;
 import com.egutter.trading.order.SellOrder;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
+import com.egutter.trading.stock.PortfolioAsset;
 import com.egutter.trading.stock.PortfolioStats;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
@@ -155,9 +156,9 @@ public class PortfolioRepository extends MongoRepository {
         DBCollection collection = stockPortfolioConn().getCollection(key);
         clear(collection);
 
-        Map<String, BuyOrder> stocks = portfolio.getStocks();
+        Map<String, PortfolioAsset> stocks = portfolio.getStocks();
         for (String stockName : stocks.keySet()) {
-            BuyOrder buyOrder = stocks.get(stockName);
+            BuyOrder buyOrder = stocks.get(stockName).getBuyOrder();
             insertOrder(collection, buyOrder);
         }
     }

@@ -16,6 +16,7 @@ import java.util.Optional;
 public class Trader {
 
     public static final BigDecimal AMOUNT_TO_INVEST = BigDecimal.valueOf(10000.00);
+    public static final double MAX_PORTFOLIO_LOST = 0.2;
     private StockMarket stockMarket;
     private TradingDecisionFactory tradingDecisionFactory;
     private Portfolio portfolio;
@@ -48,7 +49,8 @@ public class Trader {
     }
 
     private boolean shouldStop() {
-        return this.portfolio.getStats().hasLostOrders();
+        return this.portfolio.isLostAbove(BigDecimal.valueOf(MAX_PORTFOLIO_LOST));
+//                getStats().hasLostOrders();
     }
 
     private void tradeOneStock(StockPrices stockPrices) {
@@ -83,6 +85,7 @@ public class Trader {
                 portfolio,
                 tradingStrategy,
                 dailyQuote,
+                stockPrices.dailyPriceAfter(dailyQuote.getTradingDate(), 1).orElse(dailyQuote),
                 AMOUNT_TO_INVEST,
                 marketQuote);
     }

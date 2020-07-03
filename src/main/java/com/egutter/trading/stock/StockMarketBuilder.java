@@ -17,15 +17,30 @@ public class StockMarketBuilder {
     private HistoricPriceRepository repository = new HistoricPriceRepository();
 
     public static void main(String[] args) {
-        LocalDate fromDate = new LocalDate(2014, 1, 1);
+        LocalDate fromDate = new LocalDate(2020, 1, 1);
         LocalDate toDate = LocalDate.now();
-        new StockMarketBuilder().build(fromDate, toDate).getStockPrices().stream().forEach(stockPrice -> System.out.println(stockPrice.getStockName() + " - " + stockPrice.getDailyQuotes().size()));
+        new StockMarketBuilder().build(fromDate, toDate, true, true, StockMarket.sNp20());
+    }
+
+    public static void main3(String[] args) {
+        LocalDate fromDate = new LocalDate(2020, 4, 1);
+        LocalDate toDate = LocalDate.now();
+        List<String> failedStocks = new ArrayList<>();
+        for (String stock : StockMarket.sNp500()) {
+            try {
+                new StockMarketBuilder().buildInMemory(fromDate, new String[] {stock});
+            } catch (Exception e) {
+                failedStocks.add(stock);
+            }
+        }
+        System.out.println("Cannot retrieve stocks [" + failedStocks +"]");
+//                build(fromDate, toDate).getStockPrices().stream().forEach(stockPrice -> System.out.println(stockPrice.getStockName() + " - " + stockPrice.getDailyQuotes().size()));
     }
 
     public static void main2(String[] args) {
         try {
             Mongo client = new Mongo();
-            DB db = client.getDB("merval-stats");
+            DB db = client.getDB(HistoricPriceRepository.STOCK_STATS);
 
             Set<String> colls = db.getCollectionNames();
 
@@ -72,13 +87,35 @@ public class StockMarketBuilder {
         }
     }
 
-
-    public StockMarket build(LocalDate fromDate, LocalDate toDate) {
-        return build(fromDate, toDate, false, false);
+    public StockMarket buildInMemory(LocalDate fromDate) {
+        List<StockPrices> stockPrices = yahooQuoteImporter.fetchStockPrices(fromDate, StockMarket.sNp20());;
+//        List<StockPrices> stockPrices = yahooQuoteImporter.fetchStockPrices(fromDate, StockMarket.aapl());;
+        return getStockMarket(fromDate, stockPrices);
     }
 
-    public StockMarket build(LocalDate fromDate, LocalDate toDate, boolean runImport, boolean appendLastQuoteFromMarket) {
-        if (runImport) yahooQuoteImporter.runImport();
+    public StockMarket buildInMemory(LocalDate fromDate, String[] symbols) {
+        List<StockPrices> stockPrices = yahooQuoteImporter.fetchStockPrices(fromDate, symbols);;
+        return getStockMarket(fromDate, stockPrices);
+    }
+
+    private StockMarket getStockMarket(LocalDate fromDate, List<StockPrices> stockPrices) {
+        List<DailyQuote> marketIndexPrices = yahooQuoteImporter.fetchStockPrices(fromDate, StockMarket.spy()).get(0).getDailyQuotes();
+        System.out.println("stock prices size "+stockPrices.size());
+        System.out.println("first stock name "+stockPrices.get(0).getStockName());
+        System.out.println("num of daily quotes "+stockPrices.get(0).getDailyQuotes().size());
+        return new StockMarket(stockPrices, new StockPrices("SPY", marketIndexPrices));
+    }
+
+    public StockMarket build(LocalDate fromDate, LocalDate toDate) {
+        return build(fromDate, toDate, false, false, StockMarket.sNp20());
+    }
+
+    public StockMarket build(LocalDate fromDate, LocalDate toDate, String[] stockSymbols) {
+        return build(fromDate, toDate, false, false, stockSymbols);
+    }
+
+    public StockMarket build(LocalDate fromDate, LocalDate toDate, boolean runImport, boolean appendLastQuoteFromMarket, String[] stockSymbols) {
+        if (runImport) yahooQuoteImporter.runImportFromMaxOrFrom(fromDate, stockSymbols);
         List<StockPrices> stockPrices = new ArrayList<StockPrices>();
         List<DailyQuote> marketIndexPrices = new ArrayList<DailyQuote>();
 
@@ -87,23 +124,32 @@ public class StockMarketBuilder {
             repository.forEachDailyQuote(fromDate, toDate, stockName, (dailyQuote) -> {
                 dailyPrices.add((DailyQuote) dailyQuote);
             });
-            if (appendLastQuoteFromMarket) appendLastQuoteFromMarket(stockName, dailyPrices);
+            if (appendLastQuoteFromMarket) appendLastQuoteFromMarket(stockName, dailyPrices, toDate);
             if (stockName.endsWith("MERV")) {
                 marketIndexPrices.addAll(dailyPrices);
             } else {
                 stockPrices.add(new StockPrices(stockName, dailyPrices));
             }
-        }, stockName -> !StockMarket.isMerval25(stockName));
+        }, stockName -> !Arrays.asList(stockSymbols).contains(stockName));
         return new StockMarket(stockPrices, new StockPrices("MERVAL", marketIndexPrices));
     }
 
-    private void appendLastQuoteFromMarket(String stockName, List<DailyQuote> dailyPrices) {
+    private void appendLastQuoteFromMarket(String stockName, List<DailyQuote> dailyPrices, LocalDate toDate) {
+
+        LocalDate maxTradingDate = repository.getMaxTradingDate(stockName).orElse(toDate);
+        if (toDate.isBefore(maxTradingDate)) {
+            System.out.println("Max trading date in repo is after to date");
+            return;
+        }
+
         Optional<DailyQuote> potentialLastQuote = yahooQuoteImporter.getLastQuote(stockName);
         potentialLastQuote.ifPresent( lastQuote -> {
-            if (lastQuote.getTradingDate().isAfter(repository.getMaxTradingDate(stockName))) {
-                System.out.println("Add last quote to market " + lastQuote.getTradingDate() + " " + lastQuote);
+            LocalDate tradingDate = lastQuote.getTradingDate();
+            if (tradingDate.isAfter(maxTradingDate)) {
+                System.out.println("Add last quote to market " + tradingDate + " " + lastQuote);
                 dailyPrices.add(lastQuote);
             }
         });
     }
+
 }

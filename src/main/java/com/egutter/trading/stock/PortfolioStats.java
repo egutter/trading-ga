@@ -33,7 +33,9 @@ public class PortfolioStats {
         this.stats.remove(buySellOperation);
     }
 
-    public void addStatsFor(BuyOrder buyOrder, SellOrder sellOrder) {
+    public void addStatsFor(PortfolioAsset portfolioAsset, SellOrder sellOrder) {
+        BuyOrder originalOrder = portfolioAsset.getBuyOrder();
+        BuyOrder buyOrder = new BuyOrder(originalOrder.getStockName(), originalOrder.getDailyQuote(), originalOrder.getNextDailyQuote(), sellOrder.getNumberOfShares());
         BuySellOperation buySellOperation = new BuySellOperation(buyOrder, sellOrder);
         if (buySellOperation.isLost()) {
             this.ordersLost.add(buySellOperation);
@@ -116,7 +118,11 @@ public class PortfolioStats {
         List<BigDecimal> dailyReturns = from(someStats).transform(new Function<BuySellOperation, BigDecimal>() {
             @Override
             public BigDecimal apply(BuySellOperation operation) {
-                return operation.profit().divide(operation.getBuyOrder().amountPaid(), RoundingMode.HALF_EVEN);
+                try {
+                    return operation.profit().divide(operation.getBuyOrder().amountPaid(), RoundingMode.HALF_EVEN);
+                } catch (java.lang.ArithmeticException e) {
+                    return BigDecimal.ZERO;
+                }
             }
         }).toList();
         BigDecimal total = BigDecimal.ZERO;
@@ -206,5 +212,9 @@ public class PortfolioStats {
 
     public boolean hasLostOrders() {
         return this.countOrdersLost() > 0;
+    }
+
+    public List<BuySellOperation> allOrders() {
+        return this.stats;
     }
 }

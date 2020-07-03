@@ -15,17 +15,19 @@ public class SellOrder implements MarketOrder {
 
     private final String stockName;
     private final DailyQuote dailyQuote;
+    private DailyQuote nextdailyQuote;
     private final int numberOfSharesFor;
     private final Optional<DailyQuote> marketQuote;
     private final int marketNumberOfSharesFor;
 
     public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor) {
-        this(stockName, dailyQuote, numberOfSharesFor, Optional.empty(), 0);
+        this(stockName, dailyQuote, dailyQuote, numberOfSharesFor, Optional.empty(), 0);
     }
 
-    public SellOrder(String stockName, DailyQuote dailyQuote, int numberOfSharesFor, Optional<DailyQuote> marketQuote, int marketNumberOfSharesFor) {
+    public SellOrder(String stockName, DailyQuote dailyQuote, DailyQuote nextdailyQuote, int numberOfSharesFor, Optional<DailyQuote> marketQuote, int marketNumberOfSharesFor) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
+        this.nextdailyQuote = nextdailyQuote;
         this.numberOfSharesFor = numberOfSharesFor;
         this.marketQuote = marketQuote;
         this.marketNumberOfSharesFor = marketNumberOfSharesFor;
@@ -37,7 +39,9 @@ public class SellOrder implements MarketOrder {
     }
 
     public BigDecimal amountEarned() {
-        return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfSharesFor);
+        if (dailyQuote.getTradingDate().equals(nextdailyQuote.getTradingDate()))
+            return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfSharesFor);
+        return BigDecimal.valueOf(dailyQuote.getAverageOpenLowHighPrice() * numberOfSharesFor);
     }
 
     public BigDecimal marketAmountEarned() {

@@ -1,12 +1,19 @@
 package com.egutter.trading.out;
 
+import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.decision.technicalanalysis.CrossOverOscillator;
+import com.egutter.trading.decision.technicalanalysis.MomentumOscillator;
+import com.egutter.trading.decision.technicalanalysis.MoneyFlowIndex;
 import com.egutter.trading.runner.OneCandidateRunner;
+import com.egutter.trading.stock.StockMarket;
 import com.google.common.collect.Ordering;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 import org.uncommons.maths.binary.BitString;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,15 +43,58 @@ public class PrintResult {
         System.out.println("Num of orders which even " + runner.ordersEven());
         System.out.println("Biggest Lost " + runner.biggestLost());
         System.out.println("Biggest Win " + runner.biggestWin());
+
         System.out.println("Percentage of orders which won " + runner.percentageOfOrdersWon());
         System.out.println("Percentage of orders which didn't loose " + runner.percentageOfOrdersNotLost());
         System.out.println("Order return average " + runner.averageReturn());
 
         if (this.printDayDetails) {
-            Map<LocalDate, Pair<Integer, Integer>> ordersPerDay = runner.ordersPerDay();
-            Ordering.natural().sortedCopy(ordersPerDay.keySet()).stream().forEachOrdered(day -> {
-                System.out.println("On " + day + " bought " + ordersPerDay.get(day).getFirst() + " sold " + ordersPerDay.get(day).getSecond());
-            });
+//            Map<LocalDate, Pair<Integer, Integer>> ordersPerDay = runner.ordersPerDay();
+//            Ordering.natural().sortedCopy(ordersPerDay.keySet()).stream().forEachOrdered(day -> {
+//                System.out.println("On " + day +
+//                        " bought " + ordersPerDay.get(day).getFirst() +
+//                        " sold " + ordersPerDay.get(day).getSecond());
+//            });
+
+            System.out.println("ALL ORDERS");
+            runner.allOrders().forEach(order -> System.out.println(order));
+
         }
+
+    }
+
+    public void printIndexValues(StockMarket stockMarket, MomentumOscillator oscillator) {
+        List<Double> maxes = new ArrayList<Double>();
+        List<Double> minis = new ArrayList<Double>();
+        stockMarket.getStockPrices().get(0).getDailyQuotes().forEach(quote -> {
+            DecisionResult result = oscillator.shouldBuyOn(quote.getTradingDate());
+            System.out.println(quote.getTradingDate() + " = " + result);
+        });
+        Map<LocalDate, Double> indexes = oscillator.getMomentumOscillatorIndex();
+        for (LocalDate aDate : Ordering.natural().sortedCopy(indexes.keySet())) {
+            System.out.println("Oscillator value " + aDate + " = " + indexes.get(aDate));
+        }
+        maxes.add(Ordering.natural().max(indexes.values()));
+        minis.add(Ordering.natural().min(indexes.values()));
+        System.out.println("Max value " + Ordering.natural().max(maxes));
+        System.out.println("Min value " + Ordering.natural().min(minis));
+    }
+
+    public void printIndexValues(StockMarket stockMarket, CrossOverOscillator oscillator) {
+        List<Double> maxes = new ArrayList<Double>();
+        List<Double> minis = new ArrayList<Double>();
+        stockMarket.getStockPrices().get(0).getDailyQuotes().forEach(quote -> {
+            DecisionResult result = oscillator.shouldBuyOn(quote.getTradingDate());
+            System.out.println(quote.getTradingDate() + " = " + result);
+        });
+        Map<LocalDate, Double> indexes = oscillator.getIndexValues();
+        Map<LocalDate, Double> signalValues = oscillator.getSignalValues();
+        for (LocalDate aDate : Ordering.natural().sortedCopy(indexes.keySet())) {
+            System.out.println("Oscillator index value " + aDate + " = " + indexes.get(aDate) + " | signal " + signalValues.get(aDate));
+        }
+        maxes.add(Ordering.natural().max(indexes.values()));
+        minis.add(Ordering.natural().min(indexes.values()));
+        System.out.println("Max value " + Ordering.natural().max(maxes));
+        System.out.println("Min value " + Ordering.natural().min(minis));
     }
 }

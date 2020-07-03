@@ -2,7 +2,6 @@ package com.egutter.trading.decision.constraint;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
-import com.egutter.trading.decision.generator.SellAfterAFixedNumberOfDaysGenerator;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 

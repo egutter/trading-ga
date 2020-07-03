@@ -11,4 +11,5 @@ public interface BuyTradingDecision extends TradingDecision {
     String buyDecisionToString();
 
     LocalDate startOn();
+
 }

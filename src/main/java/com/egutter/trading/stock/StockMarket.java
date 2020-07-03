@@ -3,6 +3,7 @@ package com.egutter.trading.stock;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import java.util.Arrays;
@@ -12,15 +13,1070 @@ import java.util.stream.Stream;
 
 public class StockMarket {
 
+    public static final String TECH_SECTOR = "TECH";
+    public static final String COMM_SECTOR = "COMM";
+    public static final String FINANCE_SECTOR = "FINANCE";
+    public static final String CONS_BASIC_SECTOR = "CONS BASIC";
+    public static final String CONS_DISC_SECTOR = "CONS DISC";
+    public static final String HEALTH_SECTOR = "HEALTH";
+    public static final String BIOTECH_SECTOR = "BIOTECH";
+    public static final String INDUSTRIAL_SECTOR = "INDUSTRIAL";
+    public static final String INNOVATION_SECTOR = "INNOVATION";
+    public static final String ETF_SECTORS = "SECTORS ETF";
+    public static final String DEVELOP_ETF_MARKETS = "DEVELO ETF MARKETS";
     private List<StockPrices> stockPrices;
 
     private StockPrices marketIndexPrices;
 
     public static String MERVAL_MARKET_INDEX = "%5EMERV";
+    private LocalDate lastTradingDay;
+    private LocalDate firstTradingDay;
 
     public StockMarket(List<StockPrices> stockPrices, StockPrices marketIndexPrices) {
         this.stockPrices = stockPrices;
         this.marketIndexPrices = marketIndexPrices;
+    }
+
+    public static List<StockGroup> allSectors() {
+         return Arrays.asList(new StockGroup(ETF_SECTORS, sectors()),
+                 new StockGroup(TECH_SECTOR, techSector()),
+                 new StockGroup(COMM_SECTOR, commSector()),
+                 new StockGroup(FINANCE_SECTOR, financeSector()),
+                 new StockGroup(CONS_BASIC_SECTOR, consumerBasicSector()),
+                 new StockGroup(CONS_DISC_SECTOR, consumerDiscSector()),
+                 new StockGroup(HEALTH_SECTOR, healthSector()),
+                 new StockGroup(BIOTECH_SECTOR, biotechSector()),
+                 new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
+                 new StockGroup(INNOVATION_SECTOR, innovationSector()),
+                 new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()));
+    }
+
+    public static String[] innovationSector() {
+        return new String[]{
+                "SQ",
+                "Z",
+                "SPLK",
+                "TWLO",
+                "WORK",
+                "TSLA",
+                "TWOU",
+                "XLNX",
+                "SPOT",
+                "CRNC",
+                "ZM",
+                "NET",
+                "IRBT",
+                "DT",
+                "ALB",
+                "W",
+                "ETSY",
+                "VMW",
+                "SHOP"
+        };
+    }
+    public static String[] biotechSector() {
+        return new String[]{
+                "XBI",
+                "MRNA",
+                "REGN",
+                "IMMU",
+                "BMRN",
+                "SGEN",
+                "UTHR",
+                "VRTX",
+                "EXEL",
+                "SRPT",
+                "ALNY",
+                "GILD",
+                "ACAD",
+                "BHVN",
+                "ABBV",
+                "NBIX",
+                "FOLD",
+                "INCY",
+                "ALXN",
+                "RARE",
+                "LGND"
+        };
+    }
+    public static String[] commSector() {
+        return new String[]{
+                "XLC",
+                "FB",
+                "GOOGL",
+                "GOOG",
+                "TMUS",
+                "EA",
+                "ATVI",
+                "NFLX",
+                "DIS",
+                "CHTR",
+                "CMCSA",
+                "VZ",
+                "TWTR",
+                "T",
+                "TTWO",
+                "VIAC",
+                "OMC",
+                "FOXA",
+                "CTL",
+                "DISH",
+                "DISCK"
+        };
+    }
+    public static String[] industrialSector() {
+        return new String[]{
+                "XLI",
+                "UNP",
+                "HON",
+                "BA",
+                "RTX",
+                "LMT",
+                "MMM",
+                "UPS",
+                "CAT",
+                "GE",
+                "CSX",
+                "ITW",
+                "NOC",
+                "DE",
+                "NSC",
+                "ROP",
+                "LHX",
+                "WM",
+                "EMR",
+                "GD",
+                "ETN"
+        };
+    }
+    public static String[] consumerDiscSector() {
+        return new String[]{
+                "XLY",
+                "AMZN",
+                "HD",
+                "MCD",
+                "NKE",
+                "LOW",
+                "SBUX",
+                "BKNG",
+                "TJX",
+                "TGT",
+                "DG",
+                "EBAY",
+                "GM",
+                "ROST",
+                "ORLY",
+                "YUM",
+                "AZO",
+                "CMG",
+                "MAR",
+                "F",
+                "HLT"
+        };
+    }
+
+    public static String[] consumerBasicSector() {
+        return new String[]{
+                "XLP",
+                "PG",
+                "PEP",
+                "KO",
+                "WMT",
+                "MO",
+                "MDLZ",
+                "PM",
+                "COST",
+                "CL",
+                "KMB",
+                "EL",
+                "GIS",
+                "WBA",
+                "STZ",
+                "SYY",
+                "CLX",
+                "MNST",
+                "KR",
+                "ADM",
+                "MKC"
+        };
+    }
+    public static String[] healthSector() {
+        return new String[]{
+                "XLV",
+                "JNJ",
+                "UNH",
+                "MRK",
+                "PFE",
+                "ABBV",
+                "ABT",
+                "TMO",
+                "AMGN",
+                "LLY",
+                "BMY",
+                "MDT",
+                "DHR",
+                "GILD",
+                "CVS",
+                "VRTX",
+                "CI",
+                "BDX",
+                "ISRG",
+                "ANTM",
+                "ZTS",
+        };
+    }
+    public static String[] financeSector() {
+        return new String[]{
+                "XLF",
+                "JPM",
+                "BAC",
+                "C",
+                "WFC",
+                "BLK",
+                "SPGI",
+                "AXP",
+                "GS",
+                "CME",
+                "CB",
+                "MS",
+                "USB",
+                "MMC",
+                "TFC",
+                "ICE",
+                "PNC",
+                "PGR",
+                "AON",
+                "MCO"
+        };
+    }
+    public static String[] topTechSector() {
+        return new String[]{
+                "XLK",
+                "MSFT",
+                "AAPL",
+                "V",
+                "MA",
+                "INTC",
+                "NVDA",
+                "ADBE",
+                "PYPL",
+                "CSCO",
+                "CRM"
+        };
+    }
+
+    public static String[] techSector() {
+        return new String[]{
+                "XLK",
+                "MSFT",
+                "AAPL",
+                "V",
+                "MA",
+                "INTC",
+                "NVDA",
+                "ADBE",
+                "PYPL",
+                "CSCO",
+                "CRM",
+                "ACN",
+                "AVGO",
+                "TXN",
+                "ORCL",
+                "IBM",
+                "QCOM",
+                "FIS",
+                "NOW",
+                "INTU",
+                "ADP"
+        };
+    }
+    public static String[] developedMarkets() {
+        return new String[]{
+            "VTI",
+            "VGK",
+            "EPP",
+            "VEA",
+            "EWJ",
+            "EWG",
+            "EWQ",
+            "EWU",
+            "EWL",
+            "EWC",
+            "EIS",
+        };
+    }
+    public static String[] europe() {
+        return new String[]{
+            "VGK",
+        };
+    }
+    public static String[] sectors() {
+        return new String[]{
+            "SPY",
+            "XLF",
+            "XLI",
+            "XLK",
+            "XLY",
+            "XLV",
+            "XLP",
+            "XLC",
+            "XBI",
+        };
+    }
+    public static String[] largeSectorStocks() {
+        return new String[]{
+                "MSFT",
+                "AAPL",
+                "V",
+                "MA",
+                "INTC",
+                "NVDA",
+                "ADBE",
+                "PYPL",
+                "CSCO",
+                "CRM",
+                "ACN",
+                "AVGO",
+                "TXN",
+                "ORCL",
+                "IBM",
+                "QCOM",
+                "FIS",
+                "NOW",
+                "INTU",
+                "ADP",
+                "AMD",
+                "FISV",
+                "MU",
+                "AMAT",
+                "GPN",
+                "ADSK",
+                "LRCX",
+                "ADI",
+                "KLAC",
+                "CTSH",
+                "JPM",
+                "BAC",
+                "C",
+                "WFC",
+                "BLK",
+                "SPGI",
+                "AXP",
+                "GS",
+                "CME",
+                "CB",
+                "MS",
+                "USB",
+                "MMC",
+                "TFC",
+                "ICE",
+                "PNC",
+                "PGR",
+                "AON",
+                "MCO",
+                "SCHW",
+                "COF",
+                "BK",
+                "ALL",
+                "TRV",
+                "MET",
+                "TROW",
+                "AIG",
+                "BRKB",
+                "UNH",
+                "HD",
+                "BA",
+                "MCD",
+                "MMM",
+                "JNJ",
+                "CAT",
+                "PG",
+                "DIS",
+                "WMT",
+                "NKE",
+                "KO",
+                "CVX",
+                "MRK",
+                "RTX",
+                "VZ",
+                "XOM",
+                "WBA",
+                "PFE",
+                "ABBV",
+                "ABT",
+                "TMO",
+                "AMGN",
+                "LLY",
+                "BMY",
+                "MDT",
+                "DHR",
+                "GILD",
+                "CVS",
+                "PEP",
+                "MO",
+                "MDLZ",
+                "COST",
+                "CL",
+                "KMB",
+                "EL",
+                "GIS",
+                "STZ",
+                "AMZN",
+                "LOW",
+                "SBUX",
+                "BKNG",
+                "TJX",
+                "TGT",
+                "DG",
+                "EBAY",
+                "GM",
+                "ROST",
+                "ORLY",
+                "YUM",
+                "AZO",
+                "CMG",
+                "MAR",
+                "F",
+                "HLT",
+                "DLTR",
+                "VFC",
+                "APTV",
+                "DHI",
+                "BBY",
+                "FB",
+                "GOOGL",
+                "GOOG",
+                "TMUS",
+                "EA",
+                "ATVI",
+                "NFLX",
+                "CHTR",
+                "CMCSA",
+                "TWTR",
+                "T",
+                "TTWO",
+                "OMC",
+                "UNP",
+                "HON",
+                "FDX",
+                "UPS",
+                "GE"
+        };
+    }
+
+    public static String[] sNp20() {
+        return new String[]{
+                "MMM",
+                "AAPL",
+                "MSFT",
+                "FB",
+                "GOOG",
+                "GOOGL",
+                "AMZN",
+                "NFLX",
+                "JNJ",
+                "V",
+                "PG",
+                "UNH",
+                "JPM",
+                "INTC",
+                "HD",
+                "MA",
+                "VZ",
+                "PFE",
+                "T",
+                "MRK",
+                "NVDA",
+                "DIS",
+                "CSCO",
+                "PEP",
+                "XOM",
+                "BAC",
+                "WMT",
+                "ADBE",
+                "CVX",
+                "PYPL",
+                "KO",
+                "CMCSA",
+                "ABT",
+        };
+    }
+    public static String[] sNp500() {
+        return new String[]{
+                "MMM",
+                "ABT",
+                "ABBV",
+                "ABMD",
+                "ACN",
+                "ATVI",
+                "ADBE",
+                "AMD",
+                "AAP",
+                "AES",
+                "AFL",
+                "A",
+                "APD",
+                "AKAM",
+                "ALK",
+                "ALB",
+                "ARE",
+                "ALXN",
+                "ALGN",
+                "ALLE",
+//                "AGN",
+                "ADS",
+                "LNT",
+                "ALL",
+                "GOOGL",
+                "GOOG",
+                "MO",
+                "AMZN",
+                "AMCR",
+                "AEE",
+                "AAL",
+                "AEP",
+                "AXP",
+                "AIG",
+                "AMT",
+                "AWK",
+                "AMP",
+                "ABC",
+                "AME",
+                "AMGN",
+                "APH",
+                "ADI",
+                "ANSS",
+                "ANTM",
+                "AON",
+                "AOS",
+                "APA",
+                "AIV",
+                "AAPL",
+                "AMAT",
+                "APTV",
+                "ADM",
+                "ANET",
+                "AJG",
+                "AIZ",
+                "T",
+                "ATO",
+                "ADSK",
+                "ADP",
+                "AZO",
+                "AVB",
+                "AVY",
+                "BKR",
+                "BLL",
+                "BAC",
+                "BK",
+                "BAX",
+                "BDX",
+//                "BRKB",
+                "BBY",
+                "BIIB",
+                "BLK",
+                "BA",
+                "BKNG",
+                "BWA",
+                "BXP",
+                "BSX",
+                "BMY",
+                "AVGO",
+                "BR",
+//                "BFB",
+                "CHRW",
+                "COG",
+                "CDNS",
+                "CPB",
+                "COF",
+                "CPRI",
+                "CAH",
+                "KMX",
+                "CCL",
+//                "CARR", new stock?
+                "CAT",
+                "CBOE",
+                "CBRE",
+                "CDW",
+                "CE",
+                "CNC",
+                "CNP",
+                "CTL",
+                "CERN",
+                "CF",
+                "SCHW",
+                "CHTR",
+                "CVX",
+                "CMG",
+                "CB",
+                "CHD",
+                "CI",
+                "CINF",
+                "CTAS",
+                "CSCO",
+                "C",
+                "CFG",
+                "CTXS",
+                "CLX",
+                "CME",
+                "CMS",
+                "KO",
+                "CTSH",
+                "CL",
+                "CMCSA",
+                "CMA",
+                "CAG",
+                "CXO",
+                "COP",
+                "ED",
+                "STZ",
+                "COO",
+                "CPRT",
+                "GLW",
+//                "CTVA", new stock?
+                "COST",
+                "COTY",
+                "CCI",
+                "CSX",
+                "CMI",
+                "CVS",
+                "DHI",
+                "DHR",
+                "DRI",
+                "DVA",
+                "DE",
+                "DAL",
+                "XRAY",
+                "DVN",
+                "FANG",
+                "DLR",
+                "DFS",
+                "DISCA",
+                "DISCK",
+                "DISH",
+                "DG",
+                "DLTR",
+                "D",
+                "DOV",
+//                "DOW", new stock?
+                "DTE",
+                "DUK",
+                "DRE",
+                "DD",
+                "DXC",
+                "ETFC",
+                "EMN",
+                "ETN",
+                "EBAY",
+                "ECL",
+                "EIX",
+                "EW",
+                "EA",
+                "EMR",
+                "ETR",
+                "EOG",
+                "EFX",
+                "EQIX",
+                "EQR",
+                "ESS",
+                "EL",
+                "EVRG",
+                "ES",
+                "RE",
+                "EXC",
+                "EXPE",
+                "EXPD",
+                "EXR",
+                "XOM",
+                "FFIV",
+                "FB",
+                "FAST",
+                "FRT",
+                "FDX",
+                "FIS",
+                "FITB",
+                "FE",
+                "FRC",
+                "FISV",
+                "FLT",
+                "FLIR",
+                "FLS",
+                "FMC",
+                "F",
+                "FTNT",
+                "FTV",
+                "FBHS",
+                "FOXA",
+                "FOX",
+                "BEN",
+                "FCX",
+                "GPS",
+                "GRMN",
+                "IT",
+                "GD",
+                "GE",
+                "GIS",
+                "GM",
+                "GPC",
+                "GILD",
+                "GL",
+                "GPN",
+                "GS",
+                "GWW",
+                "HRB",
+                "HAL",
+                "HBI",
+                "HOG",
+                "HIG",
+                "HAS",
+                "HCA",
+                "PEAK",
+                "HP",
+                "HSIC",
+                "HSY",
+                "HES",
+                "HPE",
+                "HLT",
+                "HFC",
+                "HOLX",
+                "HD",
+                "HON",
+                "HRL",
+                "HST",
+//                "HWM",
+                "HPQ",
+                "HUM",
+                "HBAN",
+                "HII",
+                "IEX",
+                "IDXX",
+                "INFO",
+                "ITW",
+                "ILMN",
+                "INCY",
+                "IR",
+                "INTC",
+                "ICE",
+                "IBM",
+                "IP",
+                "IPG",
+                "IFF",
+                "INTU",
+                "ISRG",
+                "IVZ",
+                "IPGP",
+                "IQV",
+                "IRM",
+                "JKHY",
+                "J",
+                "JBHT",
+                "SJM",
+                "JNJ",
+                "JCI",
+                "JPM",
+                "JNPR",
+                "KSU",
+                "K",
+                "KEY",
+                "KEYS",
+                "KMB",
+                "KIM",
+                "KMI",
+                "KLAC",
+                "KSS",
+                "KHC",
+                "KR",
+                "LB",
+                "LHX",
+                "LH",
+                "LRCX",
+                "LW",
+                "LVS",
+                "LEG",
+                "LDOS",
+                "LEN",
+                "LLY",
+                "LNC",
+                "LIN",
+                "LYV",
+                "LKQ",
+                "LMT",
+                "L",
+                "LOW",
+                "LYB",
+                "MTB",
+                "MRO",
+                "MPC",
+                "MKTX",
+                "MAR",
+                "MMC",
+                "MLM",
+                "MAS",
+                "MA",
+                "MKC",
+                "MXIM",
+                "MCD",
+                "MCK",
+                "MDT",
+                "MRK",
+                "MET",
+                "MTD",
+                "MGM",
+                "MCHP",
+                "MU",
+                "MSFT",
+                "MAA",
+                "MHK",
+                "TAP",
+                "MDLZ",
+                "MNST",
+                "MCO",
+                "MS",
+                "MOS",
+                "MSI",
+                "MSCI",
+                "MYL",
+                "NDAQ",
+                "NOV",
+                "NTAP",
+                "NFLX",
+                "NWL",
+                "NEM",
+                "NWSA",
+                "NWS",
+                "NEE",
+                "NLSN",
+                "NKE",
+                "NI",
+                "NBL",
+                "JWN",
+                "NSC",
+                "NTRS",
+                "NOC",
+                "NLOK",
+                "NCLH",
+                "NRG",
+                "NUE",
+                "NVDA",
+                "NVR",
+                "ORLY",
+                "OXY",
+                "ODFL",
+                "OMC",
+                "OKE",
+                "ORCL",
+                "OTIS",
+                "PCAR",
+                "PKG",
+                "PH",
+                "PAYX",
+                "PAYC",
+                "PYPL",
+                "PNR",
+                "PBCT",
+                "PEP",
+                "PKI",
+                "PRGO",
+                "PFE",
+                "PM",
+                "PSX",
+                "PNW",
+                "PXD",
+                "PNC",
+                "PPG",
+                "PPL",
+                "PFG",
+                "PG",
+                "PGR",
+                "PLD",
+                "PRU",
+                "PEG",
+                "PSA",
+                "PHM",
+                "PVH",
+                "QRVO",
+                "PWR",
+                "QCOM",
+                "DGX",
+                "RL",
+                "RJF",
+                "RTX",
+                "O",
+                "REG",
+                "REGN",
+                "RF",
+                "RSG",
+                "RMD",
+                "RHI",
+                "ROK",
+                "ROL",
+                "ROP",
+                "ROST",
+                "RCL",
+                "SPGI",
+                "CRM",
+                "SBAC",
+                "SLB",
+                "STX",
+                "SEE",
+                "SRE",
+                "NOW",
+                "SHW",
+                "SPG",
+                "SWKS",
+                "SLG",
+                "SNA",
+                "SO",
+                "LUV",
+                "SWK",
+                "SBUX",
+                "STT",
+                "STE",
+                "SYK",
+                "SIVB",
+                "SYF",
+                "SNPS",
+                "SYY",
+                "TMUS",
+                "TROW",
+                "TTWO",
+                "TPR",
+                "TGT",
+                "TEL",
+                "FTI",
+                "TFX",
+                "TXN",
+                "TXT",
+                "TMO",
+                "TIF",
+                "TJX",
+                "TSCO",
+//                "TT",
+                "TDG",
+                "TRV",
+                "TFC",
+                "TWTR",
+                "TSN",
+                "UDR",
+                "ULTA",
+                "USB",
+                "UAA",
+                "UA",
+                "UNP",
+                "UAL",
+                "UNH",
+                "UPS",
+                "URI",
+                "UHS",
+                "UNM",
+                "VFC",
+                "VLO",
+                "VAR",
+                "VTR",
+                "VRSN",
+                "VRSK",
+                "VZ",
+                "VRTX",
+//                "VIAC",
+                "V",
+                "VNO",
+                "VMC",
+                "WRB",
+                "WAB",
+                "WMT",
+                "WBA",
+                "DIS",
+                "WM",
+                "WAT",
+                "WEC",
+                "WFC",
+                "WELL",
+                "WDC",
+                "WU",
+                "WRK",
+                "WY",
+                "WHR",
+                "WMB",
+                "WLTW",
+                "WYNN",
+                "XEL",
+                "XRX",
+                "XLNX",
+                "XYL",
+                "YUM",
+                "ZBRA",
+                "ZBH",
+                "ZION",
+                "ZTS"
+        };
+//        List<String> excludeStocks = Arrays.asList("AGN", "FCX", "GPS", "GD", "HD", "HON", "HII", "ISRG", "JKHY", "KEYS", "KR", "LKQ", "MMC", "MAA", "NFLX", "NOC", "NVR", "OMC", "PAYC", "PPG", "PPL", "PG", "DGX", "RTX", "RSG", "SBAC", "SPG", "SIVB", "SYF", "TXT", "TDG", "UDR", "UNH", "VZ", "VIAC", "WRB", "WM", "WEC", "WU", "WMB", "WLTW", "WYNN", "XRX");
+//        return Arrays.stream(sNp500).filter(s -> !excludeStocks.contains(s)).toArray(String[]::new);
+    }
+
+
+    public static String[] spy() {
+        return new String[] {"SPY"};
+    }
+
+    public static List<String[]> individualStocks() {
+        return Arrays.asList(aapl(), amazon(), microsoft(), google(), netflix(), tesla(), salesforce(), paypal(), intel(), nvidia(), electronicArts(), square(), cloudfare(), splunk(), cisco());
+    }
+
+    public static String[] aapl() {
+        return new String[] {"AAPL"};
+    }
+
+    public static String[] amazon() {
+        return new String[] { "AMZN"};
+    }
+
+    public static String[] microsoft() {
+        return new String[] { "MSFT"};
+    }
+    public static String[] google() {
+        return new String[] { "GOOGL"};
+    }
+
+    public static String[] netflix() {
+        return new String[] { "NFLX"};
+    }
+    public static String[] tesla() {
+        return new String[] { "TSLA"};
+    }
+
+    public static String[] salesforce() {
+        return new String[] { "CRM"};
+    }
+
+    public static String[] paypal() {
+        return new String[] { "PYPL"};
+    }
+
+    public static String[] intel() {
+        return new String[] { "INTC"};
+    }
+
+    public static String[] nvidia() {
+        return new String[] { "NVDA"};
+    }
+
+    public static String[] electronicArts() {
+        return new String[] { "EA"};
+    }
+
+    public static String[] square() {
+        return new String[] { "SQ"};
+    }
+
+    public static String[] cloudfare() {
+        return new String[] { "NET"};
+    }
+    public static String[] splunk() {
+        return new String[] { "SPLK"};
+    }
+
+    public static String[] cisco() {
+        return new String[] { "CSCO"};
     }
 
     public List<StockPrices> getStockPrices() {
@@ -32,13 +1088,26 @@ public class StockMarket {
     }
 
     public LocalDate getLastTradingDay() {
-        List<LocalDate> tradingDays = Lists.transform(stockPrices, new Function<StockPrices, LocalDate>() {
+        if (this.lastTradingDay == null) {
+            this.lastTradingDay = Ordering.natural().max(tradingDays(stockPrices -> stockPrices.getLastTradingDate()));;
+        }
+        return this.lastTradingDay;
+    }
+
+    public LocalDate getFirstTradingDay() {
+        if (this.firstTradingDay == null) {
+            this.firstTradingDay = Ordering.natural().min(tradingDays(stockPrices -> stockPrices.getFirstTradingDate()));
+        }
+        return this.firstTradingDay;
+    }
+
+    private List<LocalDate> tradingDays(Function<StockPrices, LocalDate> extractor) {
+        return Lists.transform(stockPrices, new Function<StockPrices, LocalDate>() {
             @Override
             public LocalDate apply(StockPrices stockPrices) {
-                return stockPrices.getLastTradingDate();
+                return extractor.apply(stockPrices);
             }
         });
-        return Ordering.natural().max(tradingDays);
     }
 
     public StockPrices getMarketIndexPrices() {
@@ -134,5 +1203,9 @@ public class StockMarket {
 
     public static boolean isMerval25(String stockName) {
         return Arrays.asList(merval25StockSymbols()).contains(stockName);
+    }
+
+    public int getTotalTradingDays() {
+        return Days.daysBetween(getFirstTradingDay(), getLastTradingDay()).getDays();
     }
 }

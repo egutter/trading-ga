@@ -30,7 +30,7 @@ public class SellByProfitThreshold implements SellTradingDecision {
     @Override
     public DecisionResult shouldSellOn(LocalDate tradingDate) {
         if (portfolio.hasStock(stockPrices.getStockName())) {
-            BuyOrder buyOrder = portfolio.getBuyOrder(stockPrices.getStockName());
+            BuyOrder buyOrder = portfolio.getPortFolioAsset(stockPrices.getStockName()).getBuyOrder();
             DailyQuote dailyQuote = stockPrices.dailyPriceOn(tradingDate).get();
             SellOrder sellOrder = new SellOrder(buyOrder.getStockName(), dailyQuote, buyOrder.getNumberOfShares());
             BuySellOperation buySellOperation = new BuySellOperation(buyOrder, sellOrder);

@@ -6,8 +6,13 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Range;
+import com.google.common.primitives.Doubles;
+import com.tictactec.ta.lib.CoreAnnotated;
+import com.tictactec.ta.lib.MInteger;
+import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -49,8 +54,8 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
         if (!getMomentumOscillatorIndex().containsKey(tradingDate)) {
             return DecisionResult.NEUTRAL;
         }
-        Double mfiAtDay = getIndexAtDate(tradingDate).get();
-        if (tradeThreshold.contains(mfiAtDay)) {
+        Double indexAtDay = getIndexAtDate(tradingDate).get();
+        if (tradeThreshold.contains(indexAtDay)) {
             return DecisionResult.YES;
         }
         return DecisionResult.NO;
@@ -60,14 +65,49 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
         return Optional.ofNullable(getMomentumOscillatorIndex().get(tradingDate));
     }
 
-    protected synchronized Map<LocalDate, Double> getMomentumOscillatorIndex() {
+    public synchronized Map<LocalDate, Double> getMomentumOscillatorIndex() {
         if (this.momentumOscillatorIndex == null) {
             this.momentumOscillatorIndex = calculateMomentumOscillatorIndex();
         }
         return this.momentumOscillatorIndex;
     }
 
-    protected abstract Map<LocalDate, Double> calculateMomentumOscillatorIndex();
+    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
+        Map<LocalDate, Double> oscillatorIndex = new HashMap<LocalDate, Double>();
+        List<Double>closePrices = stockPrices.getClosePrices();
+        List<Double>hiPrices = stockPrices.getHighPrices();
+        List<Double>lowPrices = stockPrices.getLowPrices();
+        List<? extends Number> volume = stockPrices.getVolumes();
+
+        MInteger outBegIdx = new MInteger();
+        MInteger outNBElement = new MInteger();
+        double outReal[] = new double[closePrices.size()];
+        double[] hiPricesArray = Doubles.toArray(hiPrices);
+        double[] lowPricesArray = Doubles.toArray(lowPrices);
+        double[] closePricesArray = Doubles.toArray(closePrices);
+        double[] volumeArray = Doubles.toArray(volume);
+
+        CoreAnnotated coreAnnotated = new CoreAnnotated();
+        RetCode returnCode = calculateOscillatorValues(closePrices, outBegIdx, outNBElement, outReal, hiPricesArray, lowPricesArray, closePricesArray, volumeArray, coreAnnotated);
+
+        if (!returnCode.equals(RetCode.Success)) {
+            throw new RuntimeException("Error calculating Money Flow Index " + returnCode);
+        }
+
+        List<LocalDate> tradingDates = stockPrices.getTradingDates();
+        int lookBack = calculateOscillatorLookback(coreAnnotated);
+        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
+        for (int i = 0; i < outNBElement.value; i++) {
+            int daysOffset = i + lookBack;
+            LocalDate tradingDate = tradingDates.get(daysOffset);
+            oscillatorIndex.put(tradingDate, outReal[i]);
+        }
+        return oscillatorIndex;
+    }
+
+    protected abstract int calculateOscillatorLookback(CoreAnnotated coreAnnotated);
+
+    protected abstract RetCode calculateOscillatorValues(List<Double> closePrices, MInteger outBegIdx, MInteger outNBElement, double[] outReal, double[] hiPricesArray, double[] lowPricesArray, double[] closePricesArray, double[] volumeArray, CoreAnnotated coreAnnotated);
 
     @Override
     public String buyDecisionToString() {

@@ -17,6 +17,7 @@ public class MarketOrderGenerator {
     private final Portfolio portfolio;
     private TradingStrategy tradingStrategy;
     private final DailyQuote dailyQuote;
+    private DailyQuote nextDayQuote;
     private BigDecimal amountToInvest;
     private Optional<DailyQuote> marketQuote;
 
@@ -24,12 +25,14 @@ public class MarketOrderGenerator {
                                 Portfolio portfolio,
                                 TradingStrategy tradingStrategy,
                                 DailyQuote dailyQuote,
+                                DailyQuote nextDayQuote,
                                 BigDecimal amountToInvest,
                                 Optional<DailyQuote> marketQuote) {
         this.stockName = stockName;
         this.portfolio = portfolio;
         this.tradingStrategy = tradingStrategy;
         this.dailyQuote = dailyQuote;
+        this.nextDayQuote = nextDayQuote;
         this.amountToInvest = amountToInvest;
         this.marketQuote = marketQuote;
     }
@@ -38,19 +41,29 @@ public class MarketOrderGenerator {
 
         OrderBook marketOrders = new OrderBook();
 
-        if (DecisionResult.YES.equals(tradingStrategy.shouldBuyOn(dailyQuote.getTradingDate()))) {
+        DecisionResult buyResult = tradingStrategy.shouldBuyOn(dailyQuote.getTradingDate());
+        if (DecisionResult.YES.equals(buyResult)) {
             marketOrders.add(
                     new BuyOrder(stockName,
                             dailyQuote,
+                            nextDayQuote,
                             amountToInvest,
-                            this.marketQuote));
+                            this.marketQuote,
+                            buyResult.getOrderExtraInfo()));
         };
 
-        if (DecisionResult.YES.equals(tradingStrategy.shouldSellOn(dailyQuote.getTradingDate()))) {
+        DecisionResult sellResult = tradingStrategy.shouldSellOn(dailyQuote.getTradingDate());
+        if (DecisionResult.YES.equals(sellResult)) {
+            int sharesToSell = portfolio.getNumberOfSharesFor(stockName);
+            if (sellResult.hasExtraInfo()) {
+                OrderExtraInfo extraInfo = sellResult.getOrderExtraInfo().get();
+                sharesToSell = extraInfo.getNumberOfShares();
+            }
             marketOrders.add(
                     new SellOrder(stockName,
                             dailyQuote,
-                            portfolio.getNumberOfSharesFor(stockName),
+                            nextDayQuote,
+                            sharesToSell,
                             this.marketQuote,
                             portfolio.getNumberOfMarketSharesFor(stockName)));
         };

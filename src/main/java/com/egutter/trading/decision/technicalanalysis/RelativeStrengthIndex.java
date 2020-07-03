@@ -3,6 +3,7 @@ package com.egutter.trading.decision.technicalanalysis;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
@@ -27,21 +28,11 @@ import java.util.Map;
 public class RelativeStrengthIndex extends MomentumOscillator {
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2012, 1, 1), new LocalDate(2014, 12, 31));
-        List<Double> maxes = new ArrayList<Double>();
-        List<Double> minis = new ArrayList<Double>();
-        List<Double> means = new ArrayList<Double>();
-        for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            System.out.println("Stock " + stockPrices.getStockName());
-            RelativeStrengthIndex mfi = new RelativeStrengthIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 14);
-            Map<LocalDate, Double> indexes = mfi.getMomentumOscillatorIndex();
-            maxes.add(Ordering.natural().max(indexes.values()));
-            minis.add(Ordering.natural().min(indexes.values()));
-            means.add(DoubleMath.mean(indexes.values()));
-        }
-        System.out.println("Max value " + Ordering.natural().max(maxes));
-        System.out.println("Min value " + Ordering.natural().min(minis));
-        System.out.println("Mean value " + DoubleMath.mean(means));
+        LocalDate fromDate = new LocalDate(2016, 1, 01);
+        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate, StockMarket.aapl());
+        StockPrices stock = stockMarket.getStockPricesFor("AAPL");
+        RelativeStrengthIndex rsi = new RelativeStrengthIndex(stock, Range.atMost(30.0), Range.atLeast(70.0), 14);
+        new PrintResult().printIndexValues(stockMarket, rsi);
     }
 
     public RelativeStrengthIndex(StockPrices stockPrices, Range buyThreshold, Range sellThreshold, Integer days) {
@@ -53,37 +44,53 @@ public class RelativeStrengthIndex extends MomentumOscillator {
     }
 
     @Override
-    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
-        Map<LocalDate, Double> relativeStrengthIndex = new HashMap<LocalDate, Double>();
-        List<Double>closePrices = stockPrices.getAdjustedClosePrices();
+    protected int calculateOscillatorLookback(CoreAnnotated coreAnnotated) {
+        return coreAnnotated.rsiLookback(days());
+    }
 
-        MInteger outBegIdx = new MInteger();
-        MInteger outNBElement = new MInteger();
-        double outReal[] = new double[closePrices.size()];
-        double[] closePricesArray = Doubles.toArray(closePrices);
-
-        RetCode returnCode = new CoreAnnotated().rsi(startIndex(),
+    @Override
+    protected RetCode calculateOscillatorValues(List<Double> closePrices, MInteger outBegIdx, MInteger outNBElement, double[] outReal, double[] hiPricesArray, double[] lowPricesArray, double[] closePricesArray, double[] volumeArray, CoreAnnotated coreAnnotated) {
+        return coreAnnotated.rsi(startIndex(),
                 endIndex(closePrices),
                 closePricesArray,
                 days(),
                 outBegIdx,
                 outNBElement,
                 outReal);
-
-        if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Relative Strength Index for " + this.stockPrices.getStockName() + " error code " + returnCode);
-        }
-
-        List<LocalDate> tradingDates = stockPrices.getTradingDates();
-        int lookBack = new CoreAnnotated().rsiLookback(days());
-        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
-        for (int i = 0; i < outNBElement.value; i++) {
-            int daysOffset = i + lookBack;
-            LocalDate tradingDate = tradingDates.get(daysOffset);
-            relativeStrengthIndex.put(tradingDate, outReal[i]);
-        }
-        return relativeStrengthIndex;
     }
+
+//    @Override
+//    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
+//        Map<LocalDate, Double> relativeStrengthIndex = new HashMap<LocalDate, Double>();
+//        List<Double>closePrices = stockPrices.getAdjustedClosePrices();
+//
+//        MInteger outBegIdx = new MInteger();
+//        MInteger outNBElement = new MInteger();
+//        double outReal[] = new double[closePrices.size()];
+//        double[] closePricesArray = Doubles.toArray(closePrices);
+//
+//        RetCode returnCode = new CoreAnnotated().rsi(startIndex(),
+//                endIndex(closePrices),
+//                closePricesArray,
+//                days(),
+//                outBegIdx,
+//                outNBElement,
+//                outReal);
+//
+//        if (!returnCode.equals(RetCode.Success)) {
+//            throw new RuntimeException("Error calculating Relative Strength Index for " + this.stockPrices.getStockName() + " error code " + returnCode);
+//        }
+//
+//        List<LocalDate> tradingDates = stockPrices.getTradingDates();
+//        int lookBack = new CoreAnnotated().rsiLookback(days());
+//        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
+//        for (int i = 0; i < outNBElement.value; i++) {
+//            int daysOffset = i + lookBack;
+//            LocalDate tradingDate = tradingDates.get(daysOffset);
+//            relativeStrengthIndex.put(tradingDate, outReal[i]);
+//        }
+//        return relativeStrengthIndex;
+//    }
 
 
 }

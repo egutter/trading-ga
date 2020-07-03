@@ -1,5 +1,6 @@
 package com.egutter.trading.decision.technicalanalysis;
 
+import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
@@ -22,21 +23,11 @@ import java.util.Map;
 public class WilliamsR extends MomentumOscillator {
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
-        List<Double> maxes = new ArrayList<Double>();
-        List<Double> minis = new ArrayList<Double>();
-        for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            if (stockPrices.getDailyQuotes().size() < 28) continue;
-            System.out.println("Stock " + stockPrices.getStockName() + " size "+ stockPrices.getLowPrices().size());
-            WilliamsR willR = new WilliamsR(stockPrices, Range.atLeast(80), Range.atMost(10), 14);
-            Map<LocalDate, Double> indexes = willR.getMomentumOscillatorIndex();
-            maxes.add(Ordering.natural().max(indexes.values()));
-            minis.add(Ordering.natural().min(indexes.values()));
-        }
-        System.out.println("Max value " + Ordering.natural().max(maxes));
-        System.out.println("Min value " + Ordering.natural().min(minis));
-        System.out.println("Max value " + maxes);
-        System.out.println("Min value " + minis);
+        LocalDate fromDate = new LocalDate(2016, 1, 01);
+        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate, StockMarket.aapl());
+        StockPrices stock = stockMarket.getStockPricesFor("AAPL");
+        WilliamsR rsi = new WilliamsR(stock, Range.atMost(-80.0), Range.atLeast(-20.0), 14);
+        new PrintResult().printIndexValues(stockMarket, rsi);
     }
 
     public WilliamsR(StockPrices stockPrices, Range buyThreshold, Range sellThreshold, Integer days) {
@@ -48,20 +39,13 @@ public class WilliamsR extends MomentumOscillator {
     }
 
     @Override
-    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
-        Map<LocalDate, Double> williamsR = new HashMap<LocalDate, Double>();
-        List<Double>closePrices = stockPrices.getAdjustedClosePrices();
-        List<Double>hiPrices = stockPrices.getHighPrices();
-        List<Double>lowPrices = stockPrices.getLowPrices();
+    protected int calculateOscillatorLookback(CoreAnnotated coreAnnotated) {
+        return coreAnnotated.willRLookback(days());
+    }
 
-        MInteger outBegIdx = new MInteger();
-        MInteger outNBElement = new MInteger();
-        double outReal[] = new double[closePrices.size()];
-        double[] hiPricesArray = Doubles.toArray(hiPrices);
-        double[] lowPricesArray = Doubles.toArray(lowPrices);
-        double[] closePricesArray = Doubles.toArray(closePrices);
-
-        RetCode returnCode = new CoreAnnotated().willR(startIndex(),
+    @Override
+    protected RetCode calculateOscillatorValues(List<Double> closePrices, MInteger outBegIdx, MInteger outNBElement, double[] outReal, double[] hiPricesArray, double[] lowPricesArray, double[] closePricesArray, double[] volumeArray, CoreAnnotated coreAnnotated) {
+        return coreAnnotated.willR(startIndex(),
                 endIndex(closePrices),
                 hiPricesArray,
                 lowPricesArray,
@@ -70,20 +54,45 @@ public class WilliamsR extends MomentumOscillator {
                 outBegIdx,
                 outNBElement,
                 outReal);
-
-        if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Williams R " + returnCode);
-        }
-
-        List<LocalDate> tradingDates = stockPrices.getTradingDates();
-        int lookBack = new CoreAnnotated().willRLookback(days());
-        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
-        for (int i = 0; i < outNBElement.value; i++) {
-            int daysOffset = i + lookBack;
-            LocalDate tradingDate = tradingDates.get(daysOffset);
-            williamsR.put(tradingDate, outReal[i]);
-        }
-        return williamsR;
     }
+
+//    @Override
+//    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
+//        Map<LocalDate, Double> williamsR = new HashMap<LocalDate, Double>();
+//        List<Double>closePrices = stockPrices.getAdjustedClosePrices();
+//        List<Double>hiPrices = stockPrices.getHighPrices();
+//        List<Double>lowPrices = stockPrices.getLowPrices();
+//
+//        MInteger outBegIdx = new MInteger();
+//        MInteger outNBElement = new MInteger();
+//        double outReal[] = new double[closePrices.size()];
+//        double[] hiPricesArray = Doubles.toArray(hiPrices);
+//        double[] lowPricesArray = Doubles.toArray(lowPrices);
+//        double[] closePricesArray = Doubles.toArray(closePrices);
+//
+//        RetCode returnCode = new CoreAnnotated().willR(startIndex(),
+//                endIndex(closePrices),
+//                hiPricesArray,
+//                lowPricesArray,
+//                closePricesArray,
+//                days(),
+//                outBegIdx,
+//                outNBElement,
+//                outReal);
+//
+//        if (!returnCode.equals(RetCode.Success)) {
+//            throw new RuntimeException("Error calculating Williams R " + returnCode);
+//        }
+//
+//        List<LocalDate> tradingDates = stockPrices.getTradingDates();
+//        int lookBack = new CoreAnnotated().willRLookback(days());
+//        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
+//        for (int i = 0; i < outNBElement.value; i++) {
+//            int daysOffset = i + lookBack;
+//            LocalDate tradingDate = tradingDates.get(daysOffset);
+//            williamsR.put(tradingDate, outReal[i]);
+//        }
+//        return williamsR;
+//    }
 
 }

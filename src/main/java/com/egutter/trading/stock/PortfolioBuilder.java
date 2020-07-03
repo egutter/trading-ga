@@ -24,7 +24,7 @@ public class PortfolioBuilder {
             portfolio.buyStock(aBuyOrder.getStockName(), aBuyOrder.amountPaid(), aBuyOrder);
         });
         portfolioRepository.forEachStatOn(key, (BuySellOperation buySellOperation) -> {
-            portfolio.getStats().addStatsFor(buySellOperation.getBuyOrder(), buySellOperation.getSellOrder());
+            portfolio.getStats().addStatsFor(new PortfolioAsset(buySellOperation.getBuyOrder().getNumberOfShares(), buySellOperation.getBuyOrder()), buySellOperation.getSellOrder());
         });
         return portfolio;
     }

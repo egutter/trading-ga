@@ -59,7 +59,8 @@ public class Main extends HttpServlet {
     private void importAltStocks(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         YahooQuoteImporter yahooQuoteImporter = new YahooQuoteImporter();
         LocalDate fromDate = new LocalDate(2014, 1, 1);
-        yahooQuoteImporter.runImport(fromDate, StockMarket.altStockSymbols());
+        LocalDate toDate = new LocalDate(2015, 1, 1);
+        yahooQuoteImporter.runImport(fromDate, toDate, StockMarket.altStockSymbols());
         showHome(req, resp);
     }
 
@@ -98,7 +99,7 @@ public class Main extends HttpServlet {
         LocalDate fromDate = new LocalDate(2014, 1, 1);
         LocalDate toDate = LocalDate.now();
         PortfolioRepository portfolioRepository = new PortfolioRepository();
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, true);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
         LocalDate lastTradingDay = stockMarket.getLastTradingDay();
         PrintWriter writer = resp.getWriter();
         new StatsPrinter(portfolioRepository, stockMarket, new TradeOneDayRunner(fromDate, toDate).candidates()).htmlStatsAndPortfolioOn(lastTradingDay, writer);

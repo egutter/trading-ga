@@ -14,7 +14,8 @@ import org.uncommons.maths.binary.BitString;
 public class TradingDecisionGenome {
 //    public static final int SIZE = 17;
 //    public static final int SIZE = 30;
-    public static final int START_POSITION = 4;
+//    public static final int START_POSITION = 4;
+    public static final int START_POSITION = 0;
     public static final int LENGTH = 13;
     public static final int HEAD_LENGTH = START_POSITION;
 

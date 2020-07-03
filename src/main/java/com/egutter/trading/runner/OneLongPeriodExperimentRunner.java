@@ -1,6 +1,8 @@
 package com.egutter.trading.runner;
 
+import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.decision.technicalanalysis.StochasticOscillatorThreshold;
 import com.egutter.trading.genetic.Experiment;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
@@ -13,10 +15,9 @@ import org.paukov.combinatorics.ICombinatoricsVector;
 import org.uncommons.maths.binary.BitString;
 
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
 
 public class OneLongPeriodExperimentRunner {
 
@@ -31,13 +32,14 @@ public class OneLongPeriodExperimentRunner {
 
     private void run() {
 
-        LocalDate fromDate = new LocalDate(2014, 1, 1);
-//        LocalDate toDate = new LocalDate(2013, 7, 1);
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
+//        LocalDate toDate = new LocalDate(2019, 12, 31);
 //        LocalDate fromDate = LocalDate.now().minusMonths(6);
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+//        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate);
 
 //        runOneStrategy(stockMarket, asList(
 //                        AverageDirectionalIndexGenerator.class,
@@ -89,20 +91,47 @@ public class OneLongPeriodExperimentRunner {
 //                BollingerBandsGenerator.class));
 ////
 
-        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
-                asList(
-                        MovingAverageConvergenceDivergenceGenerator.class,
-                        RelativeStrengthIndexGenerator.class,
-                        AverageDirectionalIndexGenerator.class,
-                        BollingerBandsGenerator.class,
-                        AroonOscilatorGenerator.class,
-                        MoneyFlowIndexGenerator.class,
-                        UltimateOscillatorGenerator.class,
-                        WilliamsRGenerator.class) );
+//        ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector = Factory.createVector(
+//                asList(
+//                        MovingAverageConvergenceDivergenceGenerator.class,
+//                        RelativeStrengthIndexGenerator.class,
+//                        AverageDirectionalIndexGenerator.class,
+//                        BollingerBandsGenerator.class,
+//                        AroonOscilatorGenerator.class,
+//                        MoneyFlowIndexGenerator.class,
+//                        UltimateOscillatorGenerator.class,
+//                        WilliamsRGenerator.class) );
+//
+//        runAllCombinationsOf(stockMarket, initialVector, 3);
+//        runAllCombinationsOf(stockMarket, initialVector, 2);
 
-        runAllCombinationsOf(stockMarket, initialVector, 3);
-        runAllCombinationsOf(stockMarket, initialVector, 2);
+        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
+                StochasticOscillatorGenerator.class,
+//                StochasticOscillatorThresholdGenerator.class,
+                MoneyFlowIndexGenerator.class,
+                TrailingStopGenerator.class);
 
+        // With all STOCK GROUPS
+//        StockMarket.allSectors().forEach(stockGroup -> {
+//            System.out.println("=============================================");
+//            System.out.println(stockGroup.getFullName());
+//            System.out.println("=============================================");
+//            String[] symbols = stockGroup.getStockSymbols();
+//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), symbols);
+//            runOneStrategy(stockMarket, tradingDecisionGenerators);
+//        });
+
+        // One Sector
+
+//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), StockMarket.developedMarkets());
+        List<String[]> stocks = StockMarket.individualStocks();
+        stocks.stream().forEach(stock -> {
+            System.out.println("=============================================");
+            System.out.println(stock[0]);
+            System.out.println("=============================================");
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), stock);
+            runOneStrategy(stockMarket, tradingDecisionGenerators);
+        });
     }
 
     private void runAllCombinationsOf(StockMarket stockMarket, ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector, int numOfCombinations) {
@@ -116,7 +145,7 @@ public class OneLongPeriodExperimentRunner {
     private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
         System.out.println("=============================================");
 
-        printResults("OnlyFalls 2014-2016", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
+        printResults("2001-2020", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
     }
 
 
@@ -127,7 +156,7 @@ public class OneLongPeriodExperimentRunner {
 
         System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", asList(" + tradingDecisionGeneratorsString + ".class)),");
 
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result);
         runner.run();
     }
 

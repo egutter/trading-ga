@@ -1,6 +1,7 @@
 package com.egutter.trading.genetic;
 
 import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
+import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.stats.CandidateRanker;
@@ -42,29 +43,29 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     public double getFitness(BitString candidate) {
         Portfolio portfolio = new Portfolio(INITIAL_CASH);
 
-        GeneticsTradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
-        if (candidateValidator(tradingDecisionFactory).isInvalid()) {
-            return 0;
-        }
+        TradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
+//        if (candidateValidator(tradingDecisionFactory).isInvalid()) {
+//            return 0;
+//        }
 
         buildTrader(portfolio, tradingDecisionFactory).tradeAllStocksInMarket();
 
-        seeOtherWaysOfEvaluatePortfolioNotUsed();
+//        seeOtherWaysOfEvaluatePortfolioNotUsed();
 
         if (shouldDiscardCandidate(portfolio)) {
             return 0;
         }
-        CandidateRanker candidateRanker = new CandidateRanker(null);
+//        CandidateRanker candidateRanker = new CandidateRanker(null);
         PortfolioStats porfolioStats = portfolio.getStats();
-        CandidateStats stats = new CandidateStats(porfolioStats.average30daysReturn(),
-                porfolioStats.biggestLost().profitPctg30(),
-                porfolioStats.countOrdersWon(),
-                porfolioStats.countOrdersLost());
+//        CandidateStats stats = new CandidateStats(porfolioStats.average30daysReturn(),
+//                porfolioStats.biggestLost().profitPctg30(),
+//                porfolioStats.countOrdersWon(),
+//                porfolioStats.countOrdersLost());
 
 //        if (!candidateRanker.rank(stats).isHighRank()) return 0;
 //        if (discardWhenBellowMarket(portfolio, 0.9)) return 0;
 
-        if (discardWhenOrdersLost(portfolio)) return 0;
+//        if (discardWhenOrdersLost(portfolio)) return 0;
 
 //        Fitness by Cash
 //        return portfolio.getCash().doubleValue();
@@ -73,9 +74,15 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 //        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(Math.log10(portfolio.getStats().countOrdersWon()));
 //        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
 
+//        int minOps = stockMarket.getTotalTradingDays()/40;
+        int minOps = stockMarket.getTotalTradingDays()/120;
+        if (porfolioStats.totalOrdersCount() < minOps) {
+            return 0;
+        }
+        BigDecimal ordersWonCountWeight = porfolioStats.percentageOfOrdersWon();
+        return ordersWonCountWeight.doubleValue();
 //      Fitness Cash weighted by Orders Won
-        BigDecimal ordersWonCountWeight = BigDecimal.valueOf(porfolioStats.countOrdersWon());
-        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
+//        return portfolio.getProfit().multiply(ordersWonCountWeight).doubleValue();
     }
 
     private boolean discardWhenOrdersLost(Portfolio portfolio) {
@@ -118,8 +125,9 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
         return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
     }
 
-    private GeneticsTradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
-        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, false);
+    private TradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
+//        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, false);
+        return new HardcodedTradingDecisionFactory(portfolio, candidate);
     }
 
     private GenomeCandidateValidator candidateValidator(GeneticsTradingDecisionFactory tradingDecisionGenerator) {

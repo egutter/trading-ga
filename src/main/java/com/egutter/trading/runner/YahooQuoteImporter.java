@@ -2,6 +2,7 @@ package com.egutter.trading.runner;
 
 import com.egutter.trading.repository.HistoricPriceRepository;
 import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockPrices;
 import org.joda.time.LocalDate;
 import yahoofinance.Stock;
@@ -10,6 +11,7 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.BiConsumer;
 
@@ -23,14 +25,31 @@ public class YahooQuoteImporter {
 
     private HistoricPriceRepository repository = new HistoricPriceRepository();
 
-    public static void main(String[] args) {
-        new YahooQuoteImporter().runImport(new LocalDate(2014, 1, 1), allStockSymbols());
-        Optional<DailyQuote> lastQuote = new YahooQuoteImporter().getLastQuote("IRSA.BA");
-        System.out.println(lastQuote.get().getTradingDate().isAfter(new HistoricPriceRepository().getMaxTradingDate()));
+    public static void main(String[] args) throws IOException {
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
+//        LocalDate toDate = new LocalDate(2018, 1, 1);
+        LocalDate toDate = LocalDate.now();
+        String[] stockSymbols = StockMarket.developedMarkets();
+        HistoricPriceRepository historicPriceRepository = new HistoricPriceRepository();
+        Arrays.stream(stockSymbols).forEach(stock -> {
+            LocalDate minTradingDate = historicPriceRepository.getMinTradingDate(stock).orElse(toDate.minusDays(10));
+            if (fromDate.plusDays(5).isAfter(minTradingDate)) {
+                System.out.println("Stock [" + stock + "] already imported minTradeDate = " + minTradingDate);
+            } else {
+                System.out.println("Stock [" + stock + "] NOT imported minTradeDate = " + minTradingDate);
+                new YahooQuoteImporter().runImport(fromDate, toDate, new String[]{stock});
+            }
+        });
+
     }
 
     public Optional<DailyQuote> getLastQuote(String stockName) {
-        Stock stock = YahooFinance.get(stockName);
+        Stock stock = null;
+        try {
+            stock = YahooFinance.get(stockName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if (stock == null) return Optional.empty();
 
         StockQuote quote = stock.getQuote();
@@ -46,24 +65,32 @@ public class YahooQuoteImporter {
     }
 
     public void forEachLastQuote(BiConsumer<String, DailyQuote> applyBlok) {
-        YahooFinance.get(allStockSymbols()).forEach((symbol, stock) -> {
-            StockQuote quote = stock.getQuote();
-            DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
-                    quote.getOpen(),
-                    quote.getPrice(),
-                    quote.getPrice(),
-                    quote.getDayLow(),
-                    quote.getDayHigh(),
-                    quote.getVolume());
-            applyBlok.accept(symbol, dailyQuote);
-        });
+        try {
+            YahooFinance.get(allStockSymbols()).forEach((symbol, stock) -> {
+                StockQuote quote = stock.getQuote();
+                DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getLastTradeTime()),
+                        quote.getOpen(),
+                        quote.getPrice(),
+                        quote.getPrice(),
+                        quote.getDayLow(),
+                        quote.getDayHigh(),
+                        quote.getVolume());
+                applyBlok.accept(symbol, dailyQuote);
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-    public void runImport() {
-        LocalDate fromDate = repository.getMaxTradingDate().plusDays(1);
+    public void runImportFromMaxOrFrom(LocalDate fromDate, String[] symbols) {
+        LocalDate fromMaxDate = repository.getMaxTradingDate(symbols).orElse(fromDate).plusDays(1);
+        runImport(fromMaxDate, symbols);
+    }
+
+    public void runImport(LocalDate fromDate) {
         runImport(fromDate, merval25StockSymbols());
     }
 
-    public void runImport(LocalDate fromDate, String[] stockSymbols) {
+    public List<StockPrices> fetchStockPrices(LocalDate fromDate, String[] stockSymbols) {
         Calendar to = Calendar.getInstance();
 
         Calendar from = Calendar.getInstance();
@@ -72,28 +99,81 @@ public class YahooQuoteImporter {
         from.set(Calendar.MONTH, fromDate.getMonthOfYear() - 1);
         from.set(Calendar.DAY_OF_MONTH, fromDate.getDayOfMonth());
 
-        Map<String, Stock> stocks = YahooFinance.get(stockSymbols, from, to, Interval.DAILY);
+        List<StockPrices> stockPrices = new ArrayList<>();
 
-        System.out.println("Start import from " + from.getTime() + " to " + to.getTime());
-        for (Stock stock : stocks.values()) {
-            List<DailyQuote> dailyQuotes = new ArrayList<DailyQuote>();
-            for (HistoricalQuote quote : stock.getHistory()) {
-                DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getDate()),
-                        quote.getOpen(),
-                        quote.getClose(),
-                        quote.getAdjClose(),
-                        quote.getLow(),
-                        quote.getHigh(),
-                        quote.getVolume());
+        try {
+            Map<String, Stock> stocks =  YahooFinance.get(stockSymbols, from, to, Interval.DAILY);
+            System.out.println("Start import from " + from.getTime() + " to " + to.getTime());
+            for (Stock stock : stocks.values()) {
+                List<DailyQuote> dailyQuotes = new ArrayList<DailyQuote>();
+                for (HistoricalQuote quote : stock.getHistory()) {
+                    DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getDate()),
+                            quote.getOpen(),
+                            quote.getClose(),
+                            quote.getAdjClose(),
+                            quote.getLow(),
+                            quote.getHigh(),
+                            quote.getVolume());
 
-                dailyQuotes.add(dailyQuote);
+                    dailyQuotes.add(dailyQuote);
+                }
+                stockPrices.add(new StockPrices(stock.getSymbol(), dailyQuotes));
             }
-            repository.removeAllFrom(stock.getSymbol(), fromDate);
-
-            StockPrices prices = new StockPrices(stock.getSymbol(), dailyQuotes);
-            System.out.println("Import " + stock.getSymbol() + " - " + stock.getName() + " number of quotes " + dailyQuotes.size());
-            repository.insertStockPrices(prices);
+            return stockPrices;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private void runImport(LocalDate fromDate, String[] stockSymbols) {
+        runImport(fromDate, LocalDate.now(), stockSymbols);
+    }
+
+    public void runImport(LocalDate fromDate, LocalDate toDate, String[] stockSymbols) {
+        Calendar to = Calendar.getInstance();
+
+        to.set(Calendar.YEAR, toDate.getYear());
+        to.set(Calendar.MONTH, toDate.getMonthOfYear() - 1);
+        to.set(Calendar.DAY_OF_MONTH, toDate.getDayOfMonth());
+
+        Calendar from = Calendar.getInstance();
+
+        from.set(Calendar.YEAR, fromDate.getYear());
+        from.set(Calendar.MONTH, fromDate.getMonthOfYear() - 1);
+        from.set(Calendar.DAY_OF_MONTH, fromDate.getDayOfMonth());
+
+        try {
+            Map<String, Stock> stocks = YahooFinance.get(stockSymbols, from, to, Interval.DAILY);
+
+            System.out.println("Start import from " + from.getTime() + " to " + to.getTime());
+            for (Stock stock : stocks.values()) {
+                List<DailyQuote> dailyQuotes = new ArrayList<DailyQuote>();
+                try {
+                    for (HistoricalQuote quote : stock.getHistory()) {
+                        DailyQuote dailyQuote = new DailyQuote(LocalDate.fromCalendarFields(quote.getDate()),
+                                quote.getOpen(),
+                                quote.getClose(),
+                                quote.getAdjClose(),
+                                quote.getLow(),
+                                quote.getHigh(),
+                                quote.getVolume());
+
+                        dailyQuotes.add(dailyQuote);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                repository.removeAllBetween(stock.getSymbol(), fromDate, toDate);
+
+                StockPrices prices = new StockPrices(stock.getSymbol(), dailyQuotes);
+                System.out.println("Import " + stock.getSymbol() + " - " + stock.getName() + " number of quotes " + dailyQuotes.size());
+                repository.insertStockPrices(prices);
+            }
+        } catch (IOException e) {
+//            throw new RuntimeException(e);
+            e.printStackTrace();
+        }
+
     }
 
 }

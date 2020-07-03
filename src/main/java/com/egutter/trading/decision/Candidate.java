@@ -1,12 +1,12 @@
 package com.egutter.trading.decision;
 
 import com.egutter.trading.decision.generator.*;
-import com.egutter.trading.repository.PortfolioRepository;
-import com.egutter.trading.runner.TradeOneDayRunner;
+import com.egutter.trading.stock.StockGroup;
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
+import org.apache.commons.math3.util.Pair;
 import org.uncommons.maths.binary.BitString;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,7 @@ import static com.google.common.collect.Lists.transform;
  */
 public class Candidate {
 
+    private List<StockGroup> stockGroups = new ArrayList();
     private String description;
     private BitString chromosome;
     private List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators;
@@ -41,6 +42,11 @@ public class Candidate {
         this.description = description;
         this.chromosome = chromosome;
         this.tradingDecisionGenerators = tradingDecisionGenerators;
+    }
+
+    public <T> Candidate(String description, String chromosome, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators, List<StockGroup> stockGroups) {
+        this(description, chromosome, tradingDecisionGenerators);
+        this.stockGroups = stockGroups;
     }
 
     public String key() {
@@ -70,6 +76,10 @@ public class Candidate {
 
     public String getDescription() {
         return description;
+    }
+
+    public List<StockGroup> getStockGroups() {
+        return stockGroups;
     }
 
     @Override

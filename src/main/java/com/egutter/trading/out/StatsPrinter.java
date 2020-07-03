@@ -40,7 +40,7 @@ public class StatsPrinter {
         LocalDate fromDate = new LocalDate(2014, 1, 1);
         LocalDate toDate = LocalDate.now();
         PortfolioRepository portfolioRepository = new PortfolioRepository();
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
         LocalDate lastTradingDay = stockMarket.getLastTradingDay();
         new StatsPrinter(portfolioRepository, stockMarket, new TradeOneDayRunner(fromDate, toDate).candidates()).printStatsAndPortfolio(lastTradingDay);
     }

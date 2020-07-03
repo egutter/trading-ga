@@ -59,7 +59,9 @@ public class DailyQuote {
     }
 
     public double getAdjustedClosePrice() {
-        return adjustedClosePrice;
+        return closePrice;
+//        For stats we need to close price. Maybe
+//        return adjustedClosePrice;
     }
 
     public double getLowPrice() {
@@ -80,7 +82,7 @@ public class DailyQuote {
 
     @Override
     public String toString() {
-        return Joiner.on(" ").join(tradingDate, adjustedClosePrice);
+        return Joiner.on("=").join(tradingDate, closePrice);
     }
 
     public boolean isOn(LocalDate tradingDate) {
@@ -93,5 +95,12 @@ public class DailyQuote {
 
     public static DailyQuote empty() {
         return new DailyQuote(LocalDate.now(), 1, 1, 1, 1, 1, 1);
+    }
+    public static DailyQuote withClosePrice(double closePrice) {
+        return new DailyQuote(LocalDate.now(), 1, closePrice, 1, 1, 1, 1);
+    }
+
+    public double getAverageOpenLowHighPrice() {
+        return (this.openPrice * 0.5) + (this.lowPrice * 0.25) + (this.highPrice * 0.25);
     }
 }

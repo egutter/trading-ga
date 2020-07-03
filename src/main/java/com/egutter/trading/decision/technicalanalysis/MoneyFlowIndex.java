@@ -3,6 +3,7 @@ package com.egutter.trading.decision.technicalanalysis;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
@@ -23,18 +24,12 @@ import java.util.*;
 public class MoneyFlowIndex extends MomentumOscillator {
 
     public static void main(String[] args) {
-        StockMarket stockMarket = new StockMarketBuilder().build(new LocalDate(2013, 1, 1), new LocalDate(2014, 12, 31));
-        List<Double> maxes = new ArrayList<Double>();
-        List<Double> minis = new ArrayList<Double>();
-        for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            System.out.println("Stock " + stockPrices.getStockName());
-            MoneyFlowIndex mfi = new MoneyFlowIndex(stockPrices, Range.atLeast(80), Range.atMost(10), 20);
-            Map<LocalDate, Double> indexes = mfi.getMomentumOscillatorIndex();
-            maxes.add(Ordering.natural().max(indexes.values()));
-            minis.add(Ordering.natural().min(indexes.values()));
-        }
-        System.out.println("Max value " + Ordering.natural().max(maxes));
-        System.out.println("Min value " + Ordering.natural().min(minis));
+        LocalDate fromDate = new LocalDate(2016, 1, 01);
+        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate, StockMarket.aapl());
+        StockPrices stock = stockMarket.getStockPricesFor("AAPL");
+        MoneyFlowIndex mfi = new MoneyFlowIndex(stock, Range.atMost(25.0), Range.atLeast(80.0), 14);
+        new PrintResult().printIndexValues(stockMarket, mfi);
+
     }
 
     public MoneyFlowIndex(StockPrices stockPrices, Range buyThreshold, Range sellThreshold, Integer days) {
@@ -46,22 +41,13 @@ public class MoneyFlowIndex extends MomentumOscillator {
     }
 
     @Override
-    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
-        Map<LocalDate, Double> moneyFlowIndex = new HashMap<LocalDate, Double>();
-        List<Double>closePrices = stockPrices.getAdjustedClosePrices();
-        List<Double>hiPrices = stockPrices.getHighPrices();
-        List<Double>lowPrices = stockPrices.getLowPrices();
-        List<? extends Number> volume = stockPrices.getVolumes();
+    protected int calculateOscillatorLookback(CoreAnnotated coreAnnotated) {
+        return coreAnnotated.mfiLookback(days());
+    }
 
-        MInteger outBegIdx = new MInteger();
-        MInteger outNBElement = new MInteger();
-        double outReal[] = new double[closePrices.size()];
-        double[] hiPricesArray = Doubles.toArray(hiPrices);
-        double[] lowPricesArray = Doubles.toArray(lowPrices);
-        double[] closePricesArray = Doubles.toArray(closePrices);
-        double[] volumeArray = Doubles.toArray(volume);
-
-        RetCode returnCode = new CoreAnnotated().mfi(startIndex(),
+    @Override
+    protected RetCode calculateOscillatorValues(List<Double> closePrices, MInteger outBegIdx, MInteger outNBElement, double[] outReal, double[] hiPricesArray, double[] lowPricesArray, double[] closePricesArray, double[] volumeArray, CoreAnnotated coreAnnotated) {
+        return coreAnnotated.mfi(startIndex(),
                 endIndex(closePrices),
                 hiPricesArray,
                 lowPricesArray,
@@ -71,20 +57,48 @@ public class MoneyFlowIndex extends MomentumOscillator {
                 outBegIdx,
                 outNBElement,
                 outReal);
-
-        if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Money Flow Index " + returnCode);
-        }
-
-        List<LocalDate> tradingDates = stockPrices.getTradingDates();
-        int lookBack = new CoreAnnotated().mfiLookback(days());
-        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
-        for (int i = 0; i < outNBElement.value; i++) {
-            int daysOffset = i + lookBack;
-            LocalDate tradingDate = tradingDates.get(daysOffset);
-            moneyFlowIndex.put(tradingDate, outReal[i]);
-        }
-        return moneyFlowIndex;
     }
+
+//    @Override
+//    protected Map<LocalDate, Double> calculateMomentumOscillatorIndex() {
+//        Map<LocalDate, Double> moneyFlowIndex = new HashMap<LocalDate, Double>();
+//        List<Double>closePrices = stockPrices.getClosePrices();
+//        List<Double>hiPrices = stockPrices.getHighPrices();
+//        List<Double>lowPrices = stockPrices.getLowPrices();
+//        List<? extends Number> volume = stockPrices.getVolumes();
+//
+//        MInteger outBegIdx = new MInteger();
+//        MInteger outNBElement = new MInteger();
+//        double outReal[] = new double[closePrices.size()];
+//        double[] hiPricesArray = Doubles.toArray(hiPrices);
+//        double[] lowPricesArray = Doubles.toArray(lowPrices);
+//        double[] closePricesArray = Doubles.toArray(closePrices);
+//        double[] volumeArray = Doubles.toArray(volume);
+//
+//        RetCode returnCode = new CoreAnnotated().mfi(startIndex(),
+//                endIndex(closePrices),
+//                hiPricesArray,
+//                lowPricesArray,
+//                closePricesArray,
+//                volumeArray,
+//                days(),
+//                outBegIdx,
+//                outNBElement,
+//                outReal);
+//
+//        if (!returnCode.equals(RetCode.Success)) {
+//            throw new RuntimeException("Error calculating Money Flow Index " + returnCode);
+//        }
+//
+//        List<LocalDate> tradingDates = stockPrices.getTradingDates();
+//        int lookBack = new CoreAnnotated().mfiLookback(days());
+//        if (lookBack < tradingDates.size()) this.startOnDate = tradingDates.get(lookBack);
+//        for (int i = 0; i < outNBElement.value; i++) {
+//            int daysOffset = i + lookBack;
+//            LocalDate tradingDate = tradingDates.get(daysOffset);
+//            moneyFlowIndex.put(tradingDate, outReal[i]);
+//        }
+//        return moneyFlowIndex;
+//    }
 
 }

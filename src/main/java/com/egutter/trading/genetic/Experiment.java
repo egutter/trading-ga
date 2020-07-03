@@ -19,13 +19,13 @@ import org.uncommons.watchmaker.framework.selection.RouletteWheelSelection;
 import org.uncommons.watchmaker.framework.selection.SigmaScaling;
 import org.uncommons.watchmaker.framework.selection.TournamentSelection;
 import org.uncommons.watchmaker.framework.selection.TruncationSelection;
+import org.uncommons.watchmaker.framework.termination.ElapsedTime;
 import org.uncommons.watchmaker.framework.termination.GenerationCount;
 import org.uncommons.watchmaker.framework.termination.Stagnation;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
+import static com.egutter.trading.candidates.GlobalStockMarketCandidates.chromosomeCandidates;
 import static java.util.Arrays.asList;
 
 /**
@@ -74,7 +74,9 @@ public class Experiment {
                 getSelectionStrategy(),
                 rng);
 
-        return engine.evolve(1000, 10, new GenerationCount(200), new Stagnation(20, true));
+//        return engine.evolve(1000, 10, candidateSeeds, new GenerationCount(200), new Stagnation(20, true));
+        List<BitString> candidateSeeds = chromosomeCandidates();
+        return engine.evolve(candidateSeeds.size(), 1, candidateSeeds, new ElapsedTime(1800000), new GenerationCount(200), new Stagnation(20, true));
     }
 
     public SelectionStrategy<? super BitString> getSelectionStrategy() {

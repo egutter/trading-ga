@@ -43,12 +43,13 @@ public class OrderExtraInfo {
         return new StringJoiner(" ", "OrderExtraInfo ", "").
                 add("shares:").
                 add(String.valueOf(numberOfShares)).
-                add(buffer).add("Buy price trigger").
+                add(buffer).
+                add("Buy price trigger").
                 add(String.valueOf(buyPriceTrigger)).
-                add(buffer).add("High quote").
-                add(String.valueOf(highQuote)).
-                add(buffer).add("Low quote").
-                add(String.valueOf(lowQuote)).
+                add("High quote").
+                add(String.valueOf(highQuote.highQuoteToString())).
+                add("Low quote").
+                add(String.valueOf(lowQuote.lowQuoteToString())).
                 toString();
     }
 

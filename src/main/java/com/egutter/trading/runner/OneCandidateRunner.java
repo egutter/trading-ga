@@ -75,7 +75,9 @@ public class OneCandidateRunner {
 
     public void run() {
         trader.tradeAllStocksInMarket();
-        new PrintResult(true).print(this, candidate);
+        if (this.percentageOfOrdersWon().compareTo(new BigDecimal(0.85)) >= 0) {
+            new PrintResult(false).print(this, candidate);
+        }
     }
 
     public void runOn(LocalDate tradingDate) {
@@ -202,7 +204,7 @@ public class OneCandidateRunner {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-        runOneSectorWithOneCandidate(fromDate, StockMarket.developedMarkets(), "1000010001110011011110111110011100011111111101110001");
+        runOneSectorWithOneCandidate(fromDate, StockMarket.sectors(), "0100001100001001101100010001011011111111111111111110");
 
 //        runAllSectorsOnAllCandidates(fromDate);
     }

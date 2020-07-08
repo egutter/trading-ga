@@ -6,6 +6,7 @@ import com.google.common.collect.Ordering;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -23,7 +24,11 @@ public class StockMarket {
     public static final String INDUSTRIAL_SECTOR = "INDUSTRIAL";
     public static final String INNOVATION_SECTOR = "INNOVATION";
     public static final String ETF_SECTORS = "SECTORS ETF";
-    public static final String DEVELOP_ETF_MARKETS = "DEVELO ETF MARKETS";
+    public static final String METALS_SECTORS = "METALS";
+    public static final String EMERGENT_SECTORS = "EMERGENT";
+    public static final String SMALL_CAP_SECTORS = "SMALL CAP";
+    public static final String GREEN_SECTORS = "GREEN ETF";
+    public static final String DEVELOP_ETF_MARKETS = "DEVELOP ETF MARKETS";
     private List<StockPrices> stockPrices;
 
     private StockPrices marketIndexPrices;
@@ -37,18 +42,41 @@ public class StockMarket {
         this.marketIndexPrices = marketIndexPrices;
     }
 
+    public static List<StockGroup> onlyIndividualSectors() {
+        List<StockGroup> stockGroups = new ArrayList<StockGroup>();
+        stockGroups.addAll(Arrays.asList(new StockGroup("VGLT", longTermBonds()),
+                new StockGroup("VCLT", corporateBonds()),
+                new StockGroup(METALS_SECTORS, metals())));
+        individualStocks().stream().forEach(stocks -> {
+            stockGroups.add(new StockGroup(stocks[0], stocks));
+        });
+
+        return stockGroups;
+    }
     public static List<StockGroup> allSectors() {
-         return Arrays.asList(new StockGroup(ETF_SECTORS, sectors()),
-                 new StockGroup(TECH_SECTOR, techSector()),
-                 new StockGroup(COMM_SECTOR, commSector()),
-                 new StockGroup(FINANCE_SECTOR, financeSector()),
-                 new StockGroup(CONS_BASIC_SECTOR, consumerBasicSector()),
-                 new StockGroup(CONS_DISC_SECTOR, consumerDiscSector()),
-                 new StockGroup(HEALTH_SECTOR, healthSector()),
-                 new StockGroup(BIOTECH_SECTOR, biotechSector()),
-                 new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
-                 new StockGroup(INNOVATION_SECTOR, innovationSector()),
-                 new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()));
+        List<StockGroup> stockGroups = new ArrayList<StockGroup>();
+        stockGroups.addAll(Arrays.asList(new StockGroup(ETF_SECTORS, sectors()),
+                new StockGroup(TECH_SECTOR, techSector()),
+                new StockGroup(COMM_SECTOR, commSector()),
+                new StockGroup(FINANCE_SECTOR, financeSector()),
+                new StockGroup(CONS_BASIC_SECTOR, consumerBasicSector()),
+                new StockGroup(CONS_DISC_SECTOR, consumerDiscSector()),
+                new StockGroup(HEALTH_SECTOR, healthSector()),
+                new StockGroup(BIOTECH_SECTOR, biotechSector()),
+                new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
+                new StockGroup(INNOVATION_SECTOR, innovationSector()),
+//                new StockGroup("VGLT", longTermBonds()),
+//                new StockGroup("VCLT", corporateBonds()),
+//                new StockGroup(METALS_SECTORS, metals()),
+                new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
+                new StockGroup(GREEN_SECTORS, greenSector()),
+                new StockGroup(SMALL_CAP_SECTORS, smallCap()),
+//                new StockGroup("BGRN", greenBonds()),
+                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets())));
+//        individualStocks().stream().forEach(stocks -> {
+//            stockGroups.add(new StockGroup(stocks[0], stocks));
+//        });
+        return stockGroups;
     }
 
     public static String[] innovationSector() {
@@ -184,7 +212,6 @@ public class StockMarket {
                 "WMT",
                 "MO",
                 "MDLZ",
-                "PM",
                 "COST",
                 "CL",
                 "KMB",
@@ -321,6 +348,67 @@ public class StockMarket {
             "XLP",
             "XLC",
             "XBI",
+        };
+    }
+    public static String[] metals() {
+        return new String[]{
+            "GLD",
+            "SLV",
+        };
+    }
+    public static String[] corporateBonds() {
+        return new String[]{
+            "VCLT"
+        };
+    }
+
+    public static String[] longTermBonds() {
+        return new String[]{
+            "VGLT",
+        };
+    }
+    public static String[] greenBonds() {
+        return new String[]{
+            "BGRN",
+        };
+    }
+    public static String[] greenSector() {
+        return new String[]{
+            "PBW",
+            "ICLN",
+            "TAN",
+            "QCLN",
+            "FAN",
+        };
+    }
+
+    public static String[] smallCap() {
+        return new String[]{
+            "VBK",
+            "FPX",
+            "SCZ",
+        };
+    }
+
+    public static String[] govBonds() {
+        return new String[]{
+            "BLV",
+            "VGLT",
+            "BND",
+            "EDV",
+        };
+    }
+
+    public static String[] emergentMarkets() {
+        return new String[]{
+            "VWO",
+            "MCHI",
+            "EWT",
+            "EWZ",
+            "RSX",
+            "INDA",
+            "EWW",
+            "ECH",
         };
     }
     public static String[] largeSectorStocks() {

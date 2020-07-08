@@ -75,6 +75,7 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 //        return portfolio.getCash().multiply(ordersWonCountWeight).doubleValue();
 
 //        int minOps = stockMarket.getTotalTradingDays()/40;
+//        int minOps = stockMarket.getTotalTradingDays()/40;
         int minOps = stockMarket.getTotalTradingDays()/120;
         if (porfolioStats.totalOrdersCount() < minOps) {
             return 0;

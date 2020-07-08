@@ -15,6 +15,7 @@ import org.paukov.combinatorics.ICombinatoricsVector;
 import org.uncommons.maths.binary.BitString;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -112,26 +113,29 @@ public class OneLongPeriodExperimentRunner {
                 TrailingStopGenerator.class);
 
         // With all STOCK GROUPS
-//        StockMarket.allSectors().forEach(stockGroup -> {
-//            System.out.println("=============================================");
-//            System.out.println(stockGroup.getFullName());
-//            System.out.println("=============================================");
-//            String[] symbols = stockGroup.getStockSymbols();
-//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), symbols);
-//            runOneStrategy(stockMarket, tradingDecisionGenerators);
-//        });
-
-        // One Sector
-
-//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), StockMarket.developedMarkets());
-        List<String[]> stocks = StockMarket.individualStocks();
-        stocks.stream().forEach(stock -> {
+        StockMarket.onlyIndividualSectors().forEach(stockGroup -> {
             System.out.println("=============================================");
-            System.out.println(stock[0]);
+            System.out.println(stockGroup.getFullName());
             System.out.println("=============================================");
-            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), stock);
+            String[] symbols = stockGroup.getStockSymbols();
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), symbols);
             runOneStrategy(stockMarket, tradingDecisionGenerators);
         });
+
+        // One Sector
+//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), StockMarket.sectors());
+//        runOneStrategy(stockMarket, tradingDecisionGenerators);
+
+//        EACH INDIVIDUAL
+//        List<String[]> stocks = new ArrayList();
+//        stocks.add(StockMarket.metals());
+//        stocks.stream().forEach(stock -> {
+//            System.out.println("=============================================");
+//            System.out.println(stock[0]);
+//            System.out.println("=============================================");
+//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), stock);
+//            runOneStrategy(stockMarket, tradingDecisionGenerators);
+//        });
     }
 
     private void runAllCombinationsOf(StockMarket stockMarket, ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector, int numOfCombinations) {

@@ -85,6 +85,15 @@ public class DailyQuote {
         return Joiner.on("=").join(tradingDate, closePrice);
     }
 
+    public String highQuoteToString() {
+        return Joiner.on("=").join(tradingDate, highPrice);
+    }
+
+    public String lowQuoteToString() {
+        return Joiner.on("=").join(tradingDate, lowPrice);
+    }
+
+
     public boolean isOn(LocalDate tradingDate) {
         return this.tradingDate.equals(tradingDate);
     }
@@ -103,4 +112,5 @@ public class DailyQuote {
     public double getAverageOpenLowHighPrice() {
         return (this.openPrice * 0.5) + (this.lowPrice * 0.25) + (this.highPrice * 0.25);
     }
+
 }

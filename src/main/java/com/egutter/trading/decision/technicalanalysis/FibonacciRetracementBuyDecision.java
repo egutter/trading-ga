@@ -89,7 +89,7 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
 
             if (previousQuote.get().getClosePrice() < quoteAtDate.get().getClosePrice()) return DecisionResult.NO;
 
-            double retracement = (high.getClosePrice() - quoteAtDate.get().getClosePrice()) / (high.getClosePrice() - low.getClosePrice());
+            double retracement = (high.getHighPrice() - quoteAtDate.get().getClosePrice()) / (high.getHighPrice() - low.getLowPrice());
             MathContext mc = new MathContext(3, RoundingMode.HALF_UP);
 
             BigDecimal actualRetracement = new BigDecimal(retracement, mc);
@@ -101,7 +101,7 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
                 buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(this.sellExtensionSecondLevel, high, low), 1);
 //                buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(FIB_EXT_1_618, high, low), 0.5);
 //                buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(FIB_EXT_1_786, high, low), 1.0);
-                buyOrderExtraInfo.setBuyPriceTrigger(sellTakeProfitPrice(this.buyLevelTrigger, high, low));
+                buyOrderExtraInfo.setBuyPriceTrigger(buyLevelTriggerPrice(this.buyLevelTrigger, high, low));
                 buyOrderExtraInfo.setHighQuote(high);
                 buyOrderExtraInfo.setLowQuote(low);
                 return DecisionResult.yesWithExtraInfo(buyOrderExtraInfo);
@@ -112,8 +112,12 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
         return DecisionResult.NO;
     }
 
+    private double buyLevelTriggerPrice(double buyLevelTrigger, DailyQuote high, DailyQuote low) {
+        return (high.getHighPrice() - (buyLevelTrigger * (high.getHighPrice() - low.getLowPrice())));
+    }
+
     private double sellTakeProfitPrice(double level, DailyQuote high, DailyQuote low) {
-        return (level * (high.getClosePrice() - low.getClosePrice())) + low.getClosePrice();
+        return (level * (high.getHighPrice() - low.getLowPrice())) + low.getLowPrice();
     }
 
     @Override

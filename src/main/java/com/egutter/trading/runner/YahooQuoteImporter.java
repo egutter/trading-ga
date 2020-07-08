@@ -29,7 +29,7 @@ public class YahooQuoteImporter {
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 //        LocalDate toDate = new LocalDate(2018, 1, 1);
         LocalDate toDate = LocalDate.now();
-        String[] stockSymbols = StockMarket.developedMarkets();
+        String[] stockSymbols = StockMarket.greenSector();
         HistoricPriceRepository historicPriceRepository = new HistoricPriceRepository();
         Arrays.stream(stockSymbols).forEach(stock -> {
             LocalDate minTradingDate = historicPriceRepository.getMinTradingDate(stock).orElse(toDate.minusDays(10));

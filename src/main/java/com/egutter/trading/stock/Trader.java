@@ -9,6 +9,7 @@ import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 /**
  * Created by egutter on 2/12/14.
@@ -62,18 +63,26 @@ public class Trader {
     public void tradeOn(LocalDate tradingDate) {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
             TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
-            stockPrices.withDailyPriceOn(tradingDate, executeMarketOrders(stockPrices, tradingStrategy));
+            LocalDate startOn = tradingDate.minusDays(10);
+            stockPrices.forEachDailyPrice(startOn, executeMarketOrders(stockPrices, tradingStrategy, (runOnDate) -> runOnDate.equals(tradingDate)), () -> false);
+//            stockPrices.withDailyPriceOn(tradingDate, executeMarketOrders(stockPrices, tradingStrategy));
         }
     }
 
     private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingStrategy tradingStrategy) {
+        return executeMarketOrders(stockPrices, tradingStrategy, (runOnDate) -> true);
+    }
+
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingStrategy tradingStrategy, Function<LocalDate, Boolean> shouldAddOrders) {
         return new Function<DailyQuote, Object>() {
             @Override
             public Object apply(DailyQuote dailyQuote) {
                 MarketOrderGenerator marketOrderGenerator = marketOrderGenerator(stockPrices, dailyQuote, tradingStrategy);
                 OrderBook newMarketOrders = marketOrderGenerator.generateOrders();
-                newMarketOrders.execute(portfolio);
-                orderBook.append(newMarketOrders);
+                if (shouldAddOrders.apply(dailyQuote.getTradingDate())) {
+                    newMarketOrders.execute(portfolio);
+                    orderBook.append(newMarketOrders);
+                }
                 return orderBook;
             }
         };

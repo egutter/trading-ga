@@ -2,7 +2,7 @@ package com.egutter.trading.decision.consensus;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
-import com.egutter.trading.decision.ShouldCrearDecision;
+import com.egutter.trading.decision.ShouldClearDecision;
 import com.egutter.trading.decision.TradingDecision;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -17,7 +17,7 @@ import static com.google.common.collect.FluentIterable.from;
 /**
  * Created by egutter on 2/16/14.
  */
-public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision, ShouldCrearDecision {
+public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision, ShouldClearDecision {
 
     private List<TradingDecision> buyTradingDecisionList = new ArrayList<TradingDecision>();
 
@@ -66,8 +66,8 @@ public class BuyWhenNoOppositionsTradingDecision implements BuyTradingDecision, 
     @Override
     public void clear() {
         this.buyTradingDecisionList.stream().forEach(decision -> {
-            if (ShouldCrearDecision.class.isAssignableFrom(decision.getClass())) {
-                ((ShouldCrearDecision) decision).clear();
+            if (ShouldClearDecision.class.isAssignableFrom(decision.getClass())) {
+                ((ShouldClearDecision) decision).clear();
             }
         });
     }

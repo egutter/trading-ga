@@ -75,6 +75,7 @@ public class OneCandidateRunner {
 
     public void run() {
         trader.tradeAllStocksInMarket();
+//        new PrintResult(false).print(this, candidate);
         if (this.percentageOfOrdersWon().compareTo(new BigDecimal(0.85)) >= 0) {
             new PrintResult(false).print(this, candidate);
         }
@@ -202,9 +203,9 @@ public class OneCandidateRunner {
 
     public static void main(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        LocalDate fromDate = new LocalDate(2020, 1, 1);
 
-        runOneSectorWithOneCandidate(fromDate, StockMarket.sectors(), "0100001100001001101100010001011011111111111111111110");
+        runOneSectorWithOneCandidate(fromDate, new String[] {"MA"}, "0010100100001011111001101111111100001111111111111100");
 
 //        runAllSectorsOnAllCandidates(fromDate);
     }
@@ -229,7 +230,7 @@ public class OneCandidateRunner {
 
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), sectors.getStockSymbols());
 
-            GlobalStockMarketCandidates.candidates().stream().forEach(candidate -> {
+            GlobalStockMarketCandidates.newCandidates().stream().forEach(candidate -> {
                 OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome());
                 runner.run();
                 System.out.println("==========================================");

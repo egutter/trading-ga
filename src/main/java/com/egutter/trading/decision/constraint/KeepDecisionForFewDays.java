@@ -8,7 +8,7 @@ import org.joda.time.LocalDate;
 
 import java.util.function.Function;
 
-public class KeepDecisionForFewDays implements BuyTradingDecision, SellTradingDecision, ShouldCrearDecision {
+public class KeepDecisionForFewDays implements BuyTradingDecision, SellTradingDecision, ShouldClearDecision {
 
     private final StockPrices stockPrices;
     private TradingDecision decision;

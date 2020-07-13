@@ -65,17 +65,17 @@ public class StockMarket {
                 new StockGroup(BIOTECH_SECTOR, biotechSector()),
                 new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
                 new StockGroup(INNOVATION_SECTOR, innovationSector()),
-//                new StockGroup("VGLT", longTermBonds()),
-//                new StockGroup("VCLT", corporateBonds()),
-//                new StockGroup(METALS_SECTORS, metals()),
+                new StockGroup("VGLT", longTermBonds()),
+                new StockGroup("VCLT", corporateBonds()),
+                new StockGroup(METALS_SECTORS, metals()),
                 new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
                 new StockGroup(GREEN_SECTORS, greenSector()),
                 new StockGroup(SMALL_CAP_SECTORS, smallCap()),
-//                new StockGroup("BGRN", greenBonds()),
+                new StockGroup("BGRN", greenBonds()),
                 new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets())));
-//        individualStocks().stream().forEach(stocks -> {
-//            stockGroups.add(new StockGroup(stocks[0], stocks));
-//        });
+        individualStocks().stream().forEach(stocks -> {
+            stockGroups.add(new StockGroup(stocks[0], stocks));
+        });
         return stockGroups;
     }
 

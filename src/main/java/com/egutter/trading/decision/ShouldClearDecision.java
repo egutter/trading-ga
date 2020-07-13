@@ -1,6 +1,6 @@
 package com.egutter.trading.decision;
 
-public interface ShouldCrearDecision {
+public interface ShouldClearDecision {
 
     void clear();
 }

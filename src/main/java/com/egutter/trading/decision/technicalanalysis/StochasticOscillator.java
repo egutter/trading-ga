@@ -31,11 +31,11 @@ public class StochasticOscillator extends CrossOverOscillator {
     private MAType slowDMaType;
 
     public static void main(String[] args) {
-        LocalDate fromDate = new LocalDate(2016, 1, 01);
-        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate, StockMarket.aapl());
-        StockPrices stock = stockMarket.getStockPricesFor("AAPL");
+        LocalDate fromDate = new LocalDate(2020, 1, 01);
+        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate, new String[] {"MA"});
+        StockPrices stock = stockMarket.getStockPricesFor("MA");
         StochasticOscillator oscillator = new StochasticOscillator(stock,
-                14, 3, 3, MAType.Sma, MAType.Sma);
+                17, 6, 6, MAType.Ema, MAType.Sma);
         new PrintResult().printIndexValues(stockMarket, oscillator);
 
     }

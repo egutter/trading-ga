@@ -33,7 +33,7 @@ public class OneDayCandidateRunner {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
         LocalDate toDate = LocalDate.now();
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, toDate);
-        LocalDate tradeOn = new LocalDate(2020, 7, 7);
+        LocalDate tradeOn = new LocalDate(2020, 7, 10);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
     }
@@ -115,7 +115,7 @@ public class OneDayCandidateRunner {
     }
 
     public List<Candidate> candidates() {
-        return GlobalStockMarketCandidates.candidates();
+        return GlobalStockMarketCandidates.newCandidates();
     }
 
     public List<String> getResultBuffer() {

@@ -28,72 +28,261 @@ public class GlobalStockMarketCandidates {
                 new Candidate("ETF Sectors", "1000010001110011011110111110011100011111111101110001",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.94", sectors())
+                                new StockGroup(ETF_SECTORS, "0.89", sectors()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.87", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.87", healthSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.94", smallCap())
                         )),
                 new Candidate("ETF Sectors", "0100011100001101101001001111100100001111111111101111",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.94", sectors())
+                                new StockGroup(ETF_SECTORS, "0.94", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(FINANCE_SECTOR, "0.85", financeSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.85", consumerBasicSector()),
+                                new StockGroup(CONS_DISC_SECTOR, "0.86", consumerDiscSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCap())
                         )),
                 new Candidate("ETF Sectors", "0100001100001001101100010001011011111111111111111110",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.93", sectors())
+                                new StockGroup(ETF_SECTORS, "0.93", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.85", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.85", smallCap())
                         )),
                 new Candidate("Tech", "1100001100000100101110111110111100000001111001110111",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.87", sectors())
+                                new StockGroup(TECH_SECTOR, "0.87", techSector()),
+                                new StockGroup(FINANCE_SECTOR, "0.85", financeSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.87", consumerBasicSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.85", consumerBasicSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCap())
                         )),
                 new Candidate("Comm", "1110011100001100101011011111100100001011111101111111",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.87", sectors())
+                                new StockGroup(COMM_SECTOR, "0.87", commSector()),
+                                new StockGroup(ETF_SECTORS, "0.89", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.87", techSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.90", consumerBasicSector()),
+                                new StockGroup(CONS_DISC_SECTOR, "0.85", consumerDiscSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.87", consumerBasicSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCap())
                         )),
                 new Candidate("Finance", "0001010100101010101000111110111100001011111101111011",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.87", sectors())
+                                new StockGroup(FINANCE_SECTOR, "0.87", financeSector()),
+                                new StockGroup(ETF_SECTORS, "0.91", sectors()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.88", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92", smallCap()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.86", developedMarkets())
                         )),
                 new Candidate("Cons Basic", "1010100100001111111011011101001011110001111111111000",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.93", sectors())
+                                new StockGroup(CONS_BASIC_SECTOR, "0.93", consumerBasicSector()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.86", developedMarkets()),
+                                new StockGroup(ETF_SECTORS, "0.89", sectors()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.93", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.87", healthSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.85", industrialSector())
                         )),
                 new Candidate("Cons Disc", "0100011100000100101111011111110100000111111111111110",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                                new StockGroup(CONS_DISC_SECTOR, "0.88", consumerDiscSector()),
+                                new StockGroup(ETF_SECTORS, "0.93", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(COMM_SECTOR, "0.86", commSector()),
+                                new StockGroup(FINANCE_SECTOR, "0.85", financeSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.86", consumerBasicSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.85", industrialSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.85", smallCap())
                         )),
                 new Candidate("Health", "1000010000100011011100101000100100001111111111110010",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.89", sectors())
+                                new StockGroup(HEALTH_SECTOR, "0.89", healthSector()),
+                                new StockGroup(ETF_SECTORS, "0.92", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCap()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.86", developedMarkets()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.88", consumerBasicSector()),
+                                new StockGroup(CONS_DISC_SECTOR, "0.85", consumerDiscSector())
                         )),
                 new Candidate("Industrial", "1111010100000100001011011000011100000111111111110101",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.88", industrialSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.88", healthSector()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.88", developedMarkets()),
+                                new StockGroup(ETF_SECTORS, "0.90", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.86", techSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.91", consumerBasicSector())
                         )),
                 new Candidate("Emergent", "0100001100111001101011011111000100001111111111111100",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.87", sectors())
+                                new StockGroup(EMERGENT_SECTORS, "0.87", emergentMarkets()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.87", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.87", healthSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.88", smallCap()),
+                                new StockGroup(ETF_SECTORS, "0.93", sectors()),
+                                new StockGroup(FINANCE_SECTOR, "0.86", financeSector())
                         )),
                 new Candidate("Green ETF", "0010100100001011111001101111111100001111111111111100",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.87", sectors())
+                                new StockGroup(GREEN_SECTORS, "0.87", greenSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.89", consumerBasicSector()),
+                                new StockGroup(CONS_DISC_SECTOR, "0.86", consumerDiscSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.85", industrialSector()),
+                                new StockGroup(ETF_SECTORS, "0.90", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.87", techSector()),
+                                new StockGroup(COMM_SECTOR, "0.86", commSector()),
+                                new StockGroup(FINANCE_SECTOR, "0.85", financeSector())
                         )),
                 new Candidate("Small Cap", "0001010000101001101010011011101011101011111111011010",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(ETF_SECTORS, "0.97", sectors())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCap()),
+                                new StockGroup("INTC", "0.88", intel()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.86", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.86", industrialSector()),
+                                new StockGroup(ETF_SECTORS, "0.90", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector())
                         )),
                 new Candidate("Develop Markets", "0001010100001010101000011101101011101111111101111100",
                         tradingDecisionGenerators,
                         asList(
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.89", developedMarkets()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(FINANCE_SECTOR, "0.86", financeSector()),
+                                new StockGroup(CONS_BASIC_SECTOR, "0.88", consumerBasicSector()),
+                                new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.85", industrialSector()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.94", smallCap()),
+                                new StockGroup(ETF_SECTORS, "0.90", sectors())
+                        )),
+                new Candidate("AAPL", "0100001000101011011010001011101011101011111111111011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("AAPL", "0.88", aapl()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.86", developedMarkets()),
+                                new StockGroup(ETF_SECTORS, "0.89", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector())
+                        )),
+                new Candidate("AMZN", "0001010000101001111101010000101011001011101001111100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("AMZN", "0.88", amazon())
+                        )),
+                new Candidate("MSFT", "0001010000101001101010011001101011101111111101111000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("MSFT", "0.92", microsoft()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.85", developedMarkets()),
+                                new StockGroup(ETF_SECTORS, "0.91", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(COMM_SECTOR, "0.85", commSector())
+                        )),
+                new Candidate("GOOGL", "0001010000101011101011001101111011001101101001110110",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("GOOGL", "0.97", google()),
+                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                        )),
+                new Candidate("AAPL", "0001010100001010101000111101101011101111111101111011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("AAPL", "0.89", aapl()),
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.87", developedMarkets()),
+                                new StockGroup(ETF_SECTORS, "0.91", sectors())
+                        )),
+                new Candidate("NFLX", "0001010100001010101000111111101011101111111101111010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("NFLX", "0.89", netflix())
+                        )),
+                new Candidate("CRM", "0000010101101010101000011101100011110111111111111100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("CRM", "0.85", salesforce()),
+                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                        )),
+                new Candidate("PYPL", "0001010000111001101000001101001011101111111101111001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("PYPL", "0.93", paypal()),
+                                new StockGroup(ETF_SECTORS, "0.90", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.86", techSector())
+                        )),
+                new Candidate("NVDA", "0001010100001010101010011111101011101111111111111100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("NVDA", "0.90", nvidia()),
+                                new StockGroup(ETF_SECTORS, "0.91", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector()),
+                                new StockGroup(COMM_SECTOR, "0.85", commSector())
+                        )),
+                new Candidate("SQ", "0001010000101001101000001011101011100011111111011010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("SQ", "0.93", square()),
+                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                        )),
+                new Candidate("SPLK", "0001010000101001101000001011101011100011111111011010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("SPLK", "0.86", splunk()),
+                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                        )),
+                new Candidate(METALS_SECTORS, "1111010100000100001011011101111100001111111101111011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(METALS_SECTORS, "0.94", metals()),
+                                new StockGroup(ETF_SECTORS, "0.88", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.86", techSector())
+                        )),
+                new Candidate("VGLT", "1110011100001100101011011111101011101111111101101101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("VGLT", "1.00 (9 ops)", longTermBonds()),
+                                new StockGroup(ETF_SECTORS, "0.89", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.86", techSector()),
+                                new StockGroup(COMM_SECTOR, "0.87", commSector())
+                        )),
+                new Candidate("VCLT", "0100001100111001101000010001001011111111111111111110",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("VCLT", "1.00 (22 ops)", corporateBonds()),
+                                new StockGroup(ETF_SECTORS, "0.92", sectors()),
+                                new StockGroup(TECH_SECTOR, "0.85", techSector())
+                        )),
+                new Candidate("EA", "1010100100101011011011011101100011010011111101111000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("EA", "1.00 (9 ops)", electronicArts()),
+                                new StockGroup(ETF_SECTORS, "0.88", sectors())
+                        )),
+                new Candidate("CSCO", "1111010100000100001011001101111100101011111111011001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("CSCO", "1.00 (9 ops)", cisco()),
                                 new StockGroup(ETF_SECTORS, "0.89", sectors())
+                        )),
+                new Candidate("BGRN", "0001010100101100111010001100011011101010111101011010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("BGRN", "1.00 (9 ops)", greenSector())
                         ))
         );
     }

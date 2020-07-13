@@ -39,7 +39,40 @@ public class OneLongPeriodExperimentRunner {
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
+        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
+                StochasticOscillatorGenerator.class,
+//                StochasticOscillatorThresholdGenerator.class,
+                MoneyFlowIndexGenerator.class,
+                TrailingStopGenerator.class);
+
+        // With all STOCK GROUPS
+//        StockMarket.onlyIndividualSectors().forEach(stockGroup -> {
+//            System.out.println("=============================================");
+//            System.out.println(stockGroup.getFullName());
+//            System.out.println("=============================================");
+//            String[] symbols = stockGroup.getStockSymbols();
+//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), symbols);
+//            runOneStrategy(stockMarket, tradingDecisionGenerators);
+//        });
+
+        // One Sector
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), StockMarket.sectors());
+        runOneStrategy(stockMarket, tradingDecisionGenerators);
+
+//        EACH INDIVIDUAL
+//        List<String[]> stocks = new ArrayList();
+//        stocks.add(StockMarket.metals());
+//        stocks.stream().forEach(stock -> {
+//            System.out.println("=============================================");
+//            System.out.println(stock[0]);
+//            System.out.println("=============================================");
+//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), stock);
+//            runOneStrategy(stockMarket, tradingDecisionGenerators);
+//        });
+    }
+
+    private void oldStrategies() {
+        //        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false);
 //        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate);
 
 //        runOneStrategy(stockMarket, asList(
@@ -105,37 +138,6 @@ public class OneLongPeriodExperimentRunner {
 //
 //        runAllCombinationsOf(stockMarket, initialVector, 3);
 //        runAllCombinationsOf(stockMarket, initialVector, 2);
-
-        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-                StochasticOscillatorGenerator.class,
-//                StochasticOscillatorThresholdGenerator.class,
-                MoneyFlowIndexGenerator.class,
-                TrailingStopGenerator.class);
-
-        // With all STOCK GROUPS
-        StockMarket.onlyIndividualSectors().forEach(stockGroup -> {
-            System.out.println("=============================================");
-            System.out.println(stockGroup.getFullName());
-            System.out.println("=============================================");
-            String[] symbols = stockGroup.getStockSymbols();
-            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), symbols);
-            runOneStrategy(stockMarket, tradingDecisionGenerators);
-        });
-
-        // One Sector
-//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), StockMarket.sectors());
-//        runOneStrategy(stockMarket, tradingDecisionGenerators);
-
-//        EACH INDIVIDUAL
-//        List<String[]> stocks = new ArrayList();
-//        stocks.add(StockMarket.metals());
-//        stocks.stream().forEach(stock -> {
-//            System.out.println("=============================================");
-//            System.out.println(stock[0]);
-//            System.out.println("=============================================");
-//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), stock);
-//            runOneStrategy(stockMarket, tradingDecisionGenerators);
-//        });
     }
 
     private void runAllCombinationsOf(StockMarket stockMarket, ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector, int numOfCombinations) {

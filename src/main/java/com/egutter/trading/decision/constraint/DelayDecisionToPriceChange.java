@@ -48,8 +48,8 @@ public class DelayDecisionToPriceChange implements BuyTradingDecision, SellTradi
             this.triggered = false;
             double triggerPrice = this.cachedDecisionResult.getOrderExtraInfo().map((ei) -> ei.getBuyPriceTrigger()).orElse(this.triggerDailyQuote.getClosePrice());
             if (diffApplies.apply(dailyQuote.getClosePrice() - triggerPrice)) {
-                if (ShouldCrearDecision.class.isAssignableFrom(buyTradingDecision.getClass())) {
-                    ((ShouldCrearDecision) buyTradingDecision).clear();
+                if (ShouldClearDecision.class.isAssignableFrom(buyTradingDecision.getClass())) {
+                    ((ShouldClearDecision) buyTradingDecision).clear();
                 }
                 return this.cachedDecisionResult;
             }

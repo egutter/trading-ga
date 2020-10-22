@@ -88,6 +88,8 @@ public class Trader {
             public Object apply(DailyQuote dailyQuote) {
                 TimeFrameQuote timeFrameQuote = builTimeFrameQuote(dailyQuote, stockPrices);
 
+//                if (shouldAddOrders.apply(dailyQuote.getTradingDate())) {
+//                }
                 orderBook.forEachPendingOrder((order) ->
                         order.execute(timeFrameQuote.getQuoteAtDay().getTradingDate(), orderBook, portfolio, timeFrameQuote));
 
@@ -95,10 +97,8 @@ public class Trader {
 
                 OrderBook newMarketOrders = new OrderBook();
                 marketOrderGenerator.generateOrders_NEW(newMarketOrders);
+                orderBook.append(newMarketOrders);
 
-                if (shouldAddOrders.apply(dailyQuote.getTradingDate())) {
-                    orderBook.append(newMarketOrders);
-                }
                 return orderBook;
             }
         };

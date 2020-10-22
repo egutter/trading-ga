@@ -5,6 +5,7 @@ import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
 import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.PortfolioStats;
 import com.egutter.trading.stock.Trader;
 import com.egutter.trading.order.OrderBook;
@@ -26,9 +27,9 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
     private StockMarket stockMarket;
 
-    private List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators;
+    private List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators;
 
-    public StockTradingFitnessEvaluator(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionsGenerators) {
+    public StockTradingFitnessEvaluator(StockMarket stockMarket, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionsGenerators) {
         this.stockMarket = stockMarket;
         this.tradingDecisionGenerators = tradingDecisionsGenerators;
 

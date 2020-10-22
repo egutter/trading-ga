@@ -2,6 +2,7 @@ package com.egutter.trading.candidates;
 
 import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.StockGroup;
 import org.uncommons.maths.binary.BitString;
 
@@ -19,8 +20,7 @@ public class GlobalStockMarketCandidates {
     }
 
     public static List<Candidate> newNewerCandidates() {
-        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-                StochasticOscillatorGenerator.class,
+        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(StochasticOscillatorGenerator.class,
                 ChaikinOscillatorGenerator.class);
 
         return asList(
@@ -64,11 +64,6 @@ public class GlobalStockMarketCandidates {
                         asList(
                                 new StockGroup(TECH_SECTOR, "0.88", techSector())
                         )),
-                new Candidate("Tech Sectors", "100110100111101100111111110100000111010",
-                        tradingDecisionGenerators,
-                        asList(
-                                new StockGroup(TECH_SECTOR, "0.91", techSector())
-                        )),
                 new Candidate("ETF Sectors", "001011110010111011101001000011100110100",
                         tradingDecisionGenerators,
                         asList(
@@ -84,6 +79,11 @@ public class GlobalStockMarketCandidates {
                         asList(
                                 new StockGroup(COMM_SECTOR, "0.94", commSector())
                         )),
+                new Candidate("Comm Sector", "111100101000111001101001000011100011011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(COMM_SECTOR, "0.90", commSector())
+                        )),
                 new Candidate("Disc Sector", "001011110100100011010011100000111110011",
                         tradingDecisionGenerators,
                         asList(
@@ -98,15 +98,128 @@ public class GlobalStockMarketCandidates {
                         tradingDecisionGenerators,
                         asList(
                                 new StockGroup(CONS_BASIC_SECTOR, "1.00", consumerBasicSector())
+                        )),
+                new Candidate("Biotech Sector", "011110000000101001101001000011100100010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.91", biotechSector())
+                        )),
+                new Candidate("Innovation Sector", "110011000111000111100110111010100100000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00", innovationSector())
+                        )),
+                new Candidate("Developed Markets", "000011110001010011001000101101000101100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(DEVELOP_ETF_MARKETS, "0.92", developedMarkets())
+                        )),
+                new Candidate("Industrial Sector", "111010001110100010010000010101100111010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00", industrialSector())
+                        )),
+                new Candidate("Emergent Sector", "001100001011010001011000000001100011111",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.93", emergentMarkets())
+                        )),
+                new Candidate("Metals Sector", "101101011000001000110000110000100001101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00", metals())
+                        )),
+                new Candidate("Develop ADR Sector", "110011001110000100011111001010101110000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("DEVELOP ADR", "1.00", developAdr())
+                        )),
+                new Candidate("Emergent ADR Sector", "001101010100100011010011110000011110011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("EMERG ADR", "1.00", emergentAdr())
+                        )),
+                new Candidate("Apple", "001101001000100010010011110000111111011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("AAPL", "1.00", aapl())
+                        )),
+                new Candidate("Amazon", "111100100000111001101000110000100011001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("AMZN", "1.00", amazon())
+                        )),
+                new Candidate("Microsoft", "010100101100110100001000010000000101101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("MSFT", "1.00", microsoft())
+                        )),
+                new Candidate("Google", "110011001000101010111101100001100101010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("GOOGL", "1.00", google())
+                        )),
+                new Candidate("Netflix", "011010100000110101100101100010000111101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("NFLX", "1.00", netflix())
+                        )),
+                new Candidate("Tesla", "110010010100001000110000010000100001000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("TSLA", "1.00", tesla())
+                        )),
+                new Candidate("Salesforce", "101101010010001000110000110000100001100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("CRM", "1.00", salesforce())
+                        )),
+                new Candidate("Paypal", "101000010011100101010111100000000001000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("PYPL", "1.00", paypal())
+                        )),
+                new Candidate("Intel", "101100010110100100010000100100100101001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("INTC", "1.00", intel())
+                        )),
+                new Candidate("Nvidia", "101011000101011110110010010101000010101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("NVDA", "1.00", nvidia())
+                        )),
+                new Candidate("Electronic Arts", "100001101000100110111011010000100001000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("EA", "1.00", electronicArts())
+                        )),
+                new Candidate("Square", "001101011010000000110010000000000000001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("SQ", "1.00", square())
+                        )),
+                new Candidate("Splunk", "101001101010001000110010110000100000111",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("SPLK", "1.00", splunk())
+                        )),
+                new Candidate("Cisco", "011100010100011000010100111110011000101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("CSCO", "1.00", cisco())
+                        )),
+                new Candidate("VGLT", "010001001111010001011000000001100111000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup("VGLT", "1.00", longTermBonds())
                         ))
         );
     }
 
     public static List<Candidate> newCandidates() {
-        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-                StochasticOscillatorGenerator.class,
-                MoneyFlowIndexGenerator.class,
-                TrailingStopGenerator.class);
+        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(StochasticOscillatorGenerator.class,
+                ChaikinOscillatorGenerator.class);
 
         return asList(
                 new Candidate("ETF Sectors", "1000010001110011011110111110011100011111111101110001",
@@ -371,10 +484,8 @@ public class GlobalStockMarketCandidates {
         );
     }
     public static List<Candidate> candidates() {
-        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-                StochasticOscillatorGenerator.class,
-                MoneyFlowIndexGenerator.class,
-                TrailingStopGenerator.class);
+        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(StochasticOscillatorGenerator.class,
+                ChaikinOscillatorGenerator.class);
 
         return asList(
                 new Candidate("Developed Countries ETF", "1000010001110011011110111110011100011111111101110001",

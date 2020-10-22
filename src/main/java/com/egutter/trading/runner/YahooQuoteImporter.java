@@ -170,8 +170,9 @@ public class YahooQuoteImporter {
 
                         dailyQuotes.add(dailyQuote);
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                } catch (Exception e) {
+                    System.out.println("Failed to import " + stock.getSymbol() + " error " + e.getMessage());
+//                    throw new RuntimeException(e);
                 }
                 repository.removeAllBetween(stock.getSymbol(), fromDate, toDate);
 

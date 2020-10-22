@@ -51,4 +51,8 @@ public class OneCancelTheOtherOrder extends ConditionalOrder {
         return (timeFrameQuote -> false);
     }
 
+    @Override
+    public String toString() {
+        return primaryOrder.toString();
+    }
 }

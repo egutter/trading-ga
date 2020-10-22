@@ -2,6 +2,7 @@ package com.egutter.trading.genetic;
 
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.genetic.cache.CachedFitnesseEvaluatorDecorator;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.StockMarket;
 import org.uncommons.maths.binary.BitString;
 import org.uncommons.maths.number.ConstantGenerator;
@@ -33,9 +34,9 @@ import static java.util.Arrays.asList;
  */
 public class Experiment {
 
-    private List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators;
+    private List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators;
 
-    public Experiment(List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+    public Experiment(List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
         this.tradingDecisionGenerators = tradingDecisionGenerators;
     }
 
@@ -63,7 +64,7 @@ public class Experiment {
     }
 
     private int genomeSize() {
-        return (TradingDecisionGenome.LENGTH * this.tradingDecisionGenerators.size()) + TradingDecisionGenome.HEAD_LENGTH;
+        return (TradingDecisionGenome.LENGTH * (this.tradingDecisionGenerators.size() + 1)) + TradingDecisionGenome.HEAD_LENGTH;
     }
 
     private BitString runEvolutionExperiment(FitnessEvaluator stockTradingFitnessEvaluator, CandidateFactory<BitString> candidateFactory, EvolutionaryOperator<BitString> pipeline, Random rng) {
@@ -76,7 +77,7 @@ public class Experiment {
 
 //        return engine.evolve(1000, 10, new GenerationCount(200), new Stagnation(20, true));
         List<BitString> candidateSeeds = chromosomeCandidates();
-        return engine.evolve(100, 1, candidateSeeds, new ElapsedTime(1200000), new GenerationCount(200), new Stagnation(20, true));
+        return engine.evolve(candidateSeeds.size(), candidateSeeds.size()/10, candidateSeeds, new ElapsedTime(1200000), new GenerationCount(200), new Stagnation(20, true));
     }
 
     public SelectionStrategy<? super BitString> getSelectionStrategy() {

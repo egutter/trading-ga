@@ -9,6 +9,7 @@ import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.uncommons.maths.binary.BitString;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class FibonacciRetracementStrategyFactory {
 
     private final Portfolio portfolio;
     private final TradingDecisionGenome genome;
-    private List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators;
+    private List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators;
 
     public FibonacciRetracementStrategyFactory(Portfolio portfolio,
-                                               BitString genome, List<? extends Class<? extends TradingDecisionGenerator>> tradingDecisionGenerators) {
+                                               BitString genome, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
         this.tradingDecisionGenerators = tradingDecisionGenerators;
@@ -41,10 +42,22 @@ public class FibonacciRetracementStrategyFactory {
     }
 
     private List<ConditionalOrderConditionGenerator> buyDecisionGenerators() {
-//        return Arrays.asList(new StochasticOscillatorGenerator(genome.extractChromosome(BUY_STOCH_INDEX)));
-//        return Arrays.asList(new ChaikinOscillatorGenerator(genome.extractChromosome(BUY_STOCH_INDEX)));
-        return Arrays.asList(
-                new StochasticOscillatorGenerator(genome.extractChromosome(BUY_STOCH_INDEX)),
-                new ChaikinOscillatorGenerator(genome.extractChromosome(BUY_CHAIKIN_INDEX)));
+        int index = 1;
+        List<ConditionalOrderConditionGenerator> generators = new ArrayList<>();
+        for (Class<? extends ConditionalOrderConditionGenerator> tradingDecisionGeneratorClass : tradingDecisionGenerators) {
+            ConditionalOrderConditionGenerator tradingDecisionGenerator = getGenerator(tradingDecisionGeneratorClass, this.genome.extractChromosome(index));
+            generators.add(tradingDecisionGenerator);
+            index++;
+        }
+
+        return generators;
+    }
+
+    public ConditionalOrderConditionGenerator getGenerator(Class<? extends ConditionalOrderConditionGenerator> generatorClass, BitString chromosome) {
+        try {
+            return generatorClass.getConstructor(BitString.class).newInstance(chromosome);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

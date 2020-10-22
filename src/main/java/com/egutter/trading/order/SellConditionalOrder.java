@@ -5,6 +5,7 @@ import com.egutter.trading.stats.MetricsRecorder;
 import com.egutter.trading.stats.MetricsRecorderFactory;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.TimeFrameQuote;
+import com.google.common.base.Joiner;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -54,5 +55,10 @@ public class SellConditionalOrder extends ConditionalOrder {
 
     private BigDecimal priceSold(TimeFrameQuote timeFrameQuote) {
         return priceResolver.resolveSellPrice(timeFrameQuote);
+    }
+
+    @Override
+    public String toString() {
+        return conditions.toString();
     }
 }

@@ -6,6 +6,7 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Range;
@@ -16,11 +17,12 @@ import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * Created by egutter on 6/4/14.
  */
-public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
+public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator, Function<TimeFrameQuote, Boolean> {
 
     private HashMap<LocalDate, Double> aroonOscilator;
     private final StockPrices stockPrices;
@@ -53,6 +55,11 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, 
         this.buyThreshold = buyThreshold;
         this.sellThreshold = sellThreshold;
         this.days = days;
+    }
+
+    @Override
+    public Boolean apply(TimeFrameQuote timeFrameQuote) {
+        return this.shouldBuyOn(timeFrameQuote.getQuoteAtDay().getTradingDate()).equals(DecisionResult.YES);
     }
 
     public static AroonOscilator empty(StockPrices stockPrices) {
@@ -167,4 +174,5 @@ public class AroonOscilator implements BuyTradingDecision, SellTradingDecision, 
     public int days() {
         return days;
     }
+
 }

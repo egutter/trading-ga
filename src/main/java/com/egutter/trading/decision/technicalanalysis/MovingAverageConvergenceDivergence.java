@@ -8,6 +8,7 @@ import com.egutter.trading.decision.technicalanalysis.macd.SignChange;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
@@ -29,7 +30,7 @@ import static java.util.Arrays.asList;
 /**
  * Created by egutter on 2/10/14.
  */
-public class MovingAverageConvergenceDivergence implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
+public class MovingAverageConvergenceDivergence implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator, java.util.function.Function<TimeFrameQuote, Boolean> {
 
     private final StockPrices stockPrices;
     private Map<LocalDate, MacdStats> macd;
@@ -76,6 +77,11 @@ public class MovingAverageConvergenceDivergence implements BuyTradingDecision, S
 
     public static MovingAverageConvergenceDivergence empty(StockPrices stockPrices) {
         return new MovingAverageConvergenceDivergence(stockPrices, TradeSignal.noChange(), TradeSignal.noChange());
+    }
+
+    @Override
+    public Boolean apply(TimeFrameQuote timeFrameQuote) {
+        return this.shouldBuyOn(timeFrameQuote.getQuoteAtDay().getTradingDate()).equals(DecisionResult.YES);
     }
 
     @Override

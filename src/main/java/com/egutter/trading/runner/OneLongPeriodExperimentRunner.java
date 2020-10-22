@@ -1,9 +1,12 @@
 package com.egutter.trading.runner;
 
+import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.decision.technicalanalysis.StochasticOscillatorThreshold;
 import com.egutter.trading.genetic.Experiment;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
+import com.egutter.trading.stock.StockGroup;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import org.joda.time.LocalDate;
@@ -19,6 +22,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.egutter.trading.stock.StockMarket.TECH_SECTOR;
+import static com.egutter.trading.stock.StockMarket.techSector;
+import static java.util.Arrays.asList;
 
 public class OneLongPeriodExperimentRunner {
 
@@ -39,15 +46,8 @@ public class OneLongPeriodExperimentRunner {
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
-//        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-//                StochasticOscillatorGenerator.class,
-////                StochasticOscillatorThresholdGenerator.class,
-//                MoneyFlowIndexGenerator.class,
-//                TrailingStopGenerator.class);
-
-        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-                StochasticOscillatorGenerator.class,
-                ChaikinOscillatorGenerator.class);
+//        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = asList(StochasticOscillatorGenerator.class,
+//                ChaikinOscillatorGenerator.class);
 
         // With all STOCK GROUPS
 //        StockMarket.onlyIndividualSectors().forEach(stockGroup -> {
@@ -60,17 +60,36 @@ public class OneLongPeriodExperimentRunner {
 //        });
 
         // One Sector
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, true, StockMarket.consumerBasicSector());
-        runOneStrategy(stockMarket, tradingDecisionGenerators);
+        StockMarket.allSectors().stream().forEach(stockGroup -> {
 
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), false, false,
+                    stockGroup.getStockSymbols());
+    //        runOneStrategy(stockMarket, tradingDecisionGenerators);
+
+            // All combinations
+            ICombinatoricsVector<? extends Class<? extends ConditionalOrderConditionGenerator>> initialVector = Factory.createVector(
+            asList(
+                    StochasticOscillatorGenerator.class,
+                    ChaikinOscillatorGenerator.class,
+                    MovingAverageConvergenceDivergenceGenerator.class,
+                    RelativeStrengthIndexGenerator.class,
+                    AverageDirectionalIndexGenerator.class,
+                    BollingerBandsGenerator.class,
+                    AroonOscilatorGenerator.class,
+                    MoneyFlowIndexGenerator.class,
+                    UltimateOscillatorGenerator.class,
+                    WilliamsRGenerator.class) );
+
+            runAllCombinationsOf(stockMarket, initialVector, 2, stockGroup);
+        });
 //        EACH INDIVIDUAL
 //        List<String[]> stocks = new ArrayList();
 //        stocks.add(StockMarket.metals());
-//        stocks.stream().forEach(stock -> {
+//        StockMarket.individualStocks().stream().forEach(stock -> {
 //            System.out.println("=============================================");
 //            System.out.println(stock[0]);
 //            System.out.println("=============================================");
-//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), stock);
+//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), false, false, stock);
 //            runOneStrategy(stockMarket, tradingDecisionGenerators);
 //        });
     }
@@ -144,30 +163,50 @@ public class OneLongPeriodExperimentRunner {
 //        runAllCombinationsOf(stockMarket, initialVector, 2);
     }
 
-    private void runAllCombinationsOf(StockMarket stockMarket, ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> initialVector, int numOfCombinations) {
-        Generator<? extends Class<? extends BuyTradingDecisionGenerator>> gen = Factory.createSimpleCombinationGenerator(initialVector, numOfCombinations);
+    private void runAllCombinationsOf(StockMarket stockMarket, ICombinatoricsVector<? extends Class<? extends ConditionalOrderConditionGenerator>> initialVector, int numOfCombinations, StockGroup stockGroup) {
+        Generator<? extends Class<? extends ConditionalOrderConditionGenerator>> gen = Factory.createSimpleCombinationGenerator(initialVector, numOfCombinations);
 
-        for (ICombinatoricsVector<? extends Class<? extends BuyTradingDecisionGenerator>> combination : gen) {
-            runOneStrategy(stockMarket, combination.getVector());
+        for (ICombinatoricsVector<? extends Class<? extends ConditionalOrderConditionGenerator>> combination : gen) {
+            runOneStrategy(stockMarket, combination.getVector(), stockGroup);
         }
     }
 
-    private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+    private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators, StockGroup stockGroup) {
         System.out.println("=============================================");
 
-        printResults("2001-2020", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators);
+        printResults("2001-2020", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators, stockGroup);
     }
 
 
-    private static void printResults(String description, StockMarket stockMarket, BitString result, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+    private static void printResults(String description, StockMarket stockMarket, BitString result, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators, StockGroup stockGroup) {
         String tradingDecisionGeneratorsString = tradingDecisionGenerators.stream()
                 .map(Class::getSimpleName)
                 .collect(Collectors.joining(".class, "));
 
-        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", asList(" + tradingDecisionGeneratorsString + ".class)),");
+        String tradingDecisionGeneratorsClassList = "asList(" + tradingDecisionGeneratorsString + ".class)";
+        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", " + tradingDecisionGeneratorsClassList + "),");
 
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result);
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
         runner.run();
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("new Candidate(\"");
+        sb.append(stockGroup.getFullName());
+        sb.append("\", \"");
+        sb.append(result);
+        sb.append("\",\n");
+        sb.append(tradingDecisionGeneratorsClassList);
+        sb.append(",\n");
+        sb.append("asList(\n");
+        sb.append("new StockGroup(");
+        sb.append(stockGroup.getFullName());
+        sb.append(",\"");
+        sb.append(runner.percentageOfOrdersWon());
+        sb.append("\", ");
+        sb.append(stockGroup.getFullName());
+        sb.append("())\n");
+        sb.append(")),\n");
+        System.out.println(sb.toString());
     }
 
 }

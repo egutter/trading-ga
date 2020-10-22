@@ -19,6 +19,7 @@ import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
 import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.OrderBook;
 import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.stock.*;
 import com.google.common.collect.Range;
@@ -45,17 +46,17 @@ public class OneCandidateRunner {
     private StockMarket stockMarket;
     private final BitString candidate;
 
-    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators) {
+    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
         this(stockMarket, candidate, new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH), tradingDecisionGenerators, true);
     }
 
-    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators, boolean onExperiment) {
+    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators, boolean onExperiment) {
         this.stockMarket = stockMarket;
         this.candidate = candidate;
         this.portfolio = portfolio;
         this.orderBook = new OrderBook();
-        this.trader = new Trader(stockMarket, new GeneticsTradingDecisionFactory(portfolio, candidate, tradingDecisionGenerators, onExperiment), portfolio, orderBook);
-        this.tradingDecisionFactory = new GeneticsTradingDecisionFactory(new Portfolio(), candidate, tradingDecisionGenerators, onExperiment);
+        this.fibTradingDecisionFactory = new FibonacciRetracementStrategyFactory(portfolio, candidate, tradingDecisionGenerators);
+        this.trader = new Trader(stockMarket, fibTradingDecisionFactory, portfolio, orderBook);
     }
 
     public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, TradingDecisionFactory tradingDecisionFactory) {
@@ -68,22 +69,14 @@ public class OneCandidateRunner {
     }
 
     public OneCandidateRunner(StockMarket stockMarket, BitString result) {
-        this.stockMarket = stockMarket;
-        this.candidate = result;
-        this.portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
-        this.orderBook = new OrderBook();
-        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
-                StochasticOscillatorGenerator.class,
-                ChaikinOscillatorGenerator.class);
-
-        this.fibTradingDecisionFactory = new FibonacciRetracementStrategyFactory(portfolio, result, tradingDecisionGenerators);
-        this.trader = new Trader(stockMarket, fibTradingDecisionFactory, portfolio, orderBook);
+        this(stockMarket, result, Arrays.asList(StochasticOscillatorGenerator.class,
+                ChaikinOscillatorGenerator.class));
     }
 
     public void run() {
         trader.tradeAllStocksInMarket();
+        new PrintResult(false).print(this, candidate);
         if (this.percentageOfOrdersWon().compareTo(new BigDecimal(0.85)) >= 0) {
-            new PrintResult(false).print(this, candidate);
 //            new PrintResult(true).print(this, candidate);
         }
     }
@@ -151,72 +144,15 @@ public class OneCandidateRunner {
         return portfolio.getStats().allOrdersAverageReturn();
     }
 
-    public static void main2(String[] args) {
-        LocalDate fromDate = new LocalDate(2014, 12, 1);
-        LocalDate toDate = LocalDate.now();
-
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
-
-        System.out.println("==========================================");
-        System.out.println("******************************************");
-        System.out.println("==========================================");
-        Candidate candidate = new Candidate("XXX", "1111100110011000011010110110101010100110111", Arrays.asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class, WilliamsRGenerator.class));
-        System.out.println(candidate.getDescription() + ": " + candidate.key());
-        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
-        TradingDecisionFactory tradingDecisionFactory = new TradingDecisionFactory() {
-            @Override
-            public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
-                BuyWhenNoOppositionsTradingDecision tradingDecisionComposite = new BuyWhenNoOppositionsTradingDecision();
-                tradingDecisionComposite.addBuyTradingDecision(new DoNotBuyWhenSameStockInPortfolio(portfolio, stockPrices));
-                tradingDecisionComposite.addBuyTradingDecision(new DoNotBuyInTheLastBuyTradingDays(stockPrices, 10));
-                tradingDecisionComposite.addBuyTradingDecision(new RelativeStrengthIndex(stockPrices, Range.atLeast(75.0), Range.atMost(50.0), 14));
-                tradingDecisionComposite.addBuyTradingDecision(new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(0.5), 20, MAType.Sma));
-                tradingDecisionComposite.addBuyTradingDecision(new WilliamsR(stockPrices, Range.atMost(-70.0), Range.atLeast(-50.0), 14));
-                return tradingDecisionComposite;
-            }
-
-            @Override
-            public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
-                SellWhenNoOppositionsTradingDecision sellAfterAFixedNumberOfDaysComposite = new SellWhenNoOppositionsTradingDecision();
-                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new DoNotSellWhenNoStockInPorfolio(portfolio, stockPrices));
-                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new SellAfterAFixedNumberOFDays(portfolio, stockPrices, 10));
-
-                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new SellByProfitThreshold(portfolio, stockPrices, BigDecimal.TEN));
-                sellAfterAFixedNumberOfDaysComposite.addSellTradingDecision(new SellLastDayOfMarket(portfolio, stockPrices));
-
-                return sellAfterAFixedNumberOfDaysComposite;
-
-            }
-        };
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, tradingDecisionFactory);
-        runner.run();
-    }
-    public static void main3(String[] args) {
-        LocalDate fromDate = new LocalDate(2019, 1, 1);
-        LocalDate toDate = LocalDate.now();
-
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate);
-
-        new TradeOneDayRunner(fromDate, toDate).candidates().forEach(candidate -> {
-            System.out.println("==========================================");
-            System.out.println("******************************************");
-            System.out.println("==========================================");
-            System.out.println(candidate.getDescription() + ": " + candidate.key());
-            OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
-            runner.run();
-        });
-//        BitString candidate = new BitString("10011000000011101");
-    }
-
     public static void main(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        LocalDate fromDate = new LocalDate(2019, 1, 1);
 
-        String[] sector = StockMarket.techSector();
+        String[] sector = StockMarket.longTermBonds();
 //        String[] nvda = new String[]{"NVDA"};
-//        runOneSectorWithOneCandidate(fromDate, sector, "1000011000100010001100101100001000010001101100010110");
+        runOneSectorWithOneCandidate(fromDate, sector, "010001001111010001011000000001100111000");
 
-        runAllSectorsOnAllCandidates(fromDate);
+//        runAllSectorsOnAllCandidates(fromDate);
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString) {
@@ -251,18 +187,19 @@ public class OneCandidateRunner {
 
     public static void mainOri(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2010, 1, 1);
-
-        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate);
-        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
-        HardcodedTradingDecisionFactory tradingDecisionFactory = new HardcodedTradingDecisionFactory(portfolio, new BitString("011010101010010011100000101101111010001"));
-
-
-        TradingDecisionFactory tradingDecisionFactory2 = fibonacciDecision(portfolio);
-        Candidate candidate = new Candidate("XXX", "0100100101110011100000101011110110111011011110000010", Arrays.asList(FibonacciRetracementGenerator.class, StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class, TrailingStopGenerator.class));
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, tradingDecisionFactory2   );
-        runner.run();
+//        LocalDate fromDate = new LocalDate(2010, 1, 1);
+//
+//        StockMarket stockMarket = new StockMarketBuilder().buildInMemory(fromDate);
+//        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+//        HardcodedTradingDecisionFactory tradingDecisionFactory = new HardcodedTradingDecisionFactory(portfolio, new BitString("011010101010010011100000101101111010001"));
+//
+//
+//        TradingDecisionFactory tradingDecisionFactory2 = fibonacciDecision(portfolio);
+//        Candidate candidate = new Candidate("XXX", "0100100101110011100000101011110110111011011110000010", Arrays.asList(FibonacciRetracementGenerator.class, StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class, TrailingStopGenerator.class));
+//        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio, tradingDecisionFactory2   );
+//        runner.run();
     }
+
 
     private static TradingDecisionFactory movingAvgCrossOverTradingDecision(Portfolio portfolio) {
         return new TradingDecisionFactory() {
@@ -392,5 +329,13 @@ public class OneCandidateRunner {
 
     public OrderBook getOrderBook() {
         return this.orderBook;
+    }
+
+    public FibonacciRetracementStrategyFactory getFibTradingDecisionFactory() {
+        return fibTradingDecisionFactory;
+    }
+
+    public StockMarket getStockMarket() {
+        return stockMarket;
     }
 }

@@ -3,7 +3,10 @@ package com.egutter.trading.decision.technicalanalysis;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.stats.MetricsRecorder;
+import com.egutter.trading.stats.MetricsRecorderFactory;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Range;
 import com.google.common.primitives.Doubles;
@@ -16,11 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Created by egutter on 3/1/15.
  */
-public abstract class MomentumOscillator implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
+public abstract class MomentumOscillator implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator, Function<TimeFrameQuote, Boolean> {
 
     protected final StockPrices stockPrices;
     protected final Range sellThreshold;
@@ -38,6 +42,11 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
         this.buyThreshold = buyThreshold;
         this.sellThreshold = sellThreshold;
         this.days = days;
+    }
+
+    @Override
+    public Boolean apply(TimeFrameQuote timeFrameQuote) {
+        return this.shouldBuyOn(timeFrameQuote.getQuoteAtDay().getTradingDate()).equals(DecisionResult.YES);
     }
 
     @Override

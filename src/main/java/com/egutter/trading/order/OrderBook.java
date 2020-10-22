@@ -79,7 +79,7 @@ public class OrderBook {
 
     @Override
     public String toString() {
-        return Joiner.on(" ").join("ORDERS IN BOOK:", orders);
+        return Joiner.on("\n").join("CONFIRMED ORDERS IN BOOK:", orders, "PENDING ORDERS IN BOOK: ", pendingOrders);
     }
 
     public void addPendingOrder(ConditionalOrder conditionalOrder) {

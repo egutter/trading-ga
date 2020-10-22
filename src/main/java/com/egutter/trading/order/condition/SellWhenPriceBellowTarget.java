@@ -31,4 +31,11 @@ public class SellWhenPriceBellowTarget implements Function<TimeFrameQuote, Boole
     private boolean resistancePriceAbove(double highPrice) {
         return this.resistancePrice.compareTo(BigDecimal.valueOf(highPrice)) > 0;
     }
+
+    @Override
+    public String toString() {
+        return "SellWhenPriceBellowTarget{" +
+                "resistancePrice=" + resistancePrice +
+                '}';
+    }
 }

@@ -2,6 +2,7 @@ package com.egutter.trading.out;
 
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.technicalanalysis.CrossOverOscillator;
+import com.egutter.trading.decision.technicalanalysis.FibonacciRetracementBuyDecision;
 import com.egutter.trading.decision.technicalanalysis.MomentumOscillator;
 import com.egutter.trading.decision.technicalanalysis.MoneyFlowIndex;
 import com.egutter.trading.runner.OneCandidateRunner;
@@ -35,6 +36,8 @@ public class PrintResult {
 
     public void print(OneCandidateRunner runner, BitString result) {
         System.out.println("Best candidate is " + result);
+        FibonacciRetracementBuyDecision fibonacciRetracementBuyDecision = runner.getFibTradingDecisionFactory().generateBuyDecision(runner.getStockMarket().getStockPrices().get(0));
+        System.out.println("Best candidate is " + fibonacciRetracementBuyDecision.buyDecisionToString());
 //        System.out.println("Buy Trading Decisions " + runner.buyDecisions());
 //        System.out.println("Sell Trading Decisions " + runner.sellDecisions());
         System.out.println("Final Cash $" + runner.finalCash());

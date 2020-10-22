@@ -2,12 +2,14 @@ package com.egutter.trading.repository;
 
 import com.egutter.trading.runner.YahooQuoteImporter;
 import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Ordering;
 import com.mongodb.*;
 import org.joda.time.LocalDate;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -20,14 +22,22 @@ public class HistoricPriceRepository extends MongoRepository {
     private static DB dbConn;
 
     public static void main(String[] args) throws Exception {
-        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate toDate = LocalDate.now();
-        String stock = "TSLA";
-        new YahooQuoteImporter().runImport(fromDate, toDate, new String[]{stock});
         HistoricPriceRepository repo = new HistoricPriceRepository();
-        repo.forEachDailyQuote(fromDate, toDate, stock, dailyQuote -> {
-            System.out.println(dailyQuote);
+        repo.removeAll();
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        LocalDate toDate = LocalDate.now();
+        StockMarket.allSectors().stream().forEach(stockGroup -> {
+            new YahooQuoteImporter().runImport(fromDate, toDate, stockGroup.getStockSymbols());
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
+
+//        repo.forEachDailyQuote(fromDate, toDate, stock, dailyQuote -> {
+//            System.out.println(dailyQuote);
+//        });
 
     }
 

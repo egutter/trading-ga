@@ -27,32 +27,32 @@ import java.util.Random;
  * Created by egutter on 11/29/14.
  */
 public class NonGeneticExperiment {
-
-    private List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators;
-    private StockMarket stockMarket;
-
-    List<BitString> winningCandidates = new ArrayList<>();
-
-    public NonGeneticExperiment(List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators, StockMarket stockMarket) {
-        this.tradingDecisionGenerators = tradingDecisionGenerators;
-        this.stockMarket = stockMarket;
-    }
-
-    public void run(BitString candidate) {
-
-        StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket, this.tradingDecisionGenerators);
-        double result = stockTradingFitnessEvaluator.getFitness(candidate);
-        if (result > 0.0) {
-            winningCandidates.add(candidate);
-        }
-    }
-
-    public List<BitString> getWinningCandidates() {
-        return winningCandidates;
-    }
-
-    private int genomeSize() {
-        return (TradingDecisionGenome.LENGTH * this.tradingDecisionGenerators.size()) + TradingDecisionGenome.HEAD_LENGTH;
-    }
+//
+//    private List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators;
+//    private StockMarket stockMarket;
+//
+//    List<BitString> winningCandidates = new ArrayList<>();
+//
+//    public NonGeneticExperiment(List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators, StockMarket stockMarket) {
+//        this.tradingDecisionGenerators = tradingDecisionGenerators;
+//        this.stockMarket = stockMarket;
+//    }
+//
+//    public void run(BitString candidate) {
+//
+//        StockTradingFitnessEvaluator stockTradingFitnessEvaluator = new StockTradingFitnessEvaluator(stockMarket, this.tradingDecisionGenerators);
+//        double result = stockTradingFitnessEvaluator.getFitness(candidate);
+//        if (result > 0.0) {
+//            winningCandidates.add(candidate);
+//        }
+//    }
+//
+//    public List<BitString> getWinningCandidates() {
+//        return winningCandidates;
+//    }
+//
+//    private int genomeSize() {
+//        return (TradingDecisionGenome.LENGTH * this.tradingDecisionGenerators.size()) + TradingDecisionGenome.HEAD_LENGTH;
+//    }
 
 }

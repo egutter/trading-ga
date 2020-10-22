@@ -6,6 +6,7 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Range;
@@ -17,11 +18,12 @@ import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * Created by egutter on 2/10/14.
  */
-public class BollingerBands implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator {
+public class BollingerBands implements BuyTradingDecision, SellTradingDecision, TechnicalAnalysisIndicator, Function<TimeFrameQuote, Boolean> {
 
     private final StockPrices stockPrices;
     private final Range sellThreshold;
@@ -61,6 +63,11 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision, 
 
     public static BollingerBands empty(StockPrices stockPrices) {
         return new BollingerBands(stockPrices, Range.atLeast(1.0), Range.atMost(1.0), 20, MAType.Sma);
+    }
+
+    @Override
+    public Boolean apply(TimeFrameQuote timeFrameQuote) {
+        return this.shouldBuyOn(timeFrameQuote.getQuoteAtDay().getTradingDate()).equals(DecisionResult.YES);
     }
 
     @Override
@@ -192,5 +199,4 @@ public class BollingerBands implements BuyTradingDecision, SellTradingDecision, 
                 "moving avg type",
                 this.movingAverageType);
     }
-
 }

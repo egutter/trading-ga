@@ -5,12 +5,15 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.technicalanalysis.MovingAverageConvergenceDivergence;
 import com.egutter.trading.decision.technicalanalysis.TradeSignal;
 import com.egutter.trading.decision.technicalanalysis.macd.SignChange;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Range;
 import org.uncommons.maths.binary.BitString;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 
 import static com.google.common.collect.Range.atLeast;
 import static com.google.common.collect.Range.atMost;
@@ -19,7 +22,7 @@ import static com.google.common.primitives.Ints.min;
 /**
  * Created by egutter on 2/12/14.
  */
-public class MovingAverageConvergenceDivergenceGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator {
+public class MovingAverageConvergenceDivergenceGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator, ConditionalOrderConditionGenerator {
 
     private final TradeSignal buySignal;
     private final TradeSignal sellSignal;
@@ -31,6 +34,11 @@ public class MovingAverageConvergenceDivergenceGenerator implements BuyTradingDe
         this.chromosome = chromosome;
         this.buySignal = generateBuySignal(chromosome);
         this.sellSignal = generateSellSignal(chromosome);
+    }
+
+    @Override
+    public Function<TimeFrameQuote, Boolean> generateCondition(StockPrices stockPrices) {
+        return generateMovingAverageConvergenceDivergence(stockPrices);
     }
 
     /**
@@ -46,13 +54,13 @@ public class MovingAverageConvergenceDivergenceGenerator implements BuyTradingDe
      * @param stockPrices
      * @return
      */
-    public BuyTradingDecision generateBuyDecision(StockPrices stockPrices) {
+    public MovingAverageConvergenceDivergence generateBuyDecision(StockPrices stockPrices) {
         return generateMovingAverageConvergenceDivergence(stockPrices);
     }
 
 
     @Override
-    public SellTradingDecision generateSellDecision(StockPrices stockPrices) {
+    public MovingAverageConvergenceDivergence generateSellDecision(StockPrices stockPrices) {
         return generateMovingAverageConvergenceDivergence(stockPrices);
     }
 

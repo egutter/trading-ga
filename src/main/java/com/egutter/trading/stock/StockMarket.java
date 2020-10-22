@@ -72,7 +72,9 @@ public class StockMarket {
                 new StockGroup(GREEN_SECTORS, greenSector()),
                 new StockGroup(SMALL_CAP_SECTORS, smallCap()),
                 new StockGroup("BGRN", greenBonds()),
-                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets())));
+                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
+                new StockGroup("DEVELOP ADR", developAdr()),
+                new StockGroup("EMERG ADR", emergentAdr())));
         individualStocks().stream().forEach(stocks -> {
             stockGroups.add(new StockGroup(stocks[0], stocks));
         });
@@ -99,7 +101,8 @@ public class StockMarket {
                 "W",
                 "ETSY",
                 "VMW",
-                "SHOP"
+                "SHOP",
+                "FPX"
         };
     }
     public static String[] biotechSector() {
@@ -385,7 +388,6 @@ public class StockMarket {
     public static String[] smallCap() {
         return new String[]{
             "VBK",
-            "FPX",
             "SCZ",
         };
     }
@@ -409,6 +411,28 @@ public class StockMarket {
             "INDA",
             "EWW",
             "ECH",
+        };
+    }
+
+    public static String[] developAdr() {
+        return new String[]{
+            "SAP", // SAP
+            "TM", // Toyota
+            "NVS", // Novartis
+            "UBS", // UBS
+            "AZN", // Aztra Seneca
+            "GSK", // Glaxo Smith
+            "SNE", // Sony
+        };
+    }
+
+    public static String[] emergentAdr() {
+        return new String[]{
+            "MELI", // Mercado LIbre
+            "GLOB", // Globant
+            "BABA", // Ali Baba
+            "BIDU", // Baidu
+            "JD", // JD.com
         };
     }
     public static String[] largeSectorStocks() {

@@ -39,6 +39,8 @@ public class BuyConditionalOrder extends ConditionalOrder {
         BuyOrder buyOrder = buildConfirmedOrder(timeFrameQuote, shares, price);
         portfolio.buyStock(this.stockName, amount, buyOrder);
 
+        // Add buy Order
+        orderBook.add(buyOrder);
         // ADD Sell Orders
         ConditionalOrder sellWhenPriceAboveTarget = sellWhenPriceAboveTarget(shares, buyOrder);
         ConditionalOrder sellWhenPriceDropBellowStopLoss = sellWhenPriceDropBellowStopLoss(shares, buyOrder);

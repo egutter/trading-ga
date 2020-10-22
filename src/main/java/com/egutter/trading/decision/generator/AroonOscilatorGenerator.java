@@ -3,12 +3,15 @@ package com.egutter.trading.decision.generator;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.technicalanalysis.AroonOscilator;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Range;
 import org.uncommons.maths.binary.BitString;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 
 import static com.google.common.collect.Range.atLeast;
 import static com.google.common.collect.Range.atMost;
@@ -16,7 +19,7 @@ import static com.google.common.collect.Range.atMost;
 /**
  * Created by egutter on 2/12/14.
  */
-public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator {
+public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator, ConditionalOrderConditionGenerator {
 
     private final Range<Double> buyThreshold;
     private final Range<Double> sellThreshold;
@@ -31,6 +34,11 @@ public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, Sel
         this.buyThreshold = generateBuyThreshold(chromosome);
         this.sellThreshold = generateSellThreshold(chromosome);
         this.days = generateDays(chromosome);
+    }
+
+    @Override
+    public Function<TimeFrameQuote, Boolean> generateCondition(StockPrices stockPrices) {
+        return generateAroonOscilator(stockPrices);
     }
 
     /**
@@ -95,4 +103,5 @@ public class AroonOscilatorGenerator implements BuyTradingDecisionGenerator, Sel
         }
         return atLeast(thresholdValue);
     }
+
 }

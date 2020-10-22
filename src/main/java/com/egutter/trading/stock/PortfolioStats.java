@@ -34,8 +34,8 @@ public class PortfolioStats {
     }
 
     public void addStatsFor(PortfolioAsset portfolioAsset, SellOrder sellOrder) {
-        BuyOrder originalOrder = portfolioAsset.getBuyOrder();
-        BuyOrder buyOrder = new BuyOrder(originalOrder.getStockName(), originalOrder.getDailyQuote(), originalOrder.getNextDailyQuote(), sellOrder.getNumberOfShares());
+        BuyOrder buyOrder = portfolioAsset.getBuyOrder();
+        buyOrder.setNumberOfShares(sellOrder.getNumberOfShares());
         BuySellOperation buySellOperation = new BuySellOperation(buyOrder, sellOrder);
         if (buySellOperation.isLost()) {
             this.ordersLost.add(buySellOperation);

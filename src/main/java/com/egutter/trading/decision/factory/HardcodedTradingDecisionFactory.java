@@ -7,9 +7,9 @@ import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
 import com.egutter.trading.decision.constraint.*;
 import com.egutter.trading.decision.generator.*;
-import com.egutter.trading.decision.technicalanalysis.StochasticOscillator;
-import com.egutter.trading.decision.technicalanalysis.StochasticOscillatorThreshold;
+import com.egutter.trading.decision.technicalanalysis.ChaikinOscillator;
 import com.egutter.trading.genetic.TradingDecisionGenome;
+import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.uncommons.maths.binary.BitString;
@@ -40,13 +40,19 @@ public class HardcodedTradingDecisionFactory implements TradingDecisionFactory {
 
         innerComposite.addBuyTradingDecision(
                 new KeepDecisionForFewDays(stockPrices,
-                        new FibonacciRetracementGenerator(genome.extractChromosome(BUY_FIB_RETR_INDEX)).generateBuyDecision(stockPrices),
+                        new FibonacciRetracementGenerator(genome.extractChromosome(BUY_FIB_RETR_INDEX), BuyDecisionConditionsFactory.empty()).generateBuyDecision(stockPrices),
                         3)
         );
         BuyTradingDecision stochasticBuyDecision = new StochasticOscillatorGenerator(genome.extractChromosome(BUY_STOCH_INDEX)).generateBuyDecision(stockPrices);
         innerComposite.addBuyTradingDecision(
                 new KeepDecisionForFewDays(stockPrices,
                         stochasticBuyDecision,
+                        3)
+        );
+        BuyTradingDecision chaikingBuyDecision = new ChaikinOscillator(stockPrices, 3, 10);
+        innerComposite.addBuyTradingDecision(
+                new KeepDecisionForFewDays(stockPrices,
+                        chaikingBuyDecision,
                         3)
         );
 //        Comment me to disable Stoch Threshold
@@ -58,6 +64,7 @@ public class HardcodedTradingDecisionFactory implements TradingDecisionFactory {
 
 
         tradingDecisionComposite.addBuyTradingDecision(new DelayDecisionToPriceChange(stockPrices, innerComposite, 5));
+//        tradingDecisionComposite.addBuyTradingDecision(innerComposite);
 
 //        BuyWhenNoOppositionsTradingDecision tradingDecisionComposite = new BuyWhenNoOppositionsTradingDecision();
 //        tradingDecisionComposite.addBuyTradingDecision(new DoNotBuyWhenSameStockInPortfolio(portfolio, stockPrices));
@@ -75,7 +82,7 @@ public class HardcodedTradingDecisionFactory implements TradingDecisionFactory {
         sellTrailingStopComposite.addSellTradingDecision(new TakeProfitPartialSell(portfolio, stockPrices));
 
 //        Uncomment me to activate MFI
-        sellTrailingStopComposite.addSellTradingDecision(new MoneyFlowIndexGenerator(genome.extractChromosome(SELL_MONEY_FLOW_INDEX)).generateSellDecision(stockPrices));
+//        sellTrailingStopComposite.addSellTradingDecision(new MoneyFlowIndexGenerator(genome.extractChromosome(SELL_MONEY_FLOW_INDEX)).generateSellDecision(stockPrices));
 
         //                new MoneyFlowIndex(stockPrices, Range.atMost(20.0), Range.atLeast(80.0), 14));
 

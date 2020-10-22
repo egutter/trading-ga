@@ -35,6 +35,10 @@ public class StockPrices {
         addAll(dailyQuotesSource);
     }
 
+    public static StockPrices empty() {
+        return new StockPrices("", Arrays.asList(DailyQuote.empty()));
+    }
+
     public void addDailyQuote(LocalDate tradingDate, DailyQuote dailyQuote) {
         dailyQuotes.put(tradingDate, dailyQuote);
     }
@@ -61,7 +65,7 @@ public class StockPrices {
         return this.lowPrices;
     }
 
-    public List<? extends Number> getVolumes() {
+    public List<Long> getVolumes() {
         return this.volumes;
     }
 

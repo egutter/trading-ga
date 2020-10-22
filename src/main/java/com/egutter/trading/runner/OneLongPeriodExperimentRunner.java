@@ -39,11 +39,15 @@ public class OneLongPeriodExperimentRunner {
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
 
+//        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
+//                StochasticOscillatorGenerator.class,
+////                StochasticOscillatorThresholdGenerator.class,
+//                MoneyFlowIndexGenerator.class,
+//                TrailingStopGenerator.class);
+
         List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
                 StochasticOscillatorGenerator.class,
-//                StochasticOscillatorThresholdGenerator.class,
-                MoneyFlowIndexGenerator.class,
-                TrailingStopGenerator.class);
+                ChaikinOscillatorGenerator.class);
 
         // With all STOCK GROUPS
 //        StockMarket.onlyIndividualSectors().forEach(stockGroup -> {
@@ -56,7 +60,7 @@ public class OneLongPeriodExperimentRunner {
 //        });
 
         // One Sector
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), StockMarket.sectors());
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, true, StockMarket.consumerBasicSector());
         runOneStrategy(stockMarket, tradingDecisionGenerators);
 
 //        EACH INDIVIDUAL

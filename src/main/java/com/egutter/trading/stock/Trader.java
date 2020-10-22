@@ -1,7 +1,9 @@
 package com.egutter.trading.stock;
 
+import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
 import com.egutter.trading.decision.TradingStrategy;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
+import com.egutter.trading.decision.technicalanalysis.FibonacciRetracementBuyDecision;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
 import com.google.common.base.Function;
@@ -9,7 +11,6 @@ import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.function.BooleanSupplier;
 
 /**
  * Created by egutter on 2/12/14.
@@ -22,6 +23,7 @@ public class Trader {
     private TradingDecisionFactory tradingDecisionFactory;
     private Portfolio portfolio;
     private OrderBook orderBook;
+    private FibonacciRetracementStrategyFactory fibonacciStrategy;
 
     public Trader(StockMarket stockMarket,
                   TradingDecisionFactory tradingDecisionFactory,
@@ -30,6 +32,13 @@ public class Trader {
 
         this.stockMarket = stockMarket;
         this.tradingDecisionFactory = tradingDecisionFactory;
+        this.portfolio = portfolio;
+        this.orderBook = orderBook;
+    }
+
+    public Trader(StockMarket stockMarket, FibonacciRetracementStrategyFactory fibonacciStrategy, Portfolio portfolio, OrderBook orderBook) {
+        this.stockMarket = stockMarket;
+        this.fibonacciStrategy = fibonacciStrategy;
         this.portfolio = portfolio;
         this.orderBook = orderBook;
     }
@@ -51,36 +60,43 @@ public class Trader {
 
     private boolean shouldStop() {
         return this.portfolio.isLostAbove(BigDecimal.valueOf(MAX_PORTFOLIO_LOST));
-//                getStats().hasLostOrders();
     }
 
     private void tradeOneStock(StockPrices stockPrices) {
-        TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
-        LocalDate startOn = tradingStrategy.startOn();
+//        TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
+//        LocalDate startOn = tradingStrategy.startOn();
+        FibonacciRetracementBuyDecision tradingStrategy = fibonacciStrategy.generateBuyDecision(stockPrices);
+        LocalDate startOn = stockPrices.getFirstTradingDate();
         stockPrices.forEachDailyPrice(startOn, executeMarketOrders(stockPrices, tradingStrategy), () -> shouldStop());
     }
 
     public void tradeOn(LocalDate tradingDate) {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
+            FibonacciRetracementBuyDecision tradingStrategy = fibonacciStrategy.generateBuyDecision(stockPrices);
             LocalDate startOn = tradingDate.minusDays(10);
             stockPrices.forEachDailyPrice(startOn, executeMarketOrders(stockPrices, tradingStrategy, (runOnDate) -> runOnDate.equals(tradingDate)), () -> false);
-//            stockPrices.withDailyPriceOn(tradingDate, executeMarketOrders(stockPrices, tradingStrategy));
         }
     }
 
-    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingStrategy tradingStrategy) {
-        return executeMarketOrders(stockPrices, tradingStrategy, (runOnDate) -> true);
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final FibonacciRetracementBuyDecision buyDecision) {
+        return executeMarketOrders(stockPrices, buyDecision, (runOnDate) -> true);
     }
 
-    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TradingStrategy tradingStrategy, Function<LocalDate, Boolean> shouldAddOrders) {
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final FibonacciRetracementBuyDecision buyDecision, Function<LocalDate, Boolean> shouldAddOrders) {
         return new Function<DailyQuote, Object>() {
             @Override
             public Object apply(DailyQuote dailyQuote) {
-                MarketOrderGenerator marketOrderGenerator = marketOrderGenerator(stockPrices, dailyQuote, tradingStrategy);
-                OrderBook newMarketOrders = marketOrderGenerator.generateOrders();
+                TimeFrameQuote timeFrameQuote = builTimeFrameQuote(dailyQuote, stockPrices);
+
+                orderBook.forEachPendingOrder((order) ->
+                        order.execute(timeFrameQuote.getQuoteAtDay().getTradingDate(), orderBook, portfolio, timeFrameQuote));
+
+                MarketOrderGenerator marketOrderGenerator = marketOrderGenerator(stockPrices, dailyQuote, buyDecision, timeFrameQuote);
+
+                OrderBook newMarketOrders = new OrderBook();
+                marketOrderGenerator.generateOrders_NEW(newMarketOrders);
+
                 if (shouldAddOrders.apply(dailyQuote.getTradingDate())) {
-                    newMarketOrders.execute(portfolio);
                     orderBook.append(newMarketOrders);
                 }
                 return orderBook;
@@ -88,13 +104,19 @@ public class Trader {
         };
     }
 
-    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, DailyQuote dailyQuote, TradingStrategy tradingStrategy) {
+    private TimeFrameQuote builTimeFrameQuote(DailyQuote dailyQuote, StockPrices stockPrices) {
+        DailyQuote quoteAtNextDay = stockPrices.dailyPriceAfter(dailyQuote.getTradingDate(), 1).orElse(dailyQuote);
+        DailyQuote quoteAtPrevDay = stockPrices.dailyPriceBefore(dailyQuote.getTradingDate(), 1).orElse(dailyQuote);
+        return new TimeFrameQuote(dailyQuote, quoteAtPrevDay, quoteAtNextDay);
+    }
+
+    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, DailyQuote dailyQuote, FibonacciRetracementBuyDecision tradingStrategy, TimeFrameQuote timeFrameQuote) {
         Optional<DailyQuote> marketQuote = stockMarket.getMarketIndexPrices().dailyPriceOn(dailyQuote.getTradingDate());
+
         return new MarketOrderGenerator(stockPrices.getStockName(),
                 portfolio,
                 tradingStrategy,
-                dailyQuote,
-                stockPrices.dailyPriceAfter(dailyQuote.getTradingDate(), 1).orElse(dailyQuote),
+                timeFrameQuote,
                 AMOUNT_TO_INVEST,
                 marketQuote);
     }

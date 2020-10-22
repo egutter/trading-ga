@@ -29,7 +29,7 @@ public class TrailingStopGenerator implements BuyTradingDecisionGenerator, SellT
     public static void main(String[] args) {
         StockPrices stocks = new StockPrices("stock");
         stocks.addAll(Arrays.asList(DailyQuote.empty()));
-        SellTradingDecision stoch = new TrailingStopGenerator(new Portfolio(), new BitString("0110101000000")).generateSellDecision(stocks);
+        SellTradingDecision stoch = new TrailingStopGenerator(new Portfolio(), new BitString("1111101111001")).generateSellDecision(stocks);
         System.out.println(stoch.sellDecisionToString());
     }
 

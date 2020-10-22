@@ -1,0 +1,25 @@
+package com.egutter.trading.stats;
+
+import java.util.HashMap;
+
+public interface MetricsRecorder {
+    String BUY_COND_ORDER = "BUY_COND_ORDER";
+    String STOCHASTIC_DECISION_YES = "STOCHASTIC_DECISION_YES";
+    String HAS_SAME_STOCK_IN_PORTFOLIO = "HAS_SAME_STOCK_IN_PORTFOLIO";
+    String HAS_NOT_SAME_STOCK_IN_PORTFOLIO = "HAS_NOT_SAME_STOCK_IN_PORTFOLIO";
+    String STOCHASTIC_DECISION_NO = "STOCHASTIC_DECISION_NO";
+    String HAS_NOT_BROKEN_RESISTANCE = "HAS_NOT_BROKEN_RESISTANCE";
+    String HAS_BROKEN_RESISTANCE = "HAS_BROKEN_RESISTANCE";
+    String WITHIN_NEXT_DAY_RANGE = "WITHIN_NEXT_DAY_RANGE";
+    String OUTSIDE_NEXT_DAY_RANGE = "OUTSIDE_NEXT_DAY_RANGE";
+    String BUY_EXECUTED = "BUY_EXECUTED";
+    String SELL_EXECUTED = "SELL_EXECUTED";
+    String CHAIKIN_DECISION_YES = "CHAIKIN_DECISION_YES";
+    String CHAIKIN_DECISION_NO = "CHAIKIN_DECISION_NO";
+
+    void incEvent(String eventName);
+
+    HashMap<String, Integer> getMetrics();
+
+    String getMetricsAsString();
+}

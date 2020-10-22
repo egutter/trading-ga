@@ -32,17 +32,24 @@ public class TakeProfitPartialSell implements SellTradingDecision {
         BuyOrder buyOrder = portFolioAsset.getBuyOrder();
         if (buyOrder.hasExtraInfo()) {
             OrderExtraInfo buyExtraInfo = buyOrder.getOrderExtraInfo();
-            Optional<Pair<Double, Double>> closeTargetPrice = buyExtraInfo.getNextSellPrice();
+            Optional<Pair<Double, Double>> closeTargetPrice = buyExtraInfo.getNextTriggerSellPrice();
             if (!closeTargetPrice.isPresent()) return DecisionResult.NO;
             DailyQuote dailyQuote = stockPrices.dailyPriceOn(tradingDate).get();
             Pair<Double, Double> targetPriceAndPercentage = closeTargetPrice.get();
-            if (dailyQuote.getClosePrice() >= targetPriceAndPercentage.getFirst()) {
-                buyExtraInfo.removeFirst();
-                OrderExtraInfo sellExtraInfo = new OrderExtraInfo();
-                int numberOfShares = (int) Math.round(portFolioAsset.getNumberOfShares() * targetPriceAndPercentage.getSecond());
-                sellExtraInfo.addNumberOfShares(numberOfShares);
-                return DecisionResult.yesWithExtraInfo(sellExtraInfo);
+            Double targetPrice = targetPriceAndPercentage.getFirst();
+            if (targetPrice > dailyQuote.getHighPrice()) {
+                return DecisionResult.NO;
             }
+            buyExtraInfo.removeFirstTriggerSellPrice();
+            OrderExtraInfo sellExtraInfo = new OrderExtraInfo();
+            int numberOfShares = (int) Math.round(portFolioAsset.getNumberOfShares() * targetPriceAndPercentage.getSecond());
+            sellExtraInfo.addNumberOfShares(numberOfShares);
+            if (dailyQuote.getOpenPrice() >= targetPrice) {
+                sellExtraInfo.addSellPrice(dailyQuote.getOpenPrice());
+            } else {
+                sellExtraInfo.addSellPrice(targetPrice);
+            }
+            return DecisionResult.yesWithExtraInfo(sellExtraInfo);
         }
         return DecisionResult.NO;
     }

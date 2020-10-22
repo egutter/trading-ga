@@ -41,23 +41,24 @@ public abstract class CrossOverOscillator implements BuyTradingDecision, SellTra
             return DecisionResult.NEUTRAL;
         }
         LocalDate yesterday = previousQuote.get().getTradingDate();
-        Optional<Double> yesterdayD = getIndexAtDate(getSignalValues(), yesterday);
-        if (!yesterdayD.isPresent()) {
+        Optional<Double> yesterdaySignal = getSignalValue(yesterday);
+        Optional<Double> yesterdayIndex = getIndexAtDate(getIndexValues(), yesterday);
+        if (!yesterdaySignal.isPresent() || !yesterdayIndex.isPresent()) {
             return DecisionResult.NEUTRAL;
         }
 
-        Optional<Double> todayD = getIndexAtDate(getSignalValues(), tradingDate);
-        Optional<Double> yesterdayK = getIndexAtDate(getIndexValues(), yesterday);
-        Optional<Double> todayK = getIndexAtDate(getIndexValues(), tradingDate);
+        Optional<Double> todaySignal = getSignalValue(tradingDate);
+        Optional<Double> todayIndex = getIndexAtDate(getIndexValues(), tradingDate);
 
-        boolean yesterdayDiff = calcYesterdayDiff.apply(yesterdayK.get() - yesterdayD.get());
-        boolean todayDiff = calcTodayDiff.apply(todayK.get() - todayD.get());
+        boolean yesterdayDiff = calcYesterdayDiff.apply(yesterdayIndex.get() - yesterdaySignal.get());
+        boolean todayDiff = calcTodayDiff.apply(todayIndex.get() - todaySignal.get());
         return (yesterdayDiff && todayDiff) ? DecisionResult.YES : DecisionResult.NO;
     }
 
+
     public abstract Map<LocalDate, Double> getIndexValues();
 
-    public abstract Map<LocalDate, Double> getSignalValues();
+    public abstract Optional<Double> getSignalValue(LocalDate day);
 
     public Optional<Double> getIndexAtDate(Map<LocalDate, Double> indexValues, LocalDate tradingDate) {
         return Optional.ofNullable(indexValues.get(tradingDate));

@@ -31,7 +31,7 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
     }
 
     public boolean isEven() {
-        return amountPaidWithCommision().equals(amountEarnedWithoutCommision());
+        return priceSold().compareTo(pricePaid()) == 0;
     }
 
     public BigDecimal profit() {
@@ -60,20 +60,21 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
     }
 
     public boolean isLost() {
-        return amountPaidWithCommision().compareTo(amountEarnedWithoutCommision()) > 0;
+        return pricePaid().compareTo(priceSold()) > 0;
     }
 
     public boolean isWon() {
-        return amountPaidWithCommision().compareTo(amountEarnedWithoutCommision()) < 0;
+        return priceSold().compareTo(pricePaid()) > 0;
     }
 
     public boolean isAboveMarket() {
-        return profitWithoutCommision().compareTo(marketProfit()) > 0;
+        return false;
+//        return profitWithoutCommision().compareTo(marketProfit()) > 0;
     }
-
-    private BigDecimal marketProfit() {
-        return marketEarned().subtract(marketPaid());
-    }
+//
+//    private BigDecimal marketProfit() {
+//        return marketEarned().subtract(marketPaid());
+//    }
 
     @Override
     public int compareTo(BuySellOperation anotherOperation) {
@@ -97,6 +98,14 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
         return buyOrder.amountPaid();
     }
 
+    private BigDecimal pricePaid() {
+        return buyOrder.getPricePaid();
+    }
+
+    private BigDecimal priceSold() {
+        return sellOrder.getPriceSold();
+    }
+
     private BigDecimal amountEarnedWithoutCommision() {
         return amountEarned().multiply(SELL_COMMISION);
     }
@@ -109,8 +118,8 @@ public class BuySellOperation implements Comparable<BuySellOperation> {
         return buyOrder.marketAmountPaid();
     }
 
-    private BigDecimal marketEarned() {
-        return sellOrder.marketAmountEarned();
-    }
+//    private BigDecimal marketEarned() {
+//        return sellOrder.marketAmountEarned();
+//    }
 
 }

@@ -2,11 +2,11 @@ package com.egutter.trading.decision.technicalanalysis;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
+import com.egutter.trading.order.BuyConditionalOrder;
+import com.egutter.trading.order.ConditionalOrder;
 import com.egutter.trading.order.OrderExtraInfo;
-import com.egutter.trading.stock.DailyQuote;
-import com.egutter.trading.stock.StockMarket;
-import com.egutter.trading.stock.StockMarketBuilder;
-import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
+import com.egutter.trading.stock.*;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Range;
 import org.joda.time.LocalDate;
@@ -44,15 +44,14 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
     private final int lowLookback;
     private final double sellExtensionFirstLevel;
     private final double sellExtensionSecondLevel;
-    private double[] lastHigh;
-    private int[] lastHighIndex;
+    private BuyDecisionConditionsFactory buyDecisionConditionsFactory;
 
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2019, 1, 01);
         StockMarket market = new StockMarketBuilder().buildInMemory(fromDate);
         FibonacciRetracementBuyDecision fib = new FibonacciRetracementBuyDecision(market.getStockPricesFor("SPY"),
                 Range.open(new BigDecimal(0.382), new BigDecimal(0.5)),
-                0.5,20, 40, FIB_EXT_1_236, FIB_EXT_1_618);
+                0.5,20, 40, FIB_EXT_1_236, FIB_EXT_1_618, BuyDecisionConditionsFactory.empty());
         System.out.println(fib.shouldBuyOn(new LocalDate(2019, 10, 4)));
     }
     public FibonacciRetracementBuyDecision(StockPrices stockPrices,
@@ -61,7 +60,8 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
                                            int highLookback,
                                            int lowLookback,
                                            double sellExtensionFirstLevel,
-                                           double sellExtensionSecondLevel) {
+                                           double sellExtensionSecondLevel,
+                                           BuyDecisionConditionsFactory buyDecisionConditionsFactory) {
         this.retracementLevel = retracementLevel;
         this.stockPrices = stockPrices;
         this.startOnDate = stockPrices.getFirstTradingDate();
@@ -70,6 +70,52 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
         this.lowLookback = lowLookback;
         this.sellExtensionFirstLevel = sellExtensionFirstLevel;
         this.sellExtensionSecondLevel = sellExtensionSecondLevel;
+        this.buyDecisionConditionsFactory = buyDecisionConditionsFactory;
+    }
+
+
+    public Optional<ConditionalOrder> generateOrder(TimeFrameQuote timeFrameQuote) {
+        try {
+            DailyQuote quoteAtDay = timeFrameQuote.getQuoteAtDay();
+            LocalDate tradingDate = quoteAtDay.getTradingDate();
+            DailyQuote high = stockPrices.getLastHighFrom(tradingDate, this.highLookback);
+            DailyQuote low = stockPrices.getLastLowFrom(tradingDate, this.lowLookback);
+
+            if (low.isAfter(high.getTradingDate())) {
+                return Optional.empty();
+            }
+
+            DailyQuote previousQuote = timeFrameQuote.getQuoteAtPreviousDay();
+
+            if (previousQuote.getClosePrice() < quoteAtDay.getClosePrice()) return Optional.empty();
+
+            BigDecimal closePriceRetracement = calculateRetracement(high, low, quoteAtDay.getClosePrice());
+            BigDecimal lowPriceRetracement = calculateRetracement(high, low, quoteAtDay.getLowPrice());
+
+            if (this.retracementLevel.contains(closePriceRetracement) ||
+                    this.retracementLevel.contains(lowPriceRetracement)) {
+
+                BigDecimal sellTargetPrice = BigDecimal.valueOf(sellTakeProfitPrice(this.sellExtensionFirstLevel, high, low));
+                BigDecimal resistancePrice = resistancePrice(quoteAtDay, closePriceRetracement);
+                BuyConditionalOrder buyOrder = new BuyConditionalOrder(this.stockPrices.getStockName(), quoteAtDay, Trader.AMOUNT_TO_INVEST, sellTargetPrice, resistancePrice);
+                buyDecisionConditionsFactory.addConditions(buyOrder, resistancePrice, sellTargetPrice);
+                return Optional.of(buyOrder);
+            }
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
+        return Optional.empty();
+    }
+
+    private BigDecimal resistancePrice(DailyQuote quoteAtDay, BigDecimal closePriceRetracement) {
+        return BigDecimal.valueOf(this.retracementLevel.contains(closePriceRetracement) ?
+                quoteAtDay.getClosePrice() :
+                quoteAtDay.getLowPrice());
+    }
+
+    private BigDecimal calculateRetracement(DailyQuote high, DailyQuote low, double closePrice) {
+        MathContext mc = new MathContext(3, RoundingMode.HALF_UP);
+        return new BigDecimal((high.getHighPrice() - closePrice) / (high.getHighPrice() - low.getLowPrice()), mc);
     }
 
     @Override
@@ -97,11 +143,16 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
             if (this.retracementLevel.contains(actualRetracement)) {
                 OrderExtraInfo buyOrderExtraInfo = new OrderExtraInfo();
 //                buyOrderExtraInfo.addSellPrice(high.getClosePrice(), 1);//FIB_RETR_0_5);
-                buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(this.sellExtensionFirstLevel, high, low), 1);
-                buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(this.sellExtensionSecondLevel, high, low), 1);
+                buyOrderExtraInfo.addTriggerSellPrice(sellTakeProfitPrice(this.sellExtensionFirstLevel, high, low), 1);
+//                buyOrderExtraInfo.addTriggerSellPrice(sellTakeProfitPrice(this.sellExtensionSecondLevel, high, low), 1);
 //                buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(FIB_EXT_1_618, high, low), 0.5);
 //                buyOrderExtraInfo.addSellPrice(sellTakeProfitPrice(FIB_EXT_1_786, high, low), 1.0);
+
+                // FIB EXTENSION
                 buyOrderExtraInfo.setBuyPriceTrigger(buyLevelTriggerPrice(this.buyLevelTrigger, high, low));
+                // HIGH PRICE
+//                buyOrderExtraInfo.setBuyPriceTrigger(quoteAtDate.get().getHighPrice());
+
                 buyOrderExtraInfo.setHighQuote(high);
                 buyOrderExtraInfo.setLowQuote(low);
                 return DecisionResult.yesWithExtraInfo(buyOrderExtraInfo);
@@ -149,4 +200,5 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
     public LocalDate startOn() {
         return this.startOnDate;
     }
+
 }

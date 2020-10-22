@@ -1210,40 +1210,43 @@ public class StockMarket {
     public static String[] merval25StockSymbols() {
         return new String[]{
                 // MERVAL 25
-                "AGRO.BA", // ALUAR ALUMINIO
+                "AGRO.BA", // AGROMETAL
                 "ALUA.BA", // ALUAR ALUMINIO
                 "APBR.BA", // PETROBRAS ORDINARIAS
+                "BBAR.BA", // BCO.FRANCES S.A.
                 "BHIP.BA", // BANCO HIPOTECARIO
                 "BMA.BA", // BANCO MACRO
+                "BYMA.BA", // BYMA
                 "BPAT.BA", // Banco Patagonia
                 "BRIO.BA", // Banco Santander Rio S.A.
-                "CAPU.BA", // Banco Santander Rio S.A.
+                "CAPU.BA", // Caputo S.A
                 "CECO2.BA", // Endesa Costanera SA
                 "CELU.BA", // Celulosa Argentina S.A.
                 "CEPU.BA", // CENTRAL PUERTO
                 "COME.BA", // COMERCIAL DEL PLATA
                 "CRES.BA", // CRESUD
-                "CTIO.BA",
+                "CTIO.BA", // Consultatio
+                "CVH.BA", // Cablevision
+                "DGCU2.BA", // Distribuidora de Gas cuyana
                 "EDN.BA", // EDENOR
-                "ERAR.BA", // SIDERAR
-                "FRAN.BA", // BCO.FRANCES S.A.
+                "TXAR.BA", // Ternium Argentina
                 "GGAL.BA", // GRUPO FINANCIERO GALICIA
                 "INDU.BA", // SOLVAY INDUPA SAI
                 "IRSA.BA", //Inversiones y Representaciones Sociedad Anónima
                 "LEDE.BA",
+                "LOMA.BA", // Loma Negra
                 "MIRG.BA", // Mirgor S.A.C.I.F.I.A.
+                "METR.BA", // Metrogas
                 "MOLI.BA", // MOLINOS
-                "PAMP.BA", // FRIGORIFICO LA PAMPA
-                "PESA.BA", // PETROBRAS ENERGIA
-                "PETR.BA", // Petrolera Pampa S.A.
-                "SAMI.BA", // Petrolera Pampa S.A.
-                "SEMI.BA", // Petrolera Pampa S.A.
+                "PAMP.BA", // PAMPA ENERGIA
+                "SAMI.BA", // SAn Miguel
+                "SEMI.BA", // Molino Juan Semino
                 "TECO2.BA", // TELECOM ARGENTINA
                 "TEF.BA",   // Telefonica
                 "TGNO4.BA", // TRANSPORT GAS NORTE
                 "TGSU2.BA", // Transportadora de Gas Del Sur S.A.
                 "TRAN.BA", // CIA.TRANSP.EN.ELECTRICIDAD
-                "TS.BA", // TENARIS
+                "VALO.BA", // Valores
                 "YPFD.BA", // YPF
                 MERVAL_MARKET_INDEX
         };

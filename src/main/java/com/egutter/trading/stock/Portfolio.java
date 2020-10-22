@@ -24,6 +24,10 @@ public class Portfolio {
         this(new BigDecimal(0.0));
     }
 
+    public static Portfolio empty() {
+        return new Portfolio();
+    }
+
     public Portfolio(BigDecimal cashInPortfolio) {
         this.initialCash = cashInPortfolio;
         this.cash = cashInPortfolio;
@@ -82,6 +86,10 @@ public class Portfolio {
     private void removeStock(String stockName, PortfolioAsset portfolioAsset, SellOrder sellOrder) {
         portfolioAsset.decreaseShares(sellOrder.getNumberOfShares());
         if (portfolioAsset.soldAllShares()) stocks.remove(stockName);
+    }
+
+    public boolean soldAllSharesOf(String stockName) {
+        return !stocks.containsKey(stockName);
     }
 
     private void addStock(String stockName, PortfolioAsset portfolioAsset) {

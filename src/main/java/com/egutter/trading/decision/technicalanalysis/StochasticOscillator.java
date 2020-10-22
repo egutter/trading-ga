@@ -2,10 +2,12 @@ package com.egutter.trading.decision.technicalanalysis;
 
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.out.PrintResult;
-import com.egutter.trading.stock.DailyQuote;
+import com.egutter.trading.stats.MetricsRecorder;
+import com.egutter.trading.stats.MetricsRecorderFactory;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.base.Joiner;
 import com.google.common.primitives.Doubles;
 import com.tictactec.ta.lib.CoreAnnotated;
@@ -20,7 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class StochasticOscillator extends CrossOverOscillator {
+public class StochasticOscillator extends CrossOverOscillator implements Function<TimeFrameQuote, Boolean> {
 
     private final int fastKPeriod;
     private final int slowKPeriod;
@@ -56,13 +58,24 @@ public class StochasticOscillator extends CrossOverOscillator {
     }
 
     @Override
+    public Boolean apply(TimeFrameQuote timeFrameQuote) {
+        boolean shouldBuy = this.shouldBuyOn(timeFrameQuote.getQuoteAtDay().getTradingDate()).equals(DecisionResult.YES);
+        if (shouldBuy) {
+            MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.STOCHASTIC_DECISION_YES);
+        } else {
+            MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.STOCHASTIC_DECISION_NO);
+        }
+        return shouldBuy;
+    }
+
+    @Override
     public Map<LocalDate, Double> getIndexValues() {
         return this.kValues;
     }
 
     @Override
-    public Map<LocalDate, Double> getSignalValues() {
-        return this.dValues;
+    public Optional<Double> getSignalValue(LocalDate day) {
+        return Optional.ofNullable(dValues.get(day));
     }
 
     private void calculateOscillator() {
@@ -142,4 +155,5 @@ public class StochasticOscillator extends CrossOverOscillator {
                 "Slow D MAType",
                 this.slowDMaType);
     }
+
 }

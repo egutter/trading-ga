@@ -1,11 +1,14 @@
 package com.egutter.trading.decision.constraint;
 
 import com.egutter.trading.decision.*;
+import com.egutter.trading.order.OrderExtraInfo;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.base.Joiner;
+import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 public class DelayDecisionToPriceChange implements BuyTradingDecision, SellTradingDecision {
@@ -45,13 +48,25 @@ public class DelayDecisionToPriceChange implements BuyTradingDecision, SellTradi
         }
         if (this.triggered) {
             DailyQuote dailyQuote = stockPrices.dailyPriceOn(tradingDate).get();
-            this.triggered = false;
-            double triggerPrice = this.cachedDecisionResult.getOrderExtraInfo().map((ei) -> ei.getBuyPriceTrigger()).orElse(this.triggerDailyQuote.getClosePrice());
-            if (diffApplies.apply(dailyQuote.getClosePrice() - triggerPrice)) {
+            DailyQuote prevQailyQuote = stockPrices.dailyPriceBefore(tradingDate, 1).get();
+            DailyQuote nextDailyQuote = stockPrices.dailyPriceAfter(tradingDate, 1).orElse(dailyQuote);
+            Optional<OrderExtraInfo> orderExtraInfo = this.cachedDecisionResult.getOrderExtraInfo();
+            double triggerPrice = orderExtraInfo.map((ei) -> ei.getBuyPriceTrigger()).orElse(this.triggerDailyQuote.getClosePrice());
+            Pair<Double, Double> triggerSellPrice = orderExtraInfo.map((ei) -> ei.getNextTriggerSellPrice()).orElse(Optional.of(new Pair<Double, Double>(this.triggerDailyQuote.getClosePrice(), 1.0))).get();
+//            this.triggered = false;
+            if (
+                    diffApplies.apply(dailyQuote.getLowPrice() - triggerPrice)
+                            && diffApplies.apply(triggerSellPrice.getFirst() - nextDailyQuote.getOpenPrice())
+                            && diffApplies.apply(dailyQuote.getClosePrice() - dailyQuote.getOpenPrice())
+                            && diffApplies.apply(dailyQuote.getClosePrice() - prevQailyQuote.getClosePrice())
+            ) {
+                this.triggered = false;
                 if (ShouldClearDecision.class.isAssignableFrom(buyTradingDecision.getClass())) {
                     ((ShouldClearDecision) buyTradingDecision).clear();
                 }
                 return this.cachedDecisionResult;
+            } else {
+                return DecisionResult.NO;
             }
         }
         return decisionResult;

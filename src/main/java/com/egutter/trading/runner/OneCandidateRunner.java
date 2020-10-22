@@ -3,6 +3,7 @@ package com.egutter.trading.runner;
 import com.egutter.trading.candidates.GlobalStockMarketCandidates;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.Candidate;
+import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
 import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.constraint.SellLastDayOfMarket;
 import com.egutter.trading.decision.SellTradingDecision;
@@ -17,6 +18,7 @@ import com.egutter.trading.decision.technicalanalysis.*;
 import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
 import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.OrderBook;
+import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.stock.*;
 import com.google.common.collect.Range;
@@ -37,8 +39,9 @@ public class OneCandidateRunner {
 
     private final Portfolio portfolio;
     private final Trader trader;
-    private final TradingDecisionFactory tradingDecisionFactory;
+    private TradingDecisionFactory tradingDecisionFactory;
     private final OrderBook orderBook;
+    private FibonacciRetracementStrategyFactory fibTradingDecisionFactory;
     private StockMarket stockMarket;
     private final BitString candidate;
 
@@ -69,15 +72,19 @@ public class OneCandidateRunner {
         this.candidate = result;
         this.portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
         this.orderBook = new OrderBook();
-        this.tradingDecisionFactory = new HardcodedTradingDecisionFactory(portfolio, result);
-        this.trader = new Trader(stockMarket, tradingDecisionFactory, portfolio, orderBook);
+        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
+                StochasticOscillatorGenerator.class,
+                ChaikinOscillatorGenerator.class);
+
+        this.fibTradingDecisionFactory = new FibonacciRetracementStrategyFactory(portfolio, result, tradingDecisionGenerators);
+        this.trader = new Trader(stockMarket, fibTradingDecisionFactory, portfolio, orderBook);
     }
 
     public void run() {
         trader.tradeAllStocksInMarket();
-//        new PrintResult(false).print(this, candidate);
         if (this.percentageOfOrdersWon().compareTo(new BigDecimal(0.85)) >= 0) {
             new PrintResult(false).print(this, candidate);
+//            new PrintResult(true).print(this, candidate);
         }
     }
 
@@ -203,11 +210,13 @@ public class OneCandidateRunner {
 
     public static void main(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2020, 1, 1);
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-        runOneSectorWithOneCandidate(fromDate, new String[] {"MA"}, "0010100100001011111001101111111100001111111111111100");
+        String[] sector = StockMarket.techSector();
+//        String[] nvda = new String[]{"NVDA"};
+//        runOneSectorWithOneCandidate(fromDate, sector, "1000011000100010001100101100001000010001101100010110");
 
-//        runAllSectorsOnAllCandidates(fromDate);
+        runAllSectorsOnAllCandidates(fromDate);
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString) {
@@ -230,7 +239,7 @@ public class OneCandidateRunner {
 
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), sectors.getStockSymbols());
 
-            GlobalStockMarketCandidates.newCandidates().stream().forEach(candidate -> {
+            GlobalStockMarketCandidates.newNewerCandidates().stream().forEach(candidate -> {
                 OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome());
                 runner.run();
                 System.out.println("==========================================");
@@ -320,7 +329,8 @@ public class OneCandidateRunner {
                                 new FibonacciRetracementBuyDecision(stockPrices,
                                         Range.open(new BigDecimal(0.7), new BigDecimal(0.8)),
                                         FibonacciRetracementBuyDecision.FIB_RETR_0_5, 20, 30,
-                                        FibonacciRetracementBuyDecision.FIB_EXT_1_618, FibonacciRetracementBuyDecision.FIB_EXT_1_786),
+                                        FibonacciRetracementBuyDecision.FIB_EXT_1_618, FibonacciRetracementBuyDecision.FIB_EXT_1_786,
+                                        BuyDecisionConditionsFactory.empty()),
                                     3)
                 );
                 innerComposite.addBuyTradingDecision(

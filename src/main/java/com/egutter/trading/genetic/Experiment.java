@@ -74,9 +74,9 @@ public class Experiment {
                 getSelectionStrategy(),
                 rng);
 
-//        return engine.evolve(1000, 10, candidateSeeds, new GenerationCount(200), new Stagnation(20, true));
+//        return engine.evolve(1000, 10, new GenerationCount(200), new Stagnation(20, true));
         List<BitString> candidateSeeds = chromosomeCandidates();
-        return engine.evolve(candidateSeeds.size(), 1, candidateSeeds, new ElapsedTime(1800000), new GenerationCount(200), new Stagnation(20, true));
+        return engine.evolve(100, 1, candidateSeeds, new ElapsedTime(1200000), new GenerationCount(200), new Stagnation(20, true));
     }
 
     public SelectionStrategy<? super BitString> getSelectionStrategy() {

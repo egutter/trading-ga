@@ -33,7 +33,7 @@ public class OneDayCandidateRunner {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
         LocalDate toDate = LocalDate.now();
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, toDate);
-        LocalDate tradeOn = new LocalDate(2020, 7, 10);
+        LocalDate tradeOn = new LocalDate(2020, 9, 11);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
     }

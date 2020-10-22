@@ -26,10 +26,16 @@ public class YahooQuoteImporter {
     private HistoricPriceRepository repository = new HistoricPriceRepository();
 
     public static void main(String[] args) throws IOException {
+        Optional<DailyQuote> quoteOpt = new YahooQuoteImporter().getLastQuote("NKE");
+        DailyQuote quote = quoteOpt.get();
+        System.out.println(quote.toString());
+    }
+
+    public static void main2(String[] args) throws IOException {
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 //        LocalDate toDate = new LocalDate(2018, 1, 1);
         LocalDate toDate = LocalDate.now();
-        String[] stockSymbols = StockMarket.greenSector();
+        String[] stockSymbols = StockMarket.merval25StockSymbols();
         HistoricPriceRepository historicPriceRepository = new HistoricPriceRepository();
         Arrays.stream(stockSymbols).forEach(stock -> {
             LocalDate minTradingDate = historicPriceRepository.getMinTradingDate(stock).orElse(toDate.minusDays(10));
@@ -130,6 +136,10 @@ public class YahooQuoteImporter {
     }
 
     public void runImport(LocalDate fromDate, LocalDate toDate, String[] stockSymbols) {
+        if (toDate.isBefore(fromDate) || toDate.equals(fromDate)) {
+            System.out.println("Nothing to import for symbols " + Arrays.toString(stockSymbols));
+            return;
+        }
         Calendar to = Calendar.getInstance();
 
         to.set(Calendar.YEAR, toDate.getYear());

@@ -5,8 +5,6 @@ import com.egutter.trading.order.BuyOrder;
 import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.repository.PortfolioRepository;
 
-import java.math.BigDecimal;
-
 /**
  * Created by egutter on 1/1/15.
  */

@@ -50,6 +50,18 @@ public class DailyQuote {
         this.volume = volume;
     }
 
+    public static DailyQuote emptyAt(LocalDate tradingDate) {
+        return new DailyQuote(tradingDate, 0, 0, 0, 0, 0,0);
+    }
+
+    public static DailyQuote withHighPriceAt(LocalDate tradingDate, double highPrice) {
+        return new DailyQuote(tradingDate, 0, 0, 0, 0, highPrice,0);
+    }
+
+    public static DailyQuote withLowPriceAt(LocalDate tradingDate, double lowPrice) {
+        return new DailyQuote(tradingDate, 0, 0, 0, lowPrice, 0,0);
+    }
+
     public double getOpenPrice() {
         return openPrice;
     }
@@ -110,7 +122,8 @@ public class DailyQuote {
     }
 
     public double getAverageOpenLowHighPrice() {
-        return (this.openPrice * 0.5) + (this.lowPrice * 0.25) + (this.highPrice * 0.25);
+        return this.openPrice;
+//        return (this.openPrice * 0.5) + (this.lowPrice * 0.25) + (this.highPrice * 0.25);
     }
 
 }

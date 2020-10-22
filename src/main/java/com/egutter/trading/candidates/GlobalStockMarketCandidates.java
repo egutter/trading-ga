@@ -15,7 +15,91 @@ import static java.util.Arrays.asList;
 public class GlobalStockMarketCandidates {
 
     public static List<BitString> chromosomeCandidates() {
-        return newCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());
+        return newNewerCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());
+    }
+
+    public static List<Candidate> newNewerCandidates() {
+        List<? extends Class<? extends BuyTradingDecisionGenerator>> tradingDecisionGenerators = Arrays.asList(FibonacciRetracementGenerator.class,
+                StochasticOscillatorGenerator.class,
+                ChaikinOscillatorGenerator.class);
+
+        return asList(
+                new Candidate("Tech Sectors", "100001100010001000110010110000100001000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "0.75", techSector())
+                        )),
+                new Candidate("Tech Sectors", "100001000111001101111011110000110001001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "0.64", techSector())
+                        )),
+                new Candidate("Tech Sectors", "000010001000100010111011001000111111000",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "1.00", techSector())
+                        )),
+                new Candidate("Tech Sectors", "001110001000100110111011110000111111001",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "1.00", techSector())
+                        )),
+                new Candidate("Tech Sectors", "000110100101100011010111101101000010111",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "1.00", techSector())
+                        )),
+                new Candidate("Tech Sectors", "110011001100100100001100010000000101101",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "0.84", techSector())
+                        )),
+                new Candidate("Tech Sectors", "110011001100100100001100010000000101100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "0.81", techSector())
+                        )),
+                new Candidate("Tech Sectors", "111001101001011000111010000010000010011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "0.88", techSector())
+                        )),
+                new Candidate("Tech Sectors", "100110100111101100111111110100000111010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(TECH_SECTOR, "0.91", techSector())
+                        )),
+                new Candidate("ETF Sectors", "001011110010111011101001000011100110100",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(ETF_SECTORS, "0.91", sectors())
+                        )),
+                new Candidate("Finance Sectors", "100101000010110010010011110100100100011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(FINANCE_SECTOR, "1.00", financeSector())
+                        )),
+                new Candidate("Comm Sector", "111100101000101001101001000011100100010",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(COMM_SECTOR, "0.94", commSector())
+                        )),
+                new Candidate("Disc Sector", "001011110100100011010011100000111110011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(CONS_DISC_SECTOR, "0.93", consumerDiscSector())
+                        )),
+                new Candidate("Health Sector", "100001010101110110101010010000111001011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(HEALTH_SECTOR, "0.93", healthSector())
+                        )),
+                new Candidate("Cons Basic Sector", "111101100010000111110010010111000011011",
+                        tradingDecisionGenerators,
+                        asList(
+                                new StockGroup(CONS_BASIC_SECTOR, "1.00", consumerBasicSector())
+                        ))
+        );
     }
 
     public static List<Candidate> newCandidates() {

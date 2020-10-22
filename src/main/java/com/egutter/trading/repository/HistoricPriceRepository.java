@@ -1,5 +1,6 @@
 package com.egutter.trading.repository;
 
+import com.egutter.trading.runner.YahooQuoteImporter;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.Ordering;
@@ -19,6 +20,14 @@ public class HistoricPriceRepository extends MongoRepository {
     private static DB dbConn;
 
     public static void main(String[] args) throws Exception {
+        LocalDate fromDate = new LocalDate(2001, 1, 1);
+        LocalDate toDate = LocalDate.now();
+        String stock = "TSLA";
+        new YahooQuoteImporter().runImport(fromDate, toDate, new String[]{stock});
+        HistoricPriceRepository repo = new HistoricPriceRepository();
+        repo.forEachDailyQuote(fromDate, toDate, stock, dailyQuote -> {
+            System.out.println(dailyQuote);
+        });
 
     }
 
@@ -69,7 +78,7 @@ public class HistoricPriceRepository extends MongoRepository {
         }
 
         if (maxDates.isEmpty()) return Optional.empty();
-        return Optional.of(Ordering.natural().max(maxDates));
+        return Optional.of(Ordering.natural().min(maxDates));
     }
 
     public void insertStockPrices(StockPrices prices) {

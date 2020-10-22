@@ -21,6 +21,7 @@ public class PortfolioAsset {
 
     public void decreaseShares(int shares) {
         this.numberOfShares = this.numberOfShares - shares;
+        if (this.numberOfShares < 0) throw new RuntimeException("Shares can't be less than zero: "+ numberOfShares);
     }
 
     public boolean soldAllShares() {

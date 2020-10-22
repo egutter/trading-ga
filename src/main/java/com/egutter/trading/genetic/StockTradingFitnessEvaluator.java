@@ -1,11 +1,10 @@
 package com.egutter.trading.genetic;
 
+import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
 import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
 import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
-import com.egutter.trading.stats.CandidateRanker;
-import com.egutter.trading.stats.CandidateStats;
 import com.egutter.trading.stock.PortfolioStats;
 import com.egutter.trading.stock.Trader;
 import com.egutter.trading.order.OrderBook;
@@ -43,12 +42,14 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     public double getFitness(BitString candidate) {
         Portfolio portfolio = new Portfolio(INITIAL_CASH);
 
-        TradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
+//        TradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
 //        if (candidateValidator(tradingDecisionFactory).isInvalid()) {
 //            return 0;
 //        }
 
-        buildTrader(portfolio, tradingDecisionFactory).tradeAllStocksInMarket();
+        FibonacciRetracementStrategyFactory tradingDecisionRetracementStrategyFactory = tradingDecisionRetracementStrategyFactory(portfolio, candidate);
+//        buildTrader(portfolio, tradingDecisionFactory).tradeAllStocksInMarket();
+        buildTrader(portfolio, tradingDecisionRetracementStrategyFactory).tradeAllStocksInMarket();
 
 //        seeOtherWaysOfEvaluatePortfolioNotUsed();
 
@@ -76,14 +77,20 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 
 //        int minOps = stockMarket.getTotalTradingDays()/40;
 //        int minOps = stockMarket.getTotalTradingDays()/40;
-        int minOps = stockMarket.getTotalTradingDays()/120;
-        if (porfolioStats.totalOrdersCount() < minOps) {
+
+//        int minOps = stockMarket.getTotalTradingDays()/200;
+//        if (porfolioStats.totalOrdersCount() < minOps) {
+//            return 0;
+//        }
+        BigDecimal ordersWonCountWeight = porfolioStats.percentageOfOrdersWon();
+        if (ordersWonCountWeight.compareTo(BigDecimal.valueOf(0.90)) < 0) {
             return 0;
         }
-        BigDecimal ordersWonCountWeight = porfolioStats.percentageOfOrdersWon();
-        return ordersWonCountWeight.doubleValue();
-//      Fitness Cash weighted by Orders Won
-//        return portfolio.getProfit().multiply(ordersWonCountWeight).doubleValue();
+//        return ordersWonCountWeight.doubleValue();
+////      Fitness Cash weighted by Orders Won
+        BigDecimal totalOps = BigDecimal.valueOf(porfolioStats.totalOrdersCount());
+        return totalOps.doubleValue();
+//        return portfolio.getProfit().multiply(totalOps).multiply(ordersWonCountWeight).doubleValue();
     }
 
     private boolean discardWhenOrdersLost(Portfolio portfolio) {
@@ -126,9 +133,16 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
         return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
     }
 
+    public Trader buildTrader(Portfolio portfolio, FibonacciRetracementStrategyFactory tradingDecisionFactory) {
+        return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
+    }
+
     private TradingDecisionFactory tradingDecisionFactory(Portfolio portfolio, BitString candidate) {
 //        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, false);
         return new HardcodedTradingDecisionFactory(portfolio, candidate);
+    }
+    private FibonacciRetracementStrategyFactory tradingDecisionRetracementStrategyFactory(Portfolio portfolio, BitString candidate) {
+        return new FibonacciRetracementStrategyFactory(portfolio, candidate, this.tradingDecisionGenerators);
     }
 
     private GenomeCandidateValidator candidateValidator(GeneticsTradingDecisionFactory tradingDecisionGenerator) {

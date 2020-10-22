@@ -2,11 +2,11 @@ package com.egutter.trading.decision.generator;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.technicalanalysis.FibonacciRetracementBuyDecision;
+import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Range;
-import org.joda.time.LocalDate;
 import org.uncommons.maths.binary.BitString;
 
 import java.math.BigDecimal;
@@ -27,6 +27,7 @@ public class FibonacciRetracementGenerator implements BuyTradingDecisionGenerato
     private final double buyLevelTrigger;
     private final double extensionSellFirstLevel;
     private final double extensionSellSecondLevel;
+    private BuyDecisionConditionsFactory buyDecisionConditionsFactory;
     private final int highLookback;
     private final int lowLookback;
 
@@ -38,11 +39,11 @@ public class FibonacciRetracementGenerator implements BuyTradingDecisionGenerato
     public static void main(String[] args) {
         StockPrices stocks = new StockPrices("stock");
         stocks.addAll(Arrays.asList(DailyQuote.empty()));
-        BuyTradingDecision fib = new FibonacciRetracementGenerator(new BitString("1010111001111")).generateBuyDecision(stocks);
+        BuyTradingDecision fib = new FibonacciRetracementGenerator(new BitString("1010111001111"), null).generateBuyDecision(stocks);
         System.out.println(fib.buyDecisionToString());
     }
 
-    public FibonacciRetracementGenerator(BitString chromosome) {
+    public FibonacciRetracementGenerator(BitString chromosome, BuyDecisionConditionsFactory buyDecisionConditionsFactory) {
         this.chromosome = chromosome;
         this.retracementLevel = generateRetracementLevel(chromosome);
         this.buyLevelTrigger = generateBuyLevelTrigger(chromosome);
@@ -50,6 +51,7 @@ public class FibonacciRetracementGenerator implements BuyTradingDecisionGenerato
         this.lowLookback = generateLowLookback(chromosome);
         this.extensionSellFirstLevel = generateExtensionSellFirstLevel(chromosome);
         this.extensionSellSecondLevel = generateExtensionSellSecondLevel(chromosome);
+        this.buyDecisionConditionsFactory = buyDecisionConditionsFactory;
     }
 
     /**
@@ -79,7 +81,8 @@ public class FibonacciRetracementGenerator implements BuyTradingDecisionGenerato
                     highLookback,
                     lowLookback,
                     extensionSellFirstLevel,
-                    extensionSellSecondLevel);
+                    extensionSellSecondLevel,
+                    this.buyDecisionConditionsFactory);
             cache.put(key, fibRetracement);
         }
         return fibRetracement;
@@ -88,8 +91,10 @@ public class FibonacciRetracementGenerator implements BuyTradingDecisionGenerato
     private Range<BigDecimal> generateRetracementLevel(BitString chromosome) {
         this.retracementLevelIndex = new BitString(chromosome.toString().substring(0, 2)).toNumber().intValue();
         double fibLevel = FIBONACCI_RETR_LEVELS.get(retracementLevelIndex + 1);
+//        MathContext mc = new MathContext(2, RoundingMode.DOWN);
         MathContext mc = new MathContext(1, RoundingMode.DOWN);
         BigDecimal low = new BigDecimal(fibLevel, mc);
+//        BigDecimal high = low.add(BigDecimal.valueOf(0.01));
         BigDecimal high = low.add(BigDecimal.valueOf(0.1));
         return Range.open(low, high);
     }

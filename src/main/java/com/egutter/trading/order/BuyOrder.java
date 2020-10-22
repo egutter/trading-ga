@@ -21,17 +21,19 @@ public class BuyOrder implements MarketOrder {
     private Optional<OrderExtraInfo> orderExtraInfo = Optional.empty();
     private int numberOfShares;
     private final int originalNumberOfShares;
+    private BigDecimal price;
 
     public BuyOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest) {
         this(stockName, dailyQuote, dailyQuote, amountToInvest, Optional.empty(), Optional.empty());
     }
 
-    public BuyOrder(String stockName, DailyQuote dailyQuote, int numberOfShares) {
+    public BuyOrder(String stockName, DailyQuote dailyQuote, int numberOfShares, BigDecimal price) {
         this.stockName = stockName;
         this.dailyQuote = dailyQuote;
         this.nextDailyQuote = dailyQuote;
         this.numberOfShares = numberOfShares;
         this.originalNumberOfShares = numberOfShares;
+        this.price = price;
         this.marketNumberOfShares = 0;
     }
 
@@ -64,10 +66,16 @@ public class BuyOrder implements MarketOrder {
     }
 
     public BigDecimal amountPaid() {
-        if (dailyQuote.getTradingDate().equals(nextDailyQuote.getTradingDate()))
-            return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfShares);
+//        if (dailyQuote.getTradingDate().equals(nextDailyQuote.getTradingDate()))
+//            return BigDecimal.valueOf(dailyQuote.getAdjustedClosePrice() * numberOfShares);
 
-        return BigDecimal.valueOf(dailyQuote.getAverageOpenLowHighPrice() * numberOfShares);
+//        return BigDecimal.valueOf(getPricePaid() * numberOfShares);
+        return this.price.multiply(BigDecimal.valueOf(numberOfShares));
+    }
+
+    public BigDecimal getPricePaid() {
+//        return nextDailyQuote.getAverageOpenLowHighPrice();
+        return this.price;
     }
 
     public int getNumberOfShares() {
@@ -96,11 +104,15 @@ public class BuyOrder implements MarketOrder {
     @Override
     public String toString() {
         String orderExtraInfoString = orderExtraInfo.isPresent() ? orderExtraInfo.get().toString() : "";
-        return Joiner.on(" ").join("BUY", stockName, "Shares", numberOfShares, "Quote:", dailyQuote, orderExtraInfoString);
+        return Joiner.on(" ").join("BUY", stockName,
+                "Day", dailyQuote.getTradingDate(),
+                "Shares", numberOfShares,
+                "Price", price,
+                "Amount", amountPaid());
     }
 
     public static BuyOrder empty() {
-        return new BuyOrder("N/A", DailyQuote.empty(), BigDecimal.ZERO);
+        return new BuyOrder("N/A", DailyQuote.empty(), 0, BigDecimal.ZERO);
     }
 
     public BigDecimal marketAmountPaid() {
@@ -127,5 +139,9 @@ public class BuyOrder implements MarketOrder {
 
     public boolean hasSoldAllShares(SellOrder sellOrder) {
         return this.numberOfShares == 0 || this.originalNumberOfShares == sellOrder.getNumberOfShares();
+    }
+
+    public void setNumberOfShares(int numberOfShares) {
+        this.numberOfShares = numberOfShares;
     }
 }

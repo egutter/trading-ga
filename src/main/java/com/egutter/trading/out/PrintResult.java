@@ -5,6 +5,8 @@ import com.egutter.trading.decision.technicalanalysis.CrossOverOscillator;
 import com.egutter.trading.decision.technicalanalysis.MomentumOscillator;
 import com.egutter.trading.decision.technicalanalysis.MoneyFlowIndex;
 import com.egutter.trading.runner.OneCandidateRunner;
+import com.egutter.trading.stats.MetricsRecorder;
+import com.egutter.trading.stats.MetricsRecorderFactory;
 import com.egutter.trading.stock.StockMarket;
 import com.google.common.collect.Ordering;
 import org.apache.commons.math3.util.Pair;
@@ -33,8 +35,8 @@ public class PrintResult {
 
     public void print(OneCandidateRunner runner, BitString result) {
         System.out.println("Best candidate is " + result);
-        System.out.println("Buy Trading Decisions " + runner.buyDecisions());
-        System.out.println("Sell Trading Decisions " + runner.sellDecisions());
+//        System.out.println("Buy Trading Decisions " + runner.buyDecisions());
+//        System.out.println("Sell Trading Decisions " + runner.sellDecisions());
         System.out.println("Final Cash $" + runner.finalCash());
         System.out.println("Profit $" + runner.profit());
         System.out.println("Most popular 5 stocks " + runner.mostPopularFiveStocks());
@@ -58,8 +60,11 @@ public class PrintResult {
 
             System.out.println("ALL ORDERS");
             runner.allOrders().forEach(order -> System.out.println(order));
-
         }
+
+        System.out.println("METRICS");
+        System.out.println(MetricsRecorderFactory.getInstance().getMetricsAsString());
+
 
     }
 
@@ -88,9 +93,8 @@ public class PrintResult {
             System.out.println(quote.getTradingDate() + " = " + result);
         });
         Map<LocalDate, Double> indexes = oscillator.getIndexValues();
-        Map<LocalDate, Double> signalValues = oscillator.getSignalValues();
         for (LocalDate aDate : Ordering.natural().sortedCopy(indexes.keySet())) {
-            System.out.println("Oscillator index value " + aDate + " = " + indexes.get(aDate) + " | signal " + signalValues.get(aDate));
+            System.out.println("Oscillator index value " + aDate + " = " + indexes.get(aDate) + " | signal " + oscillator.getSignalValue(aDate));
         }
         maxes.add(Ordering.natural().max(indexes.values()));
         minis.add(Ordering.natural().min(indexes.values()));

@@ -1,11 +1,13 @@
 package com.egutter.trading.helper;
 
+import com.egutter.trading.order.BuyConditionalOrder;
 import com.egutter.trading.order.BuyOrder;
 import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.SellOrder;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -38,11 +40,38 @@ public class TestHelper {
     }
 
     public static String aStockName() {
-        return "YPF";
+        return "AAPL";
+    }
+
+    public static BuyConditionalOrder aBuyConditionalOrder() {
+        return aBuyConditionalOrder(monday());
+    }
+
+    public static BuyConditionalOrder aBuyConditionalOrder(LocalDate tradingDate) {
+        return new BuyConditionalOrder(aStockName(), aDailyQuote(tradingDate), oneThousandPesos(), BigDecimal.ONE, BigDecimal.ONE);
+    }
+    public static LocalDate monday() {
+        return new LocalDate(2020, 9, 14);
+    }
+
+    public static LocalDate tuesday() {
+        return monday().plusDays(1);
     }
 
     public static BigDecimal oneThousandPesos() {
         return BigDecimal.valueOf(1000.00);
+    }
+
+    public static BigDecimal zeroPesos() {
+        return BigDecimal.valueOf(0.00);
+    }
+
+    public static BigDecimal oneHundredPesos() {
+        return BigDecimal.valueOf(100.00);
+    }
+
+    public static BigDecimal nineHundredPesos() {
+        return BigDecimal.valueOf(900.00);
     }
 
     public static BigDecimal twoThousandPesos() {
@@ -51,6 +80,10 @@ public class TestHelper {
 
     public static DailyQuote aDailyQuote() {
         return aDailyQuote(aTradingDate());
+    }
+
+    public static TimeFrameQuote aTimeFrameQuote() {
+        return new TimeFrameQuote(aDailyQuote(), aDailyQuote(), aDailyQuote());
     }
 
     public static DailyQuote aDailyQuote(LocalDate tradingDate) {

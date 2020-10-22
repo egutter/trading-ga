@@ -137,8 +137,8 @@ public class StockMarketBuilder {
     private void appendLastQuoteFromMarket(String stockName, List<DailyQuote> dailyPrices, LocalDate toDate) {
 
         LocalDate maxTradingDate = repository.getMaxTradingDate(stockName).orElse(toDate);
-        if (toDate.isBefore(maxTradingDate)) {
-            System.out.println("Max trading date in repo is after to date");
+        if (toDate.isBefore(maxTradingDate) || toDate.equals(maxTradingDate)) {
+            System.out.println("Max trading date in repo is equal or after to date for symbol " + stockName);
             return;
         }
 

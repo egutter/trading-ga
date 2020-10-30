@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableMap;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Created by egutter on 2/12/14.
@@ -79,7 +80,15 @@ public class OrderBook {
 
     @Override
     public String toString() {
-        return Joiner.on("\n").join("CONFIRMED ORDERS IN BOOK:", orders, "PENDING ORDERS IN BOOK: ", pendingOrders);
+        StringBuffer result = new StringBuffer().append("CONFIRMED ORDERS IN BOOK:").append("\n").append(orders).append("\n").append("SELL PENDING ORDERS IN BOOK: ").append("\n");
+        pendingOrders.forEach((stockName, conditionalOrders) -> {
+            List pendingSellOrders = conditionalOrders.stream().filter(co -> co.isSellOrder())
+                    .collect(Collectors.toList());
+            if (!pendingSellOrders.isEmpty()) {
+                result.append(stockName).append(": ").append(pendingSellOrders);
+            }
+        });
+        return result.toString();
     }
 
     public void addPendingOrder(ConditionalOrder conditionalOrder) {
@@ -107,12 +116,11 @@ public class OrderBook {
         return new ArrayList<>();
     }
 
-    public void forEachPendingOrder(Consumer<ConditionalOrder> block) {
-        Object[] keys = pendingOrders.keySet().toArray();
-        for (int i = 0; i < keys.length; i++) {
-            List<ConditionalOrder> orders = pendingOrders.get(keys[i]);
-            for (int j = 0; j < orders.size(); j++) {
-                block.accept(orders.get(j));
+    public void forEachPendingOrder(String stockName, Consumer<ConditionalOrder> block) {
+        if (this.pendingOrders.containsKey(stockName)) {
+            List<ConditionalOrder> conditionalOrders = pendingOrders.get(stockName);
+            for (int j = 0; j < conditionalOrders.size(); j++) {
+                block.accept(conditionalOrders.get(j));
             }
         }
     }

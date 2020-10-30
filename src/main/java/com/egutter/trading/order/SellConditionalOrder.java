@@ -61,4 +61,8 @@ public class SellConditionalOrder extends ConditionalOrder {
     public String toString() {
         return conditions.toString();
     }
+
+    public boolean isSellOrder() {
+        return true;
+    }
 }

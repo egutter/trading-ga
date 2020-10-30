@@ -5,11 +5,20 @@ import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.stock.StockGroup;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.egutter.trading.stock.StockMarket.*;
 import static java.util.Arrays.asList;
+import static java.util.stream.Stream.concat;
 
 public class UsaStockMarketCandidates {
+
+    public static List<Candidate> allCandidates() {
+        return concat(concat(commCandidates().stream(), techCandidates().stream()), etfSectorCandidates().stream())
+                .collect(Collectors.toList());
+    }
+
     public static List<Candidate> commCandidates() {
         return asList(
                 new Candidate("COMM", "111100101000111001101001000011100011011",

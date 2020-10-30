@@ -9,6 +9,7 @@ import org.uncommons.maths.binary.BitString;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.egutter.trading.stock.StockMarket.*;
 import static java.util.Arrays.asList;
@@ -17,6 +18,11 @@ public class GlobalStockMarketCandidates {
 
     public static List<BitString> chromosomeCandidates() {
         return newNewerCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());
+    }
+
+    public static List<Candidate> allNewCandidates() {
+        return Stream.concat(newNewerCandidates().stream(), UsaStockMarketCandidates.allCandidates().stream())
+                .collect(Collectors.toList());
     }
 
     public static List<Candidate> newNewerCandidates() {

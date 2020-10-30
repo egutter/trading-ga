@@ -69,4 +69,8 @@ public abstract class ConditionalOrder {
     public String getStockName() {
         return stockName;
     }
+
+    public boolean isSellOrder() {
+        return false;
+    }
 }

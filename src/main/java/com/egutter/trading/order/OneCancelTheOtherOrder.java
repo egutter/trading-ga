@@ -55,4 +55,8 @@ public class OneCancelTheOtherOrder extends ConditionalOrder {
     public String toString() {
         return primaryOrder.toString();
     }
+
+    public boolean isSellOrder() {
+        return this.primaryOrder.isSellOrder();
+    }
 }

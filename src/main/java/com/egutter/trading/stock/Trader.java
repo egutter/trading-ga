@@ -90,7 +90,7 @@ public class Trader {
 
 //                if (shouldAddOrders.apply(dailyQuote.getTradingDate())) {
 //                }
-                orderBook.forEachPendingOrder((order) ->
+                orderBook.forEachPendingOrder(stockPrices.getStockName(), (order) ->
                         order.execute(timeFrameQuote.getQuoteAtDay().getTradingDate(), orderBook, portfolio, timeFrameQuote));
 
                 MarketOrderGenerator marketOrderGenerator = marketOrderGenerator(stockPrices, dailyQuote, buyDecision, timeFrameQuote);

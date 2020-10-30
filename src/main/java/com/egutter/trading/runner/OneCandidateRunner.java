@@ -146,11 +146,11 @@ public class OneCandidateRunner {
 
     public static void main(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2019, 1, 1);
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-        String[] sector = StockMarket.longTermBonds();
+        String[] sector = StockMarket.commSector();
 //        String[] nvda = new String[]{"NVDA"};
-        runOneSectorWithOneCandidate(fromDate, sector, "010001001111010001011000000001100111000");
+        runOneSectorWithOneCandidate(fromDate, sector, "111100101000111001101001000011100011011");
 
 //        runAllSectorsOnAllCandidates(fromDate);
     }

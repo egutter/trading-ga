@@ -2,7 +2,6 @@ package com.egutter.trading.runner;
 
 import com.egutter.trading.candidates.GlobalStockMarketCandidates;
 import com.egutter.trading.decision.BuyTradingDecision;
-import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
 import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.constraint.SellLastDayOfMarket;
@@ -10,8 +9,6 @@ import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.consensus.BuyWhenNoOppositionsTradingDecision;
 import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
 import com.egutter.trading.decision.constraint.*;
-import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
-import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.decision.technicalanalysis.*;
@@ -146,19 +143,20 @@ public class OneCandidateRunner {
 
     public static void main(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        LocalDate fromDate = new LocalDate(2020, 1, 1);
 
         String[] sector = StockMarket.commSector();
 //        String[] nvda = new String[]{"NVDA"};
-        runOneSectorWithOneCandidate(fromDate, sector, "111100101000111001101001000011100011011");
+        runOneSectorWithOneCandidate(fromDate, sector, "100001100010001000110010010000100001000",
+                Arrays.asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class));
 
 //        runAllSectorsOnAllCandidates(fromDate);
     }
 
-    private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString) {
+    private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), sector);
         BitString candidate = new BitString(candidateString);
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate);
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate, tradingDecisionGenerators);
         runner.run();
         System.out.println("==========================================");
         System.out.println("******************************************");

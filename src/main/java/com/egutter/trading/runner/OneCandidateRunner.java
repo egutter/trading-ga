@@ -143,18 +143,19 @@ public class OneCandidateRunner {
 
     public static void main(String[] args) {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
-        LocalDate fromDate = new LocalDate(2020, 1, 1);
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-        String[] sector = StockMarket.commSector();
+        String[] sector = StockMarket.sectors();
 //        String[] nvda = new String[]{"NVDA"};
-        runOneSectorWithOneCandidate(fromDate, sector, "100001100010001000110010010000100001000",
-                Arrays.asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class));
+        runOneSectorWithOneCandidate(fromDate, sector, "111100100000111001101000110000100011111",
+                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
 
 //        runAllSectorsOnAllCandidates(fromDate);
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), sector);
+        LocalDate toDate = new LocalDate(2020, 11, 2); //LocalDate.now();
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false, sector);
         BitString candidate = new BitString(candidateString);
         OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate, tradingDecisionGenerators);
         runner.run();

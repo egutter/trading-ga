@@ -24,6 +24,7 @@ public class UsaStockMarketCandidates {
                 developAdrCandidates(),
                 emergentAdrCandidates(),
                 healthCandidates(),
+                biotechCandidates(),
                 aaplCandidates(),
                 amazonCandidates(),
                 microsoftCandidates(),
@@ -39,9 +40,1538 @@ public class UsaStockMarketCandidates {
                 cloudfareCandidates(),
                 splunkCandidates(),
                 ciscoCandidates(),
+                industrialCandidates(),
+                innovationCandidates(),
+                longtermBondsCandidates(),
+                corporateBondsCandidates(),
+                metalsCandidates(),
+                metalsCandidates(),
+                emergentCandidates(),
+                greenCandidates(),
+                smallCapCandidates(),
                 developEtfCandidates())
                 .flatMap(x -> x.stream())
                 .collect(Collectors.toList());
+    }
+
+    public static List<Candidate> industrialCandidates() {
+        return asList(
+                new Candidate("INDUSTRIAL_SECTOR", "111010001101100010010000010101100111010",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "000110100101100011010111101101000010101",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(2/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111010001110100011011100000100100111010",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(8/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "101010000110001110101100010101100100000",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.96(25/1)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "101011001100100011010000110101100111010",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(2/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "101011000101011110110010010101000011010",
+                        asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(2/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "000011110101100010010111110011110110001",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.94(16/1)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111001111001011000111011000010000010001",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110110101101010101110000010001100110000",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111001111001011000111011000010000001011",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111001101001111010110110000010000010011",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111001111101011000111011000011010011011",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111001111101011000111010010010000000011",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "011011110101010010001000100101000100001",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.93(14/1)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "000010001110100001010001010101100110000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110100001010111001101001000011100011011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "100010111100110000010001110101100101010",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "001011100101011110100010010101000010101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110111111111101010110111101100100111011",
+                        asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110001011110111110110100100101101101111",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.92(44/4)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "100110010100101001011100000011001111110",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.95(37/2)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110001001011101010111110010011100111110",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(8/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110000011000001001110111100011100001111",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.91(10/1)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "100001100010001000110010110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "100001100010001000110010110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "100001100010001000110010110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "100001100010001000110110110011000001100",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(4/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110010001101101010100000110101000111000",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "0.94(30/2)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111010001110100010010000010101100111011",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(2/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "110010001110100000000000010101100011011",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(8/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111101011110000110110001010101000010100",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(6/0)", industrialSector())
+                        )),
+                new Candidate("INDUSTRIAL_SECTOR", "111010001110100010010001010101100111011",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INDUSTRIAL_SECTOR, "1.00(2/0)", industrialSector())
+                        ))
+        );
+    }
+
+    public static List<Candidate> innovationCandidates() {
+        return asList(
+                new Candidate("INNOVATION_SECTOR", "110011000111000111100110111010100100000",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(8/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "000111100101100011010011101101000010111",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.91(10/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111000001110101010010000010100100011110",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(14/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "011110000000101001101001000011100100010",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111010001110110000010010110101110111010",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(8/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "101100010111110100010000000100100001000",
+                        asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.91(20/2)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001101110110100011000011100000001111011",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.91(21/2)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "011010001001011000010011100000000010010",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.92(11/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "011110110100011011010001111101111011111",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.93(13/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111111001000110100000101101101000010011",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(6/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111001100110000111010000110011001111011",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.91(10/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111001011001010000111010010010000000011",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "110011100100110010000111000011000010011",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(6/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "101011010001010011000110110011000010101",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.93(13/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001111110010111010101001000011000010000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.93(14/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "011110000000011010000011011011111110010",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.94(15/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001011110010111010111011010011100110111",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.93(14/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001011110010010010100110000000011110001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.93(14/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "100101001010110010010011110100100110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001011110010111010101001000011000110000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.93(14/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "000011110001010010010000010101100110010",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.92(12/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001100100111110101111000010100011111101",
+                        asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(2/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111100001000101001101001000011100100010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.94(15/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111000001000001001101001000011100110010",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.94(15/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111100001000101001101011000011100100010",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.94(15/1)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111000101100011010101101100111110110110",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "0.91(32/3)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111010010100001000110000010000100000010",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(2/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "110000010111001000110000110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(6/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111010001010100010010000010101100111010",
+                        asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(8/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "110010010100001000110000010000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(2/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "110010010100001000110000010000001101000",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(2/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111010001110100010010000010101100111010",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(8/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "110011001011100010010010100101010111010",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111010001110100010010000010101100111010",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(8/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "110111001111100010010010010101000101010",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "001010101111000010010010010101101110010",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(8/0)", innovationSector())
+                        )),
+                new Candidate("INNOVATION_SECTOR", "111100101000101011101000000011000100010",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                        ))
+        );
+    }
+
+    public static List<Candidate> longtermBondsCandidates() {
+        return asList(
+                new Candidate("VGLT", "010001001111010001011000000001100111000",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(6/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "000101010001010001011010110010100001100",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.91(10/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101010001110110011010100010100100111010",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "011011100000011101111101101010010111101",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.93(14/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101010001011100000010000010101100011010",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "111111111010110010010010010011000111010",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101100100001110001010011101010011111001",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(4/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "011101001110100011100100000111010011101",
+                        asList(StochasticOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.93(13/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "001100001101010110001011011110100110010",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(4/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "100001101000100100111011010010100001000",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101001101000000100101011010000100011000",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(4/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "100101000010110010010011110100100100010",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "100101011000100110101011010010100100010",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(4/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "011110101101100011010111101101100010111",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(6/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "001110011000011000100100111111100011100",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(4/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "011000011011100100000111010000100100000",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(10/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010001101111010001011000100001100111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010001001111010001011000000001100111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010001001111010001011000000011100111100",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010001001110110001011000000001100111010",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010001001111010001011010000001101111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "011001101001010001011000000001100111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010000001110100100111000010111100110010",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.92(12/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "100110100110100010010100010101001111010",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(8/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010110000010101001001101100011100101011",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "010110001000001001100001000011100100010",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(6/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101001001101000010011000010101000101010",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.91(10/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101110110110100000011010000101001110010",
+                        asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(8/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "001001111100100010000000000100100101001",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.94(16/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101010101000100010110001010100110110011",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(8/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101001001100101011011101100101101111000",
+                        asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(8/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "100101001000100010101001001001111110101",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(2/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "001010001010000010010000000101000110000",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(14/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101001000010111100100110100100101001011",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.91(10/1)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "001010011010100100010100000100110100000",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.91(21/2)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "111000001110101010000010110101001011100",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(4/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "100001000111101100110000110000110001000",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "1.00(6/0)", longTermBonds())
+                        )),
+                new Candidate("VGLT", "101001000111001010111010110000111000001",
+                        asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VGLT", "0.92(12/1)", longTermBonds())
+                        ))
+        );
+    }
+
+    public static List<Candidate> corporateBondsCandidates() {
+        return asList(
+                new Candidate("VCLT", "110010010100111001101000110000100011001",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(6/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101100010010100010111101000011100010100",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011001000101010110111000001100101010",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "111010000110100010010000011100000011010",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "011001010110111010010110010100100011010",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.92(12/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "111100100000101111110001000100001101101",
+                        asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.94(15/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011001011100100000111100000000001101",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101000001001000001010011100010000011111",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(8/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "100000000100100001010111100000000001100",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(8/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "011000101000100110111011010001100001101",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(6/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "011100011000100110111011100000000100111",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(8/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101000001000100010010100000000010111000",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(8/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "010101001000100110111010010001100001001",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(6/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101101011001001000110010110000100001100",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101101001000001000110000110000100001101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101101011000001000110000110000100001101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110111000111000111100110110000100001100",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.91(10/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011000111000111110000110000100001101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.91(10/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101101011000001000110000110000100001101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101101011000001000110000110000100001101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "010100100100100001101010000011100000100",
+                        asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110000001100000010010100010101010101010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.91(10/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "111000001110100110110110010111000111001",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(10/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011000111000111100110111010100100000",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011101101100100011111001010100110000",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "111101111110111100000000000110011001010",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "101000010110100100010000100100100101000",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.91(10/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "111010011110100001000000000111100000010",
+                        asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "011011011110100011001000010101100111010",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(8/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "010011010110000111100110010100111110001",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(6/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "111000001110001010101100100101000110000",
+                        asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "0.91(10/1)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "010111001110100011110000010101100101010",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(6/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "000010110001110011001000101100100101001",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(6/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "000101100001010011001000101101000101100",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011001001001010111101100001100110000",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "110011001000101010111101100001100101010",
+                        asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(4/0)", corporateBonds())
+                        )),
+                new Candidate("VCLT", "011110000000101001101001000010100100010",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("VCLT", "1.00(2/0)", corporateBonds())
+                        ))
+        );
+    }
+
+    public static List<Candidate> metalsCandidates() {
+        return asList(
+                new Candidate("METALS", "110011001100100100001100010000000101101",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "0.91(10/1)", metals())
+                        )),
+                new Candidate("METALS", "001000101011110000100101010100100101001",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(12/0)", metals())
+                        )),
+                new Candidate("METALS", "001001110010111010101001000011100000100",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(4/0)", metals())
+                        )),
+                new Candidate("METALS", "111011100110100111001010000101110111000",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(4/0)", metals())
+                        )),
+                new Candidate("METALS", "010010101011100110011110010100100001010",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "011100010100011000010100111110000000001",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "110111101101100110001001010000000101000",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "110011001100100100001000011110001000100",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "110011001100100100001000010000100101101",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "110111101100100110001001010010110001101",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "001110001000000000111000000000111111000",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "001110001000100001111000010000000101000",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(8/0)", metals())
+                        )),
+                new Candidate("METALS", "001111001000100110111011110000100111000",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(4/0)", metals())
+                        )),
+                new Candidate("METALS", "111100110000111001101000110000100011001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111100100000111001101000110000101010001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111101100000111001101010000000100011001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111101100000111001101000110000100010001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111000100000111001100101100000110000100",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111100100000111001101000110000100011001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111100110000111001101000110000100011001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "000010000011000000111101001000100101101",
+                        asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(14/0)", metals())
+                        )),
+                new Candidate("METALS", "010111000110101001101000000001100100110",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(8/0)", metals())
+                        )),
+                new Candidate("METALS", "011111000100001001111011100011101000011",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "011110000000001001101001000011100110010",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "011110000100101001101111000011100100110",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(4/0)", metals())
+                        )),
+                new Candidate("METALS", "011100000100101001101101010111100100010",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(8/0)", metals())
+                        )),
+                new Candidate("METALS", "100001110010001000010000110000100001100",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "100001100010001000110000110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "100101000010110010010011110100100100011",
+                        asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "101101010010001000110010110000100001100",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "101101000010001000110010110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111011101110001011110110010100001010011",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(6/0)", metals())
+                        )),
+                new Candidate("METALS", "011100001100101000010000100100101011010",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(12/0)", metals())
+                        )),
+                new Candidate("METALS", "001011000110100010010100010101101110110",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(10/0)", metals())
+                        )),
+                new Candidate("METALS", "100101001010110010011011100100100100011",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(4/0)", metals())
+                        )),
+                new Candidate("METALS", "110011001000101010111101100001100101010",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        )),
+                new Candidate("METALS", "111011001000101010111101100001100101010",
+                        asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(METALS_SECTORS, "1.00(2/0)", metals())
+                        ))
+        );
+    }
+
+    public static List<Candidate> emergentCandidates() {
+        return asList(
+                new Candidate("EMERGENT", "001100001011010001011000000001100011001",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.94(15/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111110100011000001001011010100001011100",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "010001001101111010010111010100101010000",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.91(10/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101010101110110010010000010100000111010",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111110001110010010011001010101100110010",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(8/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111011101110001110011001010110100111000",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(6/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111101000010010111110010010101000010101",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(6/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "100001010101011110110010010101000010000",
+                        asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(6/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111010011011100010010110000111011011011",
+                        asList(StochasticOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.93(14/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111100110011100101010111100000000001010",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(6/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101000001000100101010000110000101100010",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.92(12/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101100011011000100011101100000000001000",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.93(14/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101100010100101000101011000010110001011",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.91(10/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101000011011100101011101100000001001100",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(12/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101000001011101001100111000011100100011",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.92(12/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101000011010000100011101010000000001000",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.94(16/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101000011011100101011100110000000001100",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.92(12/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "100110110010111001010100101100011011100",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(6/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101010001111100000010111010101100111010",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101011000101011110110010010101000010111",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "110110011111100010000000010101100111010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.92(12/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "011111101110100000010000010111100111111",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "100001001101011110110011110101000010101",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111000001110101010000000010000100110010",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101101010010001000110010110000100001001",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "100001111000001000100000110000100001100",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101001110010001000110010110000100001000",
+                        asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "110001010010001000110000010000100000001",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101001100010001000110000110000100001100",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111010011111101010011011010100100101010",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.92(12/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101011000101011110110010010101000010101",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "111010101110101011010001010101010111110",
+                        asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.93(14/1)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "010001001111010001011000000001100111000",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "010001001011010001011000100001100010101",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "010101011001010001111010000001100111000",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(2/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "100000000111001100111011110001100111001",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "100001000111001101110011000001100111000",
+                        asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "1.00(4/0)", emergentMarkets())
+                        )),
+                new Candidate("EMERGENT", "101000001000101001101001000011111000010",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(EMERGENT_SECTORS, "0.91(10/1)", emergentMarkets())
+                        ))
+        );
+    }
+
+    public static List<Candidate> greenCandidates() {
+        return asList(
+                new Candidate("GREEN ETF", "000110100101100011010011110000011110011",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(4/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "011110000000101011101001000011100100010",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.91(21/2)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100011010100100110000110100101101001",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(4/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "111100001010111001001001100011100011001",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.91(10/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "000110010000101110111111011110000111000",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.96(25/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "111010000110100000010101110101100111011",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100000110110010010000100100100101001",
+                        asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "110101110001000110000011110010100101010",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "100001100000101001100101100011000101000",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101001101010001000111011010000100001110",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(4/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101011100010001000100101000011000100111",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(8/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101001110000110101000010110000000010111",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "100011100010100111100101100010000110101",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(8/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "100001100010001011100011100010010001101",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(8/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "100001100010010001100100110010100100000",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "010000001111110001011000000001100111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(10/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "011000000111010001001000000000100111101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(10/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "010001001111011001011000000001100101001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(4/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "010000001111010001011010000001110111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(10/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "011000001101010001011000000001101111000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(10/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "010000001111011001011000000001100110000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(10/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "011000001111010001011000000001100110000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(10/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "011110010001001001001000000001100100010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.92(11/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "000010000000100010111011001001100000000",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(16/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100010110100100000000100100100101001",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.92(11/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "111110000100100011101000000111100100110",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.94(15/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "011100001000100001010000110101100101010",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.93(13/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "111101100000100010111011001000111111000",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "110000100000001000111100100010000100111",
+                        asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100010110111110110010000100100011001",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.92(11/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "111100001110000001010010100111100100001",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.91(20/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "000010000001000011010011001001111111000",
+                        asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(16/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100010110100100010000100100100101001",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.92(11/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "111010001010111111011101000101100011011",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(6/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100010100100001000000100100110101001",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.92(11/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "100011010101010000010111000010001010000",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(2/0)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "101100010110100100010000100100100101001",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "0.92(11/1)", greenSector())
+                        )),
+                new Candidate("GREEN ETF", "010100101100110100001000010000000101101",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(GREEN_SECTORS, "1.00(2/0)", greenSector())
+                        ))
+        );
+    }
+
+    public static List<Candidate> smallCapCandidates() {
+        return asList(
+                new Candidate("SMALL CAP", "101100010110110010010000100100100101001",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "010100101100110000001000010000000001001",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.93(14/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100101000010110010010011110100100100010",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "110100101110100010010000011001000111000",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "010010000011100010010000000101100011010",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000101011101010010110101110110011",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(30/3)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111110011110110010010000010101000110010",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001010100101100010000100100100111000",
+                        asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111010011110111010010001010101101111000",
+                        asList(StochasticOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92(11/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "110111001100100100001110010000001101101",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101011111100101100000100010000000101111",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "001011101110100010010000010000111100011",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "000011110100100010010000010000000110011",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101111110100100011000011000000111110011",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101011110100100011000011000010111010011",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101010000111101000000100101111001100001",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "001010101110100010010000010100100111000",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000111001101111001010000110011011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000111000001010111010000100001000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111110100000011001101010000000100011011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101000010011100101111111110000110001000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92(11/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000111001101111000110000110011001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000110001101011111110000110001001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000111001101010010110000100011001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "011010001010101001101001000011100100010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "011110000000001000101000010111100100111",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "011110000011001001101000010011100000010",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101110000110100100010000100100100101001",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(12/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111100011010000101110000010110001011011",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.93(13/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "011010011110100010010000010101100110010",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "100001000110100010000100110111000001110",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(20/2)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111010100010100010110000010101100101010",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.94(16/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "110100001010001010010000011110000110000",
+                        asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92(12/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "101101010110100100010000100100100101000",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111111100011000011110010010111000011011",
+                        asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "001100001011010001011000000001100011111",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "001100001011010001011000000001100011111",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "010100101100110101011000110100000101011",
+                        asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                        )),
+                new Candidate("SMALL CAP", "111100101000000111110010010111000011111",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(10/0)", smallCap())
+                        ))
+        );
     }
 
     public static List<Candidate> greenBondCandidates() {
@@ -2424,187 +3954,187 @@ public class UsaStockMarketCandidates {
                 new Candidate("NET", "011100010111011001011100101111101001100",
                         asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001101000100010010010110011101111001",
                         asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101001101000100001010011000000110101101",
                         asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101000000001111010010011100000011111010",
                         asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001101000100010010011100000111111010",
                         asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101001110010111011101000000010111101011",
                         asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001101000100010011001000000100100100",
                         asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001110010111011101000100000100111010",
                         asList(StochasticOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "111010001110100011000100010001100111110",
                         asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101111101110000010010001010101100110010",
                         asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001110001110110101010010001101011000",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101001100101111110101000011011111001111",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101000100101111110111000000001111011010",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101001110001110101100011110000000111010",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "010001001111010001011000000001101111001",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001110000010000010000110000000111011",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001110001110110101110010000100101011",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101000101111100000010000010000101111110",
                         asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101111001111100010010100010001100101010",
                         asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100111001101111001101110100001100111101",
                         asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101111001100100110101010011101100111011",
                         asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101000010110100100010000100100100101000",
                         asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "111010101110100000010001110101100111000",
                         asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "111010001100100010011000000011111111100",
                         asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101000100110100010000010011101100111110",
                         asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101111001110100000010000010000000011010",
                         asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "000100101110100010010000010111101111000",
                         asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001110000100001001111111011100001001",
                         asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "110010101111100010010000010101100111010",
                         asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "011000100110101010000011011111110111010",
                         asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "001100011000100100010000100110100101001",
                         asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100001110101111010010100111110101000101",
                         asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101001110001011000011100111110110000101",
                         asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "100101110000011010101000111100111000101",
                         asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "000010110111001010000110110001100111001",
                         asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101000010110100110010000100100100101000",
                         asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         )),
                 new Candidate("NET", "101101110010011000010100111110011001101",
                         asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("NET","1.00", cloudfare())
+                                new StockGroup("NET", "1.00", cloudfare())
                         ))
         );
     }
@@ -2969,10 +4499,186 @@ public class UsaStockMarketCandidates {
         );
     }
 
-    public static List<Candidate> xCandidates() {
+    public static List<Candidate> biotechCandidates() {
         return asList(
+                new Candidate(BIOTECH_SECTOR, "011110000000101001101001000011100100010",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.91(10/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "111010000110100011010000010001000011010",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(6/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "110000001100111010010000010101000111010",
+                        asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(2/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "111010011100101010110000000110000111010",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(2/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101010001110100000010000010101100111010",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(11/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100001010101010010101010101000111001010",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(6/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101000010111110110101000010000111100001",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.93(14/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100001110101110010101010010000101001011",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(12/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100000011100110110101001010000101001010",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.94(16/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101001010101110100101010010001111001011",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(12/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100000110101010110101000110000111011011",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.95(18/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100001010101110010101010000010000010010",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(12/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100001010101110101101000110010101000010",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(12/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110101100010100011100000010110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.91(10/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110100100011010011100000111110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110100100011010011100000011110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110100100011010011100000011111011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110100100011010011010000111111011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110100100011010011110000111110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "001011110100100011010011100000111110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "111000001010100110010000010101000110110",
+                        asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(2/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "110100001110101010111001010001101110010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(11/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100000110011110101010011000010010101111",
+                        asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(2/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101011000101011110110010010101000010100",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100110001110001010110000000111001111000",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.93(14/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "011100000100101010111000000011100000000",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101111000101011111110000010101100010000",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(8/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "111101100010000111110010010110000010001",
+                        asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(8/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "110000000010001010110010010101010110010",
+                        asList(BollingerBandsGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.92(24/2)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100101101000000110010010010100111000011",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "0.95(18/1)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101001001100001100000000110101111101100",
+                        asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "100000000010110010010111110100100100001",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(8/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101011000101011110110010010101000011100",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "101011000101011110110000010101000010100",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        )),
+                new Candidate(BIOTECH_SECTOR, "000001001001001010010101110001010010010",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup(BIOTECH_SECTOR, "1.00(4/0)", biotechSector())
+                        ))
         );
     }
+
     public static List<Candidate> healthCandidates() {
         return asList(
                 new Candidate("HEALTH", "101101010100000011011011010000011110110",
@@ -3127,6 +4833,7 @@ public class UsaStockMarketCandidates {
                         ))
         );
     }
+
     public static List<Candidate> amazonCandidates() {
         return asList(
                 new Candidate("AMZN", "001101001010000000110010000000000000001",

@@ -32,7 +32,7 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2020, 10, 05);
+        LocalDate tradeOn = new LocalDate(2020, 12, 4);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -54,7 +54,7 @@ public class OneDayCandidateRunner {
                         .filter(candidateGroup -> candidateGroup.equals(stockGroup))
                         .findAny();
                 candidateStockGroup.ifPresent(candidateGroup -> {
-                    OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome());
+                    OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
                     oneCandidateRunner.runOn(tradeOn);
 
                     if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {

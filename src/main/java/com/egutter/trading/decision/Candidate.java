@@ -98,4 +98,8 @@ public class Candidate {
     public int hashCode() {
         return this.key().hashCode();
     }
+
+    public void addStockGroup(StockGroup newStockGroup) {
+        stockGroups.add(newStockGroup);
+    }
 }

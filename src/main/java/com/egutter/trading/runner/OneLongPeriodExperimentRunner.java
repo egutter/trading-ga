@@ -184,29 +184,35 @@ public class OneLongPeriodExperimentRunner {
                 .collect(Collectors.joining(".class, "));
 
         String tradingDecisionGeneratorsClassList = "asList(" + tradingDecisionGeneratorsString + ".class)";
-        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", " + tradingDecisionGeneratorsClassList + "),");
+//        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", " + tradingDecisionGeneratorsClassList + "),");
 
         OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
         runner.run();
 
-        StringBuffer sb = new StringBuffer();
-        sb.append("new Candidate(\"");
-        sb.append(stockGroup.getFullName());
-        sb.append("\", \"");
-        sb.append(result);
-        sb.append("\",\n");
-        sb.append(tradingDecisionGeneratorsClassList);
-        sb.append(",\n");
-        sb.append("asList(\n");
-        sb.append("new StockGroup(");
-        sb.append(stockGroup.getFullName());
-        sb.append(",\"");
-        sb.append(runner.percentageOfOrdersWon());
-        sb.append("\", ");
-        sb.append(stockGroup.getFullName());
-        sb.append("())\n");
-        sb.append(")),\n");
-        System.out.println(sb.toString());
+        if (runner.percentageOfOrdersWon().compareTo(new BigDecimal(0.90)) >= 0) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("new Candidate(\"");
+            sb.append(stockGroup.getName());
+            sb.append("\", \"");
+            sb.append(result);
+            sb.append("\",\n");
+            sb.append(tradingDecisionGeneratorsClassList);
+            sb.append(",\n");
+            sb.append("asList(\n");
+            sb.append("new StockGroup(\"");
+            sb.append(stockGroup.getName());
+            sb.append("\",\"");
+            sb.append(runner.percentageOfOrdersWon());
+            sb.append("(");
+            sb.append(runner.ordersWon());
+            sb.append("/");
+            sb.append(runner.ordersLost());
+            sb.append(")\", ");
+            sb.append(stockGroup.getFullName());
+            sb.append("())\n");
+            sb.append(")),\n");
+            System.out.println(sb.toString());
+        }
     }
 
 }

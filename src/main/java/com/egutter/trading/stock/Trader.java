@@ -105,7 +105,14 @@ public class Trader {
     }
 
     private TimeFrameQuote builTimeFrameQuote(DailyQuote dailyQuote, StockPrices stockPrices) {
-        DailyQuote quoteAtNextDay = stockPrices.dailyPriceAfter(dailyQuote.getTradingDate(), 1).orElse(dailyQuote);
+        DailyQuote fakeDailyQuoteAtNextDay = new DailyQuote(dailyQuote.getTradingDate().plusDays(1),
+                dailyQuote.getClosePrice(), // so when reports price bought for next day it prints close price
+                dailyQuote.getClosePrice(),
+                dailyQuote.getAdjustedClosePrice(),
+                dailyQuote.getLowPrice(),
+                dailyQuote.getHighPrice(),
+                dailyQuote.getVolume());
+        DailyQuote quoteAtNextDay = stockPrices.dailyPriceAfter(dailyQuote.getTradingDate(), 1).orElse(fakeDailyQuoteAtNextDay);
         DailyQuote quoteAtPrevDay = stockPrices.dailyPriceBefore(dailyQuote.getTradingDate(), 1).orElse(dailyQuote);
         return new TimeFrameQuote(dailyQuote, quoteAtPrevDay, quoteAtNextDay);
     }

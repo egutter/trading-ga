@@ -2,8 +2,21 @@ package com.egutter.trading.candidates;
 
 import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.out.adapters.BitStringGsonAdapter;
+import com.egutter.trading.out.adapters.ClassTypeAdapterFactory;
+import com.egutter.trading.out.adapters.JodaLocalDateGsonAdapter;
 import com.egutter.trading.stock.StockGroup;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import org.joda.time.LocalDate;
+import org.uncommons.maths.binary.BitString;
 
+import java.io.*;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,6 +26,21 @@ import static java.util.Arrays.asList;
 
 public class UsaStockMarketCandidates {
 
+    public static void main(String[] args) throws IOException {
+        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
+        gsonBuilder.registerTypeAdapterFactory(new ClassTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapter(BitString.class, new BitStringGsonAdapter());
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new JodaLocalDateGsonAdapter());
+        Gson gson = gsonBuilder.create();
+
+        Reader reader = Files.newBufferedReader(Paths.get("2020-12-06_all_candidates.json"));
+//        String jsonString = gson.toJson(etfSectorCandidates());
+//        System.out.println(jsonString);
+
+        Type listType = new TypeToken<ArrayList<Candidate>>(){}.getType();
+        List<Candidate> list = gson.fromJson(reader, listType);
+        System.out.println(list);
+    }
     public static List<Candidate> allCandidates() {
         return Stream.of(etfSectorCandidates(),
                 techCandidates(),
@@ -3319,7 +3347,7 @@ public class UsaStockMarketCandidates {
                 new Candidate("INTC", "011100010100011000001100111110011110001",
                         asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup("INTC", "0.91", intel())
+                                new StockGroup("INTC (20/2)", "0.91", intel())
                         ))
         );
     }

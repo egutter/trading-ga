@@ -2,6 +2,7 @@ package com.egutter.trading.runner;
 
 import com.egutter.trading.candidates.GlobalStockMarketCandidates;
 import com.egutter.trading.decision.BuyTradingDecision;
+import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
 import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.constraint.SellLastDayOfMarket;
@@ -18,17 +19,28 @@ import com.egutter.trading.order.OrderBook;
 import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.out.PrintResult;
+import com.egutter.trading.out.adapters.BitStringGsonAdapter;
+import com.egutter.trading.out.adapters.ClassTypeAdapterFactory;
+import com.egutter.trading.out.adapters.JodaLocalDateGsonAdapter;
 import com.egutter.trading.stock.*;
 import com.google.common.collect.Range;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tictactec.ta.lib.MAType;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 import org.uncommons.maths.binary.BitString;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
+
+import static com.egutter.trading.stock.StockMarket.*;
+import static com.egutter.trading.stock.StockMarket.innovationSector;
+import static java.util.Arrays.asList;
 
 /**
  * Created by egutter on 11/29/14.
@@ -71,10 +83,20 @@ public class OneCandidateRunner {
     }
 
     public void run() {
+        run(true);
+    }
+
+    public void run(boolean printResults) {
         trader.tradeAllStocksInMarket();
-        new PrintResult(false).print(this, candidate);
-        if (this.percentageOfOrdersWon().compareTo(new BigDecimal(0.85)) >= 0) {
-//            new PrintResult(true).print(this, candidate);
+        if (printResults) {
+            new PrintResult(false).print(this, candidate);
+            whenWonOver90Percent(() -> new PrintResult(true).print(this, candidate));
+        }
+    }
+
+    private void whenWonOver90Percent(Runnable r) {
+        if (this.percentageOfOrdersWon().compareTo(new BigDecimal(0.90)) >= 0) {
+            r.run();
         }
     }
 
@@ -145,43 +167,97 @@ public class OneCandidateRunner {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-        String[] sector = StockMarket.sectors();
-//        String[] nvda = new String[]{"NVDA"};
-        runOneSectorWithOneCandidate(fromDate, sector, "111100100000111001101000110000100011111",
-                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class));
+        String[] sector = StockMarket.innovationSector();
+////        String[] nvda = new String[]{"NVDA"};
+        runOneSectorWithOneCandidate(fromDate, sector, "100101001010110010010011110100100110011",
+                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator .class));
 
 //        runAllSectorsOnAllCandidates(fromDate);
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
-        LocalDate toDate = new LocalDate(2020, 11, 2); //LocalDate.now();
+        Map<String, Candidate> selectedCandidates = new HashMap<String, Candidate>();
+
+        LocalDate toDate = LocalDate.now(); //new LocalDate(2020, 11, 19);
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false, sector);
-        BitString candidate = new BitString(candidateString);
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate, tradingDecisionGenerators);
+        BitString chromosome = new BitString(candidateString);
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, chromosome, tradingDecisionGenerators);
         runner.run();
+        Candidate candidate = new Candidate("INNOVATION_SECTOR", "100101001010110010010011110100100110011",
+                asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                asList(
+                        new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
+                ));
+        appendToCandidates(selectedCandidates, runner, candidate, new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector()), fromDate, toDate);
         System.out.println("==========================================");
         System.out.println("******************************************");
         System.out.println("==========================================");
+        writeToFile(selectedCandidates);
     }
 
     private static void runAllSectorsOnAllCandidates(LocalDate fromDate) {
-        StockMarket.allSectors().stream().forEach(sectors -> {
+        Map<String, Candidate> selectedCandidates = new HashMap<String, Candidate>();
+        StockMarket.allSectors().stream().forEach(stockGroup -> {
             System.out.println("==========================================");
             System.out.println("******************************************");
-            System.out.println(sectors.getFullName());
-            System.out.println("******************************************");
-            System.out.println("==========================================");
+            System.out.println(stockGroup.getFullName());
 
-            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), sectors.getStockSymbols());
+            LocalDate toDate = LocalDate.now();
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, stockGroup.getStockSymbols());
 
-            GlobalStockMarketCandidates.newNewerCandidates().stream().forEach(candidate -> {
-                OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome());
-                runner.run();
-                System.out.println("==========================================");
-                System.out.println("******************************************");
-                System.out.println("==========================================");
+            GlobalStockMarketCandidates.allNewCandidates().stream().forEach(candidate -> {
+                OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
+                runner.run(false);
+                runner.whenWonOver90Percent(() -> appendToCandidates(selectedCandidates, runner, candidate, stockGroup, fromDate, toDate));
+
             });
+            System.out.println("Completed at: "+ LocalDateTime.now());
+            System.out.println("******************************************");
+            System.out.println("==========================================");
         });
+        writeToFile(selectedCandidates);
+    }
+
+    private static void writeToFile(Map<String, Candidate> selectedCandidates) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(LocalDate.now().toString() + "_all_candidates.json"));
+            GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
+            gsonBuilder.registerTypeAdapterFactory(new ClassTypeAdapterFactory());
+            gsonBuilder.registerTypeAdapter(BitString.class, new BitStringGsonAdapter());
+            gsonBuilder.registerTypeAdapter(LocalDate.class, new JodaLocalDateGsonAdapter());
+            Gson gson = gsonBuilder.create();
+            writer.write(gson.toJson(selectedCandidates.values()));
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void appendToCandidates(Map<String, Candidate> selectedCandidates, OneCandidateRunner runner, Candidate candidate, StockGroup stockGroup, LocalDate fromDate, LocalDate toDate) {
+        String stockGroupDescription = new StringBuffer(runner.percentageOfOrdersWon().toString()).
+                append("(").append(runner.ordersWon()).append("/").append(runner.ordersLost()).append(")").toString();
+        StockGroup newStockGroup = new StockGroup(stockGroup.getName(),
+                stockGroupDescription,
+                stockGroup.getStockSymbols(),
+                runner.percentageOfOrdersWon(),
+                runner.ordersWon(),
+                runner.ordersLost(),
+                fromDate,
+                toDate
+                );
+
+        if (selectedCandidates.containsKey(candidate.key())) {
+            Candidate resultCandidate = selectedCandidates.get(candidate.key());
+            resultCandidate.addStockGroup(newStockGroup);
+        } else {
+            List<StockGroup> stockGroups = new ArrayList();
+            stockGroups.add(newStockGroup);
+            Candidate newCandidate = new Candidate(candidate.getDescription(), candidate.getChromosome().toString(),
+                    candidate.getTradingDecisionGenerators(),
+                    stockGroups);
+            selectedCandidates.put(candidate.key(), newCandidate);
+        }
     }
 
     public static void mainOri(String[] args) {

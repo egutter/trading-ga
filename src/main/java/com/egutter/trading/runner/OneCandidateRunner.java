@@ -18,6 +18,7 @@ import com.egutter.trading.order.BuySellOperation;
 import com.egutter.trading.order.OrderBook;
 import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
+import com.egutter.trading.out.CandidatesFileHandler;
 import com.egutter.trading.out.PrintResult;
 import com.egutter.trading.out.adapters.BitStringGsonAdapter;
 import com.egutter.trading.out.adapters.ClassTypeAdapterFactory;
@@ -167,12 +168,12 @@ public class OneCandidateRunner {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-        String[] sector = StockMarket.innovationSector();
-////        String[] nvda = new String[]{"NVDA"};
-        runOneSectorWithOneCandidate(fromDate, sector, "100101001010110010010011110100100110011",
-                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator .class));
+//        String[] sector = StockMarket.innovationSector();
+//////        String[] nvda = new String[]{"NVDA"};
+//        runOneSectorWithOneCandidate(fromDate, sector, "100101001010110010010011110100100110011",
+//                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator .class));
 
-//        runAllSectorsOnAllCandidates(fromDate);
+        runAllSectorsOnAllCandidates(fromDate);
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
@@ -219,19 +220,7 @@ public class OneCandidateRunner {
     }
 
     private static void writeToFile(Map<String, Candidate> selectedCandidates) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(LocalDate.now().toString() + "_all_candidates.json"));
-            GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
-            gsonBuilder.registerTypeAdapterFactory(new ClassTypeAdapterFactory());
-            gsonBuilder.registerTypeAdapter(BitString.class, new BitStringGsonAdapter());
-            gsonBuilder.registerTypeAdapter(LocalDate.class, new JodaLocalDateGsonAdapter());
-            Gson gson = gsonBuilder.create();
-            writer.write(gson.toJson(selectedCandidates.values()));
-
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new CandidatesFileHandler().toJson(selectedCandidates.values());
     }
 
     private static void appendToCandidates(Map<String, Candidate> selectedCandidates, OneCandidateRunner runner, Candidate candidate, StockGroup stockGroup, LocalDate fromDate, LocalDate toDate) {

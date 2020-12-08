@@ -2,6 +2,7 @@ package com.egutter.trading.order;
 
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
+import org.joda.time.LocalDate;
 
 /**
  * Created by egutter on 2/12/14.
@@ -14,4 +15,6 @@ public interface MarketOrder {
     String getStockName();
 
     int getNumberOfShares();
+
+    boolean atDate(LocalDate tradingDate);
 }

@@ -81,6 +81,12 @@ public class BuyOrder implements MarketOrder {
     public int getNumberOfShares() {
         return numberOfShares;
     }
+
+    @Override
+    public boolean atDate(LocalDate tradingDate) {
+        return dailyQuote.getTradingDate().equals(tradingDate);
+    }
+
     public int getMarketNumberOfShares() {
         return marketNumberOfShares;
     }

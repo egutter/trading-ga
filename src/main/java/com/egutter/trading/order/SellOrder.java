@@ -93,4 +93,9 @@ public class SellOrder implements MarketOrder {
     public BigDecimal getPriceSold() {
         return this.price;
     }
+
+    @Override
+    public boolean atDate(LocalDate tradingDate) {
+        return dailyQuote.getTradingDate().equals(tradingDate);
+    }
 }

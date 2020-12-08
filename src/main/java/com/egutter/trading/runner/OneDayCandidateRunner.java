@@ -3,13 +3,19 @@ package com.egutter.trading.runner;
 import com.egutter.trading.candidates.GlobalStockMarketCandidates;
 import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.order.MarketOrder;
+import com.egutter.trading.out.CandidatesFileHandler;
 import com.egutter.trading.stock.StockGroup;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import com.google.common.collect.FluentIterable;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 
+import java.io.Reader;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -32,7 +38,7 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2020, 12, 4);
+        LocalDate tradeOn = new LocalDate(2020, 12, 7);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -115,7 +121,9 @@ public class OneDayCandidateRunner {
     }
 
     public List<Candidate> candidates() {
-        return GlobalStockMarketCandidates.allNewCandidates();
+        return new CandidatesFileHandler().fromJson();
+
+//        return GlobalStockMarketCandidates.allNewCandidates();
     }
 
     public List<String> getResultBuffer() {

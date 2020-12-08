@@ -7,6 +7,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -89,6 +90,19 @@ public class OrderBook {
             }
         });
         return result.toString();
+    }
+
+    public Map<String, List<SellOrder>> ordersWithPendingOrdersAt(LocalDate tradingDate) {
+        Map<String, List<SellOrder>> result = new HashMap<>();
+        Map<String, MarketOrder> r = orders.stream().filter(order -> order.atDate(tradingDate)).collect(Collectors.toMap(order -> order.getStockName(), order -> order));
+//        pendingOrders.forEach((stockName, conditionalOrders) -> {
+//            List pendingSellOrders = conditionalOrders.stream().filter(co -> co.isSellOrder())
+//                    .collect(Collectors.toList());
+//            if (!pendingSellOrders.isEmpty()) {
+//                result.append(stockName).append(": ").append(pendingSellOrders);
+//            }
+//        });
+        return result;
     }
 
     public void addPendingOrder(ConditionalOrder conditionalOrder) {

@@ -58,9 +58,10 @@ public class BuyConditionalOrder extends ConditionalOrder {
     }
 
     private ConditionalOrder sellWhenPriceAboveTarget(int shares, BuyOrder buyOrder) {
-        int halfShares = shares/2;
+//        int sharesToSell = shares/2; // UNCOMMENT TO DO A 2ND ORDER
+        int sharesToSell = shares; // COMMENT TO DO A SECOND ORDER
         SellWhenPriceAboveTarget sellWhenPriceAboveTarget = new SellWhenPriceAboveTarget(this.sellTargetPrice);
-        SellConditionalOrder sellConditionalOrder = new SellConditionalOrder(this.stockName, buyOrder, halfShares, sellWhenPriceAboveTarget);
+        SellConditionalOrder sellConditionalOrder = new SellConditionalOrder(this.stockName, buyOrder, sharesToSell, sellWhenPriceAboveTarget);
         sellConditionalOrder.addCondition(sellWhenPriceAboveTarget);
         return sellConditionalOrder;
     }

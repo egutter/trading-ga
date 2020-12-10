@@ -92,16 +92,20 @@ public class OrderBook {
         return result.toString();
     }
 
-    public Map<String, List<SellOrder>> ordersWithPendingOrdersAt(LocalDate tradingDate) {
-        Map<String, List<SellOrder>> result = new HashMap<>();
-        Map<String, MarketOrder> r = orders.stream().filter(order -> order.atDate(tradingDate)).collect(Collectors.toMap(order -> order.getStockName(), order -> order));
-//        pendingOrders.forEach((stockName, conditionalOrders) -> {
-//            List pendingSellOrders = conditionalOrders.stream().filter(co -> co.isSellOrder())
-//                    .collect(Collectors.toList());
-//            if (!pendingSellOrders.isEmpty()) {
-//                result.append(stockName).append(": ").append(pendingSellOrders);
-//            }
-//        });
+    public Map<String, BuyOrderWithPendingSellOrders> ordersWithPendingOrdersAt(LocalDate tradingDate) {
+        Map<String, BuyOrderWithPendingSellOrders> result = orders.stream().filter(order -> order.atDate(tradingDate)).collect(Collectors.toMap(order -> order.getStockName(), order -> new BuyOrderWithPendingSellOrders(order)));
+        if (!result.isEmpty()) {
+            pendingOrders.forEach((stockName, conditionalOrders) -> {
+                List<ConditionalOrder> pendingSellOrders = conditionalOrders.stream().filter(co -> co.isSellOrder())
+                        .collect(Collectors.toList());
+                pendingSellOrders.stream().forEach(pendingOrder -> {
+                    if (result.containsKey(pendingOrder.getStockName())) {
+                        BuyOrderWithPendingSellOrders buyOrderWithPendingSellOrders= result.get(pendingOrder.getStockName());
+                        buyOrderWithPendingSellOrders.addSellPendingOrder(pendingOrder);
+                    }
+                });
+            });
+        }
         return result;
     }
 

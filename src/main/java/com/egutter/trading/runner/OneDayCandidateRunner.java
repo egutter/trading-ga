@@ -1,21 +1,14 @@
 package com.egutter.trading.runner;
 
-import com.egutter.trading.candidates.GlobalStockMarketCandidates;
 import com.egutter.trading.decision.Candidate;
-import com.egutter.trading.order.MarketOrder;
+import com.egutter.trading.order.BuyOrderWithPendingSellOrders;
 import com.egutter.trading.out.CandidatesFileHandler;
 import com.egutter.trading.stock.StockGroup;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
-import com.google.common.collect.FluentIterable;
-import com.google.gson.reflect.TypeToken;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 
-import java.io.Reader;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -38,7 +31,7 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2020, 12, 7);
+        LocalDate tradeOn = new LocalDate(2020, 12, 8);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -63,16 +56,17 @@ public class OneDayCandidateRunner {
                     OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
                     oneCandidateRunner.runOn(tradeOn);
 
-                    if (!oneCandidateRunner.getOrderBook().getOrders().isEmpty()) {
+                    Map<String, BuyOrderWithPendingSellOrders> buyOrderWithPendingSellOrders = oneCandidateRunner.getOrderBook().ordersWithPendingOrdersAt(tradeOn);
+                    if (!buyOrderWithPendingSellOrders.isEmpty()) {
                         resultBuffer.add("==========================================");
                         resultBuffer.add(candidateGroup.getFullName());
                         resultBuffer.add("New last trading date " + tradeOn);
                         resultBuffer.add(candidateName(candidate));
-                        resultBuffer.add("On " + tradeOn + " " + oneCandidateRunner.getOrderBook());
+                        resultBuffer.add(buyOrderWithPendingSellOrders.toString());
+//                        resultBuffer.add("On " + tradeOn + " " + oneCandidateRunner.getOrderBook());
                         resultBuffer.add("==========================================");
                     }
-                    countStocksBought(countStockBought, oneCandidateRunner, candidate);
-                    countStocksSold(countStockSold, oneCandidateRunner, candidate);
+                    countStocksBought(countStockBought, buyOrderWithPendingSellOrders, candidate);
                 });
             });
         });
@@ -100,23 +94,22 @@ public class OneDayCandidateRunner {
                 .collect(Collectors.joining(" - "));
     }
 
-    private void countStocksBought(Map<String, Pair<Integer, List<Candidate>>> countStockBought, OneCandidateRunner oneCandidateRunner, Candidate candidate) {
-        countMarketOrders(countStockBought, oneCandidateRunner.getOrderBook().buyOrders(), candidate);
-    }
-    private void countStocksSold(Map<String, Pair<Integer, List<Candidate>>> countStockSold, OneCandidateRunner oneCandidateRunner, Candidate candidate) {
-        countMarketOrders(countStockSold, oneCandidateRunner.getOrderBook().sellOrders(), candidate);
+    private void countStocksBought(Map<String, Pair<Integer, List<Candidate>>> countStockBought, Map<String, BuyOrderWithPendingSellOrders> buyOrderWithPendingSellOrders, Candidate candidate) {
+        countMarketOrders(countStockBought, buyOrderWithPendingSellOrders.values(), candidate);
     }
 
-    private void countMarketOrders(Map<String, Pair<Integer, List<Candidate>>> countMarketOrders, FluentIterable<? extends MarketOrder> marketOrders, Candidate candidate) {
-        marketOrders.toList().stream().forEach(sellOrder -> {
+    private void countMarketOrders(Map<String, Pair<Integer, List<Candidate>>> countMarketOrders,
+                                   Collection<BuyOrderWithPendingSellOrders> marketOrders,
+                                   Candidate candidate) {
+        marketOrders.stream().forEach(order -> {
             int count = 0;
             List<Candidate> candidates = new ArrayList<Candidate>();
-            if (countMarketOrders.containsKey(sellOrder.getStockName())) {
-                count = countMarketOrders.get(sellOrder.getStockName()).getFirst();
-                candidates = countMarketOrders.get(sellOrder.getStockName()).getSecond();
+            if (countMarketOrders.containsKey(order.getStockName())) {
+                count = countMarketOrders.get(order.getStockName()).getFirst();
+                candidates = countMarketOrders.get(order.getStockName()).getSecond();
             }
             candidates.add(candidate);
-            countMarketOrders.put(sellOrder.getStockName(), new Pair<Integer, List<Candidate>>(count+1, candidates));
+            countMarketOrders.put(order.getStockName(), new Pair<Integer, List<Candidate>>(count+1, candidates));
         });
     }
 

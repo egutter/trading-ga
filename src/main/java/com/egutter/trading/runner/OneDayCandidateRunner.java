@@ -31,21 +31,23 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2020, 12, 9);
+        LocalDate tradeOn = new LocalDate(2020, 12, 21);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
     }
 
-    public void run(LocalDate tradeOn) {
+    public Map<String, List<BuyOrderWithPendingSellOrders>> run(LocalDate tradeOn) {
 
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
         Map<String, Pair<Integer, List<Candidate>>> countStockSold = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
         List<StockGroup> sectors = StockMarket.allSectors();
+        Map<String, List<BuyOrderWithPendingSellOrders>> allBuyOrderWithPendingSellOrders = new HashMap<>();
         sectors.stream().forEach(stockGroup -> {
 
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, stockGroup.getStockSymbols());
+
 
             candidates().stream().forEach(candidate -> {
 
@@ -65,6 +67,18 @@ public class OneDayCandidateRunner {
                         resultBuffer.add(buyOrderWithPendingSellOrders.toString());
 //                        resultBuffer.add("On " + tradeOn + " " + oneCandidateRunner.getOrderBook());
                         resultBuffer.add("==========================================");
+
+                        buyOrderWithPendingSellOrders.keySet().stream().forEach(stockName -> {
+                            BuyOrderWithPendingSellOrders aBuyOrderWithPendingSells = buyOrderWithPendingSellOrders.get(stockName);
+                            aBuyOrderWithPendingSells.setStockGroup(candidateGroup);
+                            if (allBuyOrderWithPendingSellOrders.containsKey(stockName)) {
+                                allBuyOrderWithPendingSellOrders.get(stockName).add(aBuyOrderWithPendingSells);
+                            } else {
+                                List<BuyOrderWithPendingSellOrders> buyOrderWithPendingSellOrderList = new ArrayList<>();
+                                buyOrderWithPendingSellOrderList.add(aBuyOrderWithPendingSells);
+                                allBuyOrderWithPendingSellOrders.put(stockName, buyOrderWithPendingSellOrderList);
+                            }
+                        });
                     }
                     countStocksBought(countStockBought, buyOrderWithPendingSellOrders, candidate);
                 });
@@ -77,6 +91,8 @@ public class OneDayCandidateRunner {
             resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNames(stockName, pair.getSecond()));
         });
         resultBuffer.add("==========================================");
+
+        return allBuyOrderWithPendingSellOrders;
     }
 
     private String candidateName(Candidate candidate) {

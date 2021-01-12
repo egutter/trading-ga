@@ -87,6 +87,11 @@ public class BuyOrder implements MarketOrder {
         return dailyQuote.getTradingDate().equals(tradingDate);
     }
 
+    @Override
+    public BigDecimal getPrice() {
+        return price;
+    }
+
     public int getMarketNumberOfShares() {
         return marketNumberOfShares;
     }

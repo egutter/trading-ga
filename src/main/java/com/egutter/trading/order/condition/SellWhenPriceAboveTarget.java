@@ -34,6 +34,10 @@ public class SellWhenPriceAboveTarget implements Function<TimeFrameQuote, Boolea
         return this.sellTargetPrice.compareTo(BigDecimal.valueOf(highPrice)) <= 0;
     }
 
+    public BigDecimal getSellTargetPrice() {
+        return sellTargetPrice;
+    }
+
     @Override
     public String toString() {
         return "SellWhenPriceAboveTarget{" +

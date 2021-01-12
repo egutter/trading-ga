@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.function.Function;
 
 public class SellWhenPriceBellowTarget implements Function<TimeFrameQuote, Boolean>, SellPriceResolver {
+
     private BigDecimal resistancePrice;
 
     public SellWhenPriceBellowTarget(BigDecimal resistancePrice) {
@@ -37,5 +38,9 @@ public class SellWhenPriceBellowTarget implements Function<TimeFrameQuote, Boole
         return "SellWhenPriceBellowTarget{" +
                 "resistancePrice=" + resistancePrice +
                 '}';
+    }
+
+    public BigDecimal getResistancePrice() {
+        return resistancePrice;
     }
 }

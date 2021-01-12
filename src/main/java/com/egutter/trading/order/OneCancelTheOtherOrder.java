@@ -6,6 +6,7 @@ import org.joda.time.LocalDate;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -58,5 +59,9 @@ public class OneCancelTheOtherOrder extends ConditionalOrder {
 
     public boolean isSellOrder() {
         return this.primaryOrder.isSellOrder();
+    }
+
+    protected List<Function<TimeFrameQuote, Boolean>> getConditions() {
+        return primaryOrder.getConditions();
     }
 }

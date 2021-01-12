@@ -50,10 +50,10 @@ public abstract class ConditionalOrder {
     }
 
     public void addCondition(Function<TimeFrameQuote, Boolean> condition) {
-        conditions.add(condition);
+        getConditions().add(condition);
     }
     private boolean allConditionsAreMet(TimeFrameQuote timeFrameQuote) {
-        return conditions.stream().allMatch(e -> e.apply(timeFrameQuote));
+        return getConditions().stream().allMatch(e -> e.apply(timeFrameQuote));
     }
 
     protected abstract void executeOrder(Portfolio portfolio, LocalDate tradingDate, TimeFrameQuote timeFrameQuote, OrderBook orderBook);
@@ -72,5 +72,13 @@ public abstract class ConditionalOrder {
 
     public boolean isSellOrder() {
         return false;
+    }
+
+    public Optional<Function<TimeFrameQuote, Boolean>> findConditionByClass(Class targetClass) {
+        return getConditions().stream().filter(condition -> targetClass.equals(condition.getClass())).findFirst();
+    }
+
+    protected List<Function<TimeFrameQuote, Boolean>> getConditions() {
+        return conditions;
     }
 }

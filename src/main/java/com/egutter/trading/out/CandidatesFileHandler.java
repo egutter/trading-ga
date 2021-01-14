@@ -23,7 +23,7 @@ import java.util.List;
 
 public class CandidatesFileHandler {
 
-    public static final String ALL_CANDIDATES_JSON_FILE_NAME = "2020-12-10_all_candidates.json";
+    public static final String ALL_CANDIDATES_JSON_FILE_NAME = "all_candidates.json";
     private final Gson gson;
 
     public CandidatesFileHandler() {

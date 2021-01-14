@@ -31,7 +31,7 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2020, 12, 21);
+        LocalDate tradeOn = new LocalDate(2021, 1, 12);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));

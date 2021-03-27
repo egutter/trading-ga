@@ -389,6 +389,14 @@ public class StockMarket {
         return new String[]{
             "VBK",
             "SCZ",
+                // PLUG,NVAX,PENN,CZR,RUN,DAR,RARE,IIVI,LAD,RDFN,MRTX,PACB,DECK,NTRA,BLDR,ARWR,RH,CHDN,APPN,FATE
+        };
+    }
+
+    public static String[] midCap() {
+        return new String[]{
+            "IJH",
+                // GNRC,SEDG,PENN,CZR,MPWR,CGNX,TECH,PTC,CRL,CREE,MASI,FICO,AXON,MPW,RUN,MOH,CDAY,SBNY,GGG,FDS
         };
     }
 

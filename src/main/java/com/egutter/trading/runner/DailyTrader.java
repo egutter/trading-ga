@@ -1,22 +1,41 @@
 package com.egutter.trading.runner;
 
+import com.egutter.trading.finnhub.FinnhubClient;
 import com.egutter.trading.order.BuyBracketOrder;
 import com.egutter.trading.order.BuyOrderWithPendingSellOrders;
 import com.egutter.trading.out.BuyBracketOrdersFileHandler;
+import com.egutter.trading.tda.QuoteAdapter;
+import com.egutter.trading.tda.TooExpensiveOrder;
 import com.studerw.tda.client.HttpTdaClient;
 import com.studerw.tda.client.TdaClient;
 import com.studerw.tda.model.account.*;
 import com.studerw.tda.model.quote.EquityQuote;
 import com.studerw.tda.model.quote.Quote;
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.joda.time.MonthDay;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+import yahoofinance.quotes.stock.StockQuote;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DailyTrader {
+
+    private final static Logger logger = LoggerFactory.getLogger(DailyTrader.class);
 
     public static final double MINIMUM_PROFIT_EXPECTED = 1.00;
     private String accountId;
@@ -25,8 +44,7 @@ public class DailyTrader {
     private CashAccount tdaAccount;
     private LocalDate tradeOn = LocalDate.now();
     private LocalDate lastTradeAt;
-    private final static String GENERATE_TYPE = "GENERATE";
-    private final static String TRADE_TYPE = "TRADE";
+    private final static LocalDate today = LocalDate.now();
 
     public DailyTrader(TdaClient client, LocalDate tradeOn, LocalDate lastTradeAt) {
         this.client = client;
@@ -42,53 +60,99 @@ public class DailyTrader {
         this.cashAvailable = cashAvailable;
     }
 
-    public static void main2(String[] args) {
+    public static void main2(String[] args) throws IOException {
+
+
         TdaClient client = new HttpTdaClient();
-        final Quote quote = client.fetchQuote("AVGO");
+        String stock = "PYPL";
+
+
+        Order o1 = client.fetchOrder(fetchCashAccount(client).getAccountId(), 2215236405L);
+        logger.info(o1.toString());
+        final Quote quote = client.fetchQuote(stock);
         EquityQuote equityQuote = (EquityQuote) quote;
 
-        System.out.println("Ask price of AVGO: " + equityQuote.getAskPrice());
-        System.out.println("Bid price of AVGO: " + equityQuote.getBidPrice());
-        System.out.println("Close price of AVGO: " + equityQuote.getClosePrice());
-        System.out.println("Open price of AVGO: " + equityQuote.getOpenPrice());
-        System.out.println("Last price of AVGO: " + equityQuote.getLastPrice());
+        System.out.println("Stock: " + stock);
+        System.out.println("TDA");
 
+        System.out.println("Ask price: " + equityQuote.getAskPrice());
+        System.out.println("Bid price: " + equityQuote.getBidPrice());
+        System.out.println("Close price: " + equityQuote.getClosePrice());
+        System.out.println("Open price: " + equityQuote.getOpenPrice());
+        System.out.println("Last price: " + equityQuote.getLastPrice());
+        Date dateQuote = new Date(equityQuote.getQuoteTimeInLong());
+        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");;
+        System.out.println("Last time quote: " + format.format(dateQuote));
+        Date dateTrade = new Date(equityQuote.getTradeTimeInLong());
+        System.out.println("Last time trade: " + format.format(dateTrade));
+
+        Stock yahooStock = YahooFinance.get(stock);
+
+        StockQuote yahooQuote = yahooStock.getQuote();
+        System.out.println("YAHOO");
+        System.out.println("Ask price: " + yahooQuote.getAsk());
+        System.out.println("Bid price: " + yahooQuote.getBid());
+        System.out.println("Close price: " + yahooQuote.getPreviousClose());
+        System.out.println("Open price: " + yahooQuote.getOpen());
+        System.out.println("Last price: " + yahooQuote.getPrice());
+        Date yahooDateQuote = new Date(yahooQuote.getLastTradeTime().getTimeInMillis());
+        System.out.println("Last time trade: " + format.format(yahooDateQuote));
     }
 
 
     public static void main(String[] args) {
-        String generateOrTrade = TRADE_TYPE;
-        LocalDate tradeOn = new LocalDate(2021, 1, 11);
-        LocalDate lastTradeAt = new LocalDate(2021, 1, 8);
+        LocalDate tradeOn = isMonday(today) ? today.minusDays(3) : today.minusDays(1);
+        LocalDate lastTradeAt = isMonday(tradeOn) ? tradeOn.minusDays(3) : tradeOn.minusDays(1);
+
+        logger.info("Trading on "+ tradeOn + " last trade at "+ lastTradeAt);
 
         TdaClient client = new HttpTdaClient();
         DailyTrader dailyTrader = new DailyTrader(client, tradeOn, lastTradeAt);
 
-        if (generateOrTrade.equals(GENERATE_TYPE)) {
-            dailyTrader.runTraderAndGenerateOrders();
-        } else {
-            dailyTrader.tradeGeneratedOrders();
-        }
+        dailyTrader.tradeGeneratedOrders();
+    }
+
+    private static boolean isMonday(LocalDate aDate) {
+        return (aDate.dayOfWeek().get() == DateTimeConstants.MONDAY);
     }
 
     private void tradeGeneratedOrders() {
         addOcaSellLimitsForExecutedOrders();
-//        buyGeneratedOrders();
+        buyGeneratedOrders();
     }
 
     private void buyGeneratedOrders() {
         List<BuyBracketOrder> orders = new BuyBracketOrdersFileHandler(tradeOn).fromJson();
         orders.forEach(bracketOrder -> {
 
-            Order order = buildBuyTdaOrder(bracketOrder);
+            boolean holdsPosition = tdaAccount.getPositions().stream().anyMatch(position -> position.getInstrument().getSymbol().equals(bracketOrder.getStockName()));
+            if (holdsPosition) {
+                System.out.println("DO NOT BUY STOCK IN PORTFOLIO : " + bracketOrder);
+                return;
+            }
 
-            List<Object> childOrderStrategies = new ArrayList<>();
-            order.setChildOrderStrategies(childOrderStrategies);
-            buildSellStopLimitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.DAY);
+            final Quote quoteOri = client.fetchQuote(bracketOrder.getStockName());
+//            QuoteAdapter quote = new QuoteAdapter(bracketOrder.getStockName());
+            QuoteAdapter quote = new QuoteAdapter(quoteOri);
 
-            client.placeOrder(accountId, order);
+            if (isLastPriceAboveSellTarget(quote, bracketOrder)
+                    || isLastPriceBelowResistance(quote, bracketOrder) || isOpenPriceBelowLastClose(quote)) {
+                System.out.println("OUTSIDE ORDER : " + bracketOrder + " LAST PRICE " + quote.getLastPrice() + " OPEN PRICE " + quote.getOpenPrice());
+            } else {
+                try {
+                    BigDecimal orderQuantity = calculateOrderQuantity(quote);
+                    Order order = buildBuyTdaOrder(bracketOrder, orderQuantity);
+                    List<Object> childOrderStrategies = new ArrayList<>();
+                    order.setChildOrderStrategies(childOrderStrategies);
+                    buildSellStopLimitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.DAY, orderQuantity);
 
-            System.out.println("STOCK BOUGHT: " + bracketOrder.getStockName());
+                    client.placeOrder(accountId, order);
+
+                    System.out.println("STOCK BOUGHT: " + bracketOrder + " LAST PRICE " + quote.getLastPrice());
+                } catch (TooExpensiveOrder tooExpensiveOrder) {
+                    System.out.println("STOCK IS TOO EXPENSIVE. AVOID BUYING IT: " + bracketOrder);
+                }
+            }
         });
     }
 
@@ -96,36 +160,78 @@ public class DailyTrader {
         List<BuyBracketOrder> orders = new BuyBracketOrdersFileHandler(lastTradeAt).fromJson();
         orders.forEach(bracketOrder -> {
 
-            Order order = new Order();
-            order.setOrderStrategyType(OrderStrategyType.OCO);
 
-            final Quote quote = client.fetchQuote(bracketOrder.getStockName());
-            EquityQuote equityQuote = (EquityQuote) quote;
-            equityQuote.getLastPrice();
+            Optional<Position> currentPosition = tdaAccount.getPositions().stream().filter(position -> position.getInstrument().getSymbol().equals(bracketOrder.getStockName())).findFirst();
 
-            List<Object> childOrderStrategies = new ArrayList<>();
-            order.setChildOrderStrategies(childOrderStrategies);
+            if (!currentPosition.isPresent() || hasPendingOrders(bracketOrder.getStockName())) return;
 
-            buildSellGetProfitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.GOOD_TILL_CANCEL);
-            buildSellStopLimitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.GOOD_TILL_CANCEL);
+            final Quote quoteOri = client.fetchQuote(bracketOrder.getStockName());
+//            QuoteAdapter quote = new QuoteAdapter(bracketOrder.getStockName());
+            QuoteAdapter quote = new QuoteAdapter(quoteOri);
 
-            client.placeOrder(accountId, order);
+            if (isLastPriceAboveSellTarget(quote, bracketOrder) || isLastPriceBelowResistance(quote, bracketOrder)) {
+                Order order = buildSellTdaOrder(bracketOrder);
+                client.placeOrder(accountId, order);
 
-            System.out.println("STOCK OCA: " + bracketOrder.getStockName());
+                System.out.println("STOCK SOLD: " + bracketOrder);
+            } else {
+                Order order = new Order();
+                order.setOrderStrategyType(OrderStrategyType.OCO);
+
+                List<Object> childOrderStrategies = new ArrayList<>();
+                order.setChildOrderStrategies(childOrderStrategies);
+                BigDecimal orderQuantity = currentPosition.get().getLongQuantity();
+                buildSellGetProfitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.GOOD_TILL_CANCEL, orderQuantity);
+                buildSellStopLimitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.GOOD_TILL_CANCEL, orderQuantity);
+
+                System.out.println("PLACING OCA: " + bracketOrder.getStockName());
+                try {
+                    client.placeOrder(accountId, order);
+                    System.out.println("STOCK OCA: " + bracketOrder.getStockName());
+                } catch (RuntimeException e) {
+                    if (e.getMessage().contains("This order may result in an oversold/overbought position in your account.  Please check your position quantity and/or open orders.")) {
+                        System.out.println("CANNOT PLACE OCA FOR " + bracketOrder.getStockName() + " OVERSOLD");
+                    } else {
+                        throw e;
+                    }
+                }
+            }
+
         });
     }
 
-    private void buildSellGetProfitChildTdaOrder(BuyBracketOrder bracketOrder, List<Object> childOrderStrategies, Duration orderDuration) {
+    private boolean hasPendingOrders(String stockName) {
+        OrderRequest orderReq = new OrderRequest(ZonedDateTime.now().minusDays(180), ZonedDateTime.now());
+        List<Order> orders = client.fetchOrders(orderReq);
+        List<Order> pendingOrders = orders.stream().filter(order -> {
+            if (Status.WORKING.equals(order.getStatus()) && order.getOrderLegCollection().stream().anyMatch(leg -> leg.getInstrument().getSymbol().equals(stockName))) return true;
+
+            if (order.getOrderStrategyType().equals(OrderStrategyType.OCO)) {
+                return order.getChildOrderStrategies().stream().anyMatch(child -> {
+                    List<HashMap> legs = (List<HashMap>) ((HashMap)child).get("orderLegCollection");
+                    return ((HashMap)child).get("status").equals("WORKING") && legs.stream().anyMatch(leg -> {
+                        HashMap instrument = (HashMap) leg.get("instrument");
+                        return instrument.get("symbol").equals(stockName);
+                    });
+                });
+            }
+            return false;
+        }).collect(Collectors.toList());
+        return !pendingOrders.isEmpty();
+    }
+
+    private void buildSellGetProfitChildTdaOrder(BuyBracketOrder bracketOrder, List<Object> childOrderStrategies, Duration orderDuration, BigDecimal orderQuantity) {
         Order childOrder = new Order();
-        childOrder.setOrderType(OrderType.LIMIT);
         childOrder.setSession(Session.NORMAL);
-        childOrder.setDuration(orderDuration);
         childOrder.setOrderStrategyType(OrderStrategyType.SINGLE);
+
+        childOrder.setDuration(orderDuration);
+        childOrder.setOrderType(OrderType.LIMIT);
         childOrder.setPrice(bracketOrder.getSellTargetPrice());
 
         OrderLegCollection childOlc = new OrderLegCollection();
         childOlc.setInstruction(OrderLegCollection.Instruction.SELL);
-        childOlc.setQuantity(new BigDecimal("1.0"));
+        childOlc.setQuantity(orderQuantity);
         childOrder.getOrderLegCollection().add(childOlc);
 
         Instrument instrument = new EquityInstrument();
@@ -135,17 +241,18 @@ public class DailyTrader {
         childOrderStrategies.add(childOrder);
     }
 
-    private void buildSellStopLimitChildTdaOrder(BuyBracketOrder bracketOrder, List<Object> childOrderStrategies, Duration orderDuration) {
+    private void buildSellStopLimitChildTdaOrder(BuyBracketOrder bracketOrder, List<Object> childOrderStrategies, Duration orderDuration, BigDecimal orderQuantity) {
         Order childOrder = new Order();
-        childOrder.setOrderType(OrderType.STOP);
         childOrder.setSession(Session.NORMAL);
-        childOrder.setDuration(orderDuration);
         childOrder.setOrderStrategyType(OrderStrategyType.SINGLE);
+
+        childOrder.setDuration(orderDuration);
+        childOrder.setOrderType(OrderType.STOP);
         childOrder.setStopPrice(bracketOrder.getSellResistancePrice());
 
         OrderLegCollection childOlc = new OrderLegCollection();
         childOlc.setInstruction(OrderLegCollection.Instruction.SELL);
-        childOlc.setQuantity(new BigDecimal("1.0"));
+        childOlc.setQuantity(orderQuantity);
         childOrder.getOrderLegCollection().add(childOlc);
 
         Instrument instrument = new EquityInstrument();
@@ -155,7 +262,7 @@ public class DailyTrader {
         childOrderStrategies.add(childOrder);
     }
 
-    public Order buildBuyTdaOrder(BuyBracketOrder bracketOrder) {
+    public Order buildBuyTdaOrder(BuyBracketOrder bracketOrder, BigDecimal quantity) throws TooExpensiveOrder {
         Order order = new Order();
         order.setOrderType(OrderType.MARKET);
         order.setSession(Session.NORMAL);
@@ -164,6 +271,42 @@ public class DailyTrader {
 
         OrderLegCollection olc = new OrderLegCollection();
         olc.setInstruction(OrderLegCollection.Instruction.BUY);
+        olc.setQuantity(quantity);
+        order.getOrderLegCollection().add(olc);
+
+        Instrument instrument = new EquityInstrument();
+        instrument.setSymbol(bracketOrder.getStockName());
+        olc.setInstrument(instrument);
+        return order;
+    }
+
+    private BigDecimal calculateOrderQuantity(QuoteAdapter quote) throws TooExpensiveOrder {
+        BigDecimal oneHundred = new BigDecimal(100.0);
+        BigDecimal twoHundred = new BigDecimal(200.0);
+        BigDecimal threeHundred = new BigDecimal(300.0);
+        BigDecimal oneThousand = new BigDecimal(1000.0);
+        BigDecimal lastPrice = quote.getLastPrice();
+        if (lastPrice.compareTo(oneHundred) <= 0) {
+            return new BigDecimal("5.0");
+        } else if (lastPrice.compareTo(twoHundred) <= 0) {
+            return new BigDecimal("3.0");
+        } else if (lastPrice.compareTo(threeHundred) <= 0) {
+            return new BigDecimal("2.0");
+        } else if (lastPrice.compareTo(oneThousand) <= 0) {
+            return new BigDecimal("1.0");
+        }
+        throw new TooExpensiveOrder("The stock is too expensive");
+    }
+
+    public Order buildSellTdaOrder(BuyBracketOrder bracketOrder) {
+        Order order = new Order();
+        order.setOrderType(OrderType.MARKET);
+        order.setSession(Session.NORMAL);
+        order.setDuration(Duration.DAY);
+        order.setOrderStrategyType(OrderStrategyType.SINGLE);
+
+        OrderLegCollection olc = new OrderLegCollection();
+        olc.setInstruction(OrderLegCollection.Instruction.SELL);
         olc.setQuantity(new BigDecimal("1.0"));
         order.getOrderLegCollection().add(olc);
 
@@ -173,25 +316,21 @@ public class DailyTrader {
         return order;
     }
 
-
-    public void runTraderAndGenerateOrders() {
-        LocalDate fromDate = new LocalDate(2020, 1, 1);
-        OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
-        Map<String, List<BuyOrderWithPendingSellOrders>> buyOrders = runner.run(tradeOn);
-        generateDailyBestBuyOrdersFile(buyOrders);
-        System.out.println(runner.runOutput("\n"));
-    }
-
     public void generateDailyBestBuyOrdersFile(Map<String, List<BuyOrderWithPendingSellOrders>> buyOrders) {
         writeToFile(buildBestBuyOrders(buyOrders));
 
     }
     public List<BuyBracketOrder> buildBestBuyOrders(Map<String, List<BuyOrderWithPendingSellOrders>> buyOrders) {
         List<BuyBracketOrder> ordersToTrade = new ArrayList<>();
+        FinnhubClient finnhubClient = new FinnhubClient();
         buyOrders.entrySet().stream().forEach(entry -> {
             Optional<BuyOrderWithPendingSellOrders> bestOrder = bestSellOrder(entry.getValue());
             bestOrder.ifPresent(order -> ordersToTrade.add(new BuyBracketOrder(entry.getKey(),
-                    order, orderExpectedReturn(order), orderMaxLoss(order))));
+                    order, orderExpectedReturn(order), orderMaxLoss(order), order.getCandidate(),
+                    finnhubClient.newsSentimentFor(entry.getKey()),
+                    finnhubClient.supportResistanceFor(entry.getKey()),
+                    finnhubClient.aggregateIndicator(entry.getKey())
+            )));
         });
         return ordersToTrade;
     }
@@ -227,8 +366,8 @@ public class DailyTrader {
 
     private BigDecimal orderPercentage(BigDecimal dividend, BigDecimal divisor) {
         MathContext mc3 = new MathContext(6, RoundingMode.HALF_EVEN);
-        BigDecimal orderMaxLoss = dividend.divide(divisor, mc3).multiply(new BigDecimal(100.0));
-        return orderMaxLoss.subtract(BigDecimal.ONE);
+        BigDecimal orderMaxLoss = dividend.divide(divisor, mc3).subtract(BigDecimal.ONE);
+        return orderMaxLoss.multiply(new BigDecimal(100.0));
     }
 
     private void writeToFile(List<BuyBracketOrder> orders) {
@@ -244,4 +383,17 @@ public class DailyTrader {
         CashAccount myAccount = (CashAccount) accounts.get(0);
         return myAccount;
     }
+
+    private boolean isLastPriceAboveSellTarget(QuoteAdapter quote, BuyBracketOrder order) {
+        return quote.getLastPrice().compareTo(order.getSellTargetPrice()) > 0;
+    }
+
+    private boolean isLastPriceBelowResistance(QuoteAdapter quote, BuyBracketOrder order) {
+        return quote.getLastPrice().compareTo(order.getSellResistancePrice()) < 0;
+    }
+
+    private boolean isOpenPriceBelowLastClose(QuoteAdapter quote) {
+        return quote.getOpenPrice().compareTo(quote.getLastClosePrice()) < 0;
+    }
+
 }

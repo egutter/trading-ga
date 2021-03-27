@@ -6,6 +6,8 @@ import com.egutter.trading.out.adapters.BitStringGsonAdapter;
 import com.egutter.trading.out.adapters.ClassTypeAdapterFactory;
 import com.egutter.trading.out.adapters.JodaLocalDateGsonAdapter;
 import com.egutter.trading.out.adapters.MarketOrderGsonAdapter;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +20,10 @@ import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BuyBracketOrdersFileHandler {
@@ -35,7 +39,7 @@ public class BuyBracketOrdersFileHandler {
 
     public BuyBracketOrdersFileHandler(LocalDate tradingDate) {
         this.tradingDate = tradingDate;
-        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
+        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting().addSerializationExclusionStrategy(buildExclusionStrategy());
         gsonBuilder.registerTypeAdapterFactory(new ClassTypeAdapterFactory());
         gsonBuilder.registerTypeAdapter(BitString.class, new BitStringGsonAdapter());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new JodaLocalDateGsonAdapter());
@@ -48,11 +52,14 @@ public class BuyBracketOrdersFileHandler {
     }
 
     public List<BuyBracketOrder> fromJson() {
+        String fileName = buildFilePath();
         try {
-            String fileName = buildFilePath();
             Reader reader = Files.newBufferedReader(Paths.get(fileName));
             Type listType = new TypeToken<ArrayList<BuyBracketOrder>>(){}.getType();
             return gson.fromJson(reader, listType);
+        } catch (NoSuchFileException e) {
+            System.out.println("No file to open " + fileName);
+            return new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -73,5 +80,19 @@ public class BuyBracketOrdersFileHandler {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    private ExclusionStrategy buildExclusionStrategy() {
+        return new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes fieldAttributes) {
+                return fieldAttributes.getName().equals("stockSymbols");
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> aClass) {
+                return false;
+            }
+        };
     }
 }

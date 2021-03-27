@@ -31,7 +31,7 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 1, 12);
+        LocalDate tradeOn = new LocalDate(2021, 1, 28);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -71,6 +71,7 @@ public class OneDayCandidateRunner {
                         buyOrderWithPendingSellOrders.keySet().stream().forEach(stockName -> {
                             BuyOrderWithPendingSellOrders aBuyOrderWithPendingSells = buyOrderWithPendingSellOrders.get(stockName);
                             aBuyOrderWithPendingSells.setStockGroup(candidateGroup);
+                            aBuyOrderWithPendingSells.setCandidate(candidate.toString());
                             if (allBuyOrderWithPendingSellOrders.containsKey(stockName)) {
                                 allBuyOrderWithPendingSellOrders.get(stockName).add(aBuyOrderWithPendingSells);
                             } else {
@@ -88,7 +89,7 @@ public class OneDayCandidateRunner {
         resultBuffer.add("==========================================");
         resultBuffer.add("ALL STOCKS BOUGHT");
         countStockBought.forEach((stockName, pair) -> {
-            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNames(stockName, pair.getSecond()));
+            resultBuffer.add("Stock " + stockName + " count " + pair.getFirst() + " Candidates: " + candidateListNames(pair.getSecond()));
         });
         resultBuffer.add("==========================================");
 
@@ -99,7 +100,7 @@ public class OneDayCandidateRunner {
         return candidate.toString();
     }
 
-    private String candidateListNames(String stockName, List<Candidate> candidates) {
+    private String candidateListNames(List<Candidate> candidates) {
         return candidateListNamesWithNameFunction(candidates, candidate -> candidateName(candidate));
     }
 

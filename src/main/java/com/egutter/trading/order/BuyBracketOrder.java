@@ -1,5 +1,8 @@
 package com.egutter.trading.order;
 
+import com.egutter.trading.finnhub.AggregateIndicator;
+import com.egutter.trading.finnhub.NewsSentiment;
+import com.egutter.trading.finnhub.SupportResistance;
 import com.egutter.trading.stock.StockGroup;
 
 import java.math.BigDecimal;
@@ -10,11 +13,17 @@ public class BuyBracketOrder {
     private final BigDecimal sellResistancePrice;
     private final StockGroup stockGroup;
     private final BigDecimal closePrice;
+    private String candidate;
+    private NewsSentiment newsSentiment;
+    private SupportResistance supportResistance;
+    private AggregateIndicator aggregateIndicator;
     private BigDecimal maxLoss;
     private String stockName;
     private BigDecimal expectedReturn;
 
-    public BuyBracketOrder(String stockName, BuyOrderWithPendingSellOrders buyOrderWithPendingSellOrders, BigDecimal expectedReturn, BigDecimal maxLoss) {
+    public BuyBracketOrder(String stockName, BuyOrderWithPendingSellOrders buyOrderWithPendingSellOrders,
+                           BigDecimal expectedReturn, BigDecimal maxLoss, String candidate,
+                           NewsSentiment newsSentiment, SupportResistance supportResistance, AggregateIndicator aggregateIndicator) {
         this.stockName = stockName;
         this.expectedReturn = expectedReturn;
         this.stockGroup = buyOrderWithPendingSellOrders.getStockGroup();
@@ -22,6 +31,10 @@ public class BuyBracketOrder {
         this.sellResistancePrice = buyOrderWithPendingSellOrders.getSellResistancePrice().setScale(2, RoundingMode.HALF_EVEN);
         this.maxLoss = maxLoss;
         this.closePrice = buyOrderWithPendingSellOrders.getMarketOrder().getPrice();
+        this.candidate = candidate;
+        this.newsSentiment = newsSentiment;
+        this.supportResistance = supportResistance;
+        this.aggregateIndicator = aggregateIndicator;
     }
 
     public BigDecimal getSellTargetPrice() {
@@ -42,5 +55,17 @@ public class BuyBracketOrder {
 
     public String getStockName() {
         return stockName;
+    }
+
+    @Override
+    public String toString() {
+        return "BuyBracketOrder{" +
+                ", stockName='" + stockName + '\'' +
+                "sellTargetPrice=" + sellTargetPrice +
+                ", sellResistancePrice=" + sellResistancePrice +
+                ", lastClosePrice=" + closePrice     +
+                ", expectedReturn=" + expectedReturn +
+                ", candidate=" + candidate +
+                '}';
     }
 }

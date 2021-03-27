@@ -168,12 +168,12 @@ public class OneCandidateRunner {
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 
-//        String[] sector = StockMarket.innovationSector();
-//////        String[] nvda = new String[]{"NVDA"};
-//        runOneSectorWithOneCandidate(fromDate, sector, "100101001010110010010011110100100110011",
-//                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator .class));
+        String[] stocks = StockMarket.innovationSector();
+//        String[] stocks = new String[]{"SPY"};
+        runOneSectorWithOneCandidate(fromDate, stocks, "110010011110000010011000111111110100011",
+                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class));
 
-        runAllSectorsOnAllCandidates(fromDate);
+//        runAllSectorsOnAllCandidates(fromDate);
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
@@ -184,16 +184,10 @@ public class OneCandidateRunner {
         BitString chromosome = new BitString(candidateString);
         OneCandidateRunner runner = new OneCandidateRunner(stockMarket, chromosome, tradingDecisionGenerators);
         runner.run();
-        Candidate candidate = new Candidate("INNOVATION_SECTOR", "100101001010110010010011110100100110011",
-                asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
-                asList(
-                        new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector())
-                ));
-        appendToCandidates(selectedCandidates, runner, candidate, new StockGroup(INNOVATION_SECTOR, "1.00(4/0)", innovationSector()), fromDate, toDate);
         System.out.println("==========================================");
         System.out.println("******************************************");
         System.out.println("==========================================");
-        writeToFile(selectedCandidates);
+//        writeToFile(selectedCandidates);
     }
 
     private static void runAllSectorsOnAllCandidates(LocalDate fromDate) {

@@ -16,6 +16,7 @@ public class BuyOrderWithPendingSellOrders {
     private final MarketOrder order;
     private transient final List<ConditionalOrder> pendingOrders = new ArrayList<ConditionalOrder>();
     private StockGroup stockGroup;
+    private String candidate;
 
     public BuyOrderWithPendingSellOrders(MarketOrder order) {
         this.order = order;
@@ -70,4 +71,11 @@ public class BuyOrderWithPendingSellOrders {
         return pendingOrders.stream().map(pendingOrder -> pendingOrder.findConditionByClass(targetClass)).filter(Optional::isPresent).findFirst().get().get();
     }
 
+    public void setCandidate(String candidate) {
+        this.candidate = candidate;
+    }
+
+    public String getCandidate() {
+        return candidate;
+    }
 }

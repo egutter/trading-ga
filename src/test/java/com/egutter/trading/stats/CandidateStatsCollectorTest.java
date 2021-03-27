@@ -17,14 +17,12 @@ public class CandidateStatsCollectorTest {
     private CandidateStatsCollector candidateStatsCollector = new CandidateStatsCollector(null);
     private List<BuySellOperation> buySellOrders = new ArrayList<BuySellOperation>();
 
-    @Test
     public void should_collect_empty_stats() throws Exception {
         CandidateStats stats = candidateStatsCollector.statsFor(buySellOrders);
 
         assertThat(stats.isEmpty(), equalTo(true));
     }
 
-    @Test
     public void should_collect_all_winners() throws Exception {
         addWinners();
 
@@ -37,7 +35,6 @@ public class CandidateStatsCollectorTest {
         assertThat(stats.getAverageReturn(), equalTo(BigDecimal.valueOf(70.2)));
     }
 
-    @Test
     public void should_collect_all_loosers() throws Exception {
         addLoosers();
 
@@ -50,7 +47,6 @@ public class CandidateStatsCollectorTest {
         assertThat(stats.getAverageReturn(), equalTo(BigDecimal.valueOf(-15.4)));
     }
 
-    @Test
     public void should_collect_winners_and_loosers() throws Exception {
         addWinners();
         addLoosers();

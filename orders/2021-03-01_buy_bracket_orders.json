@@ -1,0 +1,120 @@
+[
+  {
+    "sellTargetPrice": 495.13,
+    "sellResistancePrice": 455.25,
+    "stockGroup": {
+      "name": "TECH",
+      "description": "0.96(24/1)",
+      "percentageOfOrdersWon": 0.96,
+      "ordersWon": 24,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 489.579987,
+    "candidate": "NVDA: 111101100010000111110000000111000011011.BB.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 10,
+        "buzz": 0.7142,
+        "weeklyAverage": 8.25
+      },
+      "companyNewsScore": 0.7946,
+      "sectorAverageBullishPercent": 0.665,
+      "sectorAverageNewsScore": 0.5311,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "AVGO"
+    },
+    "supportResistance": {
+      "levels": [
+        303.0,
+        350.0,
+        398.28,
+        442.24,
+        495.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.253399,
+        "trending": false
+      }
+    },
+    "maxLoss": 7.54100,
+    "stockName": "AVGO",
+    "expectedReturn": 1.13400
+  },
+  {
+    "sellTargetPrice": 216.17,
+    "sellResistancePrice": 200.08,
+    "stockGroup": {
+      "name": "DEVELOP ETF MARKETS",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 205.220001,
+    "candidate": "VGLT: 010001001111010001011000000001100111000.MACD.ADX",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "VTI"
+    },
+    "supportResistance": {
+      "levels": [
+        151.35,
+        174.62,
+        192.82,
+        208.39
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.210959,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.56900,
+    "stockName": "VTI",
+    "expectedReturn": 5.33800
+  }
+]

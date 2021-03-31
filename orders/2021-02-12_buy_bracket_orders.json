@@ -1,0 +1,147 @@
+[
+  {
+    "sellTargetPrice": 386.39,
+    "sellResistancePrice": 325.95,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "SQ",
+        "Z",
+        "SPLK",
+        "TWLO",
+        "WORK",
+        "TSLA",
+        "TWOU",
+        "XLNX",
+        "SPOT",
+        "CRNC",
+        "ZM",
+        "NET",
+        "IRBT",
+        "DT",
+        "ALB",
+        "W",
+        "ETSY",
+        "VMW",
+        "SHOP",
+        "FPX"
+      ]
+    },
+    "closePrice": 339.700012,
+    "candidate": "SECTORS ETF: 101011000101011110110010010101000100000.AROO.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 18,
+        "buzz": 0.6605,
+        "weeklyAverage": 27.25
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6502,
+      "sectorAverageNewsScore": 0.533,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "SPOT"
+    },
+    "supportResistance": {
+      "levels": [
+        177.21,
+        228.11,
+        275.85,
+        319.42,
+        370.95
+      ]
+    },
+    "maxLoss": 4.21800,
+    "stockName": "SPOT",
+    "expectedReturn": 13.74600
+  },
+  {
+    "sellTargetPrice": 133.54,
+    "sellResistancePrice": 118.60,
+    "stockGroup": {
+      "name": "INDUSTRIAL",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLI",
+        "UNP",
+        "HON",
+        "BA",
+        "RTX",
+        "LMT",
+        "MMM",
+        "UPS",
+        "CAT",
+        "GE",
+        "CSX",
+        "ITW",
+        "NOC",
+        "DE",
+        "NSC",
+        "ROP",
+        "LHX",
+        "WM",
+        "EMR",
+        "GD",
+        "ETN"
+      ]
+    },
+    "closePrice": 123.980003,
+    "candidate": "INDUSTRIAL_SECTOR: 100010111100110000010001110101100101010.MACD.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 2,
+        "buzz": 0.1904,
+        "weeklyAverage": 10.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6145,
+      "sectorAverageNewsScore": 0.5164,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "ETN"
+    },
+    "supportResistance": {
+      "levels": [
+        82.44,
+        95.25,
+        106.64,
+        117.13,
+        130.0
+      ]
+    },
+    "maxLoss": 4.53600,
+    "stockName": "ETN",
+    "expectedReturn": 7.70900
+  }
+]

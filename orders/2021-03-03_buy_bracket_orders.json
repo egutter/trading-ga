@@ -1,0 +1,58 @@
+[
+  {
+    "sellTargetPrice": 104.06,
+    "sellResistancePrice": 101.72,
+    "stockGroup": {
+      "name": "VCLT",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 102.16,
+    "candidate": "PYPL: 101100010000111011111001100010110100010.RSI.ADX",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "VCLT"
+    },
+    "supportResistance": {
+      "levels": [
+        100.36,
+        100.36,
+        105.9001,
+        108.31,
+        110.52,
+        113.29
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 8,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 45.88174,
+        "trending": true
+      }
+    },
+    "maxLoss": 0.43300,
+    "stockName": "VCLT",
+    "expectedReturn": 1.86000
+  }
+]

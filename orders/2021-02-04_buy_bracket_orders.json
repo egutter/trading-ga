@@ -1,0 +1,86 @@
+[
+  {
+    "sellTargetPrice": 134.98,
+    "sellResistancePrice": 129.56,
+    "stockGroup": {
+      "name": "DEVELOP ADR",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "SAP",
+        "TM",
+        "NVS",
+        "UBS",
+        "AZN",
+        "GSK",
+        "SNE"
+      ]
+    },
+    "closePrice": 132.309998,
+    "candidate": "DEVELOP ADR: 011010000010100000010100010000101101000.StochasticOscillatorGenerator.MACD",
+    "maxLoss": 2.12300,
+    "stockName": "SAP",
+    "expectedReturn": 2.01800
+  },
+  {
+    "sellTargetPrice": 291.60,
+    "sellResistancePrice": 267.25,
+    "stockGroup": {
+      "name": "CONS DISC",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLY",
+        "AMZN",
+        "HD",
+        "MCD",
+        "NKE",
+        "LOW",
+        "SBUX",
+        "BKNG",
+        "TJX",
+        "TGT",
+        "DG",
+        "EBAY",
+        "GM",
+        "ROST",
+        "ORLY",
+        "YUM",
+        "AZO",
+        "CMG",
+        "MAR",
+        "F",
+        "HLT"
+      ]
+    },
+    "closePrice": 278.820007,
+    "candidate": "NVDA: 111011000110100010011000000101100101010.MACD.AROO",
+    "maxLoss": 4.32800,
+    "stockName": "HD",
+    "expectedReturn": 4.58400
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "sellTargetPrice": 123.66,
+    "sellResistancePrice": 106.89,
+    "stockGroup": {
+      "name": "GREEN ETF",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "PBW",
+        "ICLN",
+        "TAN",
+        "QCLN",
+        "FAN"
+      ]
+    },
+    "closePrice": 114.0,
+    "maxLoss": 105.65200,
+    "stockName": "TAN",
+    "expectedReturn": 107.46900
+  },
+  {
+    "sellTargetPrice": 261.92,
+    "sellResistancePrice": 235.03,
+    "stockGroup": {
+      "name": "PYPL",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "PYPL"
+      ]
+    },
+    "closePrice": 247.25,
+    "maxLoss": 104.19700,
+    "stockName": "PYPL",
+    "expectedReturn": 104.93500
+  }
+]

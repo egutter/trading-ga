@@ -1,0 +1,66 @@
+[
+  {
+    "sellTargetPrice": 144.79,
+    "sellResistancePrice": 133.28,
+    "stockGroup": {
+      "name": "SPLK",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 133.839996,
+    "candidate": "DEVELOP ADR: 111100100101110001110000110000100010111.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 4,
+        "buzz": 0.4102,
+        "weeklyAverage": 9.75
+      },
+      "companyNewsScore": 0.4341,
+      "sectorAverageBullishPercent": 0.6648,
+      "sectorAverageNewsScore": 0.5305,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "SPLK"
+    },
+    "supportResistance": {
+      "levels": [
+        130.82,
+        152.81,
+        178.18,
+        202.53,
+        225.8944
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 35.83087,
+        "trending": true
+      }
+    },
+    "maxLoss": 0.42000,
+    "stockName": "SPLK",
+    "expectedReturn": 8.17900
+  }
+]

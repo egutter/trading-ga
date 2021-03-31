@@ -1,0 +1,50 @@
+[
+  {
+    "sellTargetPrice": 1788.47,
+    "sellResistancePrice": 1722.88,
+    "stockGroup": {
+      "name": "COMM",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "XLC",
+        "FB",
+        "GOOGL",
+        "GOOG",
+        "TMUS",
+        "EA",
+        "ATVI",
+        "NFLX",
+        "DIS",
+        "CHTR",
+        "CMCSA",
+        "VZ",
+        "TWTR",
+        "T",
+        "TTWO",
+        "VIAC",
+        "OMC",
+        "FOXA",
+        "CTL",
+        "DISH",
+        "DISCK"
+      ]
+    },
+    "closePrice": 1756.290039,
+    "maxLoss": 100.93900,
+    "stockName": "GOOGL",
+    "expectedReturn": 100.83200
+  }
+]

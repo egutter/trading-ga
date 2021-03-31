@@ -1,0 +1,178 @@
+[
+  {
+    "sellTargetPrice": 647.10,
+    "sellResistancePrice": 515.73,
+    "stockGroup": {
+      "name": "NFLX",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "NFLX"
+      ]
+    },
+    "closePrice": 538.599976,
+    "maxLoss": 4.43400,
+    "stockName": "NFLX",
+    "expectedReturn": 20.14500
+  },
+  {
+    "sellTargetPrice": 276.37,
+    "sellResistancePrice": 229.94,
+    "stockGroup": {
+      "name": "PYPL",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "PYPL"
+      ]
+    },
+    "closePrice": 237.789993,
+    "maxLoss": 3.41400,
+    "stockName": "PYPL",
+    "expectedReturn": 16.22700
+  },
+  {
+    "sellTargetPrice": 573.32,
+    "sellResistancePrice": 516.71,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "NVDA"
+      ]
+    },
+    "closePrice": 522.039978,
+    "maxLoss": 1.03200,
+    "stockName": "NVDA",
+    "expectedReturn": 9.82200
+  },
+  {
+    "sellTargetPrice": 73.31,
+    "sellResistancePrice": 53.59,
+    "stockGroup": {
+      "name": "INTC",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "INTC"
+      ]
+    },
+    "closePrice": 56.07,
+    "maxLoss": 4.62800,
+    "stockName": "INTC",
+    "expectedReturn": 30.73800
+  },
+  {
+    "sellTargetPrice": 392.15,
+    "sellResistancePrice": 372.01,
+    "stockGroup": {
+      "name": "SECTORS ETF",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "SPY",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLY",
+        "XLV",
+        "XLP",
+        "XLC",
+        "XBI"
+      ]
+    },
+    "closePrice": 377.630005,
+    "maxLoss": 1.51100,
+    "stockName": "SPY",
+    "expectedReturn": 3.84400
+  },
+  {
+    "sellTargetPrice": 230.30,
+    "sellResistancePrice": 224.78,
+    "stockGroup": {
+      "name": "CRM",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "CRM"
+      ]
+    },
+    "closePrice": 226.5,
+    "maxLoss": 0.76500,
+    "stockName": "CRM",
+    "expectedReturn": 1.67800
+  }
+]

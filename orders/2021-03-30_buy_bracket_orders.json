@@ -1,0 +1,120 @@
+[
+  {
+    "sellTargetPrice": 36.62,
+    "sellResistancePrice": 34.64,
+    "stockGroup": {
+      "name": "DEVELOP ETF MARKETS",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 34.919998,
+    "candidate": "COMM: 011011001110100010000000010110100111010.AROO.MFI",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "EWQ"
+    },
+    "supportResistance": {
+      "levels": [
+        26.29,
+        30.02,
+        33.275,
+        35.68
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 12.6363125,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.80800,
+    "stockName": "EWQ",
+    "expectedReturn": 4.86800
+  },
+  {
+    "sellTargetPrice": 183.10,
+    "sellResistancePrice": 167.11,
+    "stockGroup": {
+      "name": "COMM",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 177.089996,
+    "candidate": "VGLT: 101001101000000100101011010000100011000.ChaikinOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 1,
+        "buzz": 0.1212,
+        "weeklyAverage": 8.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6341,
+      "sectorAverageNewsScore": 0.5284,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "TTWO"
+    },
+    "supportResistance": {
+      "levels": [
+        148.88,
+        162.98,
+        177.53,
+        193.75,
+        214.91
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 30.164337,
+        "trending": true
+      }
+    },
+    "maxLoss": 5.97200,
+    "stockName": "TTWO",
+    "expectedReturn": 3.39200
+  }
+]

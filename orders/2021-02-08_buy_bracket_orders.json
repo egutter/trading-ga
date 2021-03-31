@@ -1,0 +1,31 @@
+[
+  {
+    "sellTargetPrice": 149.51,
+    "sellResistancePrice": 133.61,
+    "stockGroup": {
+      "name": "AAPL",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "AAPL"
+      ]
+    },
+    "closePrice": 136.910004,
+    "candidate": "SQ: 101101010110100011000100100000111110011.ChaikinOscillatorGenerator.ADX",
+    "maxLoss": 2.47000,
+    "stockName": "AAPL",
+    "expectedReturn": 9.20000
+  }
+]

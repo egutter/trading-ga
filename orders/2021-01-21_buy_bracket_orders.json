@@ -1,0 +1,50 @@
+[
+  {
+    "sellTargetPrice": 403.67,
+    "sellResistancePrice": 319.75,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "SQ",
+        "Z",
+        "SPLK",
+        "TWLO",
+        "WORK",
+        "TSLA",
+        "TWOU",
+        "XLNX",
+        "SPOT",
+        "CRNC",
+        "ZM",
+        "NET",
+        "IRBT",
+        "DT",
+        "ALB",
+        "W",
+        "ETSY",
+        "VMW",
+        "SHOP",
+        "FPX"
+      ]
+    },
+    "closePrice": 348.299988,
+    "candidate": "NVDA: 110010011110000010011000111111110100011.MACD.UltimateOscillatorGenerator",
+    "maxLoss": 8.92900,
+    "stockName": "SPOT",
+    "expectedReturn": 15.89700
+  }
+]

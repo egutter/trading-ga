@@ -1,0 +1,257 @@
+[
+  {
+    "sellTargetPrice": 1204.99,
+    "sellResistancePrice": 1093.03,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 1159.0,
+    "candidate": "AMZN: 010000100110100010010000010000000111011.MACD.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 23,
+        "buzz": 0.4742,
+        "weeklyAverage": 48.5
+      },
+      "companyNewsScore": 0.7911,
+      "sectorAverageBullishPercent": 0.6555,
+      "sectorAverageNewsScore": 0.5447,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "SHOP"
+    },
+    "supportResistance": {
+      "levels": [
+        839.4,
+        990.5,
+        1115.99,
+        1285.185,
+        1499.75
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 31.602457,
+        "trending": true
+      }
+    },
+    "maxLoss": 6.03500,
+    "stockName": "SHOP",
+    "expectedReturn": 3.96800
+  },
+  {
+    "sellTargetPrice": 539.06,
+    "sellResistancePrice": 506.59,
+    "stockGroup": {
+      "name": "NFLX",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 520.25,
+    "candidate": "AAPL: 101100110100011110010101011010100111101.BB.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 122,
+        "buzz": 1.3224,
+        "weeklyAverage": 92.25
+      },
+      "companyNewsScore": 0.5714,
+      "sectorAverageBullishPercent": 0.6025,
+      "sectorAverageNewsScore": 0.5247,
+      "sentiment": {
+        "bearishPercent": 0.3334,
+        "bullishPercent": 0.6666
+      },
+      "symbol": "NFLX"
+    },
+    "supportResistance": {
+      "levels": [
+        458.6,
+        477.5101,
+        507.13,
+        536.37,
+        593.2877
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 8,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 23.413044,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.69600,
+    "stockName": "NFLX",
+    "expectedReturn": 3.61600
+  },
+  {
+    "sellTargetPrice": 2122.44,
+    "sellResistancePrice": 2019.33,
+    "stockGroup": {
+      "name": "GOOGL",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 2054.439941,
+    "candidate": "GREEN ETF: 000110010000101110111111011110000111000.StochasticOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 171,
+        "buzz": 0.8018,
+        "weeklyAverage": 213.25
+      },
+      "companyNewsScore": 0.3181,
+      "sectorAverageBullishPercent": 0.6713,
+      "sectorAverageNewsScore": 0.5396,
+      "sentiment": {
+        "bearishPercent": 0.5883,
+        "bullishPercent": 0.4117
+      },
+      "symbol": "GOOGL"
+    },
+    "supportResistance": {
+      "levels": [
+        1402.15,
+        1588.42,
+        1843.83,
+        2145.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.341343,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.73900,
+    "stockName": "GOOGL",
+    "expectedReturn": 3.31000
+  },
+  {
+    "sellTargetPrice": 535.82,
+    "sellResistancePrice": 503.60,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 527.650024,
+    "candidate": "NVDA: 001000100111110010101011001111000010001.MACD.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 44,
+        "buzz": 0.704,
+        "weeklyAverage": 62.5
+      },
+      "companyNewsScore": 0.88,
+      "sectorAverageBullishPercent": 0.6713,
+      "sectorAverageNewsScore": 0.5396,
+      "sentiment": {
+        "bearishPercent": 0.0834,
+        "bullishPercent": 0.9166
+      },
+      "symbol": "NVDA"
+    },
+    "supportResistance": {
+      "levels": [
+        391.08,
+        431.83,
+        492.0,
+        538.56,
+        614.9
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 8,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 27.399006,
+        "trending": true
+      }
+    },
+    "maxLoss": 4.77600,
+    "stockName": "NVDA",
+    "expectedReturn": 1.54800
+  }
+]

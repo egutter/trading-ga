@@ -1,0 +1,174 @@
+[
+  {
+    "sellTargetPrice": 211.66,
+    "sellResistancePrice": 199.36,
+    "stockGroup": {
+      "name": "DEVELOP ETF MARKETS",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 200.880005,
+    "candidate": "CSCO: 101100000110011001111110000011000110011.MACD.MFI",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "VTI"
+    },
+    "supportResistance": {
+      "levels": [
+        151.35,
+        174.62,
+        192.82,
+        208.39
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 6,
+          "sell": 5,
+          "neutral": 6
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 14.257592,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.76200,
+    "stockName": "VTI",
+    "expectedReturn": 5.36700
+  },
+  {
+    "sellTargetPrice": 304.93,
+    "sellResistancePrice": 276.37,
+    "stockGroup": {
+      "name": "SMALL CAP",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 280.350006,
+    "candidate": "EMERGENT: 100110110010111001010100101100011011100.MACD.RSI",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "VBK"
+    },
+    "supportResistance": {
+      "levels": [
+        192.5,
+        226.01,
+        263.66,
+        304.9299
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 6,
+          "sell": 5,
+          "neutral": 6
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 22.142767,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.44000,
+    "stockName": "VBK",
+    "expectedReturn": 8.76800
+  },
+  {
+    "sellTargetPrice": 249.50,
+    "sellResistancePrice": 229.01,
+    "stockGroup": {
+      "name": "CRM",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 231.080002,
+    "candidate": "INNOVATION_SECTOR: 011110000000011010000011011011111110010.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 51,
+        "buzz": 1.4676,
+        "weeklyAverage": 34.75
+      },
+      "companyNewsScore": 0.5384,
+      "sectorAverageBullishPercent": 0.6606,
+      "sectorAverageNewsScore": 0.526,
+      "sentiment": {
+        "bearishPercent": 0.3637,
+        "bullishPercent": 0.6363
+      },
+      "symbol": "CRM"
+    },
+    "supportResistance": {
+      "levels": [
+        180.0,
+        198.07,
+        223.75,
+        248.77,
+        284.5
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 7,
+          "sell": 4,
+          "neutral": 6
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 23.838085,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.90400,
+    "stockName": "CRM",
+    "expectedReturn": 7.97100
+  }
+]

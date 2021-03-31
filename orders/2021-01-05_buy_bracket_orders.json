@@ -1,0 +1,338 @@
+[
+  {
+    "sellTargetPrice": 244.25,
+    "sellResistancePrice": 227.53,
+    "stockGroup": {
+      "name": "PYPL",
+      "description": "1.00(13/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 13,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "PYPL"
+      ]
+    },
+    "closePrice": 234.910004,
+    "candidate": "PYPL: 000101100000100010010111110001101010111.StochasticOscillatorGenerator.RSI",
+    "maxLoss": 3.24100,
+    "stockName": "PYPL",
+    "expectedReturn": 3.97600
+  },
+  {
+    "sellTargetPrice": 116.17,
+    "sellResistancePrice": 111.11,
+    "stockGroup": {
+      "name": "SECTORS ETF",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "SPY",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLY",
+        "XLV",
+        "XLP",
+        "XLC",
+        "XBI"
+      ]
+    },
+    "closePrice": 113.769997,
+    "candidate": "BIOTECH: 100000011100110110101001010000101001010.ChaikinOscillatorGenerator.BB",
+    "maxLoss": 2.39400,
+    "stockName": "XLV",
+    "expectedReturn": 2.10700
+  },
+  {
+    "sellTargetPrice": 171.05,
+    "sellResistancePrice": 148.50,
+    "stockGroup": {
+      "name": "TECH",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "XLK",
+        "MSFT",
+        "AAPL",
+        "V",
+        "MA",
+        "INTC",
+        "NVDA",
+        "ADBE",
+        "PYPL",
+        "CSCO",
+        "CRM",
+        "ACN",
+        "AVGO",
+        "TXN",
+        "ORCL",
+        "IBM",
+        "QCOM",
+        "FIS",
+        "NOW",
+        "INTU",
+        "ADP"
+      ]
+    },
+    "closePrice": 152.429993,
+    "candidate": "CRM: 101111001111101100111000000000000011001.ChaikinOscillatorGenerator.AROO",
+    "maxLoss": 2.64600,
+    "stockName": "QCOM",
+    "expectedReturn": 12.21500
+  },
+  {
+    "sellTargetPrice": 58.35,
+    "sellResistancePrice": 50.00,
+    "stockGroup": {
+      "name": "CONS DISC",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLY",
+        "AMZN",
+        "HD",
+        "MCD",
+        "NKE",
+        "LOW",
+        "SBUX",
+        "BKNG",
+        "TJX",
+        "TGT",
+        "DG",
+        "EBAY",
+        "GM",
+        "ROST",
+        "ORLY",
+        "YUM",
+        "AZO",
+        "CMG",
+        "MAR",
+        "F",
+        "HLT"
+      ]
+    },
+    "closePrice": 52.029999,
+    "candidate": "SMALL CAP: 110111001100100100001110010000001101101.ChaikinOscillatorGenerator.MACD",
+    "maxLoss": 4.06000,
+    "stockName": "EBAY",
+    "expectedReturn": 12.15600
+  },
+  {
+    "sellTargetPrice": 25.39,
+    "sellResistancePrice": 23.72,
+    "stockGroup": {
+      "name": "EMERGENT",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "VWO",
+        "MCHI",
+        "EWT",
+        "EWZ",
+        "RSX",
+        "INDA",
+        "EWW",
+        "ECH"
+      ]
+    },
+    "closePrice": 25.049999,
+    "candidate": "GREEN ETF: 011110010001001001001000000001100100010.RSI.BB",
+    "maxLoss": 5.60700,
+    "stockName": "RSX",
+    "expectedReturn": 1.35700
+  },
+  {
+    "sellTargetPrice": 94.61,
+    "sellResistancePrice": 72.22,
+    "stockGroup": {
+      "name": "NET",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "NET"
+      ]
+    },
+    "closePrice": 75.139999,
+    "candidate": "NET: 101001100101111110101000011011111001111.MACD.ADX",
+    "maxLoss": 4.04300,
+    "stockName": "NET",
+    "expectedReturn": 25.91000
+  },
+  {
+    "sellTargetPrice": 352.08,
+    "sellResistancePrice": 340.38,
+    "stockGroup": {
+      "name": "HEALTH",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLV",
+        "JNJ",
+        "UNH",
+        "MRK",
+        "PFE",
+        "ABBV",
+        "ABT",
+        "TMO",
+        "AMGN",
+        "LLY",
+        "BMY",
+        "MDT",
+        "DHR",
+        "GILD",
+        "CVS",
+        "VRTX",
+        "CI",
+        "BDX",
+        "ISRG",
+        "ANTM",
+        "ZTS"
+      ]
+    },
+    "closePrice": 344.799988,
+    "candidate": "INNOVATION_SECTOR: 011110000000011010000011011011111110010.MACD.ADX",
+    "maxLoss": 1.29900,
+    "stockName": "UNH",
+    "expectedReturn": 2.11000
+  },
+  {
+    "sellTargetPrice": 3350.65,
+    "sellResistancePrice": 3144.02,
+    "stockGroup": {
+      "name": "AMZN",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "AMZN"
+      ]
+    },
+    "closePrice": 3218.51001,
+    "candidate": "AMZN: 110011000010010010010011110100100100011.ADX.AROO",
+    "maxLoss": 2.36900,
+    "stockName": "AMZN",
+    "expectedReturn": 4.10600
+  },
+  {
+    "sellTargetPrice": 250.85,
+    "sellResistancePrice": 214.42,
+    "stockGroup": {
+      "name": "SQ",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "SQ"
+      ]
+    },
+    "closePrice": 229.75,
+    "candidate": "NVDA: 110100000110001100100010001110111101111.StochasticOscillatorGenerator.AROO",
+    "maxLoss": 7.15000,
+    "stockName": "SQ",
+    "expectedReturn": 9.18300
+  }
+]

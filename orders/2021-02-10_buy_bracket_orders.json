@@ -1,0 +1,113 @@
+[
+  {
+    "sellTargetPrice": 134.97,
+    "sellResistancePrice": 125.61,
+    "stockGroup": {
+      "name": "TECH",
+      "description": "0.96(24/1)",
+      "percentageOfOrdersWon": 0.96,
+      "ordersWon": 24,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "XLK",
+        "MSFT",
+        "AAPL",
+        "V",
+        "MA",
+        "INTC",
+        "NVDA",
+        "ADBE",
+        "PYPL",
+        "CSCO",
+        "CRM",
+        "ACN",
+        "AVGO",
+        "TXN",
+        "ORCL",
+        "IBM",
+        "QCOM",
+        "FIS",
+        "NOW",
+        "INTU",
+        "ADP"
+      ]
+    },
+    "closePrice": 133.36,
+    "candidate": "NVDA: 111101100010000111110000000111000011011.BB.WilliamsRGenerator",
+    "maxLoss": 6.17000,
+    "stockName": "FIS",
+    "expectedReturn": 1.20700
+  },
+  {
+    "sellTargetPrice": 2020.00,
+    "sellResistancePrice": 1863.67,
+    "stockGroup": {
+      "name": "EMERG ADR",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "MELI",
+        "GLOB",
+        "BABA",
+        "BIDU",
+        "JD"
+      ]
+    },
+    "closePrice": 1905.27,
+    "candidate": "INNOVATION_SECTOR: 000011110001010010010000010101100110010.MACD.WilliamsRGenerator",
+    "maxLoss": 2.23200,
+    "stockName": "MELI",
+    "expectedReturn": 6.02200
+  },
+  {
+    "sellTargetPrice": 63.95,
+    "sellResistancePrice": 57.94,
+    "stockGroup": {
+      "name": "INTC",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "INTC"
+      ]
+    },
+    "closePrice": 58.86,
+    "candidate": "GREEN ETF: 000110010000101110111111011110000111000.StochasticOscillatorGenerator.AROO",
+    "maxLoss": 1.58800,
+    "stockName": "INTC",
+    "expectedReturn": 8.64800
+  }
+]

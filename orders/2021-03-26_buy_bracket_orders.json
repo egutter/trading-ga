@@ -1,0 +1,388 @@
+[
+  {
+    "sellTargetPrice": 540.49,
+    "sellResistancePrice": 490.88,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "1.00(5/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 5,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 513.570007,
+    "candidate": "NVDA: 100101000000110110010011110100100100111.StochasticOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 34,
+        "buzz": 0.9645,
+        "weeklyAverage": 35.25
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6556,
+      "sectorAverageNewsScore": 0.5368,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "NVDA"
+    },
+    "supportResistance": {
+      "levels": [
+        391.08,
+        431.83,
+        492.0,
+        528.65,
+        565.68,
+        614.9
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 22.354307,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.62200,
+    "stockName": "NVDA",
+    "expectedReturn": 5.24200
+  },
+  {
+    "sellTargetPrice": 67.44,
+    "sellResistancePrice": 60.98,
+    "stockGroup": {
+      "name": "INTC",
+      "description": "0.93(13/1)",
+      "percentageOfOrdersWon": 0.93,
+      "ordersWon": 13,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 64.870003,
+    "candidate": "INTC: 100100000010000011011011110000110001001.StochasticOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 123,
+        "buzz": 1.8496,
+        "weeklyAverage": 66.5
+      },
+      "companyNewsScore": 0.6842,
+      "sectorAverageBullishPercent": 0.6556,
+      "sectorAverageNewsScore": 0.5368,
+      "sentiment": {
+        "bearishPercent": 0.2353,
+        "bullishPercent": 0.7647
+      },
+      "symbol": "INTC"
+    },
+    "supportResistance": {
+      "levels": [
+        43.61,
+        48.42,
+        53.3,
+        60.64,
+        67.44
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 30.495714,
+        "trending": true
+      }
+    },
+    "maxLoss": 6.37900,
+    "stockName": "INTC",
+    "expectedReturn": 3.96200
+  },
+  {
+    "sellTargetPrice": 73.62,
+    "sellResistancePrice": 66.83,
+    "stockGroup": {
+      "name": "TECH",
+      "description": "0.91(21/2)",
+      "percentageOfOrdersWon": 0.91,
+      "ordersWon": 21,
+      "ordersLost": 2,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 70.25,
+    "candidate": "GREEN ETF: 011110010001001001001000000001100100010.RSI.BB",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 30,
+        "buzz": 0.6451,
+        "weeklyAverage": 46.5
+      },
+      "companyNewsScore": 0.685,
+      "sectorAverageBullishPercent": 0.6556,
+      "sectorAverageNewsScore": 0.5368,
+      "sentiment": {
+        "bearishPercent": 0.2,
+        "bullishPercent": 0.8
+      },
+      "symbol": "ORCL"
+    },
+    "supportResistance": {
+      "levels": [
+        53.66,
+        56.925,
+        59.74,
+        63.24,
+        68.07,
+        73.62
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 18.884094,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.11700,
+    "stockName": "ORCL",
+    "expectedReturn": 4.79700
+  },
+  {
+    "sellTargetPrice": 160.02,
+    "sellResistancePrice": 136.08,
+    "stockGroup": {
+      "name": "FINANCE",
+      "description": "1.00(5/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 5,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 143.729996,
+    "candidate": "FINANCE : 011001101000010100100000001100101110010.ChaikinOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 17,
+        "buzz": 0.7311,
+        "weeklyAverage": 23.25
+      },
+      "companyNewsScore": 0.3724,
+      "sectorAverageBullishPercent": 0.623,
+      "sectorAverageNewsScore": 0.5207,
+      "sentiment": {
+        "bearishPercent": 1.0,
+        "bullishPercent": 0.0
+      },
+      "symbol": "AXP"
+    },
+    "supportResistance": {
+      "levels": [
+        89.11,
+        100.16,
+        113.72,
+        129.54,
+        151.46
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 25.087723,
+        "trending": true
+      }
+    },
+    "maxLoss": 5.62200,
+    "stockName": "AXP",
+    "expectedReturn": 11.33600
+  },
+  {
+    "sellTargetPrice": 255.68,
+    "sellResistancePrice": 202.10,
+    "stockGroup": {
+      "name": "SQ",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 213.600006,
+    "candidate": "DEVELOP ADR: 111100000100111001101000000010111000110.MACD.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 37,
+        "buzz": 0.604,
+        "weeklyAverage": 61.25
+      },
+      "companyNewsScore": 0.542,
+      "sectorAverageBullishPercent": 0.6556,
+      "sectorAverageNewsScore": 0.5368,
+      "sentiment": {
+        "bearishPercent": 0.25,
+        "bullishPercent": 0.75
+      },
+      "symbol": "SQ"
+    },
+    "supportResistance": {
+      "levels": [
+        117.0,
+        139.3101,
+        181.2,
+        223.72,
+        283.1898
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 8,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 20.879038,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.69000,
+    "stockName": "SQ",
+    "expectedReturn": 19.70100
+  },
+  {
+    "sellTargetPrice": 183.10,
+    "sellResistancePrice": 167.11,
+    "stockGroup": {
+      "name": "COMM",
+      "description": "1.00(6/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 6,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 174.289993,
+    "candidate": "TECH: 101101011000000010110000110010100001111.ChaikinOscillatorGenerator.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 8,
+        "buzz": 0.8421,
+        "weeklyAverage": 9.5
+      },
+      "companyNewsScore": 0.6178,
+      "sectorAverageBullishPercent": 0.6427,
+      "sectorAverageNewsScore": 0.5376,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "TTWO"
+    },
+    "supportResistance": {
+      "levels": [
+        148.88,
+        163.99,
+        181.71,
+        200.7491,
+        214.91
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 35.797215,
+        "trending": true
+      }
+    },
+    "maxLoss": 4.29700,
+    "stockName": "TTWO",
+    "expectedReturn": 5.05300
+  }
+]

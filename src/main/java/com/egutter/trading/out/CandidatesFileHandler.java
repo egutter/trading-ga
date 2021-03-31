@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -40,10 +41,10 @@ public class CandidatesFileHandler {
 
     public List<Candidate> fromJson() {
         try {
-            Reader reader = Files.newBufferedReader(Paths.get(ALL_CANDIDATES_JSON_FILE_NAME));
+            Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource(ALL_CANDIDATES_JSON_FILE_NAME).toURI()));
             Type listType = new TypeToken<ArrayList<Candidate>>(){}.getType();
             return gson.fromJson(reader, listType);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }

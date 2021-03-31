@@ -1,0 +1,305 @@
+[
+  {
+    "sellTargetPrice": 63.83,
+    "sellResistancePrice": 57.81,
+    "stockGroup": {
+      "name": "CONS BASIC",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 62.490002,
+    "candidate": "TECH: 011100010100100110011011110110000001111.StochasticOscillatorGenerator.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 40,
+        "buzz": 2.1333,
+        "weeklyAverage": 18.75
+      },
+      "companyNewsScore": 0.5263,
+      "sectorAverageBullishPercent": 0.6325,
+      "sectorAverageNewsScore": 0.5282,
+      "sentiment": {
+        "bearishPercent": 0.375,
+        "bullishPercent": 0.625
+      },
+      "symbol": "GIS"
+    },
+    "supportResistance": {
+      "levels": [
+        53.96,
+        57.24,
+        60.5,
+        63.54,
+        66.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 25.154644,
+        "trending": true
+      }
+    },
+    "maxLoss": 8.09500,
+    "stockName": "GIS",
+    "expectedReturn": 2.14000
+  },
+  {
+    "sellTargetPrice": 570.22,
+    "sellResistancePrice": 490.88,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 517.929993,
+    "candidate": "CRM: 100001101001101000000100001110100000100.ChaikinOscillatorGenerator.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 32,
+        "buzz": 0.8707,
+        "weeklyAverage": 36.75
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6542,
+      "sectorAverageNewsScore": 0.53,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "NVDA"
+    },
+    "supportResistance": {
+      "levels": [
+        391.08,
+        431.83,
+        492.0,
+        528.65,
+        565.68,
+        614.9
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 21.162138,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.51100,
+    "stockName": "NVDA",
+    "expectedReturn": 10.09600
+  },
+  {
+    "sellTargetPrice": 135.90,
+    "sellResistancePrice": 127.72,
+    "stockGroup": {
+      "name": "SECTORS ETF",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 131.979996,
+    "candidate": "EA: 101100011000100000010110010000011011011.ChaikinOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "XLK"
+    },
+    "supportResistance": {
+      "levels": [
+        103.47,
+        112.58,
+        121.23,
+        129.77,
+        139.24
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.303524,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.33500,
+    "stockName": "XLK",
+    "expectedReturn": 2.97300
+  },
+  {
+    "sellTargetPrice": 69.86,
+    "sellResistancePrice": 60.98,
+    "stockGroup": {
+      "name": "INTC",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 64.5,
+    "candidate": "AMZN: 101110100100111001101001000011100001010.StochasticOscillatorGenerator.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 99,
+        "buzz": 1.4831,
+        "weeklyAverage": 66.75
+      },
+      "companyNewsScore": 0.5161,
+      "sectorAverageBullishPercent": 0.6542,
+      "sectorAverageNewsScore": 0.53,
+      "sentiment": {
+        "bearishPercent": 0.3847,
+        "bullishPercent": 0.6153
+      },
+      "symbol": "INTC"
+    },
+    "supportResistance": {
+      "levels": [
+        43.61,
+        48.42,
+        53.3,
+        60.975,
+        67.44
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 30.955158,
+        "trending": true
+      }
+    },
+    "maxLoss": 5.77200,
+    "stockName": "INTC",
+    "expectedReturn": 8.30900
+  },
+  {
+    "sellTargetPrice": 35.32,
+    "sellResistancePrice": 32.83,
+    "stockGroup": {
+      "name": "EMERGENT",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 33.599998,
+    "candidate": "CONS DISC: 011100010111000001110111010110100001100.ADX.MFI",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "ECH"
+    },
+    "supportResistance": {
+      "levels": [
+        23.02,
+        24.67,
+        27.48,
+        30.258,
+        34.68
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.203385,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.34500,
+    "stockName": "ECH",
+    "expectedReturn": 5.11500
+  }
+]

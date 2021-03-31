@@ -1,0 +1,65 @@
+[
+  {
+    "sellTargetPrice": 362.82,
+    "sellResistancePrice": 288.14,
+    "stockGroup": {
+      "name": "EMERG ADR",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 322.61,
+    "candidate": "DEVELOP ADR: 000100101011110001011001000001100011100.ChaikinOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 47,
+        "buzz": 1.3623,
+        "weeklyAverage": 34.5
+      },
+      "companyNewsScore": 0.75,
+      "sectorAverageBullishPercent": 0.666,
+      "sectorAverageNewsScore": 0.5285,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "BIDU"
+    },
+    "supportResistance": {
+      "levels": [
+        114.75,
+        151.18,
+        248.98,
+        326.5
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 8,
+          "sell": 0,
+          "neutral": 9
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 54.3392,
+        "trending": true
+      }
+    },
+    "maxLoss": 11.96100,
+    "stockName": "BIDU",
+    "expectedReturn": 12.46300
+  }
+]

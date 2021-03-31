@@ -1,0 +1,129 @@
+[
+  {
+    "sellTargetPrice": 1599.74,
+    "sellResistancePrice": 1345.00,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 1381.300049,
+    "candidate": "HEALTH: 000110100101010011101000101101000010111.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 82,
+        "buzz": 1.6237,
+        "weeklyAverage": 50.5
+      },
+      "companyNewsScore": 0.6857,
+      "sectorAverageBullishPercent": 0.6668,
+      "sectorAverageNewsScore": 0.5345,
+      "sentiment": {
+        "bearishPercent": 0.1539,
+        "bullishPercent": 0.8461
+      },
+      "symbol": "SHOP"
+    },
+    "supportResistance": {
+      "levels": [
+        810.59,
+        998.0,
+        1147.0001,
+        1345.0,
+        1499.75
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 8,
+          "sell": 0,
+          "neutral": 9
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 37.373707,
+        "trending": true
+      }
+    },
+    "maxLoss": 2.69900,
+    "stockName": "SHOP",
+    "expectedReturn": 15.81400
+  },
+  {
+    "sellTargetPrice": 70.25,
+    "sellResistancePrice": 66.10,
+    "stockGroup": {
+      "name": "CONS DISC",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 69.550003,
+    "candidate": "Biotech Sector: 011110000000101001101001000011100100010.StochasticOscillatorGenerator.ChaikinOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 12,
+        "buzz": 1.1111,
+        "weeklyAverage": 4.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6668,
+      "sectorAverageNewsScore": 0.5345,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "TJX"
+    },
+    "supportResistance": {
+      "levels": [
+        48.73,
+        54.57,
+        62.24,
+        70.955
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 9,
+          "sell": 1,
+          "neutral": 7
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 18.824316,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.21900,
+    "stockName": "TJX",
+    "expectedReturn": 1.00600
+  }
+]

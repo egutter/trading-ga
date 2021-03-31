@@ -1,0 +1,241 @@
+[
+  {
+    "sellTargetPrice": 32.93,
+    "sellResistancePrice": 28.95,
+    "stockGroup": {
+      "name": "SECTORS ETF",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "SPY",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLY",
+        "XLV",
+        "XLP",
+        "XLC",
+        "XBI"
+      ]
+    },
+    "closePrice": 30.209999,
+    "candidate": "Google: 110011001000101010111101100001100101010.StochasticOscillatorGenerator.ChaikinOscillatorGenerator",
+    "maxLoss": 4.35200,
+    "stockName": "XLF",
+    "expectedReturn": 9.00500
+  },
+  {
+    "sellTargetPrice": 63.84,
+    "sellResistancePrice": 55.51,
+    "stockGroup": {
+      "name": "INTC",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "INTC"
+      ]
+    },
+    "closePrice": 57.68,
+    "candidate": "PYPL: 001100011010000110111011010101110000001.MACD.AROO",
+    "maxLoss": 3.90900,
+    "stockName": "INTC",
+    "expectedReturn": 10.67500
+  },
+  {
+    "sellTargetPrice": 323.48,
+    "sellResistancePrice": 271.17,
+    "stockGroup": {
+      "name": "FINANCE",
+      "description": "1.00(8/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 8,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLF",
+        "JPM",
+        "BAC",
+        "C",
+        "WFC",
+        "BLK",
+        "SPGI",
+        "AXP",
+        "GS",
+        "CME",
+        "CB",
+        "MS",
+        "USB",
+        "MMC",
+        "TFC",
+        "ICE",
+        "PNC",
+        "PGR",
+        "AON",
+        "MCO"
+      ]
+    },
+    "closePrice": 288.549988,
+    "candidate": "FINANCE : 100001010101110110111010010000110111011.StochasticOscillatorGenerator.MACD",
+    "maxLoss": 6.40900,
+    "stockName": "GS",
+    "expectedReturn": 12.10500
+  },
+  {
+    "sellTargetPrice": 27.98,
+    "sellResistancePrice": 24.54,
+    "stockGroup": {
+      "name": "METALS",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "GLD",
+        "SLV"
+      ]
+    },
+    "closePrice": 24.93,
+    "candidate": "EMERG ADR: 100101000010110010010011110100100100011.ADX.MFI",
+    "maxLoss": 1.58900,
+    "stockName": "SLV",
+    "expectedReturn": 12.23400
+  },
+  {
+    "sellTargetPrice": 90.96,
+    "sellResistancePrice": 76.66,
+    "stockGroup": {
+      "name": "NET",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "NET"
+      ]
+    },
+    "closePrice": 82.339996,
+    "candidate": "NET: 101000100101111110111000000001111011010.MACD.BB",
+    "maxLoss": 7.40900,
+    "stockName": "NET",
+    "expectedReturn": 10.46800
+  },
+  {
+    "sellTargetPrice": 391.47,
+    "sellResistancePrice": 370.07,
+    "stockGroup": {
+      "name": "SECTORS ETF",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      },
+      "stockSymbols": [
+        "SPY",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLY",
+        "XLV",
+        "XLP",
+        "XLC",
+        "XBI"
+      ]
+    },
+    "closePrice": 381.850006,
+    "candidate": "GOOGL: 100010010100000001100000010000100001000.MACD.MFI",
+    "maxLoss": 3.18300,
+    "stockName": "SPY",
+    "expectedReturn": 2.52000
+  },
+  {
+    "sellTargetPrice": 3363.89,
+    "sellResistancePrice": 3184.55,
+    "stockGroup": {
+      "name": "AMZN",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "AMZN"
+      ]
+    },
+    "closePrice": 3312.530029,
+    "candidate": "TSLA: 100100000010110010010011110100101000010.ADX.WilliamsRGenerator",
+    "maxLoss": 4.01900,
+    "stockName": "AMZN",
+    "expectedReturn": 1.55000
+  }
+]

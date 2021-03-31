@@ -1,0 +1,66 @@
+[
+  {
+    "sellTargetPrice": 201.80,
+    "sellResistancePrice": 181.10,
+    "stockGroup": {
+      "name": "CONS BASIC",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 186.130005,
+    "candidate": "COMM: 111010001110100010010000010101100101000.StochasticOscillatorGenerator.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 6,
+        "buzz": 1.1547,
+        "weeklyAverage": 3.75
+      },
+      "companyNewsScore": 0.058,
+      "sectorAverageBullishPercent": 0.625,
+      "sectorAverageNewsScore": 0.5366,
+      "sentiment": {
+        "bearishPercent": 1.0,
+        "bullishPercent": 0.0
+      },
+      "symbol": "CLX"
+    },
+    "supportResistance": {
+      "levels": [
+        176.73,
+        193.44,
+        210.25,
+        225.38,
+        239.87
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 14.417922,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.77700,
+    "stockName": "CLX",
+    "expectedReturn": 8.41600
+  }
+]

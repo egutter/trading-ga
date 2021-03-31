@@ -1,0 +1,66 @@
+[
+  {
+    "sellTargetPrice": 254.50,
+    "sellResistancePrice": 231.82,
+    "stockGroup": {
+      "name": "MSFT",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 237.710007,
+    "candidate": "INTC: 100111011000101010100000100001111011010.BB.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 139,
+        "buzz": 0.8437,
+        "weeklyAverage": 164.75
+      },
+      "companyNewsScore": 0.4116,
+      "sectorAverageBullishPercent": 0.6581,
+      "sectorAverageNewsScore": 0.0,
+      "sentiment": {
+        "bearishPercent": 0.5556,
+        "bullishPercent": 0.4444
+      },
+      "symbol": "MSFT"
+    },
+    "supportResistance": {
+      "levels": [
+        196.25,
+        204.82,
+        219.11,
+        232.86,
+        246.13
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 20.670105,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.54100,
+    "stockName": "MSFT",
+    "expectedReturn": 7.06300
+  }
+]

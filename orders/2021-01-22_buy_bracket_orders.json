@@ -1,0 +1,77 @@
+[
+  {
+    "sellTargetPrice": 56.67,
+    "sellResistancePrice": 54.52,
+    "stockGroup": {
+      "name": "CONS BASIC",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLP",
+        "PG",
+        "PEP",
+        "KO",
+        "WMT",
+        "MO",
+        "MDLZ",
+        "COST",
+        "CL",
+        "KMB",
+        "EL",
+        "GIS",
+        "WBA",
+        "STZ",
+        "SYY",
+        "CLX",
+        "MNST",
+        "KR",
+        "ADM",
+        "MKC"
+      ]
+    },
+    "closePrice": 55.970001,
+    "maxLoss": 2.66000,
+    "stockName": "GIS",
+    "expectedReturn": 1.25100
+  },
+  {
+    "sellTargetPrice": 93.52,
+    "sellResistancePrice": 91.97,
+    "stockGroup": {
+      "name": "VGLT",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "VGLT"
+      ]
+    },
+    "closePrice": 92.389999,
+    "maxLoss": 0.45700,
+    "stockName": "VGLT",
+    "expectedReturn": 1.22300
+  }
+]

@@ -1,0 +1,115 @@
+[
+  {
+    "sellTargetPrice": 63.95,
+    "sellResistancePrice": 54.06,
+    "stockGroup": {
+      "name": "INTC",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "INTC"
+      ]
+    },
+    "closePrice": 55.21,
+    "maxLoss": 2.12700,
+    "stockName": "INTC",
+    "expectedReturn": 32.77500
+  },
+  {
+    "sellTargetPrice": 35.62,
+    "sellResistancePrice": 32.17,
+    "stockGroup": {
+      "name": "DEVELOP ETF MARKETS",
+      "description": "1.00(5/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 5,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "VTI",
+        "VGK",
+        "EPP",
+        "VEA",
+        "EWJ",
+        "EWG",
+        "EWQ",
+        "EWU",
+        "EWL",
+        "EWC",
+        "EIS"
+      ]
+    },
+    "closePrice": 33.37,
+    "maxLoss": 2.04900,
+    "stockName": "EWQ",
+    "expectedReturn": 6.74300
+  },
+  {
+    "sellTargetPrice": 153.74,
+    "sellResistancePrice": 144.21,
+    "stockGroup": {
+      "name": "CONS BASIC",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLP",
+        "PG",
+        "PEP",
+        "KO",
+        "WMT",
+        "MO",
+        "MDLZ",
+        "COST",
+        "CL",
+        "KMB",
+        "EL",
+        "GIS",
+        "WBA",
+        "STZ",
+        "SYY",
+        "CLX",
+        "MNST",
+        "KR",
+        "ADM",
+        "MKC"
+      ]
+    },
+    "closePrice": 147.51,
+    "maxLoss": 2.28800,
+    "stockName": "WMT",
+    "expectedReturn": 4.22700
+  }
+]

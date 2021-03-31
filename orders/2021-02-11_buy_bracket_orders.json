@@ -1,0 +1,93 @@
+[
+    {
+    "sellTargetPrice": 25.02,
+    "sellResistancePrice": 23.84,
+    "stockGroup": {
+      "name": "GREEN ETF",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "PBW",
+        "ICLN",
+        "TAN",
+        "QCLN",
+        "FAN"
+      ]
+    },
+    "closePrice": 24.459999,
+    "candidate": "EMERGENT: 101000001000101001101001000011111000010.UltimateOscillatorGenerator.WilliamsRGenerator",
+    "maxLoss": 2.60100,
+    "stockName": "FAN",
+    "expectedReturn": 2.27100
+  },
+  {
+    "sellTargetPrice": 50.53,
+    "sellResistancePrice": 45.83,
+    "stockGroup": {
+      "name": "CSCO",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "CSCO"
+      ]
+    },
+    "closePrice": 47.580002,
+    "candidate": "SMALL CAP: 100001000110100010000100110111000001110.ADX.AROO",
+    "maxLoss": 3.81800,
+    "stockName": "CSCO",
+    "expectedReturn": 6.20800
+  },
+  {
+    "sellTargetPrice": 101.61,
+    "sellResistancePrice": 87.33,
+    "stockGroup": {
+      "name": "NET",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "NET"
+      ]
+    },
+    "closePrice": 91.279999,
+    "candidate": "AAPL: 001011100101011110111011010101000010101.MACD.BB",
+    "maxLoss": 4.52300,
+    "stockName": "NET",
+    "expectedReturn": 11.32100
+  }
+]

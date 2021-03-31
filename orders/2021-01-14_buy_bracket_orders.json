@@ -1,0 +1,49 @@
+[
+  {
+    "sellTargetPrice": 130.27,
+    "sellResistancePrice": 95.23,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "SQ",
+        "Z",
+        "SPLK",
+        "TWLO",
+        "WORK",
+        "TSLA",
+        "TWOU",
+        "XLNX",
+        "SPOT",
+        "CRNC",
+        "ZM",
+        "NET",
+        "IRBT",
+        "DT",
+        "ALB",
+        "W",
+        "ETSY",
+        "VMW",
+        "SHOP",
+        "FPX"
+      ]
+    },
+    "closePrice": 113.980003,
+    "maxLoss": 118.68900,
+    "stockName": "CRNC",
+    "expectedReturn": 113.29200
+  }
+]

@@ -13,7 +13,6 @@ import com.studerw.tda.model.quote.EquityQuote;
 import com.studerw.tda.model.quote.Quote;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.joda.time.MonthDay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import yahoofinance.Stock;
@@ -26,12 +25,10 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DailyTrader {
 

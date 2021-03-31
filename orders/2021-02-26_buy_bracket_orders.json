@@ -1,0 +1,192 @@
+[
+  {
+    "sellTargetPrice": 263.18,
+    "sellResistancePrice": 228.99,
+    "stockGroup": {
+      "name": "MSFT",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 232.380005,
+    "candidate": "TSLA: 011001101100111001111100110011111110110.MACD.RSI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 137,
+        "buzz": 0.9415,
+        "weeklyAverage": 145.5
+      },
+      "companyNewsScore": 0.194,
+      "sectorAverageBullishPercent": 0.653,
+      "sectorAverageNewsScore": 0.525,
+      "sentiment": {
+        "bearishPercent": 0.7778,
+        "bullishPercent": 0.2222
+      },
+      "symbol": "MSFT"
+    },
+    "supportResistance": {
+      "levels": [
+        193.55,
+        204.82,
+        219.11,
+        232.86,
+        246.13
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 0,
+          "neutral": 0
+        }
+      },
+      "trend": {
+        "adx": 0.0,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.48000,
+    "stockName": "MSFT",
+    "expectedReturn": 13.25400
+  },
+  {
+    "sellTargetPrice": 293.94,
+    "sellResistancePrice": 251.47,
+    "stockGroup": {
+      "name": "PYPL",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 259.850006,
+    "candidate": "PYPL: 101100010000111011111001100010110100010.RSI.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 40,
+        "buzz": 0.5653,
+        "weeklyAverage": 70.75
+      },
+      "companyNewsScore": 0.9658,
+      "sectorAverageBullishPercent": 0.653,
+      "sectorAverageNewsScore": 0.525,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "PYPL"
+    },
+    "supportResistance": {
+      "levels": [
+        164.29,
+        186.52,
+        209.02,
+        232.2013,
+        254.39,
+        309.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 0,
+          "neutral": 0
+        }
+      },
+      "trend": {
+        "adx": 0.0,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.33200,
+    "stockName": "PYPL",
+    "expectedReturn": 13.11900
+  },
+  {
+    "sellTargetPrice": 345.61,
+    "sellResistancePrice": 243.43,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 288.980011,
+    "candidate": "CONS BASIC: 111110111110100010010000010101110010110.MACD.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 29,
+        "buzz": 2.1481,
+        "weeklyAverage": 13.5
+      },
+      "companyNewsScore": 0.8235,
+      "sectorAverageBullishPercent": 0.6227,
+      "sectorAverageNewsScore": 0.5278,
+      "sentiment": {
+        "bearishPercent": 0.125,
+        "bullishPercent": 0.875
+      },
+      "symbol": "W"
+    },
+    "supportResistance": {
+      "levels": [
+        193.69,
+        243.435,
+        277.43,
+        314.85,
+        369.0
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 0,
+          "neutral": 0
+        }
+      },
+      "trend": {
+        "adx": 0.0,
+        "trending": false
+      }
+    },
+    "maxLoss": 18.70900,
+    "stockName": "W",
+    "expectedReturn": 19.59700
+  }
+]

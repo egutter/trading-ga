@@ -1,0 +1,50 @@
+[
+  {
+    "sellTargetPrice": 522.00,
+    "sellResistancePrice": 482.48,
+    "stockGroup": {
+      "name": "HEALTH",
+      "description": "1.00(6/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 6,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "XLV",
+        "JNJ",
+        "UNH",
+        "MRK",
+        "PFE",
+        "ABBV",
+        "ABT",
+        "TMO",
+        "AMGN",
+        "LLY",
+        "BMY",
+        "MDT",
+        "DHR",
+        "GILD",
+        "CVS",
+        "VRTX",
+        "CI",
+        "BDX",
+        "ISRG",
+        "ANTM",
+        "ZTS"
+      ]
+    },
+    "closePrice": 509.700012,
+    "maxLoss": 5.64200,
+    "stockName": "TMO",
+    "expectedReturn": 2.41300
+  }
+]

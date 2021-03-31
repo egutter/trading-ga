@@ -1,0 +1,302 @@
+[
+  {
+    "sellTargetPrice": 125.05,
+    "sellResistancePrice": 108.29,
+    "stockGroup": {
+      "name": "GREEN ETF",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 110.639999,
+    "candidate": "GREEN ETF: 111101100000100010111011001000111111000.ADX.AROO",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "TAN"
+    },
+    "supportResistance": {
+      "levels": [
+        33.15,
+        57.95,
+        88.35,
+        125.9799
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 9
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 26.229168,
+        "trending": true
+      }
+    },
+    "maxLoss": 2.17000,
+    "stockName": "TAN",
+    "expectedReturn": 13.02400
+  },
+  {
+    "sellTargetPrice": 69.23,
+    "sellResistancePrice": 65.00,
+    "stockGroup": {
+      "name": "COMM",
+      "description": "1.00(5/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 5,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 67.650002,
+    "candidate": "DEVELOP ADR: 000100101011110001011001000001100011100.ChaikinOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 11,
+        "buzz": 0.9602,
+        "weeklyAverage": 6.75
+      },
+      "companyNewsScore": 0.7946,
+      "sectorAverageBullishPercent": 0.6183,
+      "sectorAverageNewsScore": 0.5037,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "OMC"
+    },
+    "supportResistance": {
+      "levels": [
+        44.5,
+        48.81,
+        54.58,
+        60.37,
+        68.5
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 9,
+          "sell": 0,
+          "neutral": 8
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 21.626421,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.07700,
+    "stockName": "OMC",
+    "expectedReturn": 2.33100
+  },
+  {
+    "sellTargetPrice": 323.90,
+    "sellResistancePrice": 271.90,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 292.730011,
+    "candidate": "INDUSTRIAL_SECTOR: 000110100101100011010111101101000010101.StochasticOscillatorGenerator.MACD",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 7,
+        "buzz": 0.9032,
+        "weeklyAverage": 7.75
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6552,
+      "sectorAverageNewsScore": 0.5293,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "W"
+    },
+    "supportResistance": {
+      "levels": [
+        182.535,
+        225.05,
+        268.96,
+        314.85,
+        369.0
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 6,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 20.910353,
+        "trending": false
+      }
+    },
+    "maxLoss": 7.66100,
+    "stockName": "W",
+    "expectedReturn": 10.64900
+  },
+  {
+    "sellTargetPrice": 374.87,
+    "sellResistancePrice": 288.14,
+    "stockGroup": {
+      "name": "EMERG ADR",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 339.910004,
+    "candidate": "INDUSTRIAL_SECTOR: 000010001110100001010001010101100110000.MACD.RSI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 44,
+        "buzz": 1.3134,
+        "weeklyAverage": 33.5
+      },
+      "companyNewsScore": 0.8125,
+      "sectorAverageBullishPercent": 0.6454,
+      "sectorAverageNewsScore": 0.5197,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "BIDU"
+    },
+    "supportResistance": {
+      "levels": [
+        113.06,
+        151.18,
+        264.94,
+        326.5
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 14,
+          "sell": 0,
+          "neutral": 3
+        },
+        "signal": "strong buy"
+      },
+      "trend": {
+        "adx": 56.017155,
+        "trending": true
+      }
+    },
+    "maxLoss": 17.96500,
+    "stockName": "BIDU",
+    "expectedReturn": 10.28600
+  },
+  {
+    "sellTargetPrice": 34.56,
+    "sellResistancePrice": 32.13,
+    "stockGroup": {
+      "name": "EMERGENT",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 33.16,
+    "candidate": "METALS: 001111001000100110111011110000100111000.ChaikinOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "ECH"
+    },
+    "supportResistance": {
+      "levels": [
+        23.02,
+        24.67,
+        27.02,
+        30.258,
+        33.27
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 9,
+          "sell": 1,
+          "neutral": 7
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 22.173931,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.20600,
+    "stockName": "ECH",
+    "expectedReturn": 4.22500
+  }
+]

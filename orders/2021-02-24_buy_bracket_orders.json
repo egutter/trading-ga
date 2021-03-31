@@ -1,0 +1,307 @@
+[
+  {
+    "sellTargetPrice": 307.00,
+    "sellResistancePrice": 252.56,
+    "stockGroup": {
+      "name": "PYPL",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 266.070007,
+    "candidate": "PYPL: 101100010000111011111001100010110100010.RSI.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 44,
+        "buzz": 0.6027,
+        "weeklyAverage": 73.0
+      },
+      "companyNewsScore": 0.6666,
+      "sectorAverageBullishPercent": 0.6659,
+      "sectorAverageNewsScore": 0.5251,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "PYPL"
+    },
+    "supportResistance": {
+      "levels": [
+        164.29,
+        186.52,
+        209.02,
+        232.2013,
+        254.39,
+        309.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 8,
+          "sell": 2,
+          "neutral": 7
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 34.33954,
+        "trending": true
+      }
+    },
+    "maxLoss": 5.34900,
+    "stockName": "PYPL",
+    "expectedReturn": 15.38300
+  },
+  {
+    "sellTargetPrice": 659.73,
+    "sellResistancePrice": 535.58,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 579.960022,
+    "candidate": "CRM: 111100101110010001001001000011100011011.MACD.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 95,
+        "buzz": 1.8181,
+        "weeklyAverage": 52.25
+      },
+      "companyNewsScore": 0.88,
+      "sectorAverageBullishPercent": 0.6659,
+      "sectorAverageNewsScore": 0.5251,
+      "sentiment": {
+        "bearishPercent": 0.1539,
+        "bullishPercent": 0.8461
+      },
+      "symbol": "NVDA"
+    },
+    "supportResistance": {
+      "levels": [
+        356.0,
+        391.42,
+        480.56,
+        536.27,
+        614.9
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 8,
+          "sell": 1,
+          "neutral": 8
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 20.533278,
+        "trending": false
+      }
+    },
+    "maxLoss": 8.28600,
+    "stockName": "NVDA",
+    "expectedReturn": 13.75400
+  },
+  {
+    "sellTargetPrice": 27.00,
+    "sellResistancePrice": 24.50,
+    "stockGroup": {
+      "name": "EMERGENT",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 25.360001,
+    "candidate": "DEVELOP ADR: 101100001110010010010010110100100000011.StochasticOscillatorGenerator.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "RSX"
+    },
+    "supportResistance": {
+      "levels": [
+        19.385,
+        21.7,
+        23.09,
+        24.47,
+        26.29
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 7,
+          "sell": 2,
+          "neutral": 8
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 13.455983,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.51000,
+    "stockName": "RSX",
+    "expectedReturn": 6.47700
+  },
+  {
+    "sellTargetPrice": 137.79,
+    "sellResistancePrice": 108.94,
+    "stockGroup": {
+      "name": "INNOVATION",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 122.099998,
+    "candidate": "INNOVATION_SECTOR: 011110000000101001101001000011100100010.StochasticOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 11,
+        "buzz": 0.9565,
+        "weeklyAverage": 11.5
+      },
+      "companyNewsScore": 0.8608,
+      "sectorAverageBullishPercent": 0.6368,
+      "sectorAverageNewsScore": 0.5262,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "IRBT"
+    },
+    "supportResistance": {
+      "levels": [
+        67.55,
+        74.01,
+        80.89,
+        91.4,
+        103.64,
+        127.56,
+        137.79,
+        197.4
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 7,
+          "sell": 3,
+          "neutral": 7
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 44.811413,
+        "trending": true
+      }
+    },
+    "maxLoss": 12.08000,
+    "stockName": "IRBT",
+    "expectedReturn": 12.85000
+  },
+  {
+    "sellTargetPrice": 304.93,
+    "sellResistancePrice": 276.37,
+    "stockGroup": {
+      "name": "SMALL CAP",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 291.980011,
+    "candidate": "DEVELOP ADR: 101110110000111001111000100000100011011.MACD.RSI",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "VBK"
+    },
+    "supportResistance": {
+      "levels": [
+        192.5,
+        233.9866,
+        274.4,
+        304.9299
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 7,
+          "sell": 2,
+          "neutral": 8
+        },
+        "signal": "buy"
+      },
+      "trend": {
+        "adx": 22.45544,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.64800,
+    "stockName": "VBK",
+    "expectedReturn": 4.43500
+  }
+]

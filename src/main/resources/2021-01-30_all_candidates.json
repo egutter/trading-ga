@@ -1,0 +1,51 @@
+[
+  {
+    "stockGroups": [
+      {
+        "name": "INNOVATION",
+        "description": "0.67(2/1)",
+        "percentageOfOrdersWon": 0.67,
+        "ordersWon": 2,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 1,
+          "day": 30
+        },
+        "stockSymbols": [
+          "SQ",
+          "Z",
+          "SPLK",
+          "TWLO",
+          "WORK",
+          "TSLA",
+          "TWOU",
+          "XLNX",
+          "SPOT",
+          "CRNC",
+          "ZM",
+          "NET",
+          "IRBT",
+          "DT",
+          "ALB",
+          "W",
+          "ETSY",
+          "VMW",
+          "SHOP",
+          "FPX"
+        ]
+      }
+    ],
+    "description": "INNOVATION_SECTOR",
+    "chromosome": "100101001010110010010011110100100110011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageConvergenceDivergenceGenerator",
+      "com.egutter.trading.decision.generator.MoneyFlowIndexGenerator"
+    ]
+  }
+]

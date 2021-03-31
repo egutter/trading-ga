@@ -1,0 +1,35 @@
+[
+  {
+    "sellTargetPrice": 2020.00,
+    "sellResistancePrice": 1779.51,
+    "stockGroup": {
+      "name": "EMERG ADR",
+      "description": "1.00(4/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 4,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "MELI",
+        "GLOB",
+        "BABA",
+        "BIDU",
+        "JD"
+      ]
+    },
+    "closePrice": 1909.99,
+    "candidate": "CRM: 011110000000100010010011110001111111011.MACD.AROO",
+    "maxLoss": 7.33200,
+    "stockName": "MELI",
+    "expectedReturn": 5.76000
+  }
+]

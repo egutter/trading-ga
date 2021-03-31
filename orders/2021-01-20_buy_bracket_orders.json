@@ -1,0 +1,31 @@
+[
+  {
+    "sellTargetPrice": 183.21,
+    "sellResistancePrice": 171.16,
+    "stockGroup": {
+      "name": "METALS",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "GLD",
+        "SLV"
+      ]
+    },
+    "closePrice": 175.39,
+    "maxLoss": 2.47100,
+    "stockName": "GLD",
+    "expectedReturn": 4.45900
+  },
+]

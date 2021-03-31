@@ -19,6 +19,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
@@ -73,6 +75,7 @@ public class BuyBracketOrdersFileHandler {
     private void writeFile(String json) {
         try {
             String fileName = buildFilePath();
+//            String fileUri = ClassLoader.getSystemResource(fileName).toURI().getPath();
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(json);
             writer.close();

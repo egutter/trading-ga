@@ -34,7 +34,7 @@ public class DailyOrderGenerator {
     }
 
     public static void main(String[] args) {
-        LocalDate tradeOn = today;
+        LocalDate tradeOn = yesterday;
 
         TdaClient client = new HttpTdaClient();
         DailyOrderGenerator dailyOrderGenerator = new DailyOrderGenerator(client, tradeOn);
@@ -45,6 +45,7 @@ public class DailyOrderGenerator {
     public void runTraderAndGenerateOrders() {
         LocalDate fromDate = new LocalDate(2020, 1, 1);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
+        logger.info("Running candidates on trade date [" + tradeOn + "]");
         Map<String, List<BuyOrderWithPendingSellOrders>> buyOrders = runner.run(tradeOn);
         generateDailyBestBuyOrdersFile(buyOrders);
         logger.info(runner.runOutput("\n"));

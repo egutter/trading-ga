@@ -30,6 +30,10 @@ import com.google.gson.GsonBuilder;
 import com.tictactec.ta.lib.MAType;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.Seconds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.uncommons.maths.binary.BitString;
 
 import java.io.BufferedWriter;
@@ -47,6 +51,8 @@ import static java.util.Arrays.asList;
  * Created by egutter on 11/29/14.
  */
 public class OneCandidateRunner {
+
+    private final static Logger logger = LoggerFactory.getLogger(OneCandidateRunner.class);
 
     private final Portfolio portfolio;
     private final Trader trader;
@@ -165,15 +171,22 @@ public class OneCandidateRunner {
     }
 
     public static void main(String[] args) {
+        LocalTime startTime = LocalTime.now();
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
         LocalDate fromDate = new LocalDate(2010, 1, 1);
+        LocalDate toDate = new LocalDate(2021, 4, 9);
 
-        String[] stocks = StockMarket.innovationSector();
+//        String[] stocks = StockMarket.innovationSector();
 //        String[] stocks = new String[]{"SPY"};
-        runOneSectorWithOneCandidate(fromDate, stocks, "110010011110000010011000111111110100011",
-                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class));
+//        runOneSectorWithOneCandidate(fromDate, stocks, "110010011110000010011000111111110100011",
+//                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class));
 
 //        runAllSectorsOnAllCandidates(fromDate);
+//        runSpySectorsOnSomeCandidates(fromDate);
+        List<String> stockSymbols = allSectorsStockSymbols();
+//        List<String> stockSymbols = Arrays.asList("AAPL");
+        runStocksWithCandidates(fromDate, toDate, stockSymbols, new CandidatesFileHandler().fromJson());
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
 
     private static void runOneSectorWithOneCandidate(LocalDate fromDate, String[] sector, String candidateString, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
@@ -191,8 +204,16 @@ public class OneCandidateRunner {
     }
 
     private static void runAllSectorsOnAllCandidates(LocalDate fromDate) {
+        runSectorsWithCandidates(fromDate, StockMarket.allSectors(), GlobalStockMarketCandidates.allNewCandidates());
+    }
+
+    private static void runSpySectorsOnSomeCandidates(LocalDate fromDate) {
+        runSectorsWithCandidates(fromDate, StockMarket.spySector(), GlobalStockMarketCandidates.spyCandidates());
+    }
+
+    private static void runSectorsWithCandidates(LocalDate fromDate, List<StockGroup> stockGroups, List<Candidate> candidates) {
         Map<String, Candidate> selectedCandidates = new HashMap<String, Candidate>();
-        StockMarket.allSectors().stream().forEach(stockGroup -> {
+        stockGroups.stream().forEach(stockGroup -> {
             System.out.println("==========================================");
             System.out.println("******************************************");
             System.out.println(stockGroup.getFullName());
@@ -200,7 +221,7 @@ public class OneCandidateRunner {
             LocalDate toDate = LocalDate.now();
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, stockGroup.getStockSymbols());
 
-            GlobalStockMarketCandidates.allNewCandidates().stream().forEach(candidate -> {
+            candidates.stream().forEach(candidate -> {
                 OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
                 runner.run(false);
                 runner.whenWonOver90Percent(() -> appendToCandidates(selectedCandidates, runner, candidate, stockGroup, fromDate, toDate));
@@ -211,6 +232,47 @@ public class OneCandidateRunner {
             System.out.println("==========================================");
         });
         writeToFile(selectedCandidates);
+    }
+
+    private static void runStocksWithCandidates(LocalDate fromDate, LocalDate toDate, List<String> stockSymbols, List<Candidate> candidates) {
+        Map<String, Candidate> selectedCandidates = new HashMap<String, Candidate>();
+        stockSymbols.stream().forEach(stockSymbol -> {
+            System.out.println("******************************************");
+            System.out.println(stockSymbol);
+            logger.info("Stock: " + stockSymbol);
+
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, new String[]{stockSymbol});
+
+            candidates.stream().forEach(candidate -> {
+                OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
+                runner.run(false);
+                logger.info("Candidate: " + candidate + " Stats " + runner.percentageOfOrdersWon() + "[" + runner.ordersWon() + "/" + runner.ordersLost() +"]");
+                runner.whenWonOver90Percent(() -> appendStockToCandidates(selectedCandidates, runner, candidate, stockSymbol, fromDate, toDate));
+
+            });
+            System.out.println("Completed at: "+ LocalDateTime.now());
+            System.out.println("******************************************");
+        });
+        writeToFile(selectedCandidates);
+    }
+
+    private static void appendStockToCandidates(Map<String, Candidate> selectedCandidates, OneCandidateRunner runner, Candidate candidate, String stockSymbol, LocalDate fromDate, LocalDate toDate) {
+        if (selectedCandidates.containsKey(candidate.key())) {
+            Candidate resultCandidate = selectedCandidates.get(candidate.key());
+            resultCandidate.addStockSymbolToDefaultGroup(stockSymbol);
+        } else {
+            StockGroup newStockGroup = new StockGroup("DEFAULT GROUP",
+                    stockSymbol,
+                    fromDate,
+                    toDate
+            );
+            List<StockGroup> stockGroups = new ArrayList();
+            stockGroups.add(newStockGroup);
+            Candidate newCandidate = new Candidate(candidate.getDescription(), candidate.getChromosome().toString(),
+                    candidate.getTradingDecisionGenerators(),
+                    stockGroups);
+            selectedCandidates.put(candidate.key(), newCandidate);
+        }
     }
 
     private static void writeToFile(Map<String, Candidate> selectedCandidates) {

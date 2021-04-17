@@ -1,0 +1,23 @@
+[
+  {
+    "sellTargetPrice": 90.500721236,
+    "sellResistancePrice": 70.050003,
+    "stockName": "NET",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "NET",
+        "numberOfShares": 119,
+        "price": 80.050003
+      },
+      "stockGroup": {
+        "name": "NET",
+        "description": "Stock Group Desc",
+        "percentageOfOrdersWon": 1.0,
+        "ordersWon": 2,
+        "ordersLost": 0
+      }
+    },
+    "expectedReturn": 0.13055
+  }
+]

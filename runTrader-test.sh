@@ -1,0 +1,1 @@
+echo "hola" > "/home/emilio/Dev/personal/trading-ga/log/$(date +%Y-%m-%d_daily_trader.out)" 2>&1

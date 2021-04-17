@@ -1,0 +1,65 @@
+[
+  {
+    "sellTargetPrice": 132.13,
+    "sellResistancePrice": 128.45,
+    "stockGroup": {
+      "name": "DEVELOP ADR",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 129.789993,
+    "candidate": "Developed Markets: 000011110001010011001000101101000101100.StochasticOscillatorGenerator.ChaikinOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 8,
+        "buzz": 0.0,
+        "weeklyAverage": 5.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6576,
+      "sectorAverageNewsScore": 0.5256,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "SAP"
+    },
+    "supportResistance": {
+      "levels": [
+        104.64,
+        124.86,
+        134.98,
+        169.3
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 6,
+          "neutral": 7
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 21.03465,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.04300,
+    "stockName": "SAP",
+    "expectedReturn": 1.80300
+  }
+]

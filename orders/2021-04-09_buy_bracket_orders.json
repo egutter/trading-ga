@@ -1,0 +1,240 @@
+[
+  {
+    "sellTargetPrice": 347.55,
+    "sellResistancePrice": 319.23,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 322.649994,
+    "candidate": "AAPL: 010100100100011000010101111110011000101.RSI.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 28,
+        "buzz": 0.8615,
+        "weeklyAverage": 32.5
+      },
+      "companyNewsScore": 0.6964,
+      "sectorAverageBullishPercent": 0.6658,
+      "sectorAverageNewsScore": 0.5364,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "ZM"
+    },
+    "supportResistance": {
+      "levels": [
+        230.0,
+        313.63,
+        398.8,
+        478.0,
+        588.84
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.027943,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.07100,
+    "stockName": "ZM",
+    "expectedReturn": 7.71600
+  },
+  {
+    "sellTargetPrice": 51.06,
+    "sellResistancePrice": 48.42,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 49.939999,
+    "candidate": "SQ: 011101110011000111011011110000100001000.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 209,
+        "buzz": 0.8865,
+        "weeklyAverage": 235.75
+      },
+      "companyNewsScore": 0.1481,
+      "sectorAverageBullishPercent": 0.585,
+      "sectorAverageNewsScore": 0.5094,
+      "sentiment": {
+        "bearishPercent": 0.7932,
+        "bullishPercent": 0.2068
+      },
+      "symbol": "AZN"
+    },
+    "supportResistance": {
+      "levels": [
+        46.48,
+        49.89,
+        52.57,
+        55.45,
+        58.08
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 9.735181,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.13900,
+    "stockName": "AZN",
+    "expectedReturn": 2.24300
+  },
+  {
+    "sellTargetPrice": 14.39,
+    "sellResistancePrice": 11.27,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 11.5,
+    "candidate": "CRM: 001100111011010001010000000001100011111.ADX.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 3,
+        "buzz": 0.5,
+        "weeklyAverage": 2.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.585,
+      "sectorAverageNewsScore": 0.5094,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "CRIS"
+    },
+    "supportResistance": {
+      "levels": [
+        0.9,
+        2.24,
+        13.44
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 9.064736,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.04100,
+    "stockName": "CRIS",
+    "expectedReturn": 25.09600
+  },
+  {
+    "sellTargetPrice": 57.82,
+    "sellResistancePrice": 55.32,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 55.869999,
+    "candidate": "SPLK: 111101000000100001111001000011110100010.MFI.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 38,
+        "buzz": 0.6637,
+        "weeklyAverage": 57.25
+      },
+      "companyNewsScore": 0.722,
+      "sectorAverageBullishPercent": 0.6312,
+      "sectorAverageNewsScore": 0.5253,
+      "sentiment": {
+        "bearishPercent": 0.2,
+        "bullishPercent": 0.8
+      },
+      "symbol": "XOM"
+    },
+    "supportResistance": {
+      "levels": [
+        31.11,
+        36.56,
+        42.81,
+        51.08,
+        62.55
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.047977,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.99400,
+    "stockName": "XOM",
+    "expectedReturn": 3.49000
+  }
+]

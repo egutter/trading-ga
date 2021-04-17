@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
 public class FinnhubClient {
@@ -53,8 +54,12 @@ public class FinnhubClient {
             String sentimentJson = EntityUtils.toString(entity);
             Reader reader = new StringReader(sentimentJson);
             return gson.fromJson(reader, classOfT);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            try {
+                return classOfT.getConstructor().newInstance();
+            } catch (Exception e1) {
+                throw new RuntimeException(e1);
+            }
         }
     }
 

@@ -115,9 +115,8 @@ public class StockMarketBuilder {
     }
 
     public StockMarket build(LocalDate fromDate, LocalDate toDate, boolean runImport, boolean appendLastQuoteFromMarket, String[] stockSymbols) {
-        if (runImport) yahooQuoteImporter.runImportFromMaxOrFrom(fromDate, stockSymbols);
+        if (runImport) yahooQuoteImporter.runImportFromMaxOrFrom(fromDate, toDate, stockSymbols);
         List<StockPrices> stockPrices = new ArrayList<StockPrices>();
-        List<DailyQuote> marketIndexPrices = new ArrayList<DailyQuote>();
 
         repository.forEachStock(stockName -> {
             List<DailyQuote> dailyPrices = new ArrayList<DailyQuote>();
@@ -125,13 +124,9 @@ public class StockMarketBuilder {
                 dailyPrices.add((DailyQuote) dailyQuote);
             });
             if (appendLastQuoteFromMarket) appendLastQuoteFromMarket(stockName, dailyPrices, toDate);
-            if (stockName.endsWith("MERV")) {
-                marketIndexPrices.addAll(dailyPrices);
-            } else {
-                stockPrices.add(new StockPrices(stockName, dailyPrices));
-            }
+            stockPrices.add(new StockPrices(stockName, dailyPrices));
         }, stockName -> !Arrays.asList(stockSymbols).contains(stockName));
-        return new StockMarket(stockPrices, new StockPrices("MERVAL", marketIndexPrices));
+        return new StockMarket(stockPrices);
     }
 
     private void appendLastQuoteFromMarket(String stockName, List<DailyQuote> dailyPrices, LocalDate toDate) {

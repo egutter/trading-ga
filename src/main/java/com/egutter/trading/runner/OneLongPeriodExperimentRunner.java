@@ -61,9 +61,9 @@ public class OneLongPeriodExperimentRunner {
 //        });
 
         // One Sector
-        StockMarket.allSectors().stream().forEach(stockGroup -> {
+        StockMarket.spySector().stream().forEach(stockGroup -> {
 
-            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), false, false,
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, false,
                     stockGroup.getStockSymbols());
     //        runOneStrategy(stockMarket, tradingDecisionGenerators);
 
@@ -175,7 +175,7 @@ public class OneLongPeriodExperimentRunner {
     private void runOneStrategy(StockMarket stockMarket, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators, StockGroup stockGroup) {
         System.out.println("=============================================");
 
-        printResults("2001-2020", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators, stockGroup);
+        printResults("2001-2021", stockMarket, new Experiment(tradingDecisionGenerators).run(stockMarket), tradingDecisionGenerators, stockGroup);
     }
 
 

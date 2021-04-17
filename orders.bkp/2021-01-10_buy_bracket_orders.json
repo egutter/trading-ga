@@ -1,0 +1,424 @@
+[
+  {
+    "sellTargetPrice": 244.25,
+    "sellResistancePrice": 226.830002,
+    "stockName": "PYPL",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "PYPL",
+        "numberOfShares": 42,
+        "price": 235.039993
+      },
+      "stockGroup": {
+        "name": "PYPL",
+        "description": "1.00(13/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 13,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "PYPL"
+        ]
+      }
+    },
+    "expectedReturn": 0.03918
+  },
+  {
+    "sellTargetPrice": 346.440002,
+    "sellResistancePrice": 305.51001,
+    "stockName": "SPOT",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "SPOT",
+        "numberOfShares": 30,
+        "price": 331.359985
+      },
+      "stockGroup": {
+        "name": "INNOVATION",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "SQ",
+          "Z",
+          "SPLK",
+          "TWLO",
+          "WORK",
+          "TSLA",
+          "TWOU",
+          "XLNX",
+          "SPOT",
+          "CRNC",
+          "ZM",
+          "NET",
+          "IRBT",
+          "DT",
+          "ALB",
+          "W",
+          "ETSY",
+          "VMW",
+          "SHOP",
+          "FPX"
+        ]
+      }
+    },
+    "expectedReturn": 0.04551
+  },
+  {
+    "sellTargetPrice": 213.61019156199998,
+    "sellResistancePrice": 201.5,
+    "stockName": "ITW",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "ITW",
+        "numberOfShares": 47,
+        "price": 209.259995
+      },
+      "stockGroup": {
+        "name": "INDUSTRIAL",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "XLI",
+          "UNP",
+          "HON",
+          "BA",
+          "RTX",
+          "LMT",
+          "MMM",
+          "UPS",
+          "CAT",
+          "GE",
+          "CSX",
+          "ITW",
+          "NOC",
+          "DE",
+          "NSC",
+          "ROP",
+          "LHX",
+          "WM",
+          "EMR",
+          "GD",
+          "ETN"
+        ]
+      }
+    },
+    "expectedReturn": 0.02079
+  },
+  {
+    "sellTargetPrice": 227.179993,
+    "sellResistancePrice": 212.25,
+    "stockName": "MSFT",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "MSFT",
+        "numberOfShares": 45,
+        "price": 218.289993
+      },
+      "stockGroup": {
+        "name": "MSFT",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "MSFT"
+        ]
+      }
+    },
+    "expectedReturn": 0.04073
+  },
+  {
+    "sellTargetPrice": 480.188800978,
+    "sellResistancePrice": 445.589996,
+    "stockName": "ORLY",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "ORLY",
+        "numberOfShares": 21,
+        "price": 469.899994
+      },
+      "stockGroup": {
+        "name": "CONS DISC",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "XLY",
+          "AMZN",
+          "HD",
+          "MCD",
+          "NKE",
+          "LOW",
+          "SBUX",
+          "BKNG",
+          "TJX",
+          "TGT",
+          "DG",
+          "EBAY",
+          "GM",
+          "ROST",
+          "ORLY",
+          "YUM",
+          "AZO",
+          "CMG",
+          "MAR",
+          "F",
+          "HLT"
+        ]
+      }
+    },
+    "expectedReturn": 0.02190
+  },
+  {
+    "sellTargetPrice": 162.85499549999997,
+    "sellResistancePrice": 141.220001,
+    "stockName": "XLNX",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "XLNX",
+        "numberOfShares": 66,
+        "price": 149.710007
+      },
+      "stockGroup": {
+        "name": "INNOVATION",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "SQ",
+          "Z",
+          "SPLK",
+          "TWLO",
+          "WORK",
+          "TSLA",
+          "TWOU",
+          "XLNX",
+          "SPOT",
+          "CRNC",
+          "ZM",
+          "NET",
+          "IRBT",
+          "DT",
+          "ALB",
+          "W",
+          "ETSY",
+          "VMW",
+          "SHOP",
+          "FPX"
+        ]
+      }
+    },
+    "expectedReturn": 0.08780
+  },
+  {
+    "sellTargetPrice": 223.259995,
+    "sellResistancePrice": 203.470001,
+    "stockName": "GLOB",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "GLOB",
+        "numberOfShares": 45,
+        "price": 217.759995
+      },
+      "stockGroup": {
+        "name": "EMERG ADR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "MELI",
+          "GLOB",
+          "BABA",
+          "BIDU",
+          "JD"
+        ]
+      }
+    },
+    "expectedReturn": 0.02526
+  },
+  {
+    "sellTargetPrice": 94.47647723600001,
+    "sellResistancePrice": 73.269997,
+    "stockName": "NET",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "NET",
+        "numberOfShares": 126,
+        "price": 79.019997
+      },
+      "stockGroup": {
+        "name": "NET",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "NET"
+        ]
+      }
+    },
+    "expectedReturn": 0.19560
+  },
+  {
+    "sellTargetPrice": 3417.9547280760003,
+    "sellResistancePrice": 3138.379883,
+    "stockName": "AMZN",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "AMZN",
+        "numberOfShares": 3,
+        "price": 3162.159912
+      },
+      "stockGroup": {
+        "name": "AMZN",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "AMZN"
+        ]
+      }
+    },
+    "expectedReturn": 0.08089
+  },
+  {
+    "sellTargetPrice": 263.285004,
+    "sellResistancePrice": 223.160995,
+    "stockName": "SQ",
+    "buyOrderWithPendingSellOrders": {
+      "order": {
+        "type": "class com.egutter.trading.order.BuyOrder",
+        "stockName": "SQ",
+        "numberOfShares": 41,
+        "price": 239.479996
+      },
+      "stockGroup": {
+        "name": "SQ",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2020,
+          "month": 12,
+          "day": 10
+        },
+        "stockSymbols": [
+          "SQ"
+        ]
+      }
+    },
+    "expectedReturn": 0.09940
+  }
+]

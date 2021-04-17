@@ -1,0 +1,225 @@
+[
+  {
+    "sellTargetPrice": 85.75,
+    "sellResistancePrice": 81.05,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 82.610001,
+    "candidate": "NET: 101000010110100110010000100100100101000.MFI.WilliamsRGenerator",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "MCHI"
+    },
+    "supportResistance": {
+      "levels": [
+        70.485,
+        76.12,
+        81.76,
+        87.08,
+        97.55
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 22.1444,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.92500,
+    "stockName": "MCHI",
+    "expectedReturn": 3.79900
+  },
+  {
+    "sellTargetPrice": 89.42,
+    "sellResistancePrice": 81.25,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 82.139999,
+    "candidate": "INTC: 011100010100011000001100111110011110001.UltimateOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 8,
+        "buzz": 0.5161,
+        "weeklyAverage": 15.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6362,
+      "sectorAverageNewsScore": 0.5355,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "JD"
+    },
+    "supportResistance": {
+      "levels": [
+        59.9,
+        65.85,
+        81.06,
+        88.64,
+        96.2,
+        108.29
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 6,
+          "neutral": 7
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 20.23349,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.09500,
+    "stockName": "JD",
+    "expectedReturn": 8.86500
+  },
+  {
+    "sellTargetPrice": 640.84,
+    "sellResistancePrice": 607.84,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 615.159973,
+    "candidate": "VCLT: 111100100000101111110001000100001101101.StochasticOscillatorGenerator.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 5,
+        "buzz": 0.8333,
+        "weeklyAverage": 6.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6421,
+      "sectorAverageNewsScore": 0.5292,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "CHTR"
+    },
+    "supportResistance": {
+      "levels": [
+        572.455,
+        600.16,
+        622.23,
+        648.82,
+        681.71
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.766279,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.20400,
+    "stockName": "CHTR",
+    "expectedReturn": 4.17500
+  },
+  {
+    "sellTargetPrice": 25.73,
+    "sellResistancePrice": 23.14,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 23.440001,
+    "candidate": "NET: 011100010111011001011100101111101001100.StochasticOscillatorGenerator.MACD",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "ICLN"
+    },
+    "supportResistance": {
+      "levels": [
+        15.23,
+        17.55,
+        23.0419,
+        27.39,
+        34.25
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 29.110765,
+        "trending": true
+      }
+    },
+    "maxLoss": 1.29600,
+    "stockName": "ICLN",
+    "expectedReturn": 9.78200
+  }
+]

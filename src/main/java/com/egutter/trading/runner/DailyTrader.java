@@ -41,12 +41,14 @@ public class DailyTrader {
     private CashAccount tdaAccount;
     private LocalDate tradeOn = LocalDate.now();
     private LocalDate lastTradeAt;
+    private String baseOrdersPath;
     private final static LocalDate today = LocalDate.now();
 
-    public DailyTrader(TdaClient client, LocalDate tradeOn, LocalDate lastTradeAt) {
+    public DailyTrader(TdaClient client, LocalDate tradeOn, LocalDate lastTradeAt, String baseOrdersPath) {
         this.client = client;
         this.tradeOn = tradeOn;
         this.lastTradeAt = lastTradeAt;
+        this.baseOrdersPath = baseOrdersPath;
         CashAccount tdaAccount = fetchCashAccount(client);
         this.cashAvailable = tdaAccount.getCurrentBalances().getCashAvailableForTrading();
         this.tdaAccount = tdaAccount;
@@ -98,13 +100,18 @@ public class DailyTrader {
 
 
     public static void main(String[] args) {
+        String baseOrdersPath = "";
+        if (args.length > 0){
+            baseOrdersPath = args[0];
+        }
+
         LocalDate tradeOn = isMonday(today) ? today.minusDays(3) : today.minusDays(1);
         LocalDate lastTradeAt = isMonday(tradeOn) ? tradeOn.minusDays(3) : tradeOn.minusDays(1);
 
         logger.info("Trading on "+ tradeOn + " last trade at "+ lastTradeAt);
 
         TdaClient client = new HttpTdaClient();
-        DailyTrader dailyTrader = new DailyTrader(client, tradeOn, lastTradeAt);
+        DailyTrader dailyTrader = new DailyTrader(client, tradeOn, lastTradeAt, baseOrdersPath);
 
         dailyTrader.tradeGeneratedOrders();
     }
@@ -119,7 +126,7 @@ public class DailyTrader {
     }
 
     private void buyGeneratedOrders() {
-        List<BuyBracketOrder> orders = new BuyBracketOrdersFileHandler(tradeOn).fromJson();
+        List<BuyBracketOrder> orders = new BuyBracketOrdersFileHandler(tradeOn, baseOrdersPath).fromJson();
         orders.forEach(bracketOrder -> {
 
             boolean holdsPosition = tdaAccount.getPositions().stream().anyMatch(position -> position.getInstrument().getSymbol().equals(bracketOrder.getStockName()));
@@ -154,7 +161,7 @@ public class DailyTrader {
     }
 
     private void addOcaSellLimitsForExecutedOrders() {
-        List<BuyBracketOrder> orders = new BuyBracketOrdersFileHandler(lastTradeAt).fromJson();
+        List<BuyBracketOrder> orders = new BuyBracketOrdersFileHandler(lastTradeAt, baseOrdersPath).fromJson();
         orders.forEach(bracketOrder -> {
 
 

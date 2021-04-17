@@ -3,6 +3,7 @@ package com.egutter.trading.candidates;
 import com.egutter.trading.decision.Candidate;
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
+import com.egutter.trading.out.CandidatesFileHandler;
 import com.egutter.trading.stock.StockGroup;
 import org.uncommons.maths.binary.BitString;
 
@@ -17,12 +18,223 @@ import static java.util.Arrays.asList;
 public class GlobalStockMarketCandidates {
 
     public static List<BitString> chromosomeCandidates() {
-        return newNewerCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());
+        return new CandidatesFileHandler().chromosomesfromJson();
+//        return newNewerCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());
     }
 
     public static List<Candidate> allNewCandidates() {
         return Stream.concat(newNewerCandidates().stream(), UsaStockMarketCandidates.allCandidates().stream())
                 .collect(Collectors.toList());
+    }
+
+    public static List<Candidate> spyCandidates() {
+        return asList(
+                new Candidate("SPY", "011100000100101010111000000011100000000",
+                        asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(3/0)", topSpy())
+                        )),
+                new Candidate("SPY", "000101001100110000001000010000000101111",
+                        asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001000101010011001111110000011100010100",
+                        asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(7/0)", topSpy())
+                        )),
+                new Candidate("SPY", "100000100010010010010011100100101011110",
+                        asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(7/0)", topSpy())
+                        )),
+                new Candidate("SPY", "101001010011011110010001100100101101001",
+                        asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "101101110001000010111011110100000111000",
+                        asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "100000111011011000001010000100100000010",
+                        asList(StochasticOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "110110000010100100000000101010100010100",
+                        asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "010101100100010000000011100000100010101",
+                        asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "010101101100110101000010010000011001101",
+                        asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "110010000000101001000000010000101011110",
+                        asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "110010000000101001000000010000010101000",
+                        asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "110110000010100100000000100000100010101",
+                        asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "010101101100110101000010010000000011011",
+                        asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "010101101100110101000010010000010111001",
+                        asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101001011100000111010110000100111001",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101001000100000110000010000000101010",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101001011100000110111010000100111011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "000101001000100000111011110000101110011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "000101001000100000101000010000000111011",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101001011100000111010110000000110101",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "100100100100010111110111110101111000000",
+                        asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","0.91(10/1)", topSpy())
+                        )),
+                new Candidate("SPY", "111100101001111101101000000011001011110",
+                        asList(RelativeStrengthIndexGenerator.class, AverageDirectionalIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101011101100000000001010101100011010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101011101100000000001010101100011010",
+                        asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "010110001100101001110000010011100100011",
+                        asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "010110001100101001100111000001100110010",
+                        asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "111000101010100001010001010100100100000",
+                        asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "001101011101100000000001010101100011010",
+                        asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "111101011110000110001001010010101110110",
+                        asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "110000100001000110000011110010000001001",
+                        asList(AverageDirectionalIndexGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "111001011100000110111011110011000101100",
+                        asList(AverageDirectionalIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(5/0)", topSpy())
+                        )),
+                new Candidate("SPY", "000011111111001010010010010010100101000",
+                        asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","0.92(12/1)", topSpy())
+                        )),
+                new Candidate("SPY", "100001001011101010111111100100000110000",
+                        asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        )),
+                new Candidate("SPY", "111100101000101001100000000011010010011",
+                        asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","0.91(10/1)", topSpy())
+                        )),
+                new Candidate("SPY", "011010101111100110101000010101000111011",
+                        asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "101000010110110011001000101101000100000",
+                        asList(AroonOscilatorGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "101100100100100100000000100101110011000",
+                        asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","0.91(10/1)", topSpy())
+                        )),
+                new Candidate("SPY", "110001001010101001101001010011010110101",
+                        asList(MoneyFlowIndexGenerator.class, UltimateOscillatorGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(4/0)", topSpy())
+                        )),
+                new Candidate("SPY", "111100101001101000010000010100001011000",
+                        asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(11/0)", topSpy())
+                        )),
+                new Candidate("SPY", "111000101010100001010001010100101111000",
+                        asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
+                        asList(
+                                new StockGroup("SPY","1.00(6/0)", topSpy())
+                        ))
+        );
     }
 
     public static List<Candidate> newNewerCandidates() {

@@ -1,5 +1,7 @@
 package com.egutter.trading.stock;
 
+import java.math.BigDecimal;
+
 public class TimeFrameQuote {
 
     private final DailyQuote quoteAtDay;
@@ -22,5 +24,11 @@ public class TimeFrameQuote {
 
     public DailyQuote getQuoteAtNextDay() {
         return quoteAtNextDay;
+    }
+
+    public boolean openNextDayAboveCloseAtDay() {
+        BigDecimal openNextDay = BigDecimal.valueOf(getQuoteAtDay().getOpenPrice());
+        BigDecimal closeAtDay = BigDecimal.valueOf(getQuoteAtDay().getClosePrice());
+        return openNextDay.compareTo(closeAtDay) >= 0;
     }
 }

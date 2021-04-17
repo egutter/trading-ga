@@ -19,11 +19,6 @@ public class DoNotBuyWhenNextDayIsOutsideRange implements Function<TimeFrameQuot
     @Override
     public Boolean apply(TimeFrameQuote timeFrameQuote) {
         boolean withinRange = range.contains(BigDecimal.valueOf(timeFrameQuote.getQuoteAtNextDay().getOpenPrice()));
-        if (withinRange) {
-            MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.WITHIN_NEXT_DAY_RANGE);
-        } else {
-            MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.OUTSIDE_NEXT_DAY_RANGE);
-        }
-        return withinRange;
+        return withinRange && timeFrameQuote.openNextDayAboveCloseAtDay();
     }
 }

@@ -3,17 +3,20 @@ package com.egutter.trading.stock;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class StockGroup {
     private final String name;
     private final String description;
-    private final BigDecimal percentageOfOrdersWon;
-    private final int ordersWon;
-    private final int ordersLost;
+    private BigDecimal percentageOfOrdersWon = BigDecimal.ZERO;
+    private Integer ordersWon = 0;
+    private Integer ordersLost = 0;
     private final LocalDate fromDate;
     private final LocalDate toDate;
-    private final String[] stockSymbols;
+    private final List<String> stockSymbols;
 
     public StockGroup(String name, String[] stockSymbols) {
         this(name, "", stockSymbols);
@@ -25,13 +28,25 @@ public class StockGroup {
 
     public StockGroup(String name, String description, String[] stockSymbols, BigDecimal percentageOfOrdersWon, int ordersWon, int ordersLost, LocalDate fromDate, LocalDate toDate) {
         this.name = name;
-        this.stockSymbols = stockSymbols;
+        this.stockSymbols = Arrays.asList(stockSymbols);
         this.description = description;
         this.percentageOfOrdersWon = percentageOfOrdersWon;
         this.ordersWon = ordersWon;
         this.ordersLost = ordersLost;
         this.fromDate = fromDate;
         this.toDate = toDate;
+    }
+
+    public StockGroup(String name, String stockSymbol, LocalDate fromDate, LocalDate toDate) {
+        this.name = name;
+        this.stockSymbols = new ArrayList<>();
+        this.stockSymbols.add(stockSymbol);
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.description = "";
+        this.percentageOfOrdersWon = null;
+        this.ordersWon = null;
+        this.ordersLost = null;
     }
 
     public String getDescription() {
@@ -43,7 +58,7 @@ public class StockGroup {
     }
 
     public String[] getStockSymbols() {
-        return stockSymbols;
+        return stockSymbols.toArray(new String[stockSymbols.size()]);
     }
 
     @Override
@@ -64,15 +79,15 @@ public class StockGroup {
     }
 
     public BigDecimal getPercentageOfOrdersWon() {
-        return percentageOfOrdersWon;
+        return percentageOfOrdersWon == null ? BigDecimal.ZERO : percentageOfOrdersWon;
     }
 
     public int getOrdersWon() {
-        return ordersWon;
+        return ordersWon == null ? 0 : ordersWon;
     }
 
     public int getOrdersLost() {
-        return ordersLost;
+        return ordersLost == null ? 0 : ordersLost;
     }
 
     public LocalDate getFromDate() {
@@ -81,5 +96,13 @@ public class StockGroup {
 
     public LocalDate getToDate() {
         return toDate;
+    }
+
+    public boolean containsStockSymbol(String stockSymbol) {
+        return stockSymbols.contains(stockSymbol);
+    }
+
+    public void addStockSymbol(String stockSymbol) {
+        this.stockSymbols.add(stockSymbol);
     }
 }

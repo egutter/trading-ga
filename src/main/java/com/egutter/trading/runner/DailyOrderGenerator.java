@@ -8,6 +8,8 @@ import com.studerw.tda.client.HttpTdaClient;
 import com.studerw.tda.client.TdaClient;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.Seconds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,22 +26,31 @@ public class DailyOrderGenerator {
 
     public static final double MINIMUM_PROFIT_EXPECTED = 1.00;
     private LocalDate tradeOn;
+    private String baseOrdersPath;
 
     private final static LocalDate today = LocalDate.now();
     private final static LocalDate yesterday = (today.dayOfWeek().get() == DateTimeConstants.MONDAY) ? today.minusDays(3) : today.minusDays(1);
 
 
-    public DailyOrderGenerator(TdaClient client, LocalDate tradeOn) {
+    public DailyOrderGenerator(TdaClient client, LocalDate tradeOn, String baseOrdersPath) {
         this.tradeOn = tradeOn;
+        this.baseOrdersPath = baseOrdersPath;
     }
 
     public static void main(String[] args) {
+        String baseOrdersPath = "";
+        if (args.length > 0){
+            baseOrdersPath = args[0];
+        }
+        LocalTime startTime = LocalTime.now();
         LocalDate tradeOn = yesterday;
+//        LocalDate tradeOn = new LocalDate(2021, 4, 8);
 
         TdaClient client = new HttpTdaClient();
-        DailyOrderGenerator dailyOrderGenerator = new DailyOrderGenerator(client, tradeOn);
+        DailyOrderGenerator dailyOrderGenerator = new DailyOrderGenerator(client, tradeOn, baseOrdersPath);
 
         dailyOrderGenerator.runTraderAndGenerateOrders();
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
 
     public void runTraderAndGenerateOrders() {
@@ -106,7 +117,7 @@ public class DailyOrderGenerator {
     }
 
     private void writeToFile(List<BuyBracketOrder> orders) {
-        new BuyBracketOrdersFileHandler(tradeOn).toJson(orders);
+        new BuyBracketOrdersFileHandler(tradeOn, baseOrdersPath).toJson(orders);
     }
 
 }

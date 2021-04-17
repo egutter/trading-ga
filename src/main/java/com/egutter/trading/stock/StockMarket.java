@@ -8,13 +8,16 @@ import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
 public class StockMarket {
 
     public static final String TECH_SECTOR = "TECH";
+    public static final String SPY_SECTOR = "SPY";
     public static final String COMM_SECTOR = "COMM";
     public static final String FINANCE_SECTOR = "FINANCE";
     public static final String CONS_BASIC_SECTOR = "CONS BASIC";
@@ -37,9 +40,18 @@ public class StockMarket {
     private LocalDate lastTradingDay;
     private LocalDate firstTradingDay;
 
+    public static void main(String[] args) {
+        System.out.println(allSectorsStockSymbols());
+    }
+
     public StockMarket(List<StockPrices> stockPrices, StockPrices marketIndexPrices) {
         this.stockPrices = stockPrices;
         this.marketIndexPrices = marketIndexPrices;
+    }
+
+    public StockMarket(List<StockPrices> stockPrices) {
+        this.stockPrices = stockPrices;
+        this.marketIndexPrices = new StockPrices("MKT");
     }
 
     public static List<StockGroup> onlyIndividualSectors() {
@@ -53,6 +65,11 @@ public class StockMarket {
 
         return stockGroups;
     }
+
+    public static List<StockGroup> spySector() {
+        return Arrays.asList(new StockGroup(SPY_SECTOR, topSpy()));
+    }
+
     public static List<StockGroup> allSectors() {
         List<StockGroup> stockGroups = new ArrayList<StockGroup>();
         stockGroups.addAll(Arrays.asList(new StockGroup(ETF_SECTORS, sectors()),
@@ -65,16 +82,14 @@ public class StockMarket {
                 new StockGroup(BIOTECH_SECTOR, biotechSector()),
                 new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
                 new StockGroup(INNOVATION_SECTOR, innovationSector()),
-                new StockGroup("VGLT", longTermBonds()),
-                new StockGroup("VCLT", corporateBonds()),
                 new StockGroup(METALS_SECTORS, metals()),
                 new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
                 new StockGroup(GREEN_SECTORS, greenSector()),
                 new StockGroup(SMALL_CAP_SECTORS, smallCap()),
-                new StockGroup("BGRN", greenBonds()),
                 new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
                 new StockGroup("DEVELOP ADR", developAdr()),
-                new StockGroup("EMERG ADR", emergentAdr())));
+                new StockGroup("EMERG ADR", emergentAdr()),
+                new StockGroup(SPY_SECTOR, topSpy())));
         individualStocks().stream().forEach(stocks -> {
             stockGroups.add(new StockGroup(stocks[0], stocks));
         });
@@ -108,26 +123,26 @@ public class StockMarket {
     public static String[] biotechSector() {
         return new String[]{
                 "XBI",
-                "MRNA",
-                "REGN",
-                "IMMU",
-                "BMRN",
-                "SGEN",
+                "VCEL",
                 "UTHR",
-                "VRTX",
-                "EXEL",
-                "SRPT",
-                "ALNY",
+                "NTLA",
+                "ICPT",
+                "CLVS",
+                "MNKD",
+                "CRIS",
+                "GTHX",
+                "CDNA",
+                "AMGN",
+                "CYTK",
                 "GILD",
-                "ACAD",
-                "BHVN",
-                "ABBV",
-                "NBIX",
-                "FOLD",
+                "HGEN",
+                "MGNX",
+                "QURE",
+                "DVAX",
+                "DCPH",
+                "AGIO",
                 "INCY",
-                "ALXN",
-                "RARE",
-                "LGND"
+                "HRTX"
         };
     }
     public static String[] commSector() {
@@ -150,7 +165,7 @@ public class StockMarket {
                 "VIAC",
                 "OMC",
                 "FOXA",
-                "CTL",
+                "IPG",
                 "DISH",
                 "DISCK"
         };
@@ -340,6 +355,102 @@ public class StockMarket {
             "VGK",
         };
     }
+    public static String[] topSpy() {
+        return new String[]{
+                "AAPL",
+                "MSFT",
+                "FB",
+                "TSLA",
+                "JNJ",
+                "JPM",
+                "V",
+                "PG",
+                "UNH",
+                "DIS",
+                "MA",
+                "NVDA",
+                "HD",
+                "PYPL",
+                "VZ",
+                "ADBE",
+                "CMCSA",
+                "NFLX",
+                "BAC",
+                "KO",
+                "MRK",
+                "PEP",
+                "T",
+                "PFE",
+                "WMT",
+                "INTC",
+                "ABT",
+                "CRM",
+                "ABBV",
+                "TMO",
+                "NKE",
+                "AVGO",
+                "XOM",
+                "QCOM",
+                "CSCO",
+                "COST",
+                "ACN",
+                "CVX",
+                "MCD",
+                "MDT",
+                "NEE",
+                "TXN",
+                "HON",
+                "LLY",
+                "DHR",
+                "UNP",
+                "BMY",
+                "LIN",
+                "AMGN",
+                "PM",
+                "C",
+                "SBUX",
+                "BA",
+                "UPS",
+                "WFC",
+                "LOW",
+                "ORCL",
+                "IBM",
+                "AMD",
+                "RTX",
+                "NOW",
+                "MMM",
+                "AMT",
+                "MS",
+                "BLK",
+                "CAT",
+                "ISRG",
+                "GE",
+                "INTU",
+                "CHTR",
+                "GS",
+                "CVS",
+                "TGT",
+                "FIS",
+                "LMT",
+                "MU",
+                "MDLZ",
+                "SQ",
+//                "SYK",
+//                "SCHW",
+//                "ANTM",
+//                "SPGI",
+//                "AMAT",
+//                "ZTS",
+//                "MO",
+//                "DE",
+//                "TMUS",
+//                "CI",
+//                "TJX",
+//                "PLD",
+//                "CL",
+//                "GILD"
+        };
+    }
     public static String[] sectors() {
         return new String[]{
             "SPY",
@@ -430,7 +541,6 @@ public class StockMarket {
             "UBS", // UBS
             "AZN", // Aztra Seneca
             "GSK", // Glaxo Smith
-            "SNE", // Sony
         };
     }
 
@@ -1197,6 +1307,11 @@ public class StockMarket {
 
     public static String[] cisco() {
         return new String[] { "CSCO"};
+    }
+
+    public static List<String> allSectorsStockSymbols() {
+        return allSectors().stream().map(stockGroup -> Arrays.asList(stockGroup.getStockSymbols())).flatMap(Collection::stream).
+                distinct().collect(Collectors.toList());
     }
 
     public List<StockPrices> getStockPrices() {

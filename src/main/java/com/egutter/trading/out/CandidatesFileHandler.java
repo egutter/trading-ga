@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CandidatesFileHandler {
 
@@ -37,6 +38,10 @@ public class CandidatesFileHandler {
 
     public void toJson(Collection<Candidate> candidates) {
         writeFile(gson.toJson(candidates));
+    }
+
+    public List<BitString> chromosomesfromJson() {
+        return fromJson().stream().map(candidate -> candidate.getChromosome()).distinct().collect(Collectors.toList());
     }
 
     public List<Candidate> fromJson() {

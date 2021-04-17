@@ -102,4 +102,8 @@ public class Candidate {
     public void addStockGroup(StockGroup newStockGroup) {
         stockGroups.add(newStockGroup);
     }
+
+    public void addStockSymbolToDefaultGroup(String stockSymbol) {
+        stockGroups.get(0).addStockSymbol(stockSymbol);
+    }
 }

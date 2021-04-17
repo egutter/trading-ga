@@ -1,0 +1,303 @@
+[
+  {
+    "sellTargetPrice": 56.56,
+    "sellResistancePrice": 53.12,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 53.299999,
+    "candidate": "NFLX: 111001100001011000101010100000000111110.BB.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 31,
+        "buzz": 0.9465,
+        "weeklyAverage": 32.75
+      },
+      "companyNewsScore": 0.6178,
+      "sectorAverageBullishPercent": 0.6308,
+      "sectorAverageNewsScore": 0.5243,
+      "sentiment": {
+        "bearishPercent": 0.25,
+        "bullishPercent": 0.75
+      },
+      "symbol": "CMCSA"
+    },
+    "supportResistance": {
+      "levels": [
+        40.965,
+        45.94,
+        50.38,
+        53.97,
+        58.585
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 25.883043,
+        "trending": true
+      }
+    },
+    "maxLoss": 0.33900,
+    "stockName": "CMCSA",
+    "expectedReturn": 6.11600
+  },
+  {
+    "sellTargetPrice": 347.55,
+    "sellResistancePrice": 315.19,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 329.200012,
+    "candidate": "AMZN: 100101110110111110010011110100001100011.ADX.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 30,
+        "buzz": 0.923,
+        "weeklyAverage": 32.5
+      },
+      "companyNewsScore": 0.8608,
+      "sectorAverageBullishPercent": 0.6608,
+      "sectorAverageNewsScore": 0.5382,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "ZM"
+    },
+    "supportResistance": {
+      "levels": [
+        230.0,
+        315.19,
+        398.8,
+        478.0,
+        588.84
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.091292,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.44500,
+    "stockName": "ZM",
+    "expectedReturn": 5.57300
+  },
+  {
+    "sellTargetPrice": 59.58,
+    "sellResistancePrice": 53.76,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 54.470001,
+    "candidate": "SQ: 000110100101100100001111101101000010111.StochasticOscillatorGenerator.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 24,
+        "buzz": 0.7384,
+        "weeklyAverage": 32.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6191,
+      "sectorAverageNewsScore": 0.5294,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "WBA"
+    },
+    "supportResistance": {
+      "levels": [
+        33.36,
+        39.24,
+        44.87,
+        50.2887,
+        57.05
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 28.470198,
+        "trending": true
+      }
+    },
+    "maxLoss": 1.32100,
+    "stockName": "WBA",
+    "expectedReturn": 9.39000
+  },
+  {
+    "sellTargetPrice": 124.95,
+    "sellResistancePrice": 112.31,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 114.699997,
+    "candidate": "MSFT: 111100100000100010101010010011100101000.StochasticOscillatorGenerator.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 4,
+        "buzz": 0.8421,
+        "weeklyAverage": 4.75
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6193,
+      "sectorAverageNewsScore": 0.5294,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "IRBT"
+    },
+    "supportResistance": {
+      "levels": [
+        67.55,
+        80.89,
+        98.55,
+        117.3632,
+        137.79,
+        197.4
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 12.293915,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.12800,
+    "stockName": "IRBT",
+    "expectedReturn": 8.93600
+  },
+  {
+    "sellTargetPrice": 43.03,
+    "sellResistancePrice": 37.61,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 38.529999,
+    "candidate": "EA: 101100010110100100010000100100100111001.AROO.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 1,
+        "buzz": 0.8,
+        "weeklyAverage": 1.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6608,
+      "sectorAverageNewsScore": 0.5382,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "TWOU"
+    },
+    "supportResistance": {
+      "levels": [
+        28.45,
+        35.46,
+        40.83,
+        46.7,
+        59.74
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.811173,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.44600,
+    "stockName": "TWOU",
+    "expectedReturn": 11.68600
+  }
+]

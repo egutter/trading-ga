@@ -1,0 +1,507 @@
+[
+  {
+    "sellTargetPrice": 543.12,
+    "sellResistancePrice": 506.91,
+    "stockGroup": {
+      "name": "NFLX",
+      "description": "1.00(11/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 11,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 521.659973,
+    "candidate": "SQ: 110101000001001001110111111111110001001.BB.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 70,
+        "buzz": 0.7142,
+        "weeklyAverage": 98.0
+      },
+      "companyNewsScore": 0.5773,
+      "sectorAverageBullishPercent": 0.6155,
+      "sectorAverageNewsScore": 0.5168,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "NFLX"
+    },
+    "supportResistance": {
+      "levels": [
+        458.6,
+        483.16,
+        507.13,
+        536.37,
+        593.2877
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 17.146875,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.91000,
+    "stockName": "NFLX",
+    "expectedReturn": 4.11400
+  },
+  {
+    "sellTargetPrice": 257.60,
+    "sellResistancePrice": 233.61,
+    "stockGroup": {
+      "name": "PYPL",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 242.839996,
+    "candidate": "AAPL: 100100001110001101110111111110000100010.StochasticOscillatorGenerator.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 44,
+        "buzz": 1.0232,
+        "weeklyAverage": 43.0
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6497,
+      "sectorAverageNewsScore": 0.525,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "PYPL"
+    },
+    "supportResistance": {
+      "levels": [
+        171.63,
+        189.25,
+        212.45,
+        237.9969,
+        254.92,
+        309.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 0,
+          "sell": 8,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 21.640963,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.95100,
+    "stockName": "PYPL",
+    "expectedReturn": 6.07800
+  },
+  {
+    "sellTargetPrice": 2104.27,
+    "sellResistancePrice": 2055.54,
+    "stockGroup": {
+      "name": "COMM",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 9
+      }
+    },
+    "closePrice": 2068.629883,
+    "candidate": "CRM: 001000011011110001111000000001110011111.ADX.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 56,
+        "buzz": 0.896,
+        "weeklyAverage": 62.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6497,
+      "sectorAverageNewsScore": 0.525,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "GOOG"
+    },
+    "supportResistance": {
+      "levels": [
+        1406.55,
+        1593.86,
+        1847.2,
+        2152.68
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 10.216963,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.63700,
+    "stockName": "GOOG",
+    "expectedReturn": 1.72300
+  },
+  {
+    "sellTargetPrice": 550.56,
+    "sellResistancePrice": 508.20,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "1.00(2/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 2,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 533.929993,
+    "candidate": "NVDA: 001000100111110010101011001111000010001.MACD.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 31,
+        "buzz": 0.8985,
+        "weeklyAverage": 34.5
+      },
+      "companyNewsScore": 0.7777,
+      "sectorAverageBullishPercent": 0.6497,
+      "sectorAverageNewsScore": 0.525,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "NVDA"
+    },
+    "supportResistance": {
+      "levels": [
+        408.37,
+        431.83,
+        492.0,
+        528.65,
+        565.68,
+        614.9
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 19.789793,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.06300,
+    "stockName": "NVDA",
+    "expectedReturn": 3.11500
+  },
+  {
+    "sellTargetPrice": 129.82,
+    "sellResistancePrice": 119.90,
+    "stockGroup": {
+      "name": "AAPL",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 122.150002,
+    "candidate": "SMALL CAP: 100001000111000001010111010000100001000.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 238,
+        "buzz": 0.8447,
+        "weeklyAverage": 281.75
+      },
+      "companyNewsScore": 0.7326,
+      "sectorAverageBullishPercent": 0.6497,
+      "sectorAverageNewsScore": 0.525,
+      "sentiment": {
+        "bearishPercent": 0.1957,
+        "bullishPercent": 0.8043
+      },
+      "symbol": "AAPL"
+    },
+    "supportResistance": {
+      "levels": [
+        93.2475,
+        105.0,
+        114.4125,
+        123.449,
+        132.63,
+        145.09
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 25.844719,
+        "trending": true
+      }
+    },
+    "maxLoss": 1.87700,
+    "stockName": "AAPL",
+    "expectedReturn": 6.27800
+  },
+  {
+    "sellTargetPrice": 110.06,
+    "sellResistancePrice": 92.88,
+    "stockGroup": {
+      "name": "BIOTECH",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 97.25,
+    "candidate": "CONS BASIC: 101110101101000001010101010101100110011.StochasticOscillatorGenerator.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 5,
+        "buzz": 0.0,
+        "weeklyAverage": 4.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6032,
+      "sectorAverageNewsScore": 0.5038,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "NBIX"
+    },
+    "supportResistance": {
+      "levels": [
+        86.02,
+        94.56,
+        103.295,
+        113.4,
+        127.175
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 31.746117,
+        "trending": true
+      }
+    },
+    "maxLoss": 4.70500,
+    "stockName": "NBIX",
+    "expectedReturn": 13.17700
+  },
+  {
+    "sellTargetPrice": 35.56,
+    "sellResistancePrice": 31.86,
+    "stockGroup": {
+      "name": "EMERGENT",
+      "description": "1.00(6/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 6,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 33.450001,
+    "candidate": "EMERGENT: 101000011011100101011101100000001001100.ChaikinOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "EWZ"
+    },
+    "supportResistance": {
+      "levels": [
+        26.56,
+        29.46,
+        32.05,
+        34.81,
+        38.82
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.688081,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.99100,
+    "stockName": "EWZ",
+    "expectedReturn": 6.29500
+  },
+  {
+    "sellTargetPrice": 28.31,
+    "sellResistancePrice": 25.30,
+    "stockGroup": {
+      "name": "BIOTECH",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 25.799999,
+    "candidate": "BIOTECH: 100000110011110101010011000010010101111.RSI.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 7,
+        "buzz": 0.6086,
+        "weeklyAverage": 11.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6032,
+      "sectorAverageNewsScore": 0.5038,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "ACAD"
+    },
+    "supportResistance": {
+      "levels": [
+        23.35,
+        30.16,
+        40.82,
+        49.25,
+        57.46
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 48.457626,
+        "trending": true
+      }
+    },
+    "maxLoss": 1.97600,
+    "stockName": "ACAD",
+    "expectedReturn": 9.72900
+  }
+]

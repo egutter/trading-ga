@@ -1,0 +1,67 @@
+[
+  {
+    "sellTargetPrice": 124.24,
+    "sellResistancePrice": 118.86,
+    "stockGroup": {
+      "name": "AAPL",
+      "description": "0.93(14/1)",
+      "percentageOfOrdersWon": 0.93,
+      "ordersWon": 14,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 123.0,
+    "candidate": "AAPL: 101100010010100001010000100100100101001.ADX.BB",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 256,
+        "buzz": 0.9022,
+        "weeklyAverage": 283.75
+      },
+      "companyNewsScore": 0.7058,
+      "sectorAverageBullishPercent": 0.6593,
+      "sectorAverageNewsScore": 0.5279,
+      "sentiment": {
+        "bearishPercent": 0.2174,
+        "bullishPercent": 0.7826
+      },
+      "symbol": "AAPL"
+    },
+    "supportResistance": {
+      "levels": [
+        93.2475,
+        105.0,
+        114.4125,
+        123.449,
+        132.63,
+        145.09
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 9
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 24.424377,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.48300,
+    "stockName": "AAPL",
+    "expectedReturn": 1.00800
+  }
+]

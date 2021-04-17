@@ -1,0 +1,163 @@
+[
+  {
+    "sellTargetPrice": 26.41,
+    "sellResistancePrice": 25.00,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 25.25,
+    "candidate": "NET: 100001101000100010010011100000111111010.StochasticOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "RSX"
+    },
+    "supportResistance": {
+      "levels": [
+        19.385,
+        21.44,
+        23.575,
+        24.98,
+        27.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 14.322846,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.00,
+    "stockName": "RSX",
+    "expectedReturn": 4.57900
+  },
+  {
+    "sellTargetPrice": 235.55,
+    "sellResistancePrice": 211.29,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 220.270004,
+    "candidate": "VGLT: 001010011010100100010100000100110100000.AROO.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 1,
+        "buzz": 1.0,
+        "weeklyAverage": 1.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "GLOB"
+    },
+    "supportResistance": {
+      "levels": [
+        157.03,
+        181.6,
+        198.4273,
+        218.93,
+        244.72
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 10.688339,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.25000,
+    "stockName": "GLOB",
+    "expectedReturn": 6.93700
+  },
+  {
+    "sellTargetPrice": 295.87,
+    "sellResistancePrice": 277.36,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 280.089996,
+    "candidate": "PYPL: 000110000101100011010011111101110001111.StochasticOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.0,
+      "sectorAverageNewsScore": 0.0,
+      "symbol": "VBK"
+    },
+    "supportResistance": {
+      "levels": [
+        204.32,
+        233.9866,
+        271.768,
+        304.9299
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 19.797726,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.98400,
+    "stockName": "VBK",
+    "expectedReturn": 5.63400
+  }
+]

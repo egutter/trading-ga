@@ -1,0 +1,122 @@
+[
+  {
+    "sellTargetPrice": 155.26,
+    "sellResistancePrice": 138.06,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 144.110001,
+    "candidate": "PYPL: 000110000101100010110011110000100000011.StochasticOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 5,
+        "buzz": 0.625,
+        "weeklyAverage": 8.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "Z"
+    },
+    "supportResistance": {
+      "levels": [
+        70.11,
+        103.63,
+        131.149,
+        170.19,
+        208.11
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 17.555145,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.38200,
+    "stockName": "Z",
+    "expectedReturn": 7.73600
+  },
+  {
+    "sellTargetPrice": 43.03,
+    "sellResistancePrice": 37.61,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 39.07,
+    "candidate": "INTC: 100001000110110010010011010100100100000.ADX.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 3,
+        "buzz": 0.0,
+        "weeklyAverage": 1.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "TWOU"
+    },
+    "supportResistance": {
+      "levels": [
+        28.45,
+        35.46,
+        41.7667,
+        46.7,
+        59.74
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.004095,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.88200,
+    "stockName": "TWOU",
+    "expectedReturn": 10.14300
+  }
+]

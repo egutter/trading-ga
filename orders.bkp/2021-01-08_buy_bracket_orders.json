@@ -1,0 +1,62 @@
+[
+  {
+    "sellTargetPrice": 252.32,
+    "sellResistancePrice": 203.97,
+    "stockGroup": {
+      "name": "EMERG ADR",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "MELI",
+        "GLOB",
+        "BABA",
+        "BIDU",
+        "JD"
+      ]
+    },
+    "closePrice": 240.25,
+    "maxLoss": 0.17787,
+    "stockName": "BIDU",
+    "expectedReturn": 0.05023
+  },
+  {
+    "sellTargetPrice": 177.0,
+    "sellResistancePrice": 161.6,
+    "stockGroup": {
+      "name": "SPLK",
+      "description": "1.00(3/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 3,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      },
+      "stockSymbols": [
+        "SPLK"
+      ]
+    },
+    "closePrice": 165.399994,
+    "maxLoss": 0.02351,
+    "stockName": "SPLK",
+    "expectedReturn": 0.07013
+  }
+]

@@ -92,6 +92,11 @@ public class YahooQuoteImporter {
         runImport(fromMaxDate, symbols);
     }
 
+    public void runImportFromMaxOrFrom(LocalDate fromDate, LocalDate toDate, String[] stockSymbols) {
+        LocalDate fromMaxDate = repository.getMaxTradingDate(stockSymbols).orElse(fromDate);
+        runImport(fromMaxDate, toDate, stockSymbols);
+    }
+
     public void runImport(LocalDate fromDate) {
         runImport(fromDate, merval25StockSymbols());
     }

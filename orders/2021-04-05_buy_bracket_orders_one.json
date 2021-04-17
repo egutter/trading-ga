@@ -1,0 +1,65 @@
+[
+  {
+    "sellTargetPrice": 754.17,
+    "sellResistancePrice": 659.50,
+    "stockGroup": {
+      "name": "TSLA",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2020,
+        "month": 12,
+        "day": 10
+      }
+    },
+    "closePrice": 691.049988,
+    "candidate": "TSLA: 001110100101000011010111101101000010111.ADX.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 246,
+        "buzz": 0.8586,
+        "weeklyAverage": 286.5
+      },
+      "companyNewsScore": 0.8636,
+      "sectorAverageBullishPercent": 0.6517,
+      "sectorAverageNewsScore": 0.5423,
+      "sentiment": {
+        "bearishPercent": 0.0953,
+        "bullishPercent": 0.9047
+      },
+      "symbol": "TSLA"
+    },
+    "supportResistance": {
+      "levels": [
+        273.0,
+        502.49,
+        717.85,
+        900.4
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.983639,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.78400,
+    "stockName": "TSLA",
+    "expectedReturn": 9.13400
+  }
+]

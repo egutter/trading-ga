@@ -8,6 +8,8 @@ import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.Seconds;
 
 import java.util.*;
 import java.util.function.Function;
@@ -29,12 +31,14 @@ public class OneDayCandidateRunner {
     }
 
     public static void main(String[] args) {
-        LocalDate fromDate = new LocalDate(2020, 1, 1);
+        LocalTime startTime = LocalTime.now();
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 1, 28);
+        LocalDate tradeOn = new LocalDate(2021, 4, 9);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
 
     public Map<String, List<BuyOrderWithPendingSellOrders>> run(LocalDate tradeOn) {
@@ -43,16 +47,21 @@ public class OneDayCandidateRunner {
         Map<String, Pair<Integer, List<Candidate>>> countStockSold = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
         List<StockGroup> sectors = StockMarket.allSectors();
+        List<String> stockSymbols = StockMarket.allSectorsStockSymbols();
         Map<String, List<BuyOrderWithPendingSellOrders>> allBuyOrderWithPendingSellOrders = new HashMap<>();
-        sectors.stream().forEach(stockGroup -> {
+//        String[] stockSymbols1 = {"ZM"};
+//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, stockSymbols1);
+        stockSymbols.stream().forEach(stockSymbol -> {
 
-            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, stockGroup.getStockSymbols());
+//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, stockGroup.getStockSymbols());
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, new String[]{stockSymbol});
 
 
             candidates().stream().forEach(candidate -> {
 
                 Optional<StockGroup> candidateStockGroup = candidate.getStockGroups().stream()
-                        .filter(candidateGroup -> candidateGroup.equals(stockGroup))
+                        .filter(candidateGroup -> candidateGroup.containsStockSymbol(stockSymbol))
+//                        .filter(candidateGroup -> candidateGroup.equals(stockGroup))
                         .findAny();
                 candidateStockGroup.ifPresent(candidateGroup -> {
                     OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());

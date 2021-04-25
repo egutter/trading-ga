@@ -1,0 +1,234 @@
+[
+  {
+    "sellTargetPrice": 27.13,
+    "sellResistancePrice": 25.47,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 26.4,
+    "candidate": "TSLA: 100000001110001010010010100000011010000.BB.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.549,
+      "sectorAverageNewsScore": 0.4935,
+      "symbol": "RSX"
+    },
+    "supportResistance": {
+      "levels": [
+        19.385,
+        21.44,
+        23.575,
+        24.98,
+        27.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 5,
+          "neutral": 7
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 12.136518,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.65100,
+    "stockName": "RSX",
+    "expectedReturn": 2.76500
+  },
+  {
+    "sellTargetPrice": 16.19,
+    "sellResistancePrice": 13.27,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 15.36,
+    "candidate": "AMZN: 111100100000101001101000000011100100000.BB.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 6,
+        "buzz": 0.75,
+        "weeklyAverage": 8.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6174,
+      "sectorAverageNewsScore": 0.5179,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "HGEN"
+    },
+    "supportResistance": {
+      "levels": [
+        7.5,
+        11.21,
+        14.9,
+        20.7,
+        29.2
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.196545,
+        "trending": false
+      }
+    },
+    "maxLoss": 15.75000,
+    "stockName": "HGEN",
+    "expectedReturn": 5.40400
+  },
+  {
+    "sellTargetPrice": 295.90,
+    "sellResistancePrice": 240.34,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 245.11,
+    "candidate": "GREEN ETF: 011000000111010001001000000000100111101.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 42,
+        "buzz": 1.037,
+        "weeklyAverage": 40.5
+      },
+      "companyNewsScore": 0.7588,
+      "sectorAverageBullishPercent": 0.6669,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "SQ"
+    },
+    "supportResistance": {
+      "levels": [
+        134.0,
+        173.01,
+        208.81,
+        246.49,
+        283.1898
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.044164,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.98500,
+    "stockName": "SQ",
+    "expectedReturn": 20.72200
+  },
+  {
+    "sellTargetPrice": 26.62,
+    "sellResistancePrice": 22.84,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 24.05,
+    "candidate": "PYPL: 101110001110100010010000010101100101010.UltimateOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.6082,
+      "sectorAverageNewsScore": 0.5142,
+      "symbol": "ICLN"
+    },
+    "supportResistance": {
+      "levels": [
+        15.33,
+        17.55,
+        23.0419,
+        27.39,
+        34.25
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 23.40916,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.29800,
+    "stockName": "ICLN",
+    "expectedReturn": 10.68600
+  }
+]

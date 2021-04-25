@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 public class CandidatesFileHandler {
 
     public static final String ALL_CANDIDATES_JSON_FILE_NAME = "all_candidates.json";
+//    public static final String ALL_CANDIDATES_JSON_FILE_NAME = "2020-2021-04_all_candidates_last_good.json";
     private final Gson gson;
 
     public CandidatesFileHandler() {

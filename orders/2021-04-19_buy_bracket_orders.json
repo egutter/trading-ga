@@ -1,0 +1,361 @@
+[
+  {
+    "sellTargetPrice": 244.28,
+    "sellResistancePrice": 233.71,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 235.830002,
+    "candidate": "NET: 000010110111001010000110110001100111001.MFI.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 9,
+        "buzz": 0.8485,
+        "weeklyAverage": 6.25
+      },
+      "companyNewsScore": 0.6964,
+      "sectorAverageBullishPercent": 0.6325,
+      "sectorAverageNewsScore": 0.531,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "AON"
+    },
+    "supportResistance": {
+      "levels": [
+        179.52,
+        192.19,
+        206.4,
+        216.49,
+        240.02
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 24.303102,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.90700,
+    "stockName": "AON",
+    "expectedReturn": 3.58200
+  },
+  {
+    "sellTargetPrice": 184.46,
+    "sellResistancePrice": 172.12,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 177.720001,
+    "candidate": "NFLX: 111100100110010000111001000010100011001.StochasticOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 28,
+        "buzz": 2.074,
+        "weeklyAverage": 13.5
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6325,
+      "sectorAverageNewsScore": 0.531,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "PNC"
+    },
+    "supportResistance": {
+      "levels": [
+        101.58,
+        120.08,
+        155.46,
+        184.33
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 12.892678,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.25400,
+    "stockName": "PNC",
+    "expectedReturn": 3.79200
+  },
+  {
+    "sellTargetPrice": 493.20,
+    "sellResistancePrice": 473.45,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 487.640015,
+    "candidate": "SECTORS ETF: 000100110000111001101000110000100011001.MACD.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 31,
+        "buzz": 2.3396,
+        "weeklyAverage": 13.25
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6263,
+      "sectorAverageNewsScore": 0.5137,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "TMO"
+    },
+    "supportResistance": {
+      "levels": [
+        401.065,
+        441.96,
+        473.84,
+        499.0,
+        532.5709
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 24.65701,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.99700,
+    "stockName": "TMO",
+    "expectedReturn": 1.14000
+  },
+  {
+    "sellTargetPrice": 140.03,
+    "sellResistancePrice": 123.61,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 126.900002,
+    "candidate": "VCLT: 101101001000001000110000110000100001101.MACD.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 3,
+        "buzz": 0.6315,
+        "weeklyAverage": 4.75
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.658,
+      "sectorAverageNewsScore": 0.5317,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "XLNX"
+    },
+    "supportResistance": {
+      "levels": [
+        96.71,
+        111.84,
+        123.78,
+        141.1304,
+        154.93
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.228639,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.66200,
+    "stockName": "XLNX",
+    "expectedReturn": 10.35000
+  },
+  {
+    "sellTargetPrice": 83.79,
+    "sellResistancePrice": 77.94,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 81.110001,
+    "candidate": "SQ: 100001000000111110110010010101000010111.MFI.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 41,
+        "buzz": 1.1549,
+        "weeklyAverage": 35.5
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.658,
+      "sectorAverageNewsScore": 0.5317,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "AMD"
+    },
+    "supportResistance": {
+      "levels": [
+        73.7573,
+        79.36,
+        84.97,
+        90.63,
+        99.23
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.204783,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.06700,
+    "stockName": "AMD",
+    "expectedReturn": 3.30400
+  },
+  {
+    "sellTargetPrice": 141.26,
+    "sellResistancePrice": 131.82,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 132.570007,
+    "candidate": "AAPL: 010100100100011000010101111110011000101.RSI.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 37,
+        "buzz": 0.5714,
+        "weeklyAverage": 64.75
+      },
+      "companyNewsScore": 0.5389,
+      "sectorAverageBullishPercent": 0.6594,
+      "sectorAverageNewsScore": 0.5441,
+      "sentiment": {
+        "bearishPercent": 0.6154,
+        "bullishPercent": 0.3846
+      },
+      "symbol": "NKE"
+    },
+    "supportResistance": {
+      "levels": [
+        105.115,
+        112.79,
+        126.11,
+        137.17,
+        147.95
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 8,
+          "neutral": 7
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 12.822513,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.56900,
+    "stockName": "NKE",
+    "expectedReturn": 6.55600
+  }
+]

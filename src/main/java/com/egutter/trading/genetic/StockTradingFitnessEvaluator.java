@@ -1,10 +1,12 @@
 package com.egutter.trading.genetic;
 
-import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
+import com.egutter.trading.decision.CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory;
+import com.egutter.trading.decision.FibonacciRetracementTriggerBuyConditionalOrderDecisionStrategyFactory;
+import com.egutter.trading.decision.TriggerBuyConditionalOrderDecisionStrategyFactory;
 import com.egutter.trading.decision.factory.GeneticsTradingDecisionFactory;
 import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
-import com.egutter.trading.decision.generator.*;
+import com.egutter.trading.decision.generator.RelativeStrengthIndexCrossDownGenerator;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.PortfolioStats;
 import com.egutter.trading.stock.Trader;
@@ -28,10 +30,12 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     private StockMarket stockMarket;
 
     private List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators;
+    private Class<? extends ConditionalOrderConditionGenerator> crossOverTriggerDecisionGenerator;
 
     public StockTradingFitnessEvaluator(StockMarket stockMarket, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionsGenerators) {
         this.stockMarket = stockMarket;
         this.tradingDecisionGenerators = tradingDecisionsGenerators;
+        this.crossOverTriggerDecisionGenerator = RelativeStrengthIndexCrossDownGenerator.class;
 
     }
 
@@ -43,22 +47,30 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
     public double getFitness(BitString candidate) {
         Portfolio portfolio = new Portfolio(INITIAL_CASH);
 
-//        TradingDecisionFactory tradingDecisionFactory = tradingDecisionFactory(portfolio, candidate);
-//        if (candidateValidator(tradingDecisionFactory).isInvalid()) {
-//            return 0;
-//        }
+        //Fibonacci
+//        TriggerBuyConditionalOrderDecisionStrategyFactory tradingDecisionRetracementStrategyFactory = tradingDecisionRetracementStrategyFactory(portfolio, candidate);
 
-        FibonacciRetracementStrategyFactory tradingDecisionRetracementStrategyFactory = tradingDecisionRetracementStrategyFactory(portfolio, candidate);
-//        buildTrader(portfolio, tradingDecisionFactory).tradeAllStocksInMarket();
+        //CrossDown
+        TriggerBuyConditionalOrderDecisionStrategyFactory tradingDecisionRetracementStrategyFactory = tradingDecisionCrossOverStrategyFactory(portfolio, candidate);
+
         buildTrader(portfolio, tradingDecisionRetracementStrategyFactory).tradeAllStocksInMarket();
-
-//        seeOtherWaysOfEvaluatePortfolioNotUsed();
 
         if (shouldDiscardCandidate(portfolio)) {
             return 0;
         }
-//        CandidateRanker candidateRanker = new CandidateRanker(null);
         PortfolioStats porfolioStats = portfolio.getStats();
+
+        BigDecimal ordersWonCountWeight = porfolioStats.percentageOfOrdersWon();
+        if (ordersWonCountWeight.compareTo(BigDecimal.valueOf(0.90)) < 0) {
+            return 0;
+        }
+////      Fitness Cash weighted by Orders Won
+        BigDecimal totalOps = BigDecimal.valueOf(porfolioStats.totalOrdersCount());
+        return totalOps.doubleValue();
+    }
+
+
+//        CandidateRanker candidateRanker = new CandidateRanker(null);
 //        CandidateStats stats = new CandidateStats(porfolioStats.average30daysReturn(),
 //                porfolioStats.biggestLost().profitPctg30(),
 //                porfolioStats.countOrdersWon(),
@@ -79,20 +91,12 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 //        int minOps = stockMarket.getTotalTradingDays()/40;
 //        int minOps = stockMarket.getTotalTradingDays()/40;
 
-//        int minOps = stockMarket.getTotalTradingDays()/200;
+    //        int minOps = stockMarket.getTotalTradingDays()/200;
 //        if (porfolioStats.totalOrdersCount() < minOps) {
 //            return 0;
 //        }
-        BigDecimal ordersWonCountWeight = porfolioStats.percentageOfOrdersWon();
-        if (ordersWonCountWeight.compareTo(BigDecimal.valueOf(0.90)) < 0) {
-            return 0;
-        }
-//        return ordersWonCountWeight.doubleValue();
-////      Fitness Cash weighted by Orders Won
-        BigDecimal totalOps = BigDecimal.valueOf(porfolioStats.totalOrdersCount());
-        return totalOps.doubleValue();
+    //        return ordersWonCountWeight.doubleValue();
 //        return portfolio.getProfit().multiply(totalOps).multiply(ordersWonCountWeight).doubleValue();
-    }
 
     private boolean discardWhenOrdersLost(Portfolio portfolio) {
         return (portfolio.getStats().countOrdersLost() > 0);
@@ -134,7 +138,7 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
         return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
     }
 
-    public Trader buildTrader(Portfolio portfolio, FibonacciRetracementStrategyFactory tradingDecisionFactory) {
+    public Trader buildTrader(Portfolio portfolio, TriggerBuyConditionalOrderDecisionStrategyFactory tradingDecisionFactory) {
         return new Trader(stockMarket, tradingDecisionFactory, portfolio, new OrderBook());
     }
 
@@ -142,8 +146,12 @@ public class StockTradingFitnessEvaluator implements FitnessEvaluator<BitString>
 //        return new GeneticsTradingDecisionFactory(portfolio, candidate, this.tradingDecisionGenerators, false);
         return new HardcodedTradingDecisionFactory(portfolio, candidate);
     }
-    private FibonacciRetracementStrategyFactory tradingDecisionRetracementStrategyFactory(Portfolio portfolio, BitString candidate) {
-        return new FibonacciRetracementStrategyFactory(portfolio, candidate, this.tradingDecisionGenerators);
+    private TriggerBuyConditionalOrderDecisionStrategyFactory tradingDecisionRetracementStrategyFactory(Portfolio portfolio, BitString candidate) {
+        return new FibonacciRetracementTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio, candidate, this.tradingDecisionGenerators);
+    }
+
+    private TriggerBuyConditionalOrderDecisionStrategyFactory tradingDecisionCrossOverStrategyFactory(Portfolio portfolio, BitString candidate) {
+        return new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio, candidate, this.crossOverTriggerDecisionGenerator, this.tradingDecisionGenerators);
     }
 
     private GenomeCandidateValidator candidateValidator(GeneticsTradingDecisionFactory tradingDecisionGenerator) {

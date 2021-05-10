@@ -27,6 +27,7 @@ import org.uncommons.watchmaker.framework.termination.Stagnation;
 import java.util.*;
 
 import static com.egutter.trading.candidates.GlobalStockMarketCandidates.chromosomeCandidates;
+import static com.egutter.trading.candidates.GlobalStockMarketCandidates.rsiCrossDownChromosomeCandidates;
 import static java.util.Arrays.asList;
 
 /**
@@ -75,9 +76,10 @@ public class Experiment {
                 getSelectionStrategy(),
                 rng);
 
-//        return engine.evolve(1000, 10, new GenerationCount(200), new Stagnation(20, true));
-        List<BitString> candidateSeeds = chromosomeCandidates();
-        return engine.evolve(candidateSeeds.size(), candidateSeeds.size()/10, candidateSeeds, new ElapsedTime(1200000), new GenerationCount(200), new Stagnation(20, true));
+        List<BitString> candidateSeeds = rsiCrossDownChromosomeCandidates();
+        return engine.evolve(1000, 10, candidateSeeds, new ElapsedTime(1200000), new GenerationCount(200), new Stagnation(20, true));
+        // With candidateSeeds
+//        return engine.evolve(candidateSeeds.size(), candidateSeeds.size()/10, candidateSeeds, new ElapsedTime(1200000), new GenerationCount(200), new Stagnation(20, true));
     }
 
     public SelectionStrategy<? super BitString> getSelectionStrategy() {

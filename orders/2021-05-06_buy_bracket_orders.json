@@ -1,0 +1,178 @@
+[
+  {
+    "sellTargetPrice": 39.51,
+    "sellResistancePrice": 31.51,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 31.86,
+    "candidate": "NET: 101001101000100001010011000000110101101.StochasticOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.5966,
+      "sectorAverageNewsScore": 0.5083,
+      "symbol": "MGNX"
+    },
+    "supportResistance": {
+      "levels": [
+        18.16,
+        22.13,
+        26.59,
+        30.47,
+        36.4804
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 18.96456,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.11100,
+    "stockName": "MGNX",
+    "expectedReturn": 23.99700
+  },
+  {
+    "sellTargetPrice": 37.89,
+    "sellResistancePrice": 30.95,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 32.86,
+    "candidate": "AMZN: 100110100111101000110010110000100000101.StochasticOscillatorGenerator.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 4,
+        "buzz": 0.5128,
+        "weeklyAverage": 3.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.5966,
+      "sectorAverageNewsScore": 0.5083,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "QURE"
+    },
+    "supportResistance": {
+      "levels": [
+        28.58,
+        32.52,
+        37.0,
+        40.4899,
+        44.84,
+        52.19
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 10.000826,
+        "trending": false
+      }
+    },
+    "maxLoss": 6.17100,
+    "stockName": "QURE",
+    "expectedReturn": 15.31700
+  },
+  {
+    "sellTargetPrice": 56.87,
+    "sellResistancePrice": 52.72,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 54.46,
+    "candidate": "PYPL: 101110001110100010010000010101100101010.UltimateOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 27,
+        "buzz": 0.8565,
+        "weeklyAverage": 22.75
+      },
+      "companyNewsScore": 0.8608,
+      "sectorAverageBullishPercent": 0.6646,
+      "sectorAverageNewsScore": 0.5502,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "WBA"
+    },
+    "supportResistance": {
+      "levels": [
+        33.36,
+        40.85,
+        47.81,
+        57.05
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.444386,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.30000,
+    "stockName": "WBA",
+    "expectedReturn": 4.41600
+  }
+]

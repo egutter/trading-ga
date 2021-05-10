@@ -1,5 +1,6 @@
 package com.egutter.trading.decision.constraint;
 
+import com.egutter.trading.order.SellPriceResolver;
 import com.egutter.trading.stock.TimeFrameQuote;
 
 import java.math.BigDecimal;
@@ -7,7 +8,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.function.Function;
 
-public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolean> {
+public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolean>, SellPriceResolver {
 
     private final BigDecimal stopLossPercentage;
     private final BigDecimal trainingLossPercentage;
@@ -31,6 +32,18 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
         return false;
     }
 
+    @Override
+    public BigDecimal resolveSellPrice(TimeFrameQuote timeFrameQuote) {
+        BigDecimal openPrice = new BigDecimal(timeFrameQuote.getQuoteAtDay().getOpenPrice());
+        if (fallsBellowStopPrice(openPrice) || fallsBellowTrailingPrice(openPrice)) {
+            return openPrice;
+        }
+        if (fallsBellowStopPrice(timeFrameQuote)) {
+            return stopLossPrice;
+        }
+        return trailingLossPrice;
+    }
+
     private void trackNewTrailingPrice(TimeFrameQuote timeFrameQuote) {
         BigDecimal highPrice = new BigDecimal(timeFrameQuote.getQuoteAtDay().getHighPrice());
         this.trailingLossPrice = calculateThresholdPrice(highPrice, trainingLossPercentage);
@@ -49,11 +62,19 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     }
 
     private boolean fallsBellowStopPrice(TimeFrameQuote timeFrameQuote) {
-        return lowPrice(timeFrameQuote).compareTo(stopLossPrice) < 0;
+        return fallsBellowStopPrice(lowPrice(timeFrameQuote));
+    }
+
+    private boolean fallsBellowStopPrice(BigDecimal price) {
+        return price.compareTo(stopLossPrice) < 0;
     }
 
     private boolean fallsBellowTrailingPrice(TimeFrameQuote timeFrameQuote) {
-        return lowPrice(timeFrameQuote).compareTo(trailingLossPrice) < 0;
+        return fallsBellowTrailingPrice(lowPrice(timeFrameQuote));
+    }
+
+    private boolean fallsBellowTrailingPrice(BigDecimal price) {
+        return price.compareTo(trailingLossPrice) < 0;
     }
 
     private BigDecimal lowPrice(TimeFrameQuote timeFrameQuote) {
@@ -70,4 +91,5 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
         sb.append('}');
         return sb.toString();
     }
+
 }

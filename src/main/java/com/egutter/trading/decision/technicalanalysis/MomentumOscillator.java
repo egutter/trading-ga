@@ -100,7 +100,7 @@ public abstract class MomentumOscillator implements BuyTradingDecision, SellTrad
         RetCode returnCode = calculateOscillatorValues(closePrices, outBegIdx, outNBElement, outReal, hiPricesArray, lowPricesArray, closePricesArray, volumeArray, coreAnnotated);
 
         if (!returnCode.equals(RetCode.Success)) {
-            throw new RuntimeException("Error calculating Money Flow Index " + returnCode);
+            throw new RuntimeException("Error calculating Momentum Index " + returnCode);
         }
 
         List<LocalDate> tradingDates = stockPrices.getTradingDates();

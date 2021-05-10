@@ -1,0 +1,117 @@
+[
+  {
+    "sellTargetPrice": 853.29,
+    "sellResistancePrice": 719.69,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 738.2,
+    "candidate": "PYPL: 001110001000100110110010110000000000001.MACD.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 246,
+        "buzz": 0.9929,
+        "weeklyAverage": 247.75
+      },
+      "companyNewsScore": 0.3877,
+      "sectorAverageBullishPercent": 0.6664,
+      "sectorAverageNewsScore": 0.552,
+      "sentiment": {
+        "bearishPercent": 0.5129,
+        "bullishPercent": 0.4871
+      },
+      "symbol": "TSLA"
+    },
+    "supportResistance": {
+      "levels": [
+        329.88,
+        502.49,
+        717.85,
+        900.4
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 23.106358,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.57200,
+    "stockName": "TSLA",
+    "expectedReturn": 15.59000
+  },
+  {
+    "sellTargetPrice": 78.94,
+    "sellResistancePrice": 75.29,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 76.61,
+    "candidate": "PYPL: 000011100110001000110010110000100000000.StochasticOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6232,
+      "sectorAverageNewsScore": 0.5,
+      "symbol": "XLC"
+    },
+    "supportResistance": {
+      "levels": [
+        57.065,
+        62.13,
+        66.44,
+        71.02,
+        77.39
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 12.315353,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.75300,
+    "stockName": "XLC",
+    "expectedReturn": 3.04500
+  }
+]

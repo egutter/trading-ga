@@ -3,10 +3,7 @@ package com.egutter.trading.decision.technicalanalysis;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
 import com.egutter.trading.decision.SellTradingDecision;
-import com.egutter.trading.stock.DailyQuote;
-import com.egutter.trading.stock.StockMarket;
-import com.egutter.trading.stock.StockMarketBuilder;
-import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.*;
 import com.google.common.base.Joiner;
 import com.google.common.primitives.Doubles;
 import com.tictactec.ta.lib.CoreAnnotated;
@@ -15,13 +12,10 @@ import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import org.joda.time.LocalDate;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
-public class MovingAverageCrossOver implements BuyTradingDecision, SellTradingDecision {
+public class MovingAverageCrossOver implements BuyTradingDecision, SellTradingDecision, Function<TimeFrameQuote, Boolean> {
 
     private final StockPrices stockPrices;
     private final int fastMovingAverageDays;
@@ -33,13 +27,15 @@ public class MovingAverageCrossOver implements BuyTradingDecision, SellTradingDe
     private Map<LocalDate, Double> slowMovingAverage = new HashMap<LocalDate, Double>();;
 
     public static void main(String[] args) {
-        LocalDate fromDate = new LocalDate(2019, 9, 01);
+        LocalDate fromDate = new LocalDate(2020, 1, 01);
         StockMarket market = new StockMarketBuilder().buildInMemory(fromDate);
-        MovingAverageCrossOver movingAverage = new MovingAverageCrossOver(market.getStockPricesFor("SPY"), 12, 26, MAType.Sma, MAType.Sma);
+        MovingAverageCrossOver movingAverage = new MovingAverageCrossOver(market.getStockPricesFor("AAPL"), 9, 50, MAType.Sma, MAType.Sma);
 //        movingAverage.printValues();
         market.getStockPrices().get(0).getDailyQuotes().forEach(quote -> {
-            DecisionResult result = movingAverage.shouldBuyOn(quote.getTradingDate());
-            System.out.println(quote.getTradingDate() + " = " + result);
+            DecisionResult resultBuy = movingAverage.shouldBuyOn(quote.getTradingDate());
+            DecisionResult resultSell = movingAverage.shouldSellOn(quote.getTradingDate());
+            if (resultBuy.equals(DecisionResult.YES)) System.out.println(quote.getTradingDate() + " = BUY " + resultBuy);
+            if (resultSell.equals(DecisionResult.YES)) System.out.println(quote.getTradingDate() + " = SELL " + resultSell);
         });
     }
 
@@ -63,6 +59,12 @@ public class MovingAverageCrossOver implements BuyTradingDecision, SellTradingDe
         this.slowMovingAverageType = slowMovingAverageType;
         this.startOnDate = stockPrices.getFirstTradingDate();
         calculateMovingAverages();
+    }
+
+
+    @Override
+    public Boolean apply(TimeFrameQuote timeFrameQuote) {
+        return shouldBuyOn(timeFrameQuote.getQuoteAtDay().getTradingDate()).equals(DecisionResult.YES);
     }
 
     @Override
@@ -181,5 +183,19 @@ public class MovingAverageCrossOver implements BuyTradingDecision, SellTradingDe
                 this.slowMovingAverageDays,
                 "Slow MA Type",
                 this.slowMovingAverageType);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MovingAverageCrossOver.class.getSimpleName() + "[", "]")
+                .add("stockPrices=" + stockPrices)
+                .add("fastMovingAverageDays=" + fastMovingAverageDays)
+                .add("slowMovingAverageDays=" + slowMovingAverageDays)
+                .add("fastMovingAverageType=" + fastMovingAverageType)
+                .add("slowMovingAverageType=" + slowMovingAverageType)
+                .add("startOnDate=" + startOnDate)
+                .add("fastMovingAverage=" + fastMovingAverage)
+                .add("slowMovingAverage=" + slowMovingAverage)
+                .toString();
     }
 }

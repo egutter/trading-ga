@@ -1,0 +1,604 @@
+[
+  {
+    "sellTargetPrice": 1371.58,
+    "sellResistancePrice": 1090.93,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 1108.6,
+    "candidate": "AMZN: 110010100110110011101000010100010011100.ADX.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 23,
+        "buzz": 0.6092,
+        "weeklyAverage": 37.75
+      },
+      "companyNewsScore": 0.5757,
+      "sectorAverageBullishPercent": 0.6672,
+      "sectorAverageNewsScore": 0.5497,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "SHOP"
+    },
+    "supportResistance": {
+      "levels": [
+        839.4,
+        1021.57,
+        1169.97,
+        1345.0,
+        1499.75
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 17.336071,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.62000,
+    "stockName": "SHOP",
+    "expectedReturn": 23.72200
+  },
+  {
+    "sellTargetPrice": 155.96,
+    "sellResistancePrice": 147.94,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 151.59,
+    "candidate": "SPLK: 011010100001100111100101100010000111101.StochasticOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 19,
+        "buzz": 0.9528,
+        "weeklyAverage": 11.75
+      },
+      "companyNewsScore": 0.7946,
+      "sectorAverageBullishPercent": 0.6661,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "FIS"
+    },
+    "supportResistance": {
+      "levels": [
+        120.17,
+        126.0,
+        136.63,
+        143.03,
+        148.785,
+        156.725
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 25.304924,
+        "trending": true
+      }
+    },
+    "maxLoss": 2.46700,
+    "stockName": "FIS",
+    "expectedReturn": 2.88300
+  },
+  {
+    "sellTargetPrice": 2431.38,
+    "sellResistancePrice": 2306.83,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 2351.93,
+    "candidate": "NET: 101000000001111010010011100000011111010.StochasticOscillatorGenerator.BB",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 173,
+        "buzz": 0.6968,
+        "weeklyAverage": 248.25
+      },
+      "companyNewsScore": 0.5639,
+      "sectorAverageBullishPercent": 0.6661,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.3,
+        "bullishPercent": 0.7
+      },
+      "symbol": "GOOGL"
+    },
+    "supportResistance": {
+      "levels": [
+        1402.15,
+        1588.42,
+        1843.83,
+        2145.14,
+        2431.38
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 32.14591,
+        "trending": true
+      }
+    },
+    "maxLoss": 1.95500,
+    "stockName": "GOOGL",
+    "expectedReturn": 3.37800
+  },
+  {
+    "sellTargetPrice": 2553.97,
+    "sellResistancePrice": 2311.70,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 2398.69,
+    "candidate": "CSCO: 101100001100001001111101010000000111111.RSI.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 31,
+        "buzz": 0.5688,
+        "weeklyAverage": 54.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6661,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "GOOG"
+    },
+    "supportResistance": {
+      "levels": [
+        1406.55,
+        1593.86,
+        1847.2,
+        2152.68,
+        2452.378
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 35.44468,
+        "trending": true
+      }
+    },
+    "maxLoss": 3.76300,
+    "stockName": "GOOG",
+    "expectedReturn": 6.47400
+  },
+  {
+    "sellTargetPrice": 38.34,
+    "sellResistancePrice": 30.72,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 32.55,
+    "candidate": "SQ: 110011010100000000010001010000100111001.MACD.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 3,
+        "buzz": 0.923,
+        "weeklyAverage": 3.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.5888,
+      "sectorAverageNewsScore": 0.5095,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "QURE"
+    },
+    "supportResistance": {
+      "levels": [
+        28.58,
+        32.52,
+        38.79,
+        44.84,
+        52.19
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 9.726877,
+        "trending": false
+      }
+    },
+    "maxLoss": 5.95700,
+    "stockName": "QURE",
+    "expectedReturn": 17.80200
+  },
+  {
+    "sellTargetPrice": 153.93,
+    "sellResistancePrice": 136.72,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 141.74,
+    "candidate": "VGLT: 010001001111010001011000000011100111100.MACD.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 2,
+        "buzz": 0.2666,
+        "weeklyAverage": 7.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6661,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "SAP"
+    },
+    "supportResistance": {
+      "levels": [
+        104.64,
+        126.27,
+        138.47,
+        153.94,
+        169.3
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 41.217712,
+        "trending": true
+      }
+    },
+    "maxLoss": 3.67200,
+    "stockName": "SAP",
+    "expectedReturn": 8.60400
+  },
+  {
+    "sellTargetPrice": 412.42,
+    "sellResistancePrice": 368.03,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 375.4,
+    "candidate": "PYPL: 111000100111110111010000011100100101010.AROO.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 15,
+        "buzz": 0.458,
+        "weeklyAverage": 32.75
+      },
+      "companyNewsScore": 0.5535,
+      "sectorAverageBullishPercent": 0.6419,
+      "sectorAverageNewsScore": 0.5311,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "MA"
+    },
+    "supportResistance": {
+      "levels": [
+        281.2,
+        281.2,
+        330.43,
+        350.1401,
+        375.6044,
+        401.5
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.622042,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.00300,
+    "stockName": "MA",
+    "expectedReturn": 9.86100
+  },
+  {
+    "sellTargetPrice": 549.12,
+    "sellResistancePrice": 475.92,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 488.73,
+    "candidate": "VGLT: 011001101001010001011000000001100111000.MACD.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 16,
+        "buzz": 0.8,
+        "weeklyAverage": 20.0
+      },
+      "companyNewsScore": 0.8333,
+      "sectorAverageBullishPercent": 0.6661,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "ADBE"
+    },
+    "supportResistance": {
+      "levels": [
+        420.78,
+        461.18,
+        488.0,
+        506.92,
+        536.88
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 23.751595,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.69200,
+    "stockName": "ADBE",
+    "expectedReturn": 12.35600
+  },
+  {
+    "sellTargetPrice": 152.52,
+    "sellResistancePrice": 135.75,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 142.42,
+    "candidate": "NFLX: 111100101000101001101001000011100101010.BB.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 23,
+        "buzz": 0.0,
+        "weeklyAverage": 13.75
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6672,
+      "sectorAverageNewsScore": 0.5497,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "EA"
+    },
+    "supportResistance": {
+      "levels": [
+        110.15,
+        117.79,
+        129.86,
+        140.47,
+        150.3
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 22.055965,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.91300,
+    "stockName": "EA",
+    "expectedReturn": 7.09400
+  },
+  {
+    "sellTargetPrice": 293.75,
+    "sellResistancePrice": 223.96,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 233.35,
+    "candidate": "CSCO: 101010111010100000000100011001000111000.BB.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 71,
+        "buzz": 1.4715,
+        "weeklyAverage": 48.25
+      },
+      "companyNewsScore": 0.9268,
+      "sectorAverageBullishPercent": 0.6661,
+      "sectorAverageNewsScore": 0.537,
+      "sentiment": {
+        "bearishPercent": 0.05,
+        "bullishPercent": 0.95
+      },
+      "symbol": "SQ"
+    },
+    "supportResistance": {
+      "levels": [
+        134.0,
+        173.01,
+        208.81,
+        246.49,
+        283.1898
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 14.20118,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.19300,
+    "stockName": "SQ",
+    "expectedReturn": 25.88200
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "sellTargetPrice": 172.00,
+    "sellResistancePrice": 160.61,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 162.57,
+    "candidate": "PYPL: 000101100000100010010111110001101010111.StochasticOscillatorGenerator.RSI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 3,
+        "buzz": 0.2264,
+        "weeklyAverage": 13.25
+      },
+      "companyNewsScore": 0.7946,
+      "sectorAverageBullishPercent": 0.6711,
+      "sectorAverageNewsScore": 0.5454,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "VMW"
+    },
+    "supportResistance": {
+      "levels": [
+        126.79,
+        132.86,
+        143.37,
+        151.24,
+        157.48,
+        172.0
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 39.538548,
+        "trending": true
+      }
+    },
+    "maxLoss": 1.22000,
+    "stockName": "VMW",
+    "expectedReturn": 5.80100
+  },
+  {
+    "sellTargetPrice": 474.26,
+    "sellResistancePrice": 456.05,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 466.29,
+    "candidate": "AMZN: 111100100000111001101000110000000011011.StochasticOscillatorGenerator.RSI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 8,
+        "buzz": 0.7804,
+        "weeklyAverage": 10.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6711,
+      "sectorAverageNewsScore": 0.5454,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "AVGO"
+    },
+    "supportResistance": {
+      "levels": [
+        331.14,
+        398.28,
+        457.4808,
+        495.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.204462,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.24500,
+    "stockName": "AVGO",
+    "expectedReturn": 1.70900
+  }
+]

@@ -1,8 +1,10 @@
 package com.egutter.trading.decision;
 
-import com.egutter.trading.decision.generator.*;
-import com.egutter.trading.decision.technicalanalysis.FibonacciRetracementBuyDecision;
+import com.egutter.trading.decision.generator.FibonacciRetracementGenerator;
+import com.egutter.trading.decision.technicalanalysis.RelativeStrengthIndexCrossDown;
+import com.egutter.trading.decision.technicalanalysis.TriggerBuyConditionalOrderDecision;
 import com.egutter.trading.genetic.TradingDecisionGenome;
+import com.egutter.trading.order.ConditionalOrderBuyDecision;
 import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.stock.Portfolio;
@@ -10,12 +12,11 @@ import com.egutter.trading.stock.StockPrices;
 import org.uncommons.maths.binary.BitString;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class FibonacciRetracementStrategyFactory {
+public class FibonacciRetracementTriggerBuyConditionalOrderDecisionStrategyFactory implements TriggerBuyConditionalOrderDecisionStrategyFactory {
 
-    private static final int BUY_FIB_RETR_INDEX = 0;
+    private static final int TRIGGER_COND_ORDER_BUY_DECISION = 0;
     private static final int BUY_STOCH_INDEX = 1;
     private static final int BUY_CHAIKIN_INDEX = 2;
     private static final int BUY_STOCH_THRESHOLD_INDEX = 2;
@@ -26,19 +27,24 @@ public class FibonacciRetracementStrategyFactory {
     private final TradingDecisionGenome genome;
     private List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators;
 
-    public FibonacciRetracementStrategyFactory(Portfolio portfolio,
-                                               BitString genome, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
+    public FibonacciRetracementTriggerBuyConditionalOrderDecisionStrategyFactory(Portfolio portfolio,
+                                                                                 BitString genome,
+                                                                                 List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
         this.portfolio = portfolio;
         this.genome = new TradingDecisionGenome(genome);
         this.tradingDecisionGenerators = tradingDecisionGenerators;
     }
 
-    public FibonacciRetracementBuyDecision generateBuyDecision(StockPrices stockPrices) {
-        BitString chromosome = genome.extractChromosome(BUY_FIB_RETR_INDEX);
+    public TriggerBuyConditionalOrderDecision generateBuyDecision(StockPrices stockPrices) {
+        return generateFibonacciRetracementBuyDecision(stockPrices);
+    }
+
+    private TriggerBuyConditionalOrderDecision generateFibonacciRetracementBuyDecision(StockPrices stockPrices) {
+        BitString chromosome = genome.extractChromosome(TRIGGER_COND_ORDER_BUY_DECISION);
 
         BuyDecisionConditionsFactory buyDecisionConditionsFactory = new BuyDecisionConditionsFactory(buyDecisionGenerators(), portfolio, stockPrices);
         FibonacciRetracementGenerator fibonacciRetracementGenerator = new FibonacciRetracementGenerator(chromosome, buyDecisionConditionsFactory);
-        return (FibonacciRetracementBuyDecision) fibonacciRetracementGenerator.generateBuyDecision(stockPrices);
+        return (TriggerBuyConditionalOrderDecision) fibonacciRetracementGenerator.generateBuyDecision(stockPrices);
     }
 
     private List<ConditionalOrderConditionGenerator> buyDecisionGenerators() {

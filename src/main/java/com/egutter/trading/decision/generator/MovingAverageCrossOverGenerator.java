@@ -3,17 +3,23 @@ package com.egutter.trading.decision.generator;
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.technicalanalysis.MovingAverageCrossOver;
+import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
+import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockPrices;
+import com.egutter.trading.stock.TimeFrameQuote;
 import com.google.common.collect.MapMaker;
 import com.tictactec.ta.lib.MAType;
 import org.uncommons.maths.binary.BitString;
 
+import java.util.Arrays;
+import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 
 /**
  * Created by egutter on 2/12/14.
  */
-public class MovingAverageCrossOverGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator {
+public class MovingAverageCrossOverGenerator implements BuyTradingDecisionGenerator, SellTradingDecisionGenerator, ConditionalOrderConditionGenerator {
 
     private final int fastMovingAverageDays;
     private final int slowMovingAverageDays;
@@ -23,6 +29,22 @@ public class MovingAverageCrossOverGenerator implements BuyTradingDecisionGenera
     private static final transient ConcurrentMap<String, MovingAverageCrossOver> cache = new MapMaker().weakKeys().makeMap();
     private BitString chromosome;
 
+    public static void main(String[] args) {
+        StockPrices stocks = new StockPrices("stock");
+        stocks.addAll(Arrays.asList(DailyQuote.empty()));
+        String macd = new MovingAverageCrossOverGenerator(new BitString("0000000000000")).generateCondition(stocks).toString();
+        System.out.println(macd);
+
+        macd = new MovingAverageCrossOverGenerator(new BitString("1111111111111")).generateCondition(stocks).toString();
+        System.out.println(macd);
+
+        macd = new MovingAverageCrossOverGenerator(new BitString("1111111100000")).generateCondition(stocks).toString();
+        System.out.println(macd);
+
+        macd = new MovingAverageCrossOverGenerator(new BitString("0001000000011")).generateCondition(stocks).toString();
+        System.out.println(macd);
+    }
+
     public MovingAverageCrossOverGenerator(BitString chromosome) {
         this.chromosome = chromosome;
         this.fastMovingAverageDays = generateFastMovingAvgDays(chromosome);
@@ -31,12 +53,18 @@ public class MovingAverageCrossOverGenerator implements BuyTradingDecisionGenera
         this.slowMovingAverageType = generateSlowMovingAvgType(chromosome);
     }
 
+
+    @Override
+    public Function<TimeFrameQuote, Boolean> generateCondition(StockPrices stockPrices) {
+        return generateMovingAverageCrossOver(stockPrices);
+    }
+
     /**
      * Bits
      * 0 => Fast MovAvg Type (0: SMA, 1: EMA)
-     * 1-6 => Fast MovAvg Days (1-65)
+     * 1-6 => Fast MovAvg Days (1-64)
      * 7 => Slow MovAvg Type (0: SMA, 1: EMA)
-     * 8-12 => Fast MovAvg Days (Slow+ - 192)
+     * 8-12 => Fast MovAvg Days (Slow+ - 191)
      *
      * @param stockPrices
      * @return
@@ -89,4 +117,13 @@ public class MovingAverageCrossOverGenerator implements BuyTradingDecisionGenera
         return days;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MovingAverageCrossOverGenerator.class.getSimpleName() + "[", "]")
+                .add("fastMovingAverageDays=" + fastMovingAverageDays)
+                .add("slowMovingAverageDays=" + slowMovingAverageDays)
+                .add("fastMovingAverageType=" + fastMovingAverageType)
+                .add("slowMovingAverageType=" + slowMovingAverageType)
+                .toString();
+    }
 }

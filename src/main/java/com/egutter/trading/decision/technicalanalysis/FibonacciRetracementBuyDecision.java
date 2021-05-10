@@ -2,10 +2,11 @@ package com.egutter.trading.decision.technicalanalysis;
 
 import com.egutter.trading.decision.BuyTradingDecision;
 import com.egutter.trading.decision.DecisionResult;
-import com.egutter.trading.order.BuyConditionalOrder;
-import com.egutter.trading.order.ConditionalOrder;
-import com.egutter.trading.order.OrderExtraInfo;
+import com.egutter.trading.decision.constraint.DoNotBuyWhenSameStockInPortfolio;
+import com.egutter.trading.order.*;
 import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
+import com.egutter.trading.order.condition.DoNotBreakResistance;
+import com.egutter.trading.order.condition.DoNotBuyWhenNextDayIsOutsideRange;
 import com.egutter.trading.stock.*;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Range;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
+public class FibonacciRetracementBuyDecision implements BuyTradingDecision, TriggerBuyConditionalOrderDecision {
 
 
     public static final double FIB_RETR_0_236 = 0.236;
@@ -95,16 +96,25 @@ public class FibonacciRetracementBuyDecision implements BuyTradingDecision {
             if (this.retracementLevel.contains(closePriceRetracement) ||
                     this.retracementLevel.contains(lowPriceRetracement)) {
 
-                BigDecimal sellTargetPrice = BigDecimal.valueOf(sellTakeProfitPrice(this.sellExtensionFirstLevel, high, low));
-                BigDecimal resistancePrice = resistancePrice(quoteAtDay, closePriceRetracement);
-                BuyConditionalOrder buyOrder = new BuyConditionalOrder(this.stockPrices.getStockName(), quoteAtDay, Trader.AMOUNT_TO_INVEST, sellTargetPrice, resistancePrice);
-                buyDecisionConditionsFactory.addConditions(buyOrder, resistancePrice, sellTargetPrice);
+                BuyConditionalOrder buyOrder = generateBuyConditionalOrder(quoteAtDay, high, low, closePriceRetracement);
                 return Optional.of(buyOrder);
             }
         } catch (IllegalArgumentException e) {
             return Optional.empty();
         }
         return Optional.empty();
+    }
+
+    private BuyConditionalOrder generateBuyConditionalOrder(DailyQuote quoteAtDay, DailyQuote high, DailyQuote low, BigDecimal closePriceRetracement) {
+        BigDecimal sellTargetPrice = BigDecimal.valueOf(sellTakeProfitPrice(this.sellExtensionFirstLevel, high, low));
+        BigDecimal resistancePrice = resistancePrice(quoteAtDay, closePriceRetracement);
+
+        ConditionalSellOrderFactory conditionalSellOrderFactory = new TargetResistancePriceConditionalSellOrderFactory(this.stockPrices.getStockName(), sellTargetPrice, resistancePrice);
+        BuyConditionalOrder buyOrder = new BuyConditionalOrder(this.stockPrices.getStockName(), quoteAtDay, Trader.AMOUNT_TO_INVEST, conditionalSellOrderFactory);
+        buyDecisionConditionsFactory.addConditions(buyOrder);
+        buyOrder.addCondition(new DoNotBreakResistance(resistancePrice));
+        buyOrder.addCondition(new DoNotBuyWhenNextDayIsOutsideRange(Range.open(resistancePrice, sellTargetPrice)));
+        return buyOrder;
     }
 
     private BigDecimal resistancePrice(DailyQuote quoteAtDay, BigDecimal closePriceRetracement) {

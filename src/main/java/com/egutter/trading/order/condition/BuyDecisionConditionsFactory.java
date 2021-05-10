@@ -5,10 +5,9 @@ import com.egutter.trading.order.BuyConditionalOrder;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
-import com.google.common.collect.Range;
+import java.util.StringJoiner;
 
 public class BuyDecisionConditionsFactory {
 
@@ -26,10 +25,15 @@ public class BuyDecisionConditionsFactory {
         return new BuyDecisionConditionsFactory(Collections.emptyList(), Portfolio.empty(), StockPrices.empty());
     }
 
-    public void addConditions(BuyConditionalOrder buyOrder, BigDecimal resistancePrice, BigDecimal sellTargetPrice) {
+    public void addConditions(BuyConditionalOrder buyOrder) {
         buyOrder.addCondition(new DoNotBuyWhenSameStockInPortfolio(portfolio, stockPrices));
-        buyOrder.addCondition(new DoNotBreakResistance(resistancePrice));
         this.conditionGenerators.forEach(generator -> buyOrder.addCondition(generator.generateCondition(stockPrices)));
-        buyOrder.addCondition(new DoNotBuyWhenNextDayIsOutsideRange(Range.open(resistancePrice, sellTargetPrice)));
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", BuyDecisionConditionsFactory.class.getSimpleName() + "[", "]")
+                .add("conditionGenerators=" + conditionGenerators)
+                .toString();
     }
 }

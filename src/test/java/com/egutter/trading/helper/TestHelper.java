@@ -1,9 +1,6 @@
 package com.egutter.trading.helper;
 
-import com.egutter.trading.order.BuyConditionalOrder;
-import com.egutter.trading.order.BuyOrder;
-import com.egutter.trading.order.BuySellOperation;
-import com.egutter.trading.order.SellOrder;
+import com.egutter.trading.order.*;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
@@ -48,7 +45,8 @@ public class TestHelper {
     }
 
     public static BuyConditionalOrder aBuyConditionalOrder(LocalDate tradingDate) {
-        return new BuyConditionalOrder(aStockName(), aDailyQuote(tradingDate), oneThousandPesos(), BigDecimal.ONE, BigDecimal.ONE);
+        ConditionalSellOrderFactory conditionalSellOrderFactory = new TargetResistancePriceConditionalSellOrderFactory(aStockName(), BigDecimal.ONE, BigDecimal.ONE);
+        return new BuyConditionalOrder(aStockName(), aDailyQuote(tradingDate), oneThousandPesos(), conditionalSellOrderFactory);
     }
     public static LocalDate monday() {
         return new LocalDate(2020, 9, 14);

@@ -1,0 +1,302 @@
+[
+  {
+    "sellTargetPrice": 231.21,
+    "sellResistancePrice": 220.26,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 223.74,
+    "candidate": "SPLK: 101100010110100100010000100100100101010.StochasticOscillatorGenerator.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 5,
+        "buzz": 0.4081,
+        "weeklyAverage": 12.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6558,
+      "sectorAverageNewsScore": 0.5439,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "UNP"
+    },
+    "supportResistance": {
+      "levels": [
+        171.501,
+        193.14,
+        205.78,
+        216.06,
+        228.32
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 21.369833,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.58000,
+    "stockName": "UNP",
+    "expectedReturn": 3.34000
+  },
+  {
+    "sellTargetPrice": 240.64,
+    "sellResistancePrice": 223.20,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 228.17,
+    "candidate": "PYPL: 100001010101110110101010010000111001011.MFI.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 85,
+        "buzz": 2.3448,
+        "weeklyAverage": 36.25
+      },
+      "companyNewsScore": 0.9433,
+      "sectorAverageBullishPercent": 0.6558,
+      "sectorAverageNewsScore": 0.5439,
+      "sentiment": {
+        "bearishPercent": 0.0385,
+        "bullishPercent": 0.9615
+      },
+      "symbol": "CAT"
+    },
+    "supportResistance": {
+      "levels": [
+        140.91,
+        160.15,
+        183.81,
+        208.47,
+        237.78
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 11.134956,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.22700,
+    "stockName": "CAT",
+    "expectedReturn": 5.46400
+  },
+  {
+    "sellTargetPrice": 141.26,
+    "sellResistancePrice": 130.35,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 133.03,
+    "candidate": "AAPL: 100111000101010111110010010101010010101.MACD.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 27,
+        "buzz": 0.6352,
+        "weeklyAverage": 42.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6633,
+      "sectorAverageNewsScore": 0.541,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "NKE"
+    },
+    "supportResistance": {
+      "levels": [
+        110.21,
+        117.41,
+        126.11,
+        137.17,
+        147.95
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.320728,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.05600,
+    "stockName": "NKE",
+    "expectedReturn": 6.18700
+  },
+  {
+    "sellTargetPrice": 80.07,
+    "sellResistancePrice": 76.37,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 77.02,
+    "candidate": "AMZN: 011000100001110101100101100010100111101.AROO.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 14,
+        "buzz": 0.6874,
+        "weeklyAverage": 12.0
+      },
+      "companyNewsScore": 0.7946,
+      "sectorAverageBullishPercent": 0.6633,
+      "sectorAverageNewsScore": 0.541,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "JD"
+    },
+    "supportResistance": {
+      "levels": [
+        71.76,
+        81.24,
+        88.64,
+        96.2,
+        108.29
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 25.200155,
+        "trending": true
+      }
+    },
+    "maxLoss": 0.85100,
+    "stockName": "JD",
+    "expectedReturn": 3.96000
+  },
+  {
+    "sellTargetPrice": 93.57,
+    "sellResistancePrice": 90.13,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 90.93,
+    "candidate": "CRM: 011111000000101001101001000011100100010.MFI.UltimateOscillatorGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 11,
+        "buzz": 1.3664,
+        "weeklyAverage": 7.5
+      },
+      "companyNewsScore": 0.9658,
+      "sectorAverageBullishPercent": 0.6558,
+      "sectorAverageNewsScore": 0.5439,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "EMR"
+    },
+    "supportResistance": {
+      "levels": [
+        63.16,
+        71.2,
+        80.51,
+        87.07,
+        93.57
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 8.7628765,
+        "trending": false
+      }
+    },
+    "maxLoss": 0.88800,
+    "stockName": "EMR",
+    "expectedReturn": 2.90300
+  }
+]

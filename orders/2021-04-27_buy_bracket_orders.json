@@ -1,0 +1,360 @@
+[
+  {
+    "sellTargetPrice": 290.79,
+    "sellResistancePrice": 259.40,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 268.82,
+    "candidate": "PYPL: 000011100110001000110010110000100000000.StochasticOscillatorGenerator.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 31,
+        "buzz": 0.656,
+        "weeklyAverage": 47.25
+      },
+      "companyNewsScore": 0.7706,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.5387,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "PYPL"
+    },
+    "supportResistance": {
+      "levels": [
+        171.63,
+        189.25,
+        212.45,
+        237.9969,
+        259.27,
+        309.14
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 19.596798,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.63100,
+    "stockName": "PYPL",
+    "expectedReturn": 8.17100
+  },
+  {
+    "sellTargetPrice": 436.37,
+    "sellResistancePrice": 404.23,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 416.12,
+    "candidate": "METALS: 001011000110100010010100010101101110110.AROO.MFI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 4,
+        "buzz": 0.9411,
+        "weeklyAverage": 4.25
+      },
+      "companyNewsScore": 0.7946,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.5387,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "INTU"
+    },
+    "supportResistance": {
+      "levels": [
+        295.37,
+        339.35,
+        368.42,
+        387.94,
+        423.74
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 18.48304,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.94100,
+    "stockName": "INTU",
+    "expectedReturn": 4.86600
+  },
+  {
+    "sellTargetPrice": 76.51,
+    "sellResistancePrice": 64.31,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 66.01,
+    "candidate": "INTC: 100001000110110010010011010100100100000.ADX.AROO",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 121,
+        "buzz": 0.9325,
+        "weeklyAverage": 129.75
+      },
+      "companyNewsScore": 0.6086,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.5387,
+      "sentiment": {
+        "bearishPercent": 0.3,
+        "bullishPercent": 0.7
+      },
+      "symbol": "TWTR"
+    },
+    "supportResistance": {
+      "levels": [
+        38.1,
+        48.65,
+        64.08,
+        80.75
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.771598,
+        "trending": false
+      }
+    },
+    "maxLoss": 2.64300,
+    "stockName": "TWTR",
+    "expectedReturn": 15.90600
+  },
+  {
+    "sellTargetPrice": 7.35,
+    "sellResistancePrice": 5.95,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 6.15,
+    "candidate": "TSLA: 101110100000011101010001010100101101011.AROO.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.5954,
+      "sectorAverageNewsScore": 0.5098,
+      "symbol": "CLVS"
+    },
+    "supportResistance": {
+      "levels": [
+        4.08,
+        4.99,
+        5.75,
+        6.53,
+        7.97,
+        11.1
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 14.180683,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.36100,
+    "stockName": "CLVS",
+    "expectedReturn": 19.51200
+  },
+  {
+    "sellTargetPrice": 127.67,
+    "sellResistancePrice": 111.28,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 114.89,
+    "candidate": "NFLX: 111101001100100010010000010101100111010.BB.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 4,
+        "buzz": 0.5128,
+        "weeklyAverage": 3.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6589,
+      "sectorAverageNewsScore": 0.5476,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "IRBT"
+    },
+    "supportResistance": {
+      "levels": [
+        67.55,
+        80.89,
+        98.55,
+        117.46,
+        137.79,
+        197.4
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.9900875,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.24400,
+    "stockName": "IRBT",
+    "expectedReturn": 11.12400
+  },
+  {
+    "sellTargetPrice": 147.76,
+    "sellResistancePrice": 130.66,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 138.99,
+    "candidate": "AMZN: 100100001010010110111011100100100100011.ADX.BB",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 9,
+        "buzz": 1.0,
+        "weeklyAverage": 9.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6687,
+      "sectorAverageNewsScore": 0.5387,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "Z"
+    },
+    "supportResistance": {
+      "levels": [
+        79.08,
+        106.23,
+        136.1001,
+        170.19,
+        208.11
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.683671,
+        "trending": false
+      }
+    },
+    "maxLoss": 6.37500,
+    "stockName": "Z",
+    "expectedReturn": 6.31000
+  }
+]

@@ -1,15 +1,10 @@
 package com.egutter.trading.order;
 
-import com.egutter.trading.order.condition.SellWhenPriceAboveTarget;
-import com.egutter.trading.order.condition.SellWhenPriceBellowTarget;
-import com.egutter.trading.stats.MetricsRecorder;
-import com.egutter.trading.stats.MetricsRecorderFactory;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.TimeFrameQuote;
 import org.joda.time.LocalDate;
 
-import java.lang.reflect.Proxy;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -17,17 +12,21 @@ import java.math.RoundingMode;
 public class BuyConditionalOrder extends ConditionalOrder {
     private final DailyQuote dailyQuote;
     private final BigDecimal amountToInvest;
-    private final BigDecimal sellTargetPrice;
-    private final BigDecimal resistancePrice;
     public static int EXPIRE_IN_DAYS = 3;
+    private ConditionalSellOrderFactory conditionalSellOrderFactory;
+    private int expiresInDays;
 
-    public BuyConditionalOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest, BigDecimal sellTargetPrice, BigDecimal resistancePrice) {
+    public BuyConditionalOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest, ConditionalSellOrderFactory conditionalSellOrderFactory, int expiresInDays) {
         super(stockName);
         this.dailyQuote = dailyQuote;
         this.amountToInvest = amountToInvest;
-        this.sellTargetPrice = sellTargetPrice;
-        this.resistancePrice = resistancePrice;
+        this.conditionalSellOrderFactory = conditionalSellOrderFactory;
+        this.expiresInDays = expiresInDays;
         expiresOn(expirationDate(dailyQuote.getTradingDate()));
+
+    }
+    public BuyConditionalOrder(String stockName, DailyQuote dailyQuote, BigDecimal amountToInvest, ConditionalSellOrderFactory conditionalSellOrderFactory) {
+        this(stockName, dailyQuote, amountToInvest, conditionalSellOrderFactory, EXPIRE_IN_DAYS);
     }
 
     @Override
@@ -42,28 +41,7 @@ public class BuyConditionalOrder extends ConditionalOrder {
         // Add buy Order
         orderBook.add(buyOrder);
         // ADD Sell Orders
-        ConditionalOrder sellWhenPriceAboveTarget = sellWhenPriceAboveTarget(shares, buyOrder);
-        ConditionalOrder sellWhenPriceDropBellowStopLoss = sellWhenPriceDropBellowStopLoss(shares, buyOrder);
-        orderBook.addPendingOrder(new OneCancelTheOtherOrder(sellWhenPriceAboveTarget, sellWhenPriceDropBellowStopLoss));
-        orderBook.addPendingOrder(new OneCancelTheOtherOrder(sellWhenPriceDropBellowStopLoss, sellWhenPriceAboveTarget));
-
-        MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.BUY_EXECUTED);
-    }
-
-    private ConditionalOrder sellWhenPriceDropBellowStopLoss(int shares, BuyOrder buyOrder) {
-        SellWhenPriceBellowTarget sellWhenPriceAboveTarget = new SellWhenPriceBellowTarget(this.resistancePrice);
-        SellConditionalOrder sellWhenPriceBreaksResistance = new SellConditionalOrder(this.stockName, buyOrder, shares, sellWhenPriceAboveTarget);
-        sellWhenPriceBreaksResistance.addCondition(sellWhenPriceAboveTarget);
-        return sellWhenPriceBreaksResistance;
-    }
-
-    private ConditionalOrder sellWhenPriceAboveTarget(int shares, BuyOrder buyOrder) {
-//        int sharesToSell = shares/2; // UNCOMMENT TO DO A 2ND ORDER
-        int sharesToSell = shares; // COMMENT TO DO A SECOND ORDER
-        SellWhenPriceAboveTarget sellWhenPriceAboveTarget = new SellWhenPriceAboveTarget(this.sellTargetPrice);
-        SellConditionalOrder sellConditionalOrder = new SellConditionalOrder(this.stockName, buyOrder, sharesToSell, sellWhenPriceAboveTarget);
-        sellConditionalOrder.addCondition(sellWhenPriceAboveTarget);
-        return sellConditionalOrder;
+        conditionalSellOrderFactory.addSellOrdersTo(orderBook, buyOrder, shares);
     }
 
     private BuyOrder buildConfirmedOrder(TimeFrameQuote timeFrameQuote, int shares, BigDecimal price) {
@@ -78,7 +56,7 @@ public class BuyConditionalOrder extends ConditionalOrder {
     }
 
     private LocalDate expirationDate(LocalDate tradingDate) {
-        int daysInAdvance = (tradingDate.getDayOfWeek() > 2) ? EXPIRE_IN_DAYS + 2 : EXPIRE_IN_DAYS;
+        int daysInAdvance = (tradingDate.getDayOfWeek() > 2) ? expiresInDays + 2 : expiresInDays;
         return tradingDate.plusDays(daysInAdvance);
     }
 

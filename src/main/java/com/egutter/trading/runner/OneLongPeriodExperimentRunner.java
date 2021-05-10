@@ -1,11 +1,14 @@
 package com.egutter.trading.runner;
 
 import com.egutter.trading.decision.Candidate;
+import com.egutter.trading.decision.CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory;
 import com.egutter.trading.decision.factory.HardcodedTradingDecisionFactory;
 import com.egutter.trading.decision.generator.*;
 import com.egutter.trading.decision.technicalanalysis.StochasticOscillatorThreshold;
 import com.egutter.trading.genetic.Experiment;
+import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
+import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockGroup;
 import com.egutter.trading.stock.StockMarket;
 import com.egutter.trading.stock.StockMarketBuilder;
@@ -24,8 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.egutter.trading.stock.StockMarket.TECH_SECTOR;
-import static com.egutter.trading.stock.StockMarket.techSector;
+import static com.egutter.trading.stock.StockMarket.*;
 import static java.util.Arrays.asList;
 
 public class OneLongPeriodExperimentRunner {
@@ -40,6 +42,22 @@ public class OneLongPeriodExperimentRunner {
     }
 
     private void run() {
+        runRsiCrossWithOneSector();
+    }
+
+    private void runRsiCrossWithOneSector() {
+        LocalDate fromDate = new LocalDate(2020, 1, 1);
+        LocalDate toDate = LocalDate.now();
+        System.out.println("Period from " + fromDate + " to " + toDate);
+        StockGroup stockGroup = new StockGroup(TECH_SECTOR, sectors());
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, false,
+                stockGroup.getStockSymbols());
+
+        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(MovingAverageCrossOverGenerator.class);
+        runOneStrategy(stockMarket, tradingDecisionGenerators, stockGroup);
+    }
+
+    private void runFibonacciWithAllSectors() {
 
         LocalDate fromDate = new LocalDate(2010, 1, 1);
 //        LocalDate toDate = new LocalDate(2019, 12, 31);
@@ -187,7 +205,13 @@ public class OneLongPeriodExperimentRunner {
         String tradingDecisionGeneratorsClassList = "asList(" + tradingDecisionGeneratorsString + ".class)";
 //        System.out.println("new Candidate(\"" + description + "\", \"" + result + "\", " + tradingDecisionGeneratorsClassList + "),");
 
-        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
+//        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, tradingDecisionGenerators);
+        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+        CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,
+                result, RelativeStrengthIndexCrossDownGenerator.class,
+                tradingDecisionGenerators);
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, result, portfolio,
+                triggerBuyConditionalOrderDecisionFactory);
         runner.run();
 
         if (runner.percentageOfOrdersWon().compareTo(new BigDecimal(0.90)) >= 0) {

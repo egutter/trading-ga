@@ -1,0 +1,118 @@
+[
+  {
+    "sellTargetPrice": 69.27,
+    "sellResistancePrice": 63.33,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 65.64,
+    "candidate": "SQ: 101111111000000000111101010000110001000.MACD.RSI",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 30,
+        "buzz": 1.0257,
+        "weeklyAverage": 27.25
+      },
+      "companyNewsScore": 0.1428,
+      "sectorAverageBullishPercent": 0.6111,
+      "sectorAverageNewsScore": 0.5128,
+      "sentiment": {
+        "bearishPercent": 0.8,
+        "bullishPercent": 0.2
+      },
+      "symbol": "GILD"
+    },
+    "supportResistance": {
+      "levels": [
+        56.56,
+        57.04,
+        62.29,
+        65.66,
+        69.36
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 15.582899,
+        "trending": false
+      }
+    },
+    "maxLoss": 3.64800,
+    "stockName": "GILD",
+    "expectedReturn": 5.52600
+  },
+  {
+    "sellTargetPrice": 168.39,
+    "sellResistancePrice": 164.47,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 166.58,
+    "candidate": "HEALTH: 001110000000111111010001111111001111101.ChaikinOscillatorGenerator.ADX",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.5913,
+      "sectorAverageNewsScore": 0.516,
+      "symbol": "GLD"
+    },
+    "supportResistance": {
+      "levels": [
+        157.1297,
+        161.81,
+        169.89,
+        177.91,
+        186.99
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 5,
+          "sell": 3,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 14.908933,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.28300,
+    "stockName": "GLD",
+    "expectedReturn": 1.08700
+  }
+]

@@ -1,13 +1,9 @@
 package com.egutter.trading.runner;
 
 import com.egutter.trading.candidates.GlobalStockMarketCandidates;
-import com.egutter.trading.decision.BuyTradingDecision;
-import com.egutter.trading.decision.Candidate;
-import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
-import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
-import com.egutter.trading.decision.constraint.SellLastDayOfMarket;
-import com.egutter.trading.decision.SellTradingDecision;
+import com.egutter.trading.decision.*;
 import com.egutter.trading.decision.consensus.BuyWhenNoOppositionsTradingDecision;
+import com.egutter.trading.decision.consensus.SellWhenAnyAgreeTradingDecision;
 import com.egutter.trading.decision.consensus.SellWhenNoOppositionsTradingDecision;
 import com.egutter.trading.decision.constraint.*;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
@@ -20,13 +16,8 @@ import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
 import com.egutter.trading.order.condition.ConditionalOrderConditionGenerator;
 import com.egutter.trading.out.CandidatesFileHandler;
 import com.egutter.trading.out.PrintResult;
-import com.egutter.trading.out.adapters.BitStringGsonAdapter;
-import com.egutter.trading.out.adapters.ClassTypeAdapterFactory;
-import com.egutter.trading.out.adapters.JodaLocalDateGsonAdapter;
 import com.egutter.trading.stock.*;
 import com.google.common.collect.Range;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.tictactec.ta.lib.MAType;
 import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
@@ -36,16 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.uncommons.maths.binary.BitString;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
-
-import static com.egutter.trading.stock.StockMarket.*;
-import static com.egutter.trading.stock.StockMarket.innovationSector;
-import static java.util.Arrays.asList;
 
 /**
  * Created by egutter on 11/29/14.
@@ -58,21 +42,25 @@ public class OneCandidateRunner {
     private final Trader trader;
     private TradingDecisionFactory tradingDecisionFactory;
     private final OrderBook orderBook;
-    private FibonacciRetracementStrategyFactory fibTradingDecisionFactory;
+    private TriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory;
     private StockMarket stockMarket;
     private final BitString candidate;
 
     public OneCandidateRunner(StockMarket stockMarket, BitString candidate, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
-        this(stockMarket, candidate, new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH), tradingDecisionGenerators, true);
+        this(stockMarket, candidate, new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH), tradingDecisionGenerators);
     }
 
-    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators, boolean onExperiment) {
+    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators) {
+        this(stockMarket, candidate, portfolio, new FibonacciRetracementTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio, candidate, tradingDecisionGenerators));
+    }
+
+    public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, TriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory) {
         this.stockMarket = stockMarket;
         this.candidate = candidate;
         this.portfolio = portfolio;
         this.orderBook = new OrderBook();
-        this.fibTradingDecisionFactory = new FibonacciRetracementStrategyFactory(portfolio, candidate, tradingDecisionGenerators);
-        this.trader = new Trader(stockMarket, fibTradingDecisionFactory, portfolio, orderBook);
+        this.triggerBuyConditionalOrderDecisionFactory = triggerBuyConditionalOrderDecisionFactory;
+        this.trader = new Trader(stockMarket, triggerBuyConditionalOrderDecisionFactory, portfolio, orderBook);
     }
 
     public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, TradingDecisionFactory tradingDecisionFactory) {
@@ -169,23 +157,50 @@ public class OneCandidateRunner {
     public BigDecimal averageReturn() {
         return portfolio.getStats().allOrdersAverageReturn();
     }
-
-    public static void main(String[] args) {
+    // Fibonacci Main
+    public static void mainFibo(String[] args) {
         LocalTime startTime = LocalTime.now();
 //        LocalDate fromDate = new LocalDate(2001, 1, 1);
         LocalDate fromDate = new LocalDate(2010, 1, 1);
-        LocalDate toDate = new LocalDate(2021, 4, 9);
+        LocalDate toDate = new LocalDate(2021, 4, 30);
 
 //        String[] stocks = StockMarket.innovationSector();
-//        String[] stocks = new String[]{"SPY"};
-//        runOneSectorWithOneCandidate(fromDate, stocks, "110010011110000010011000111111110100011",
-//                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class));
+        String[] stocks = new String[]{"AAPL"};
+        runOneSectorWithOneCandidate(fromDate, stocks, "110010011110000010011000111111110100011",
+                Arrays.asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class));
 
 //        runAllSectorsOnAllCandidates(fromDate);
 //        runSpySectorsOnSomeCandidates(fromDate);
-        List<String> stockSymbols = allSectorsStockSymbols();
+//        List<String> stockSymbols = allSectorsStockSymbols();
 //        List<String> stockSymbols = Arrays.asList("AAPL");
-        runStocksWithCandidates(fromDate, toDate, stockSymbols, new CandidatesFileHandler().fromJson());
+//        runStocksWithCandidates(fromDate, toDate, stockSymbols, new CandidatesFileHandler().fromJson());
+        System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
+    }
+
+    // CrossOver main
+    public static void main(String[] args) {
+        LocalTime startTime = LocalTime.now();
+        LocalDate fromDate = new LocalDate(2020, 1, 1);
+//        String[] stocks = new String[]{"SPY"};
+        String[] stocks = StockMarket.aapl();
+        LocalDate toDate = LocalDate.now(); //new LocalDate(2020, 11, 19);
+        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false, stocks);
+        BitString chromosome = new BitString("000010100111000110101000000100000101001");
+
+        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+        CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,
+                chromosome, RelativeStrengthIndexCrossDownGenerator.class,
+                Arrays.asList(MovingAverageCrossOverGenerator.class));
+
+        OneCandidateRunner runner = new OneCandidateRunner(stockMarket, chromosome, portfolio,
+                triggerBuyConditionalOrderDecisionFactory);
+
+        runner.run();
+        new PrintResult(true).print(runner, chromosome);
+        System.out.println("==========================================");
+        System.out.println("******************************************");
+        System.out.println("==========================================");
+
         System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
 
@@ -197,6 +212,7 @@ public class OneCandidateRunner {
         BitString chromosome = new BitString(candidateString);
         OneCandidateRunner runner = new OneCandidateRunner(stockMarket, chromosome, tradingDecisionGenerators);
         runner.run();
+        new PrintResult(true).print(runner, chromosome);
         System.out.println("==========================================");
         System.out.println("******************************************");
         System.out.println("==========================================");
@@ -451,8 +467,8 @@ public class OneCandidateRunner {
         return this.orderBook;
     }
 
-    public FibonacciRetracementStrategyFactory getFibTradingDecisionFactory() {
-        return fibTradingDecisionFactory;
+    public TriggerBuyConditionalOrderDecisionStrategyFactory getTriggerBuyConditionalOrderDecisionFactory() {
+        return triggerBuyConditionalOrderDecisionFactory;
     }
 
     public StockMarket getStockMarket() {

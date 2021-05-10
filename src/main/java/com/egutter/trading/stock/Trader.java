@@ -1,9 +1,8 @@
 package com.egutter.trading.stock;
 
-import com.egutter.trading.decision.FibonacciRetracementStrategyFactory;
-import com.egutter.trading.decision.TradingStrategy;
+import com.egutter.trading.decision.TriggerBuyConditionalOrderDecisionStrategyFactory;
 import com.egutter.trading.decision.factory.TradingDecisionFactory;
-import com.egutter.trading.decision.technicalanalysis.FibonacciRetracementBuyDecision;
+import com.egutter.trading.decision.technicalanalysis.TriggerBuyConditionalOrderDecision;
 import com.egutter.trading.order.MarketOrderGenerator;
 import com.egutter.trading.order.OrderBook;
 import com.google.common.base.Function;
@@ -23,7 +22,7 @@ public class Trader {
     private TradingDecisionFactory tradingDecisionFactory;
     private Portfolio portfolio;
     private OrderBook orderBook;
-    private FibonacciRetracementStrategyFactory fibonacciStrategy;
+    private TriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyCondOrderDecisionStrategy;
 
     public Trader(StockMarket stockMarket,
                   TradingDecisionFactory tradingDecisionFactory,
@@ -36,9 +35,9 @@ public class Trader {
         this.orderBook = orderBook;
     }
 
-    public Trader(StockMarket stockMarket, FibonacciRetracementStrategyFactory fibonacciStrategy, Portfolio portfolio, OrderBook orderBook) {
+    public Trader(StockMarket stockMarket, TriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyCondOrderDecisionStrategy, Portfolio portfolio, OrderBook orderBook) {
         this.stockMarket = stockMarket;
-        this.fibonacciStrategy = fibonacciStrategy;
+        this.triggerBuyCondOrderDecisionStrategy = triggerBuyCondOrderDecisionStrategy;
         this.portfolio = portfolio;
         this.orderBook = orderBook;
     }
@@ -65,24 +64,24 @@ public class Trader {
     private void tradeOneStock(StockPrices stockPrices) {
 //        TradingStrategy tradingStrategy = new TradingStrategy(this.tradingDecisionFactory, stockPrices);
 //        LocalDate startOn = tradingStrategy.startOn();
-        FibonacciRetracementBuyDecision tradingStrategy = fibonacciStrategy.generateBuyDecision(stockPrices);
+        TriggerBuyConditionalOrderDecision tradingStrategy = triggerBuyCondOrderDecisionStrategy.generateBuyDecision(stockPrices);
         LocalDate startOn = stockPrices.getFirstTradingDate();
         stockPrices.forEachDailyPrice(startOn, executeMarketOrders(stockPrices, tradingStrategy), () -> shouldStop());
     }
 
     public void tradeOn(LocalDate tradingDate) {
         for (StockPrices stockPrices : stockMarket.getStockPrices()) {
-            FibonacciRetracementBuyDecision tradingStrategy = fibonacciStrategy.generateBuyDecision(stockPrices);
+            TriggerBuyConditionalOrderDecision tradingStrategy = triggerBuyCondOrderDecisionStrategy.generateBuyDecision(stockPrices);
             LocalDate startOn = tradingDate.minusDays(10);
             stockPrices.forEachDailyPrice(startOn, executeMarketOrders(stockPrices, tradingStrategy, (runOnDate) -> runOnDate.equals(tradingDate)), () -> false);
         }
     }
 
-    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final FibonacciRetracementBuyDecision buyDecision) {
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TriggerBuyConditionalOrderDecision buyDecision) {
         return executeMarketOrders(stockPrices, buyDecision, (runOnDate) -> true);
     }
 
-    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final FibonacciRetracementBuyDecision buyDecision, Function<LocalDate, Boolean> shouldAddOrders) {
+    private Function<DailyQuote, Object> executeMarketOrders(final StockPrices stockPrices, final TriggerBuyConditionalOrderDecision buyDecision, Function<LocalDate, Boolean> shouldAddOrders) {
         return new Function<DailyQuote, Object>() {
             @Override
             public Object apply(DailyQuote dailyQuote) {
@@ -117,7 +116,7 @@ public class Trader {
         return new TimeFrameQuote(dailyQuote, quoteAtPrevDay, quoteAtNextDay);
     }
 
-    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, DailyQuote dailyQuote, FibonacciRetracementBuyDecision tradingStrategy, TimeFrameQuote timeFrameQuote) {
+    private MarketOrderGenerator marketOrderGenerator(StockPrices stockPrices, DailyQuote dailyQuote, TriggerBuyConditionalOrderDecision tradingStrategy, TimeFrameQuote timeFrameQuote) {
         Optional<DailyQuote> marketQuote = stockMarket.getMarketIndexPrices().dailyPriceOn(dailyQuote.getTradingDate());
 
         return new MarketOrderGenerator(stockPrices.getStockName(),

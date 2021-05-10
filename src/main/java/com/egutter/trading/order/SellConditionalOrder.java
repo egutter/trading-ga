@@ -34,7 +34,6 @@ public class SellConditionalOrder extends ConditionalOrder {
         if (!portfolio.soldAllSharesOf(this.stockName)) {
             orderBook.addPendingOrder(sellWhenTrailingLossTarget(portfolio, timeFrameQuote));
         }
-        MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.SELL_EXECUTED);
     }
 
     private ConditionalOrder sellWhenTrailingLossTarget(Portfolio portfolio, TimeFrameQuote timeFrameQuote) {

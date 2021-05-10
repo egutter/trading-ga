@@ -17,6 +17,15 @@ import static java.util.Arrays.asList;
 
 public class GlobalStockMarketCandidates {
 
+    public static List<BitString> rsiCrossDownChromosomeCandidates() {
+        return Arrays.asList(
+                new BitString("000010100111000110101000000100000101001"),
+                new BitString("010010110101010011100000000101110110001"),
+                new BitString("001001101100000001000000110101001111100")
+                );
+//        return newNewerCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());
+    }
+
     public static List<BitString> chromosomeCandidates() {
         return new CandidatesFileHandler().chromosomesfromJson();
 //        return newNewerCandidates().stream().map(candidate -> candidate.getChromosome()).collect(Collectors.toList());

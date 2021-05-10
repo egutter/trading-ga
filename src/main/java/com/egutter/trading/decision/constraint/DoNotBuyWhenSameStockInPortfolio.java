@@ -30,10 +30,8 @@ public class DoNotBuyWhenSameStockInPortfolio implements BuyTradingDecision, Fun
     @Override
     public Boolean apply(TimeFrameQuote timeFrameQuote) {
         if (portfolio.hasStock(stockPrices.getStockName())) {
-            MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.HAS_SAME_STOCK_IN_PORTFOLIO);
             return false;
         }
-        MetricsRecorderFactory.getInstance().incEvent(MetricsRecorder.HAS_NOT_SAME_STOCK_IN_PORTFOLIO);
         return true;
     }
 

@@ -1,9 +1,7 @@
 package com.egutter.trading.decision.generator;
 
-import com.egutter.trading.decision.SellTradingDecision;
 import com.egutter.trading.decision.constraint.TrailingStopSellDecision;
 import com.egutter.trading.stock.DailyQuote;
-import com.egutter.trading.stock.Portfolio;
 import com.egutter.trading.stock.StockPrices;
 import org.uncommons.maths.binary.BitString;
 
@@ -11,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 /**
  * Created by egutter on 2/12/14.
@@ -19,40 +18,50 @@ public class TrailingStopSellDecisionGenerator {
 
     private final BigDecimal stopLoss;
     private final BigDecimal trailingLoss;
-
-    private BitString chromosome;
+    private final int expireInDays;
 
     public static void main(String[] args) {
         StockPrices stocks = new StockPrices("stock");
         stocks.addAll(Arrays.asList(DailyQuote.empty()));
         BigDecimal pricePaid = BigDecimal.TEN;
 
-        TrailingStopSellDecision decision = new TrailingStopSellDecisionGenerator(new BitString("1111101111001")).generateSellDecision(pricePaid);
+        TrailingStopSellDecisionGenerator trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("1111101111001"));
+        TrailingStopSellDecision decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
 
-        decision = new TrailingStopSellDecisionGenerator(new BitString("0000000000000")).generateSellDecision(pricePaid);
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0000000000000"));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
 
-        decision = new TrailingStopSellDecisionGenerator(new BitString("1111111111111")).generateSellDecision(pricePaid);
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("1111111111111"));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
 
-        decision = new TrailingStopSellDecisionGenerator(new BitString("1010101010101")).generateSellDecision(pricePaid);
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("1010101011111"));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
 
-        decision = new TrailingStopSellDecisionGenerator(new BitString("0101010101010")).generateSellDecision(pricePaid);
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0101010101010"));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
     }
 
     public TrailingStopSellDecisionGenerator(BitString chromosome) {
-        this.chromosome = chromosome;
         this.stopLoss = generateStopLoss(chromosome);
         this.trailingLoss = generateTrailingLoss(chromosome);
+        this.expireInDays = generateExpireInDays(chromosome);
     }
 
     /**
      * Bits
-     * 0-5 => Stop Loss value from 1 to 13.6
-     * 6-12 => Trailing Loss value from 1 to 19.14
+     * 0-3 => Stop Loss value from 1 to 16
+     * 4-6 => Trailing Loss value from stopLoss to 24
+     * 6-12 => Expire in days from 1 to 64
      *
      * @param pricePaid
      * @return
@@ -65,12 +74,32 @@ public class TrailingStopSellDecisionGenerator {
 
 
     private BigDecimal generateStopLoss(BitString chromosome) {
-        double stopLoss = new BitString(chromosome.toString().substring(0, 6)).toNumber().add(new BigInteger("5")).doubleValue();
-        return new BigDecimal(stopLoss).divide(BigDecimal.valueOf(5), 2, RoundingMode.HALF_EVEN);
+        double stopLoss = new BitString(chromosome.toString().substring(0, 4)).toNumber().add(new BigInteger("1")).doubleValue();
+        return new BigDecimal(stopLoss);
     }
 
     private BigDecimal generateTrailingLoss(BitString chromosome) {
-        double stopLoss = new BitString(chromosome.toString().substring(6, 13)).toNumber().add(new BigInteger("7")).doubleValue();
-        return new BigDecimal(stopLoss).divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_EVEN);
+        BigDecimal trailingLoss = new BigDecimal(new BitString(chromosome.toString().substring(4, 7)).toNumber());
+        if (trailingLoss.compareTo(this.stopLoss) < 0 ) {
+            trailingLoss = trailingLoss.add(this.stopLoss);
+        }
+        return trailingLoss;
+    }
+
+    private int generateExpireInDays(BitString chromosome) {
+        return new BitString(chromosome.toString().substring(7, 13)).toNumber().add(new BigInteger("1")).intValue();
+    }
+
+    public int getExpireInDays() {
+        return expireInDays;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", TrailingStopSellDecisionGenerator.class.getSimpleName() + "[", "]")
+                .add("stopLoss=" + stopLoss)
+                .add("trailingLoss=" + trailingLoss)
+                .add("expireInDays=" + expireInDays)
+                .toString();
     }
 }

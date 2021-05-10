@@ -1,20 +1,14 @@
 package com.egutter.trading.out;
 
 import com.egutter.trading.decision.DecisionResult;
-import com.egutter.trading.decision.technicalanalysis.CrossOverOscillator;
-import com.egutter.trading.decision.technicalanalysis.FibonacciRetracementBuyDecision;
-import com.egutter.trading.decision.technicalanalysis.MomentumOscillator;
-import com.egutter.trading.decision.technicalanalysis.MoneyFlowIndex;
+import com.egutter.trading.decision.technicalanalysis.*;
 import com.egutter.trading.runner.OneCandidateRunner;
-import com.egutter.trading.stats.MetricsRecorder;
 import com.egutter.trading.stats.MetricsRecorderFactory;
 import com.egutter.trading.stock.StockMarket;
 import com.google.common.collect.Ordering;
-import org.apache.commons.math3.util.Pair;
 import org.joda.time.LocalDate;
 import org.uncommons.maths.binary.BitString;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +30,8 @@ public class PrintResult {
 
     public void print(OneCandidateRunner runner, BitString result) {
         System.out.println("Best candidate is " + result);
-        FibonacciRetracementBuyDecision fibonacciRetracementBuyDecision = runner.getFibTradingDecisionFactory().generateBuyDecision(runner.getStockMarket().getStockPrices().get(0));
-        System.out.println("Best candidate is " + fibonacciRetracementBuyDecision.buyDecisionToString());
+        TriggerBuyConditionalOrderDecision triggerBuyConditionalOrderDecision = runner.getTriggerBuyConditionalOrderDecisionFactory().generateBuyDecision(runner.getStockMarket().getStockPrices().get(0));
+        System.out.println("Best candidate is " + triggerBuyConditionalOrderDecision.buyDecisionToString());
 //        System.out.println("Buy Trading Decisions " + runner.buyDecisions());
 //        System.out.println("Sell Trading Decisions " + runner.sellDecisions());
         System.out.println("Final Cash $" + runner.finalCash());

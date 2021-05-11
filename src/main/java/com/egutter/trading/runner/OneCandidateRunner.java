@@ -85,7 +85,7 @@ public class OneCandidateRunner {
         trader.tradeAllStocksInMarket();
         if (printResults) {
             new PrintResult(false).print(this, candidate);
-            whenWonOver90Percent(() -> new PrintResult(true).print(this, candidate));
+//            whenWonOver90Percent(() -> new PrintResult(false).print(this, candidate));
         }
     }
 

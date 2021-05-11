@@ -46,15 +46,17 @@ public class OneLongPeriodExperimentRunner {
     }
 
     private void runRsiCrossWithOneSector() {
-        LocalDate fromDate = new LocalDate(2020, 1, 1);
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
-        StockGroup stockGroup = new StockGroup(TECH_SECTOR, sectors());
-        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, false,
-                stockGroup.getStockSymbols());
+//        StockGroup stockGroup = new StockGroup(TECH_SECTOR, financeSector());
+        StockMarket.allSectors().stream().forEach(stockGroup -> {
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, false,
+                    stockGroup.getStockSymbols());
 
-        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(MovingAverageCrossOverGenerator.class);
-        runOneStrategy(stockMarket, tradingDecisionGenerators, stockGroup);
+            List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(MovingAverageCrossOverGenerator.class);
+            runOneStrategy(stockMarket, tradingDecisionGenerators, stockGroup);
+        });
     }
 
     private void runFibonacciWithAllSectors() {

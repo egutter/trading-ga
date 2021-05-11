@@ -79,17 +79,18 @@ public class StockMarket {
                 new StockGroup(CONS_BASIC_SECTOR, consumerBasicSector()),
                 new StockGroup(CONS_DISC_SECTOR, consumerDiscSector()),
                 new StockGroup(HEALTH_SECTOR, healthSector()),
-                new StockGroup(BIOTECH_SECTOR, biotechSector()),
+//                new StockGroup(BIOTECH_SECTOR, biotechSector()),
                 new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
-                new StockGroup(INNOVATION_SECTOR, innovationSector()),
-                new StockGroup(METALS_SECTORS, metals()),
-                new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
-                new StockGroup(GREEN_SECTORS, greenSector()),
-                new StockGroup(SMALL_CAP_SECTORS, smallCap()),
-                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
-                new StockGroup("DEVELOP ADR", developAdr()),
-                new StockGroup("EMERG ADR", emergentAdr()),
-                new StockGroup(SPY_SECTOR, topSpy())));
+//                new StockGroup(INNOVATION_SECTOR, innovationSector()),
+//                new StockGroup(METALS_SECTORS, metals()),
+//                new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
+//                new StockGroup(GREEN_SECTORS, greenSector()),
+                new StockGroup(SMALL_CAP_SECTORS, smallCap())
+//                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
+//                new StockGroup("DEVELOP ADR", developAdr()),
+//                new StockGroup("EMERG ADR", emergentAdr()),
+//                new StockGroup(SPY_SECTOR, topSpy())
+                ));
         individualStocks().stream().forEach(stocks -> {
             stockGroups.add(new StockGroup(stocks[0], stocks));
         });

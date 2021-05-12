@@ -49,8 +49,8 @@ public class OneLongPeriodExperimentRunner {
         LocalDate fromDate = new LocalDate(2010, 1, 1);
         LocalDate toDate = LocalDate.now();
         System.out.println("Period from " + fromDate + " to " + toDate);
-//        StockGroup stockGroup = new StockGroup(TECH_SECTOR, financeSector());
-        StockMarket.allSectors().stream().forEach(stockGroup -> {
+        Arrays.asList(StockMarket.topSpy()).stream().forEach(symbol -> {
+            StockGroup stockGroup = new StockGroup(symbol, new String[]{symbol});
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, LocalDate.now(), true, false,
                     stockGroup.getStockSymbols());
 

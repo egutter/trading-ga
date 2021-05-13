@@ -244,7 +244,14 @@ public class OneCandidateRunner {
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, stockGroup.getStockSymbols());
 
             candidates.stream().forEach(candidate -> {
-                OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
+                Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+                CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,
+                        candidate.getChromosome(), RelativeStrengthIndexCrossDownGenerator.class,
+                        Arrays.asList(MovingAverageCrossOverGenerator.class));
+
+                OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio,
+                        triggerBuyConditionalOrderDecisionFactory);
+
                 runner.run(false);
                 runner.whenWonOver90Percent(() -> appendToCandidates(selectedCandidates, runner, candidate, stockGroup, fromDate, toDate));
 

@@ -41,7 +41,7 @@ public class StockMarket {
     private LocalDate firstTradingDay;
 
     public static void main(String[] args) {
-        System.out.println(allSectorsStockSymbols());
+        System.out.println(allSectorsStockSymbolsAsStockGroups());
     }
 
     public StockMarket(List<StockPrices> stockPrices, StockPrices marketIndexPrices) {
@@ -79,17 +79,17 @@ public class StockMarket {
                 new StockGroup(CONS_BASIC_SECTOR, consumerBasicSector()),
                 new StockGroup(CONS_DISC_SECTOR, consumerDiscSector()),
                 new StockGroup(HEALTH_SECTOR, healthSector()),
-//                new StockGroup(BIOTECH_SECTOR, biotechSector()),
+                new StockGroup(BIOTECH_SECTOR, biotechSector()),
                 new StockGroup(INDUSTRIAL_SECTOR, industrialSector()),
-//                new StockGroup(INNOVATION_SECTOR, innovationSector()),
-//                new StockGroup(METALS_SECTORS, metals()),
-//                new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
-//                new StockGroup(GREEN_SECTORS, greenSector()),
-                new StockGroup(SMALL_CAP_SECTORS, smallCap())
-//                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
-//                new StockGroup("DEVELOP ADR", developAdr()),
-//                new StockGroup("EMERG ADR", emergentAdr()),
-//                new StockGroup(SPY_SECTOR, topSpy())
+                new StockGroup(INNOVATION_SECTOR, innovationSector()),
+                new StockGroup(METALS_SECTORS, metals()),
+                new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
+                new StockGroup(GREEN_SECTORS, greenSector()),
+                new StockGroup(SMALL_CAP_SECTORS, smallCap()),
+                new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
+                new StockGroup("DEVELOP ADR", developAdr()),
+                new StockGroup("EMERG ADR", emergentAdr()),
+                new StockGroup(SPY_SECTOR, topSpy())
                 ));
         individualStocks().stream().forEach(stocks -> {
             stockGroups.add(new StockGroup(stocks[0], stocks));
@@ -1313,6 +1313,14 @@ public class StockMarket {
     public static List<String> allSectorsStockSymbols() {
         return allSectors().stream().map(stockGroup -> Arrays.asList(stockGroup.getStockSymbols())).flatMap(Collection::stream).
                 distinct().collect(Collectors.toList());
+    }
+
+    public static List<StockGroup> allSectorsStockSymbolsAsStockGroups() {
+        return allSectors().stream().map(stockGroup -> Arrays.asList(stockGroup.getStockSymbols())).
+                flatMap(Collection::stream).
+                distinct().
+                map(symbol -> new StockGroup(symbol, new String[]{symbol})).
+                collect(Collectors.toList());
     }
 
     public List<StockPrices> getStockPrices() {

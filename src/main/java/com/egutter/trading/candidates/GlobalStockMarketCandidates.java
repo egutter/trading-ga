@@ -17,6 +17,19 @@ import static java.util.Arrays.asList;
 
 public class GlobalStockMarketCandidates {
 
+    public static List<Candidate> allRsiCrossDownCandidates() {
+        List<? extends Class<? extends ConditionalOrderConditionGenerator>> tradingDecisionGenerators = Arrays.asList(MovingAverageCrossOverGenerator.class);
+
+        return rsiCrossDownChromosomeCandidates().stream().map(chromosome -> {
+            return new Candidate("", chromosome.toString(),
+                    tradingDecisionGenerators,
+                    asList(
+                            new StockGroup("", "", new String[]{})
+                    ));
+        }).collect(Collectors.toList());
+
+    };
+
     public static List<BitString> rsiCrossDownChromosomeCandidates() {
         return Arrays.asList(
                 new BitString("000010100111000110101000000100000101001"),

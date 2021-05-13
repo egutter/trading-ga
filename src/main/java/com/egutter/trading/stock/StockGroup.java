@@ -3,10 +3,7 @@ package com.egutter.trading.stock;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class StockGroup {
     private final String name;
@@ -104,5 +101,19 @@ public class StockGroup {
 
     public void addStockSymbol(String stockSymbol) {
         this.stockSymbols.add(stockSymbol);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", StockGroup.class.getSimpleName() + "[", "]")
+                .add("name='" + name + "'")
+                .add("description='" + description + "'")
+                .add("percentageOfOrdersWon=" + percentageOfOrdersWon)
+                .add("ordersWon=" + ordersWon)
+                .add("ordersLost=" + ordersLost)
+                .add("fromDate=" + fromDate)
+                .add("toDate=" + toDate)
+                .add("stockSymbols=" + stockSymbols)
+                .toString();
     }
 }

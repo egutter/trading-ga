@@ -177,8 +177,14 @@ public class OneCandidateRunner {
         System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
     }
 
-    // CrossOver main
+    // CrossOver run all candidates with all symbols main
     public static void main(String[] args) {
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        runAllSectorsOnAllCandidates(fromDate);
+    }
+
+    // CrossOver main
+    public static void main2(String[] args) {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        String[] stocks = new String[]{"SPY"};
@@ -220,7 +226,7 @@ public class OneCandidateRunner {
     }
 
     private static void runAllSectorsOnAllCandidates(LocalDate fromDate) {
-        runSectorsWithCandidates(fromDate, StockMarket.allSectors(), GlobalStockMarketCandidates.allNewCandidates());
+        runSectorsWithCandidates(fromDate, StockMarket.allSectorsStockSymbolsAsStockGroups(), GlobalStockMarketCandidates.allRsiCrossDownCandidates());
     }
 
     private static void runSpySectorsOnSomeCandidates(LocalDate fromDate) {

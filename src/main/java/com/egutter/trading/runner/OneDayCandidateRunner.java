@@ -32,9 +32,9 @@ public class OneDayCandidateRunner {
 
     public static void main(String[] args) {
         LocalTime startTime = LocalTime.now();
-        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 4, 9);
+        LocalDate tradeOn = new LocalDate(2021, 5, 21);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -64,7 +64,8 @@ public class OneDayCandidateRunner {
 //                        .filter(candidateGroup -> candidateGroup.equals(stockGroup))
                         .findAny();
                 candidateStockGroup.ifPresent(candidateGroup -> {
-                    OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
+                    OneCandidateRunner oneCandidateRunner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, candidate.getChromosome());
+//                    OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
                     oneCandidateRunner.runOn(tradeOn);
 
                     Map<String, BuyOrderWithPendingSellOrders> buyOrderWithPendingSellOrders = oneCandidateRunner.getOrderBook().ordersWithPendingOrdersAt(tradeOn);
@@ -140,7 +141,7 @@ public class OneDayCandidateRunner {
     }
 
     public List<Candidate> candidates() {
-        return new CandidatesFileHandler().fromJson();
+        return new CandidatesFileHandler().fromJson("rsi_cross_down_all_candidates.json");
 
 //        return GlobalStockMarketCandidates.allNewCandidates();
     }

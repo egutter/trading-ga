@@ -46,8 +46,11 @@ public class CandidatesFileHandler {
     }
 
     public List<Candidate> fromJson() {
+        return fromJson(ALL_CANDIDATES_JSON_FILE_NAME);
+    }
+    public List<Candidate> fromJson(String fileName) {
         try {
-            Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource(ALL_CANDIDATES_JSON_FILE_NAME).toURI()));
+            Reader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource(fileName).toURI()));
             Type listType = new TypeToken<ArrayList<Candidate>>(){}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException | URISyntaxException e) {

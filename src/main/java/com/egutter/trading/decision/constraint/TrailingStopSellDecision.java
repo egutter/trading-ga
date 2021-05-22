@@ -13,19 +13,23 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     private final BigDecimal stopLossPercentage;
     private final BigDecimal trainingLossPercentage;
     private final BigDecimal stopLossPrice;
-
+    private final BigDecimal targetWinPrice;
     private BigDecimal trailingLossPrice;
+    private boolean applyTargetPrice = true;
 
     public TrailingStopSellDecision(BigDecimal pricePaid, BigDecimal stopLossPercentage, BigDecimal trainingLossPercentage) {
         this.stopLossPercentage = stopLossPercentage;
         this.trainingLossPercentage = trainingLossPercentage;
         this.stopLossPrice = calculateThresholdPrice(pricePaid, stopLossPercentage);
         this.trailingLossPrice = calculateThresholdPrice(pricePaid, trainingLossPercentage);
+        this.targetWinPrice = calculateTargetPrice(pricePaid, trainingLossPercentage);
     }
 
     @Override
     public Boolean apply(TimeFrameQuote timeFrameQuote) {
-        if (fallsBellowStopPrice(timeFrameQuote) || fallsBellowTrailingPrice(timeFrameQuote)) return true;
+        if (fallsBellowStopPrice(timeFrameQuote) ||
+                fallsBellowTrailingPrice(timeFrameQuote) ||
+                reachTargetPrice(timeFrameQuote)) return true;
 
         trackNewTrailingPrice(timeFrameQuote);
 
@@ -35,22 +39,30 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     @Override
     public BigDecimal resolveSellPrice(TimeFrameQuote timeFrameQuote) {
         BigDecimal openPrice = new BigDecimal(timeFrameQuote.getQuoteAtDay().getOpenPrice());
-        if (fallsBellowStopPrice(openPrice) || fallsBellowTrailingPrice(openPrice)) {
+        if (fallsBellowStopPrice(openPrice) ||
+                fallsBellowTrailingPrice(openPrice) ||
+                reachTargetPrice(openPrice)) {
             return openPrice;
         }
         if (fallsBellowStopPrice(timeFrameQuote)) {
-            return stopLossPrice;
+            return this.stopLossPrice;
         }
-        return trailingLossPrice;
+        if (reachTargetPrice(timeFrameQuote)) {
+            return this.targetWinPrice;
+        }
+        return this.trailingLossPrice;
     }
 
     private void trackNewTrailingPrice(TimeFrameQuote timeFrameQuote) {
-        BigDecimal highPrice = new BigDecimal(timeFrameQuote.getQuoteAtDay().getHighPrice());
-        this.trailingLossPrice = calculateThresholdPrice(highPrice, trainingLossPercentage);
+        this.trailingLossPrice = calculateThresholdPrice(highPrice(timeFrameQuote), trainingLossPercentage);
     }
 
     private BigDecimal calculateThresholdPrice(BigDecimal highPrice, BigDecimal trainingLossPercentage) {
         return highPrice.multiply(BigDecimal.ONE.subtract(trainingLossPercentage.divide(BigDecimal.valueOf(100.00))));
+    }
+
+    private BigDecimal calculateTargetPrice(BigDecimal pricePaid, BigDecimal trainingLossPercentage) {
+        return pricePaid.multiply(BigDecimal.ONE.add(trainingLossPercentage.divide(BigDecimal.valueOf(100.00))));
     }
 
     public BigDecimal getStopLossPrice() {
@@ -73,6 +85,14 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
         return fallsBellowTrailingPrice(lowPrice(timeFrameQuote));
     }
 
+    private boolean reachTargetPrice(TimeFrameQuote timeFrameQuote) {
+        return reachTargetPrice(highPrice(timeFrameQuote));
+    }
+
+    private boolean reachTargetPrice(BigDecimal price) {
+        return applyTargetPrice && price.compareTo(targetWinPrice) >= 0;
+    }
+
     private boolean fallsBellowTrailingPrice(BigDecimal price) {
         return price.compareTo(trailingLossPrice) < 0;
     }
@@ -81,6 +101,11 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
         return new BigDecimal(timeFrameQuote.getQuoteAtDay().getLowPrice());
     }
 
+    private BigDecimal highPrice(TimeFrameQuote timeFrameQuote) {
+        return new BigDecimal(timeFrameQuote.getQuoteAtDay().getHighPrice());
+    }
+
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("TrailingStopSellDecision{");
@@ -88,6 +113,7 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
         sb.append(", trainingLossPercentage=").append(trainingLossPercentage);
         sb.append(", stopLossPrice=").append(stopLossPrice);
         sb.append(", trailingLossPrice=").append(trailingLossPrice);
+        sb.append(", targetWinPrice=").append(targetWinPrice);
         sb.append('}');
         return sb.toString();
     }

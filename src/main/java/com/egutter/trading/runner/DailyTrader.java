@@ -173,8 +173,9 @@ public class DailyTrader {
 //            QuoteAdapter quote = new QuoteAdapter(bracketOrder.getStockName());
             QuoteAdapter quote = new QuoteAdapter(quoteOri);
 
+            BigDecimal orderQuantity = currentPosition.get().getLongQuantity();
             if (isLastPriceAboveSellTarget(quote, bracketOrder) || isLastPriceBelowResistance(quote, bracketOrder)) {
-                Order order = buildSellTdaOrder(bracketOrder);
+                Order order = buildSellTdaOrder(bracketOrder, orderQuantity);
                 client.placeOrder(accountId, order);
 
                 System.out.println("STOCK SOLD: " + bracketOrder);
@@ -184,7 +185,6 @@ public class DailyTrader {
 
                 List<Object> childOrderStrategies = new ArrayList<>();
                 order.setChildOrderStrategies(childOrderStrategies);
-                BigDecimal orderQuantity = currentPosition.get().getLongQuantity();
                 buildSellGetProfitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.GOOD_TILL_CANCEL, orderQuantity);
                 buildSellStopLimitChildTdaOrder(bracketOrder, childOrderStrategies, Duration.GOOD_TILL_CANCEL, orderQuantity);
 
@@ -302,7 +302,7 @@ public class DailyTrader {
         throw new TooExpensiveOrder("The stock is too expensive");
     }
 
-    public Order buildSellTdaOrder(BuyBracketOrder bracketOrder) {
+    public Order buildSellTdaOrder(BuyBracketOrder bracketOrder, BigDecimal orderQuantity) {
         Order order = new Order();
         order.setOrderType(OrderType.MARKET);
         order.setSession(Session.NORMAL);
@@ -311,7 +311,7 @@ public class DailyTrader {
 
         OrderLegCollection olc = new OrderLegCollection();
         olc.setInstruction(OrderLegCollection.Instruction.SELL);
-        olc.setQuantity(new BigDecimal("1.0"));
+        olc.setQuantity(orderQuantity);
         order.getOrderLegCollection().add(olc);
 
         Instrument instrument = new EquityInstrument();

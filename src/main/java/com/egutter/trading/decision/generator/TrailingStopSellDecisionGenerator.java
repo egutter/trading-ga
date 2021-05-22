@@ -23,7 +23,7 @@ public class TrailingStopSellDecisionGenerator {
     public static void main(String[] args) {
         StockPrices stocks = new StockPrices("stock");
         stocks.addAll(Arrays.asList(DailyQuote.empty()));
-        BigDecimal pricePaid = BigDecimal.TEN;
+        BigDecimal pricePaid = new BigDecimal(100.0);
 
         TrailingStopSellDecisionGenerator trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("1111101111001"));
         TrailingStopSellDecision decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);

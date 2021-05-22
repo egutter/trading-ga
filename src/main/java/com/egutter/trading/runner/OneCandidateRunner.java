@@ -63,6 +63,17 @@ public class OneCandidateRunner {
         this.trader = new Trader(stockMarket, triggerBuyConditionalOrderDecisionFactory, portfolio, orderBook);
     }
 
+
+    public static OneCandidateRunner buildRunnerWithCrossOverTriggerFor(StockMarket stockMarket, BitString chromosome) {
+        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+        CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,
+                chromosome, RelativeStrengthIndexCrossDownGenerator.class,
+                Arrays.asList(MovingAverageCrossOverGenerator.class));
+
+        return new OneCandidateRunner(stockMarket, chromosome, portfolio,
+                triggerBuyConditionalOrderDecisionFactory);
+    }
+
     public OneCandidateRunner(StockMarket stockMarket, BitString candidate, Portfolio portfolio, TradingDecisionFactory tradingDecisionFactory) {
         this.stockMarket = stockMarket;
         this.candidate = candidate;
@@ -244,13 +255,8 @@ public class OneCandidateRunner {
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, stockGroup.getStockSymbols());
 
             candidates.stream().forEach(candidate -> {
-                Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
-                CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,
-                        candidate.getChromosome(), RelativeStrengthIndexCrossDownGenerator.class,
-                        Arrays.asList(MovingAverageCrossOverGenerator.class));
+                OneCandidateRunner runner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, candidate.getChromosome());
 
-                OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), portfolio,
-                        triggerBuyConditionalOrderDecisionFactory);
 
                 runner.run(false);
                 runner.whenWonOver90Percent(() -> appendToCandidates(selectedCandidates, runner, candidate, stockGroup, fromDate, toDate));
@@ -262,6 +268,7 @@ public class OneCandidateRunner {
         });
         writeToFile(selectedCandidates);
     }
+
 
     private static void runStocksWithCandidates(LocalDate fromDate, LocalDate toDate, List<String> stockSymbols, List<Candidate> candidates) {
         Map<String, Candidate> selectedCandidates = new HashMap<String, Candidate>();

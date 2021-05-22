@@ -1,7 +1,10 @@
 package com.egutter.trading.decision;
 
+import com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator;
+import com.egutter.trading.decision.generator.RelativeStrengthIndexCrossDownGenerator;
 import com.egutter.trading.decision.generator.TrailingStopSellDecisionGenerator;
 import com.egutter.trading.decision.technicalanalysis.TriggerBuyConditionalOrderDecision;
+import com.egutter.trading.genetic.StockTradingFitnessEvaluator;
 import com.egutter.trading.genetic.TradingDecisionGenome;
 import com.egutter.trading.order.ConditionalOrderBuyDecision;
 import com.egutter.trading.order.condition.BuyDecisionConditionsFactory;
@@ -12,6 +15,7 @@ import com.egutter.trading.stock.TimeFrameQuote;
 import org.uncommons.maths.binary.BitString;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -29,6 +33,17 @@ public class CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory implemen
     private Class<? extends ConditionalOrderConditionGenerator> crossOverTriggerDecisionGenerator;
     private List<? extends Class<? extends ConditionalOrderConditionGenerator>> conditionalBuyDecisionGenerators;
 
+    public static void main(String[] args) {
+
+        Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
+
+        BitString genome = new BitString("000111111101001110111110111110001100101");
+        TriggerBuyConditionalOrderDecision tbcod = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio, genome,
+                RelativeStrengthIndexCrossDownGenerator.class,
+                Arrays.asList(MovingAverageCrossOverGenerator.class)).generateBuyDecision(StockPrices.empty());
+
+        System.out.println(tbcod.buyDecisionToString());
+    }
     public CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(Portfolio portfolio,
                                                                       BitString genome,
                                                                       Class<? extends ConditionalOrderConditionGenerator> crossOverTriggerDecisionGenerator,

@@ -1,0 +1,61 @@
+[
+  {
+    "sellTargetPrice": 155.72,
+    "sellResistancePrice": 151.16,
+    "stockGroup": {
+      "name": "DEFAULT GROUP",
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 4,
+        "day": 9
+      }
+    },
+    "closePrice": 153.52,
+    "candidate": "TSLA: 101110100000011101010001010100101101011.AROO.WilliamsRGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 32,
+        "buzz": 1.094,
+        "weeklyAverage": 29.25
+      },
+      "companyNewsScore": 0.5263,
+      "sectorAverageBullishPercent": 0.6353,
+      "sectorAverageNewsScore": 0.5287,
+      "sentiment": {
+        "bearishPercent": 0.375,
+        "bullishPercent": 0.625
+      },
+      "symbol": "TM"
+    },
+    "supportResistance": {
+      "levels": [
+        129.28,
+        140.13,
+        150.19,
+        163.3699
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 11.203222,
+        "trending": false
+      }
+    },
+    "maxLoss": 1.56100,
+    "stockName": "TM",
+    "expectedReturn": 1.43300
+  }
+]

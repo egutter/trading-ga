@@ -15,14 +15,19 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     private final BigDecimal stopLossPrice;
     private final BigDecimal targetWinPrice;
     private BigDecimal trailingLossPrice;
-    private boolean applyTargetPrice = true;
+    private boolean applyTargetPrice;
 
     public TrailingStopSellDecision(BigDecimal pricePaid, BigDecimal stopLossPercentage, BigDecimal trainingLossPercentage) {
+        this(pricePaid, stopLossPercentage, trainingLossPercentage, false);
+    }
+
+    public TrailingStopSellDecision(BigDecimal pricePaid, BigDecimal stopLossPercentage, BigDecimal trainingLossPercentage, boolean applyTargetPrice) {
         this.stopLossPercentage = stopLossPercentage;
         this.trainingLossPercentage = trainingLossPercentage;
         this.stopLossPrice = calculateThresholdPrice(pricePaid, stopLossPercentage);
         this.trailingLossPrice = calculateThresholdPrice(pricePaid, trainingLossPercentage);
         this.targetWinPrice = calculateTargetPrice(pricePaid, trainingLossPercentage);
+        this.applyTargetPrice = applyTargetPrice;
     }
 
     @Override
@@ -71,6 +76,10 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
 
     public BigDecimal getTrailingLossPrice() {
         return trailingLossPrice;
+    }
+
+    public BigDecimal getTargetWinPrice() {
+        return targetWinPrice;
     }
 
     private boolean fallsBellowStopPrice(TimeFrameQuote timeFrameQuote) {

@@ -30,10 +30,31 @@ public class TrailingStopSellDecisionTest {
     }
 
     @Test
+    public void target_win_price_is_correctly_calculated() {
+
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss);
+        assertThat(trailingStop.getTargetWinPrice(), equalTo(new BigDecimal(110.00)));
+    }
+
+    @Test
     public void when_stock_falls_bellow_stop_loss_after_bought_return_true() {
         trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss);
         TimeFrameQuote timeFrameQuote = aTimeFrameQuote(89.00, 100.0, aTradingDate());
         assertThat(trailingStop.apply(timeFrameQuote), equalTo(true));
+    }
+
+    @Test
+    public void when_stock_rise_above_target_price_after_bought_return_true() {
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, true);
+        TimeFrameQuote timeFrameQuote = aTimeFrameQuote(100.00, 110.0, aTradingDate());
+        assertThat(trailingStop.apply(timeFrameQuote), equalTo(true));
+    }
+
+    @Test
+    public void when_stock_do_not_rise_above_target_price_after_bought_return_true() {
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, true);
+        TimeFrameQuote timeFrameQuote = aTimeFrameQuote(100.00, 109.99, aTradingDate());
+        assertThat(trailingStop.apply(timeFrameQuote), equalTo(false));
     }
 
     @Test
@@ -52,6 +73,17 @@ public class TrailingStopSellDecisionTest {
         assertThat(trailingStop.apply(timeFrameQuote), equalTo(false));
 
         timeFrameQuote = aTimeFrameQuote(89.00, 100.0, aTradingDate());
+        assertThat(trailingStop.apply(timeFrameQuote), equalTo(true));
+    }
+
+    @Test
+    public void when_stock_goes_down_and_then_rise_above_target_price_after_bought_return_true() {
+
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, true);
+        TimeFrameQuote timeFrameQuote = aTimeFrameQuote(90.00, 100.0, aTradingDate());
+        assertThat(trailingStop.apply(timeFrameQuote), equalTo(false));
+
+        timeFrameQuote = aTimeFrameQuote(100.00, 110.0, aTradingDate());
         assertThat(trailingStop.apply(timeFrameQuote), equalTo(true));
     }
 

@@ -15,19 +15,19 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     private final BigDecimal stopLossPrice;
     private final BigDecimal targetWinPrice;
     private BigDecimal trailingLossPrice;
-    private boolean applyTargetPrice;
+    private BigDecimal targetPriceMultiplicator;
 
     public TrailingStopSellDecision(BigDecimal pricePaid, BigDecimal stopLossPercentage, BigDecimal trainingLossPercentage) {
-        this(pricePaid, stopLossPercentage, trainingLossPercentage, false);
+        this(pricePaid, stopLossPercentage, trainingLossPercentage, BigDecimal.ZERO);
     }
 
-    public TrailingStopSellDecision(BigDecimal pricePaid, BigDecimal stopLossPercentage, BigDecimal trainingLossPercentage, boolean applyTargetPrice) {
+    public TrailingStopSellDecision(BigDecimal pricePaid, BigDecimal stopLossPercentage, BigDecimal trainingLossPercentage, BigDecimal targetPriceMultiplicator) {
         this.stopLossPercentage = stopLossPercentage;
         this.trainingLossPercentage = trainingLossPercentage;
         this.stopLossPrice = calculateThresholdPrice(pricePaid, stopLossPercentage);
         this.trailingLossPrice = calculateThresholdPrice(pricePaid, trainingLossPercentage);
+        this.targetPriceMultiplicator = targetPriceMultiplicator;
         this.targetWinPrice = calculateTargetPrice(pricePaid, trainingLossPercentage);
-        this.applyTargetPrice = applyTargetPrice;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     }
 
     private BigDecimal calculateTargetPrice(BigDecimal pricePaid, BigDecimal trainingLossPercentage) {
-        return pricePaid.multiply(BigDecimal.ONE.add(trainingLossPercentage.divide(BigDecimal.valueOf(100.00))));
+        return pricePaid.multiply(BigDecimal.ONE.add(trainingLossPercentage.multiply(targetPriceMultiplicator).divide(BigDecimal.valueOf(100.00))));
     }
 
     public BigDecimal getStopLossPrice() {
@@ -99,7 +99,7 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
     }
 
     private boolean reachTargetPrice(BigDecimal price) {
-        return applyTargetPrice && price.compareTo(targetWinPrice) >= 0;
+        return !targetPriceMultiplicator.equals(BigDecimal.ZERO) && price.compareTo(targetWinPrice) >= 0;
     }
 
     private boolean fallsBellowTrailingPrice(BigDecimal price) {

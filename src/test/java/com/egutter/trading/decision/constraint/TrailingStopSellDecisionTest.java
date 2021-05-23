@@ -32,7 +32,7 @@ public class TrailingStopSellDecisionTest {
     @Test
     public void target_win_price_is_correctly_calculated() {
 
-        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss);
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, BigDecimal.ONE);
         assertThat(trailingStop.getTargetWinPrice(), equalTo(new BigDecimal(110.00)));
     }
 
@@ -45,14 +45,14 @@ public class TrailingStopSellDecisionTest {
 
     @Test
     public void when_stock_rise_above_target_price_after_bought_return_true() {
-        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, true);
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, BigDecimal.ONE);
         TimeFrameQuote timeFrameQuote = aTimeFrameQuote(100.00, 110.0, aTradingDate());
         assertThat(trailingStop.apply(timeFrameQuote), equalTo(true));
     }
 
     @Test
     public void when_stock_do_not_rise_above_target_price_after_bought_return_true() {
-        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, true);
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, BigDecimal.ONE);
         TimeFrameQuote timeFrameQuote = aTimeFrameQuote(100.00, 109.99, aTradingDate());
         assertThat(trailingStop.apply(timeFrameQuote), equalTo(false));
     }
@@ -79,7 +79,7 @@ public class TrailingStopSellDecisionTest {
     @Test
     public void when_stock_goes_down_and_then_rise_above_target_price_after_bought_return_true() {
 
-        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, true);
+        trailingStop = new TrailingStopSellDecision(ONE_HUNDRED, stopLoss, trainingLoss, BigDecimal.ONE);
         TimeFrameQuote timeFrameQuote = aTimeFrameQuote(90.00, 100.0, aTradingDate());
         assertThat(trailingStop.apply(timeFrameQuote), equalTo(false));
 

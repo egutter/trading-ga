@@ -30,6 +30,7 @@ import org.uncommons.maths.binary.BitString;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by egutter on 11/29/14.
@@ -157,6 +158,10 @@ public class OneCandidateRunner {
         return this.portfolio.getStats().percentageOfOrdersNotLost();
     }
 
+    public BigDecimal average30daysReturn() {
+        return this.portfolio.getStats().average30daysReturn();
+    }
+
     public Map<LocalDate, Pair<Integer, Integer>> ordersPerDay() {
         return this.portfolio.getStats().ordersPerDay();
     }
@@ -197,12 +202,12 @@ public class OneCandidateRunner {
     // CrossOver main
     public static void main2(String[] args) {
         LocalTime startTime = LocalTime.now();
-        LocalDate fromDate = new LocalDate(2020, 1, 1);
-//        String[] stocks = new String[]{"SPY"};
-        String[] stocks = StockMarket.aapl();
+        LocalDate fromDate = new LocalDate(2010, 1, 1);
+        String[] stocks = new String[]{"KO"};
+//        String[] stocks = StockMarket.aapl();
         LocalDate toDate = LocalDate.now(); //new LocalDate(2020, 11, 19);
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false, stocks);
-        BitString chromosome = new BitString("000010100111000110101000000100000101001");
+        BitString chromosome = new BitString("000101110011001001111111100100000101111");
 
         Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
         CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,
@@ -259,7 +264,20 @@ public class OneCandidateRunner {
 
 
                 runner.run(false);
-                runner.whenWonOver90Percent(() -> appendToCandidates(selectedCandidates, runner, candidate, stockGroup, fromDate, toDate));
+                runner.whenWonOver90Percent(() -> {
+                    List<String> targets = Arrays.asList("00", "01", "10", "11");
+                    Stream<OneCandidateRunner> oneCandidateRunnerStream = targets.stream().map(targetChromosome -> {
+                        BitString chromosome = new BitString(candidate.getChromosome().toString() + targetChromosome);
+                        OneCandidateRunner oneCandidateRunner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, chromosome);
+                        oneCandidateRunner.run(false);
+                        return oneCandidateRunner;
+                    });
+                    Optional<OneCandidateRunner> bestRunner = oneCandidateRunnerStream.max(Comparator.comparing(ru -> ru.average30daysReturn()));
+                    bestRunner.ifPresent(ru -> {
+                        Candidate newCandidate = new Candidate(candidate.getDescription(), ru.getCandidate(), candidate.getTradingDecisionGenerators());
+                        appendToCandidates(selectedCandidates, ru, newCandidate, stockGroup, fromDate, toDate);
+                    });
+                });
 
             });
             System.out.println("Completed at: "+ LocalDateTime.now());
@@ -283,7 +301,8 @@ public class OneCandidateRunner {
                 OneCandidateRunner runner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
                 runner.run(false);
                 logger.info("Candidate: " + candidate + " Stats " + runner.percentageOfOrdersWon() + "[" + runner.ordersWon() + "/" + runner.ordersLost() +"]");
-                runner.whenWonOver90Percent(() -> appendStockToCandidates(selectedCandidates, runner, candidate, stockSymbol, fromDate, toDate));
+                Candidate newCandidate = new Candidate(candidate.getDescription(), runner.getCandidate(), candidate.getTradingDecisionGenerators());
+                runner.whenWonOver90Percent(() -> appendStockToCandidates(selectedCandidates, runner, newCandidate, stockSymbol, fromDate, toDate));
 
             });
             System.out.println("Completed at: "+ LocalDateTime.now());
@@ -481,6 +500,10 @@ public class OneCandidateRunner {
 
             }
         };
+    }
+
+    public BitString getCandidate() {
+        return candidate;
     }
 
     public OrderBook getOrderBook() {

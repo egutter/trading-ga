@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 /**
@@ -19,6 +20,7 @@ public class TrailingStopSellDecisionGenerator {
     private final BigDecimal stopLoss;
     private final BigDecimal trailingLoss;
     private final int expireInDays;
+    private BigDecimal targetPriceMultiplicator;
 
     public static void main(String[] args) {
         StockPrices stocks = new StockPrices("stock");
@@ -29,39 +31,72 @@ public class TrailingStopSellDecisionGenerator {
         TrailingStopSellDecision decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
         System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
 
         trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0000000000000"));
         decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
         System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
 
         trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("1111111111111"));
         decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
         System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
 
         trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("1010101011111"));
         decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
         System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
 
         trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0101010101010"));
         decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
         System.out.println(decision.toString());
         System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
+
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0101010101010"), Optional.of(new BitString("00")));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
+        System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
+
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0101010101010"), Optional.of(new BitString("01")));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
+        System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
+
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0101010101010"), Optional.of(new BitString("10")));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
+        System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
+
+        trailingStopSellDecisionGenerator = new TrailingStopSellDecisionGenerator(new BitString("0101010101010"), Optional.of(new BitString("11")));
+        decision = trailingStopSellDecisionGenerator.generateSellDecision(pricePaid);
+        System.out.println(decision.toString());
+        System.out.println(trailingStopSellDecisionGenerator.getExpireInDays());
+        System.out.println(trailingStopSellDecisionGenerator.getTargetPriceMultiplicator());
     }
 
     public TrailingStopSellDecisionGenerator(BitString chromosome) {
+        this(chromosome, Optional.empty());
+    }
+    public TrailingStopSellDecisionGenerator(BitString chromosome, Optional<BitString> targetPriceMultiplicatorChromosome) {
         this.stopLoss = generateStopLoss(chromosome);
         this.trailingLoss = generateTrailingLoss(chromosome);
         this.expireInDays = generateExpireInDays(chromosome);
+        this.targetPriceMultiplicator = generateTargetPriceMultiplicator(targetPriceMultiplicatorChromosome);
     }
 
     /**
      * Bits
      * 0-3 => Stop Loss value from 1 to 16
      * 4-6 => Trailing Loss value from stopLoss to 24
-     * 6-12 => Expire in days from 1 to 64
+     * 7-12 => Expire in days from 1 to 64
      *
      * @param pricePaid
      * @return
@@ -69,7 +104,7 @@ public class TrailingStopSellDecisionGenerator {
     public TrailingStopSellDecision generateSellDecision(BigDecimal pricePaid) {
         return new TrailingStopSellDecision(pricePaid,
                     this.stopLoss,
-                    this.trailingLoss);
+                    this.trailingLoss, targetPriceMultiplicator);
     }
 
 
@@ -90,8 +125,17 @@ public class TrailingStopSellDecisionGenerator {
         return new BitString(chromosome.toString().substring(7, 13)).toNumber().add(new BigInteger("1")).intValue();
     }
 
+    private BigDecimal generateTargetPriceMultiplicator(Optional<BitString> chromosomeOpt) {
+        BitString chromosome = chromosomeOpt.orElseGet(() -> new BitString("01"));
+        return new BigDecimal(chromosome.toNumber().add(new BigInteger("1"))).multiply(new BigDecimal(0.5));
+    }
+
     public int getExpireInDays() {
         return expireInDays;
+    }
+
+    public BigDecimal getTargetPriceMultiplicator() {
+        return targetPriceMultiplicator;
     }
 
     @Override

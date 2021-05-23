@@ -2,6 +2,8 @@ package com.egutter.trading.genetic;
 
 import org.uncommons.maths.binary.BitString;
 
+import java.util.Optional;
+
 /**
  * Genome
  * 0123 4567890123456 7890123456789
@@ -18,6 +20,7 @@ public class TradingDecisionGenome {
     public static final int START_POSITION = 0;
     public static final int LENGTH = 13;
     public static final int HEAD_LENGTH = 13;
+    private static final int TAIL_LENGTH = 2;
 
     private BitString genomeBits;
 
@@ -43,5 +46,13 @@ public class TradingDecisionGenome {
 
     public BitString extractChromosome(int index) {
         return extractChromosome(START_POSITION + (LENGTH * index), (LENGTH + START_POSITION) + (LENGTH * index) );
+    }
+
+    public Optional<BitString> extractTail(int tailStartIndex) {
+        if (this.genomeBits.getLength() > (LENGTH * tailStartIndex)) {
+            int startIndex = START_POSITION + (LENGTH * (tailStartIndex));
+            return Optional.of(extractChromosome(startIndex, startIndex + TAIL_LENGTH));
+        }
+        return Optional.empty();
     }
 }

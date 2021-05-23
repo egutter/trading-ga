@@ -65,8 +65,9 @@ public class CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory implemen
         List<ConditionalOrderConditionGenerator> conditionGenerators = buyDecisionGenerators();
         BuyDecisionConditionsFactory buyDecisionConditionsFactory = new BuyDecisionConditionsFactory(conditionGenerators, portfolio, stockPrices);
 
-        BitString sellDecisionChromosome = genome.extractChromosome(conditionalBuyDecisionGenerators.size() + 1);
-        TrailingStopSellDecisionGenerator stopTrailingLossGenerator = new TrailingStopSellDecisionGenerator(sellDecisionChromosome);
+        int sellDecisionIndex = conditionalBuyDecisionGenerators.size() + 1;
+        BitString sellDecisionChromosome = genome.extractChromosome(sellDecisionIndex);
+        TrailingStopSellDecisionGenerator stopTrailingLossGenerator = new TrailingStopSellDecisionGenerator(sellDecisionChromosome, genome.extractTail(sellDecisionIndex + 1));
 
         return new ConditionalOrderBuyDecision(stockPrices, conditionalBuyTrigger, buyDecisionConditionsFactory, stopTrailingLossGenerator.getExpireInDays(), stopTrailingLossGenerator);
     }

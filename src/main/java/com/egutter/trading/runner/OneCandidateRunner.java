@@ -194,13 +194,13 @@ public class OneCandidateRunner {
     }
 
     // CrossOver run all candidates with all symbols main
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         LocalDate fromDate = new LocalDate(2010, 1, 1);
         runAllSectorsOnAllCandidates(fromDate);
     }
 
     // CrossOver main
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2010, 1, 1);
         String[] stocks = new String[]{"PG"};
@@ -257,28 +257,31 @@ public class OneCandidateRunner {
             System.out.println(stockGroup.getFullName());
 
             LocalDate toDate = LocalDate.now();
-            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, stockGroup.getStockSymbols());
+            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, false, stockGroup.getStockSymbols());
 
             candidates.stream().forEach(candidate -> {
                 OneCandidateRunner runner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, candidate.getChromosome());
 
 
-                runner.run(false);
-                runner.whenWonOver90Percent(() -> {
-                    List<String> targets = Arrays.asList("00", "01", "10", "11");
-                    Stream<OneCandidateRunner> oneCandidateRunnerStream = targets.stream().map(targetChromosome -> {
-                        BitString chromosome = new BitString(candidate.getChromosome().toString() + targetChromosome);
-                        OneCandidateRunner oneCandidateRunner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, chromosome);
-                        oneCandidateRunner.run(false);
-                        return oneCandidateRunner;
+                try {
+                    runner.run(false);
+                    runner.whenWonOver90Percent(() -> {
+                        List<String> targets = Arrays.asList("00", "01", "10", "11");
+                            Stream<OneCandidateRunner> oneCandidateRunnerStream = targets.stream().map(targetChromosome -> {
+                                    BitString chromosome = new BitString(candidate.getChromosome().toString() + targetChromosome);
+                                    OneCandidateRunner oneCandidateRunner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, chromosome);
+                                    oneCandidateRunner.run(false);
+                            return oneCandidateRunner;
+                        });
+                        Optional<OneCandidateRunner> bestRunner = oneCandidateRunnerStream.max(Comparator.comparing(ru -> ru.average30daysReturn()));
+                        bestRunner.ifPresent(ru -> {
+                                Candidate newCandidate = new Candidate(candidate.getDescription(), ru.getCandidate(), candidate.getTradingDecisionGenerators());
+                                appendToCandidates(selectedCandidates, ru, newCandidate, stockGroup, fromDate, toDate);
+                        });
                     });
-                    Optional<OneCandidateRunner> bestRunner = oneCandidateRunnerStream.max(Comparator.comparing(ru -> ru.average30daysReturn()));
-                    bestRunner.ifPresent(ru -> {
-                        Candidate newCandidate = new Candidate(candidate.getDescription(), ru.getCandidate(), candidate.getTradingDecisionGenerators());
-                        appendToCandidates(selectedCandidates, ru, newCandidate, stockGroup, fromDate, toDate);
-                    });
-                });
-
+                } catch (RuntimeException e) {
+                    System.out.println("Failed stock "+ stockGroup.getStockSymbols() + " with error "+ e.getMessage());
+                }
             });
             System.out.println("Completed at: "+ LocalDateTime.now());
             System.out.println("******************************************");

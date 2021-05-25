@@ -88,6 +88,7 @@ public class StockMarket {
                 new StockGroup(SMALL_CAP_SECTORS, smallCap()),
                 new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
                 new StockGroup("DEVELOP ADR", developAdr()),
+                new StockGroup("ALL_SPY_500", sNp500()),
                 new StockGroup("EMERG ADR", emergentAdr()),
                 new StockGroup(SPY_SECTOR, topSpy())
                 ));
@@ -436,20 +437,20 @@ public class StockMarket {
                 "MU",
                 "MDLZ",
                 "SQ",
-//                "SYK",
-//                "SCHW",
-//                "ANTM",
-//                "SPGI",
-//                "AMAT",
-//                "ZTS",
-//                "MO",
-//                "DE",
-//                "TMUS",
-//                "CI",
-//                "TJX",
-//                "PLD",
-//                "CL",
-//                "GILD"
+                "SYK",
+                "SCHW",
+                "ANTM",
+                "SPGI",
+                "AMAT",
+                "ZTS",
+                "MO",
+                "DE",
+                "TMUS",
+                "CI",
+                "TJX",
+                "PLD",
+                "CL",
+                "GILD"
         };
     }
     public static String[] sectors() {
@@ -832,7 +833,7 @@ public class StockMarket {
                 "CE",
                 "CNC",
                 "CNP",
-                "CTL",
+//                "CTL",
                 "CERN",
                 "CF",
                 "SCHW",

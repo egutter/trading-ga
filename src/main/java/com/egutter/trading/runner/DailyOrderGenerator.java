@@ -43,8 +43,8 @@ public class DailyOrderGenerator {
             baseOrdersPath = args[0];
         }
         LocalTime startTime = LocalTime.now();
-        LocalDate tradeOn = yesterday;
-//        LocalDate tradeOn = new LocalDate(2021, 4, 8);
+//        LocalDate tradeOn = yesterday;
+        LocalDate tradeOn = new LocalDate(2021, 5, 24);
 
         TdaClient client = new HttpTdaClient();
         DailyOrderGenerator dailyOrderGenerator = new DailyOrderGenerator(client, tradeOn, baseOrdersPath);
@@ -83,22 +83,18 @@ public class DailyOrderGenerator {
 
     public Optional<BuyOrderWithPendingSellOrders> bestSellOrder(List<BuyOrderWithPendingSellOrders> sellOrders) {
         int count = sellOrders.size();
-        return sellOrders.stream().filter(ordersFilter()).
+        return sellOrders.stream().
                 sorted(ordersComparator()).skip(count - 1).findFirst();
-    }
-
-    private Predicate<BuyOrderWithPendingSellOrders> ordersFilter() {
-        return (order) -> orderExpectedReturn(order).compareTo(BigDecimal.valueOf(MINIMUM_PROFIT_EXPECTED)) > 0;
     }
 
     private Comparator<BuyOrderWithPendingSellOrders> ordersComparator() {
         return (orderOne, orderTwo) -> {
             int morePercentageWon = orderOne.getStockGroup().getPercentageOfOrdersWon().compareTo(orderTwo.getStockGroup().getPercentageOfOrdersWon());
             if (morePercentageWon != 0) return morePercentageWon;
-            int moreReturn = orderExpectedReturn(orderOne).compareTo(orderExpectedReturn(orderTwo));
-            if (moreReturn != 0) return moreReturn;
             int moreOrdersWon = Integer.valueOf(orderOne.getStockGroup().getOrdersWon()).compareTo(orderTwo.getStockGroup().getOrdersWon());
-            return moreOrdersWon;
+            if (moreOrdersWon != 0) return moreOrdersWon;
+            int moreReturn = orderExpectedReturn(orderOne).compareTo(orderExpectedReturn(orderTwo));
+            return moreReturn;
         };
     }
 
@@ -107,13 +103,13 @@ public class DailyOrderGenerator {
     }
 
     private BigDecimal orderMaxLoss(BuyOrderWithPendingSellOrders order) {
-        return orderPercentage(order.getMarketOrder().getPrice(), order.getSellResistancePrice());
+        return orderPercentage(order.getMarketOrder().getPrice(), order.getStopLossPrice());
     }
 
     private BigDecimal orderPercentage(BigDecimal dividend, BigDecimal divisor) {
         MathContext mc3 = new MathContext(6, RoundingMode.HALF_EVEN);
-        BigDecimal orderMaxLoss = dividend.divide(divisor, mc3).subtract(BigDecimal.ONE);
-        return orderMaxLoss.multiply(new BigDecimal(100.0));
+        BigDecimal orderReturn = dividend.divide(divisor, mc3).subtract(BigDecimal.ONE);
+        return orderReturn.multiply(new BigDecimal(100.0));
     }
 
     private void writeToFile(List<BuyBracketOrder> orders) {

@@ -34,7 +34,7 @@ public class OneDayCandidateRunner {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 5, 21);
+        LocalDate tradeOn = new LocalDate(2021, 5, 24);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -44,16 +44,11 @@ public class OneDayCandidateRunner {
     public Map<String, List<BuyOrderWithPendingSellOrders>> run(LocalDate tradeOn) {
 
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
-        Map<String, Pair<Integer, List<Candidate>>> countStockSold = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
-        List<StockGroup> sectors = StockMarket.allSectors();
         List<String> stockSymbols = StockMarket.allSectorsStockSymbols();
         Map<String, List<BuyOrderWithPendingSellOrders>> allBuyOrderWithPendingSellOrders = new HashMap<>();
-//        String[] stockSymbols1 = {"ZM"};
-//        StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, stockSymbols1);
         stockSymbols.stream().forEach(stockSymbol -> {
 
-//            StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, stockGroup.getStockSymbols());
             StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, true, true, new String[]{stockSymbol});
 
 
@@ -61,11 +56,9 @@ public class OneDayCandidateRunner {
 
                 Optional<StockGroup> candidateStockGroup = candidate.getStockGroups().stream()
                         .filter(candidateGroup -> candidateGroup.containsStockSymbol(stockSymbol))
-//                        .filter(candidateGroup -> candidateGroup.equals(stockGroup))
                         .findAny();
                 candidateStockGroup.ifPresent(candidateGroup -> {
                     OneCandidateRunner oneCandidateRunner = OneCandidateRunner.buildRunnerWithCrossOverTriggerFor(stockMarket, candidate.getChromosome());
-//                    OneCandidateRunner oneCandidateRunner = new OneCandidateRunner(stockMarket, candidate.getChromosome(), candidate.getTradingDecisionGenerators());
                     oneCandidateRunner.runOn(tradeOn);
 
                     Map<String, BuyOrderWithPendingSellOrders> buyOrderWithPendingSellOrders = oneCandidateRunner.getOrderBook().ordersWithPendingOrdersAt(tradeOn);
@@ -75,7 +68,6 @@ public class OneDayCandidateRunner {
                         resultBuffer.add("New last trading date " + tradeOn);
                         resultBuffer.add(candidateName(candidate));
                         resultBuffer.add(buyOrderWithPendingSellOrders.toString());
-//                        resultBuffer.add("On " + tradeOn + " " + oneCandidateRunner.getOrderBook());
                         resultBuffer.add("==========================================");
 
                         buyOrderWithPendingSellOrders.keySet().stream().forEach(stockName -> {
@@ -142,8 +134,6 @@ public class OneDayCandidateRunner {
 
     public List<Candidate> candidates() {
         return new CandidatesFileHandler().fromJson("rsi_cross_down_all_candidates.json");
-
-//        return GlobalStockMarketCandidates.allNewCandidates();
     }
 
     public List<String> getResultBuffer() {

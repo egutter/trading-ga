@@ -1,8 +1,7 @@
 package com.egutter.trading.runner;
 
+import com.egutter.trading.decision.constraint.TrailingStopSellDecision;
 import com.egutter.trading.order.*;
-import com.egutter.trading.order.condition.SellWhenPriceAboveTarget;
-import com.egutter.trading.order.condition.SellWhenPriceBellowTarget;
 import com.egutter.trading.out.BuyBracketOrdersFileHandler;
 import com.egutter.trading.stock.DailyQuote;
 import com.egutter.trading.stock.StockGroup;
@@ -17,6 +16,7 @@ import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.closeTo;
 
 public class DailyTraderTest {
 
@@ -36,26 +36,18 @@ public class DailyTraderTest {
 
         List<BuyBracketOrder> result = new BuyBracketOrdersFileHandler().fromJson();
         BuyBracketOrder actual = result.stream().findFirst().get();
-        assertThat(actual.getSellResistancePrice(), equalTo(orderTwo.getSellResistancePrice()));
-        assertThat(actual.getSellTargetPrice(), equalTo(orderTwo.getSellTargetPrice()));
+        assertThat(actual.getSellResistancePrice(), closeTo(orderTwo.getStopLossPrice(), new BigDecimal(0.01)));
+        assertThat(actual.getSellTargetPrice(), closeTo(orderTwo.getSellTargetPrice(), new BigDecimal(0.01)));
     }
 
     @Test
-    public void shouldRetrieveOrderWithBiggestProfit() {
+    public void shouldRetrieveOrderWithMoreOrdersWon() {
         BuyOrderWithPendingSellOrders orderOne = buildBuyOrderWithPendingSellOrders("NET", 84.360001, BigDecimal.valueOf(1.00), 1);
         BuyOrderWithPendingSellOrders orderTwo = buildBuyOrderWithPendingSellOrders("NET", 90.500721236, BigDecimal.valueOf(1.00), 2);
         BuyOrderWithPendingSellOrders orderThree = buildBuyOrderWithPendingSellOrders("NET", 84.360001, BigDecimal.valueOf(1.00), 2);
 
         List<BuyOrderWithPendingSellOrders> sellOrders = Arrays.asList(orderOne, orderTwo, orderThree);
-        assertThat(dailyTrader.bestSellOrder(sellOrders).get(), equalTo(orderTwo));
-    }
-
-    @Test
-    public void shouldFilterOrderByMinimumProfit() {
-        BuyOrderWithPendingSellOrders orderOne = buildBuyOrderWithPendingSellOrders("NET", 81.360001, BigDecimal.valueOf(1.00), 1);
-
-        List<BuyOrderWithPendingSellOrders> sellOrders = Arrays.asList(orderOne);
-        assertThat(dailyTrader.bestSellOrder(sellOrders).isPresent(), equalTo(false));
+        assertThat(dailyTrader.bestSellOrder(sellOrders).get(), equalTo(orderThree));
     }
 
     @Test
@@ -82,18 +74,13 @@ public class DailyTraderTest {
         DailyQuote dailyQuote = new DailyQuote(LocalDate.now(), 80.050003, 84.050003, 84.050003, 74.050003, 94.050003, 100);
         BuyOrder order = new BuyOrder(stockName, dailyQuote, 119, BigDecimal.valueOf(80.050003));
 
-        SellWhenPriceBellowTarget sellWhenPriceBelowResistance = new SellWhenPriceBellowTarget(BigDecimal.valueOf(70.050003));
-        ConditionalOrder sellWhenPriceBelowResistanceSellConditionalOrder = new SellConditionalOrder(stockName, order, 119, sellWhenPriceBelowResistance);;
-        sellWhenPriceBelowResistanceSellConditionalOrder.addCondition(sellWhenPriceBelowResistance);
-
-        SellWhenPriceAboveTarget sellWhenPriceAboveTarget = new SellWhenPriceAboveTarget(BigDecimal.valueOf(sellTargetPrice));
-        SellConditionalOrder sellWhenPriceAboveTargetSellConditionalOrder = new SellConditionalOrder(stockName, order, 119, sellWhenPriceAboveTarget);
-        sellWhenPriceAboveTargetSellConditionalOrder.addCondition(sellWhenPriceAboveTarget);
+        TrailingStopSellDecision trailingStopSellDecision = new TrailingStopSellDecision(new BigDecimal(80.050003), BigDecimal.TEN, BigDecimal.TEN);
+        ConditionalOrder sellTrailingStopSellSellConditionalOrder = new SellConditionalOrder(stockName, order, 119, trailingStopSellDecision);;
+        sellTrailingStopSellSellConditionalOrder.addCondition(trailingStopSellDecision);
 
         BuyOrderWithPendingSellOrders orderOne = new BuyOrderWithPendingSellOrders(order);
-        orderOne.addSellPendingOrder(sellWhenPriceAboveTargetSellConditionalOrder);
-        orderOne.addSellPendingOrder(sellWhenPriceBelowResistanceSellConditionalOrder);
-        StockGroup stockGroup = new StockGroup(stockName, "Stock Group Desc", null, percentageOfOrdersWon, ordersWon, 0, null, null);
+        orderOne.addSellPendingOrder(sellTrailingStopSellSellConditionalOrder);
+        StockGroup stockGroup = new StockGroup(stockName, "Stock Group Desc", new String[]{stockName}, percentageOfOrdersWon, ordersWon, 0, null, null);
         orderOne.setStockGroup(stockGroup);
         return orderOne;
     }

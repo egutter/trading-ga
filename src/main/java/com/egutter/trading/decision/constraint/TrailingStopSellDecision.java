@@ -114,6 +114,13 @@ public class TrailingStopSellDecision implements Function<TimeFrameQuote, Boolea
         return new BigDecimal(timeFrameQuote.getQuoteAtDay().getHighPrice());
     }
 
+    public BigDecimal getStopLossPercentage() {
+        return stopLossPercentage;
+    }
+
+    public BigDecimal getTrainingLossPercentage() {
+        return trainingLossPercentage;
+    }
 
     @Override
     public String toString() {

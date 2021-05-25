@@ -144,6 +144,7 @@ public class TrailingStopSellDecisionGenerator {
                 .add("stopLoss=" + stopLoss)
                 .add("trailingLoss=" + trailingLoss)
                 .add("expireInDays=" + expireInDays)
+                .add("targetPriceMultiplicator=" + targetPriceMultiplicator)
                 .toString();
     }
 }

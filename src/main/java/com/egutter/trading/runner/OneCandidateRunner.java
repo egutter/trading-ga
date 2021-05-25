@@ -194,20 +194,20 @@ public class OneCandidateRunner {
     }
 
     // CrossOver run all candidates with all symbols main
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         LocalDate fromDate = new LocalDate(2010, 1, 1);
         runAllSectorsOnAllCandidates(fromDate);
     }
 
     // CrossOver main
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2010, 1, 1);
-        String[] stocks = new String[]{"KO"};
+        String[] stocks = new String[]{"PG"};
 //        String[] stocks = StockMarket.aapl();
         LocalDate toDate = LocalDate.now(); //new LocalDate(2020, 11, 19);
         StockMarket stockMarket = new StockMarketBuilder().build(fromDate, toDate, false, false, stocks);
-        BitString chromosome = new BitString("000101110011001001111111100100000101111");
+        BitString chromosome = new BitString("000111111101001110111110111110001100101");
 
         Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
         CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory triggerBuyConditionalOrderDecisionFactory = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio,

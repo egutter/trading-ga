@@ -1,0 +1,66 @@
+[
+  {
+    "sellTargetPrice": 411.18,
+    "sellResistancePrice": 319.80,
+    "stockGroup": {
+      "name": "COST",
+      "description": "1.00(5/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 5,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 22
+      }
+    },
+    "closePrice": 380.720001,
+    "candidate": ": 00011111110100111011111011111000110010100.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 40,
+        "buzz": 1.4678,
+        "weeklyAverage": 27.25
+      },
+      "companyNewsScore": 1.0,
+      "sectorAverageBullishPercent": 0.6649,
+      "sectorAverageNewsScore": 0.5542,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "COST"
+    },
+    "supportResistance": {
+      "levels": [
+        307.0,
+        333.68,
+        352.44,
+        372.05,
+        389.45
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 34.94288,
+        "trending": true
+      }
+    },
+    "maxLoss": 19.04800,
+    "stockName": "COST",
+    "expectedReturn": 8.00
+  }
+]

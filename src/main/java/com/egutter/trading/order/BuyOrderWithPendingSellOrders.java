@@ -1,7 +1,6 @@
 package com.egutter.trading.order;
 
-import com.egutter.trading.order.condition.SellWhenPriceAboveTarget;
-import com.egutter.trading.order.condition.SellWhenPriceBellowTarget;
+import com.egutter.trading.decision.constraint.TrailingStopSellDecision;
 import com.egutter.trading.stock.StockGroup;
 import com.egutter.trading.stock.TimeFrameQuote;
 
@@ -58,13 +57,23 @@ public class BuyOrderWithPendingSellOrders {
     }
 
     public BigDecimal getSellTargetPrice() {
-        SellWhenPriceAboveTarget sellWhenPriceAboveTarget = (SellWhenPriceAboveTarget) getTimeFrameQuoteBooleanFunction(SellWhenPriceAboveTarget.class);
-        return sellWhenPriceAboveTarget.getSellTargetPrice();
+        TrailingStopSellDecision trailingStopSellDecision = (TrailingStopSellDecision) getTimeFrameQuoteBooleanFunction(TrailingStopSellDecision.class);
+        return trailingStopSellDecision.getTargetWinPrice();
     }
 
-    public BigDecimal getSellResistancePrice() {
-        SellWhenPriceBellowTarget sellWhenPriceBellowTarget = (SellWhenPriceBellowTarget) getTimeFrameQuoteBooleanFunction(SellWhenPriceBellowTarget.class);
-        return sellWhenPriceBellowTarget.getResistancePrice();
+    public BigDecimal getStopLossPrice() {
+        TrailingStopSellDecision trailingStopSellDecision = (TrailingStopSellDecision) getTimeFrameQuoteBooleanFunction(TrailingStopSellDecision.class);
+        return trailingStopSellDecision.getTrailingLossPrice();
+    }
+
+    public BigDecimal getStopLossPercentage() {
+        TrailingStopSellDecision trailingStopSellDecision = (TrailingStopSellDecision) getTimeFrameQuoteBooleanFunction(TrailingStopSellDecision.class);
+        return trailingStopSellDecision.getStopLossPercentage();
+    }
+
+    public BigDecimal getTrailingLossPercentage() {
+        TrailingStopSellDecision trailingStopSellDecision = (TrailingStopSellDecision) getTimeFrameQuoteBooleanFunction(TrailingStopSellDecision.class);
+        return trailingStopSellDecision.getTrainingLossPercentage();
     }
 
     private Function<TimeFrameQuote, Boolean> getTimeFrameQuoteBooleanFunction(Class targetClass) {

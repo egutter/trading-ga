@@ -41,7 +41,7 @@ public class DailyTrader {
     private LocalDate tradeOn = LocalDate.now();
     private LocalDate lastTradeAt;
     private String baseOrdersPath;
-    private final static LocalDate today = LocalDate.now();
+    private final static LocalDate today = LocalDate.now().plusDays(1);
 
     public DailyTrader(TdaClient client, LocalDate tradeOn, LocalDate lastTradeAt, String baseOrdersPath) {
         this.client = client;
@@ -58,7 +58,7 @@ public class DailyTrader {
         this.cashAvailable = cashAvailable;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main1(String[] args) throws IOException {
 
         TdaClient client = new HttpTdaClient();
         CashAccount tdaAccount = fetchCashAccount(client);
@@ -117,7 +117,7 @@ public class DailyTrader {
     }
 
 
-    public static void main3(String[] args) {
+    public static void main(String[] args) {
         String baseOrdersPath = "";
         if (args.length > 0){
             baseOrdersPath = args[0];
@@ -260,9 +260,9 @@ public class DailyTrader {
 
         childOrder.setDuration(orderDuration);
         childOrder.setOrderType(OrderType.TRAILING_STOP);
-        childOrder.setPriceLinkBasis(PriceLinkBasis.MARK);
-        childOrder.setPriceLinkType(PriceLinkType.PERCENT);
-        childOrder.setStopPrice(sellStopLossPercentage);
+        childOrder.setStopPriceLinkBasis(StopPriceLinkBasis.MARK);
+        childOrder.setStopPriceLinkType(StopPriceLinkType.PERCENT);
+        childOrder.setStopPriceOffset(sellStopLossPercentage);
 
         OrderLegCollection childOlc = new OrderLegCollection();
         childOlc.setInstruction(OrderLegCollection.Instruction.SELL);
@@ -423,7 +423,7 @@ public class DailyTrader {
         if (executionLegs.size() != 1) return bracketOrder.getSellTargetPrice();
 
         BigDecimal multiplier = bracketOrder.getExpectedReturn().divide(BigDecimal.valueOf(100)).add(BigDecimal.ONE);
-        return executionLegs.get(0).getPrice().multiply(multiplier);
+        return executionLegs.get(0).getPrice().multiply(multiplier).setScale(2, RoundingMode.HALF_EVEN);
     }
 
 }

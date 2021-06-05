@@ -276,7 +276,7 @@ public class OneCandidateRunner {
                         Optional<OneCandidateRunner> bestRunner = oneCandidateRunnerStream.max(Comparator.comparing(ru -> ru.average30daysReturn()));
                         bestRunner.ifPresent(ru -> {
                                 Candidate newCandidate = new Candidate(candidate.getDescription(), ru.getCandidate(), candidate.getTradingDecisionGenerators());
-                                appendToCandidates(selectedCandidates, ru, newCandidate, stockGroup, fromDate, toDate);
+                                appendToCandidates(selectedCandidates, ru, newCandidate, stockGroup, stockMarket.getFirstTradingDay(), toDate);
                         });
                     });
                 } catch (RuntimeException e) {

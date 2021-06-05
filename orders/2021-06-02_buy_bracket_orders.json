@@ -1,0 +1,68 @@
+[
+  {
+    "sellTargetPrice": 87.63,
+    "sellResistancePrice": 76.31,
+    "stockGroup": {
+      "name": "NET",
+      "description": "1.00(6/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 6,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 83.860001,
+    "sellStopLossPercentage": 9.00,
+    "sellTrailingLossPercentage": 9.00,
+    "candidate": ": 00101010101010001101000011100000011100000.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 2,
+        "buzz": 0.2666,
+        "weeklyAverage": 7.5
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6685,
+      "sectorAverageNewsScore": 0.5325,
+      "sentiment": {
+        "bearishPercent": 0.5,
+        "bullishPercent": 0.5
+      },
+      "symbol": "NET"
+    },
+    "supportResistance": {
+      "levels": [
+        38.255,
+        58.34,
+        71.77,
+        81.94,
+        95.77
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.954906,
+        "trending": false
+      }
+    },
+    "maxLoss": 9.89000,
+    "stockName": "NET",
+    "expectedReturn": 4.500
+  }
+]

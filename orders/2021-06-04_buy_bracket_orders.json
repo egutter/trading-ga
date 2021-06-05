@@ -1,0 +1,68 @@
+[
+  {
+    "sellTargetPrice": 250.54,
+    "sellResistancePrice": 211.36,
+    "stockGroup": {
+      "name": "CRM",
+      "description": "1.00(11/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 11,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 237.479996,
+    "sellStopLossPercentage": 11.00,
+    "sellTrailingLossPercentage": 11.00,
+    "candidate": ": 01001011101111111110001110101000011100000.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 36,
+        "buzz": 0.75,
+        "weeklyAverage": 48.0
+      },
+      "companyNewsScore": 0.5948,
+      "sectorAverageBullishPercent": 0.6691,
+      "sectorAverageNewsScore": 0.532,
+      "sentiment": {
+        "bearishPercent": 0.1819,
+        "bullishPercent": 0.8181
+      },
+      "symbol": "CRM"
+    },
+    "supportResistance": {
+      "levels": [
+        201.51,
+        222.32,
+        238.33,
+        255.4068,
+        270.92
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 4,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 21.890675,
+        "trending": false
+      }
+    },
+    "maxLoss": 12.36000,
+    "stockName": "CRM",
+    "expectedReturn": 5.500
+  }
+]

@@ -43,8 +43,8 @@ public class DailyOrderGenerator {
             baseOrdersPath = args[0];
         }
         LocalTime startTime = LocalTime.now();
-//        LocalDate tradeOn = yesterday;
-        LocalDate tradeOn = new LocalDate(2021, 5, 24);
+        LocalDate tradeOn = today;
+//        LocalDate tradeOn = new LocalDate(2021, 6, 1);
 
         TdaClient client = new HttpTdaClient();
         DailyOrderGenerator dailyOrderGenerator = new DailyOrderGenerator(client, tradeOn, baseOrdersPath);

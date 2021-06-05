@@ -1407,197 +1407,197 @@ public class UsaStockMarketCandidates {
                 new Candidate("SMALL CAP", "101100010110110010010000100100100101001",
                         asList(StochasticOscillatorGenerator.class, ChaikinOscillatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "010100101100110000001000010000000001001",
                         asList(StochasticOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.93(14/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.93(14/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100101000010110010010011110100100100010",
                         asList(StochasticOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "110100101110100010010000011001000111000",
                         asList(StochasticOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "010010000011100010010000000101100011010",
                         asList(StochasticOscillatorGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000101011101010010110101110110011",
                         asList(StochasticOscillatorGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.91(30/3)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(30/3)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111110011110110010010000010101000110010",
                         asList(StochasticOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001010100101100010000100100100111000",
                         asList(StochasticOscillatorGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111010011110111010010001010101101111000",
                         asList(StochasticOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.92(11/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92(11/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "110111001100100100001110010000001101101",
                         asList(ChaikinOscillatorGenerator.class, MovingAverageConvergenceDivergenceGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101011111100101100000100010000000101111",
                         asList(ChaikinOscillatorGenerator.class, RelativeStrengthIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "001011101110100010010000010000111100011",
                         asList(ChaikinOscillatorGenerator.class, AverageDirectionalIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "000011110100100010010000010000000110011",
                         asList(ChaikinOscillatorGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101111110100100011000011000000111110011",
                         asList(ChaikinOscillatorGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101011110100100011000011000010111010011",
                         asList(ChaikinOscillatorGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101010000111101000000100101111001100001",
                         asList(ChaikinOscillatorGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "001010101110100010010000010100100111000",
                         asList(ChaikinOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000111001101111001010000110011011",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, RelativeStrengthIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000111000001010111010000100001000",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, AverageDirectionalIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111110100000011001101010000000100011011",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101000010011100101111111110000110001000",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.92(11/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92(11/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000111001101111000110000110011001",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000110001101011111110000110001001",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000111001101010010110000100011001",
                         asList(MovingAverageConvergenceDivergenceGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "011010001010101001101001000011100100010",
                         asList(RelativeStrengthIndexGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "011110000000001000101000010111100100111",
                         asList(RelativeStrengthIndexGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "011110000011001001101000010011100000010",
                         asList(RelativeStrengthIndexGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(4/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101110000110100100010000100100100101001",
                         asList(RelativeStrengthIndexGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(12/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(12/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111100011010000101110000010110001011011",
                         asList(RelativeStrengthIndexGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.93(13/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.93(13/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "011010011110100010010000010101100110010",
                         asList(AverageDirectionalIndexGenerator.class, BollingerBandsGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "100001000110100010000100110111000001110",
                         asList(AverageDirectionalIndexGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.91(20/2)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(20/2)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111010100010100010110000010101100101010",
                         asList(AverageDirectionalIndexGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.94(16/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.94(16/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "110100001010001010010000011110000110000",
                         asList(BollingerBandsGenerator.class, AroonOscilatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.92(12/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92(12/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "101101010110100100010000100100100101000",
                         asList(BollingerBandsGenerator.class, UltimateOscillatorGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.91(10/1)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111111100011000011110010010111000011011",
                         asList(BollingerBandsGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(8/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "001100001011010001011000000001100011111",
                         asList(AroonOscilatorGenerator.class, MoneyFlowIndexGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "001100001011010001011000000001100011111",
                         asList(AroonOscilatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(2/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "010100101100110101011000110100000101011",
                         asList(MoneyFlowIndexGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(6/0)", smallCapEtf())
                         )),
                 new Candidate("SMALL CAP", "111100101000000111110010010111000011111",
                         asList(UltimateOscillatorGenerator.class, WilliamsRGenerator.class),
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "1.00(10/0)", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "1.00(10/0)", smallCapEtf())
                         ))
         );
     }

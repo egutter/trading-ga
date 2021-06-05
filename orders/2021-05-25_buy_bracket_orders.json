@@ -1,0 +1,69 @@
+[
+  {
+    "sellTargetPrice": 163.44,
+    "sellResistancePrice": 137.88,
+    "stockGroup": {
+      "name": "AWK",
+      "description": "1.00(8/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 8,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 154.919998,
+    "sellStopLossPercentage": 11.00,
+    "sellTrailingLossPercentage": 11.00,
+    "candidate": ": 01001011101111111110001110101000011100000.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 12,
+        "buzz": 0.8727,
+        "weeklyAverage": 13.75
+      },
+      "companyNewsScore": 0.9375,
+      "sectorAverageBullishPercent": 0.5968,
+      "sectorAverageNewsScore": 0.515,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "AWK"
+    },
+    "supportResistance": {
+      "levels": [
+        131.01,
+        142.67,
+        152.0,
+        157.54,
+        163.99,
+        172.56
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.7416725,
+        "trending": false
+      }
+    },
+    "maxLoss": 12.36000,
+    "stockName": "AWK",
+    "expectedReturn": 5.500
+  }
+]

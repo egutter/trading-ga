@@ -518,7 +518,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(ETF_SECTORS, "0.89", sectors()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.87", consumerBasicSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.87", healthSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.94", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.94", smallCapEtf())
                         )),
                 new Candidate("ETF Sectors", "0100011100001101101001001111100100001111111111101111",
                         tradingDecisionGenerators,
@@ -529,7 +529,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(CONS_BASIC_SECTOR, "0.85", consumerBasicSector()),
                                 new StockGroup(CONS_DISC_SECTOR, "0.86", consumerDiscSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCapEtf())
                         )),
                 new Candidate("ETF Sectors", "0100001100001001101100010001011011111111111111111110",
                         tradingDecisionGenerators,
@@ -538,7 +538,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(TECH_SECTOR, "0.85", techSector()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.85", consumerBasicSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.85", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.85", smallCapEtf())
                         )),
                 new Candidate("Tech", "1100001100000100101110111110111100000001111001110111",
                         tradingDecisionGenerators,
@@ -547,7 +547,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(FINANCE_SECTOR, "0.85", financeSector()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.87", consumerBasicSector()),
                                 new StockGroup(INDUSTRIAL_SECTOR, "0.85", consumerBasicSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCapEtf())
                         )),
                 new Candidate("Comm", "1110011100001100101011011111100100001011111101111111",
                         tradingDecisionGenerators,
@@ -558,7 +558,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(CONS_BASIC_SECTOR, "0.90", consumerBasicSector()),
                                 new StockGroup(CONS_DISC_SECTOR, "0.85", consumerDiscSector()),
                                 new StockGroup(INDUSTRIAL_SECTOR, "0.87", consumerBasicSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCapEtf())
                         )),
                 new Candidate("Finance", "0001010100101010101000111110111100001011111101111011",
                         tradingDecisionGenerators,
@@ -567,7 +567,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(ETF_SECTORS, "0.91", sectors()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.88", consumerBasicSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.92", smallCap()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.92", smallCapEtf()),
                                 new StockGroup(DEVELOP_ETF_MARKETS, "0.86", developedMarkets())
                         )),
                 new Candidate("Cons Basic", "1010100100001111111011011101001011110001111111111000",
@@ -590,7 +590,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(FINANCE_SECTOR, "0.85", financeSector()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.86", consumerBasicSector()),
                                 new StockGroup(INDUSTRIAL_SECTOR, "0.85", industrialSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.85", smallCap())
+                                new StockGroup(SMALL_CAP_SECTORS, "0.85", smallCapEtf())
                         )),
                 new Candidate("Health", "1000010000100011011100101000100100001111111111110010",
                         tradingDecisionGenerators,
@@ -598,7 +598,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(HEALTH_SECTOR, "0.89", healthSector()),
                                 new StockGroup(ETF_SECTORS, "0.92", sectors()),
                                 new StockGroup(TECH_SECTOR, "0.85", techSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCap()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.90", smallCapEtf()),
                                 new StockGroup(DEVELOP_ETF_MARKETS, "0.86", developedMarkets()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.88", consumerBasicSector()),
                                 new StockGroup(CONS_DISC_SECTOR, "0.85", consumerDiscSector())
@@ -619,7 +619,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(EMERGENT_SECTORS, "0.87", emergentMarkets()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.87", consumerBasicSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.87", healthSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.88", smallCap()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.88", smallCapEtf()),
                                 new StockGroup(ETF_SECTORS, "0.93", sectors()),
                                 new StockGroup(FINANCE_SECTOR, "0.86", financeSector())
                         )),
@@ -639,7 +639,7 @@ public class GlobalStockMarketCandidates {
                 new Candidate("Small Cap", "0001010000101001101010011011101011101011111111011010",
                         tradingDecisionGenerators,
                         asList(
-                                new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCap()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCapEtf()),
                                 new StockGroup("INTC", "0.88", intel()),
                                 new StockGroup(CONS_BASIC_SECTOR, "0.86", consumerBasicSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
@@ -656,7 +656,7 @@ public class GlobalStockMarketCandidates {
                                 new StockGroup(CONS_BASIC_SECTOR, "0.88", consumerBasicSector()),
                                 new StockGroup(HEALTH_SECTOR, "0.86", healthSector()),
                                 new StockGroup(INDUSTRIAL_SECTOR, "0.85", industrialSector()),
-                                new StockGroup(SMALL_CAP_SECTORS, "0.94", smallCap()),
+                                new StockGroup(SMALL_CAP_SECTORS, "0.94", smallCapEtf()),
                                 new StockGroup(ETF_SECTORS, "0.90", sectors())
                         )),
                 new Candidate("AAPL", "0100001000101011011010001011101011101011111111111011",
@@ -907,7 +907,7 @@ public class GlobalStockMarketCandidates {
                 new Candidate("Small Cap",
                         "0100011100001101101001001111011100001001111101111001",
                         tradingDecisionGenerators,
-                        asList(new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCap()),
+                        asList(new StockGroup(SMALL_CAP_SECTORS, "0.97", smallCapEtf()),
                                 new StockGroup(ETF_SECTORS, "0.93", sectors()),
                                 new StockGroup("VGLT", "0.87", longTermBonds()),
                                 new StockGroup(TECH_SECTOR, "0.85", techSector())
@@ -915,7 +915,7 @@ public class GlobalStockMarketCandidates {
                 new Candidate("Small Cap",
                         "0011000100001010001010010111101011101111111101101011",
                         tradingDecisionGenerators,
-                        asList(new StockGroup(SMALL_CAP_SECTORS, "0.95", smallCap()),
+                        asList(new StockGroup(SMALL_CAP_SECTORS, "0.95", smallCapEtf()),
                                 new StockGroup("VGLT", "0.89", longTermBonds()),
                                 new StockGroup(ETF_SECTORS, "0.89", sectors()),
                                 new StockGroup(METALS_SECTORS, "0.86", metals()),

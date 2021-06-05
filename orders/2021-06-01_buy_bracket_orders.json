@@ -1,0 +1,134 @@
+[
+  {
+    "sellTargetPrice": 670.10,
+    "sellResistancePrice": 611.55,
+    "stockGroup": {
+      "name": "NVDA",
+      "description": "0.92(11/1)",
+      "percentageOfOrdersWon": 0.92,
+      "ordersWon": 11,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 650.580017,
+    "sellStopLossPercentage": 6.00,
+    "sellTrailingLossPercentage": 6.00,
+    "candidate": ": 10000011011110111100000010010100011110000.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 126,
+        "buzz": 1.1612,
+        "weeklyAverage": 108.5
+      },
+      "companyNewsScore": 0.8085,
+      "sectorAverageBullishPercent": 0.6629,
+      "sectorAverageNewsScore": 0.5352,
+      "sentiment": {
+        "bearishPercent": 0.1364,
+        "bullishPercent": 0.8636
+      },
+      "symbol": "NVDA"
+    },
+    "supportResistance": {
+      "levels": [
+        462.66,
+        492.0,
+        528.65,
+        573.9399,
+        648.566
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 4,
+          "sell": 5,
+          "neutral": 7
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 20.139736,
+        "trending": false
+      }
+    },
+    "maxLoss": 6.38300,
+    "stockName": "NVDA",
+    "expectedReturn": 3.00
+  },
+  {
+    "sellTargetPrice": 471.92,
+    "sellResistancePrice": 255.62,
+    "stockGroup": {
+      "name": "ZM",
+      "description": "1.00(1/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 1,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 327.720001,
+    "sellStopLossPercentage": 15.00,
+    "sellTrailingLossPercentage": 22.00,
+    "candidate": ": 10001010101010001000001001111011111001011.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 46,
+        "buzz": 1.4488,
+        "weeklyAverage": 31.75
+      },
+      "companyNewsScore": 0.8235,
+      "sectorAverageBullishPercent": 0.6624,
+      "sectorAverageNewsScore": 0.5352,
+      "sentiment": {
+        "bearishPercent": 0.1112,
+        "bullishPercent": 0.8888
+      },
+      "symbol": "ZM"
+    },
+    "supportResistance": {
+      "levels": [
+        273.2,
+        336.1,
+        398.8,
+        473.2229,
+        588.84
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 3,
+          "sell": 5,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 13.4311,
+        "trending": false
+      }
+    },
+    "maxLoss": 28.20500,
+    "stockName": "ZM",
+    "expectedReturn": 44.00
+  }
+]

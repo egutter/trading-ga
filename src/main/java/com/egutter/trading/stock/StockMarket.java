@@ -85,7 +85,7 @@ public class StockMarket {
                 new StockGroup(METALS_SECTORS, metals()),
                 new StockGroup(EMERGENT_SECTORS, emergentMarkets()),
                 new StockGroup(GREEN_SECTORS, greenSector()),
-                new StockGroup(SMALL_CAP_SECTORS, smallCap()),
+                new StockGroup(SMALL_CAP_SECTORS, smallCapEtf()),
                 new StockGroup(DEVELOP_ETF_MARKETS, developedMarkets()),
                 new StockGroup("DEVELOP ADR", developAdr()),
                 new StockGroup("ALL_SPY_500", sNp500()),
@@ -122,6 +122,14 @@ public class StockMarket {
                 "FPX"
         };
     }
+    public static String[] newInnovationSector() {
+        return new String[]{
+                "MJ",
+                "ROBO",
+                "ARKK",
+        };
+    }
+
     public static String[] biotechSector() {
         return new String[]{
                 "XBI",
@@ -437,20 +445,20 @@ public class StockMarket {
                 "MU",
                 "MDLZ",
                 "SQ",
-                "SYK",
-                "SCHW",
-                "ANTM",
-                "SPGI",
-                "AMAT",
-                "ZTS",
-                "MO",
-                "DE",
-                "TMUS",
-                "CI",
-                "TJX",
-                "PLD",
-                "CL",
-                "GILD"
+//                "SYK",
+//                "SCHW",
+//                "ANTM",
+//                "SPGI",
+//                "AMAT",
+//                "ZTS",
+//                "MO",
+//                "DE",
+//                "TMUS",
+//                "CI",
+//                "TJX",
+//                "PLD",
+//                "CL",
+//                "GILD"
         };
     }
     public static String[] sectors() {
@@ -498,7 +506,7 @@ public class StockMarket {
         };
     }
 
-    public static String[] smallCap() {
+    public static String[] smallCapEtf() {
         return new String[]{
             "VBK",
             "SCZ",
@@ -506,10 +514,97 @@ public class StockMarket {
         };
     }
 
+    public static String[] smallCap() {
+        return new String[]{
+            "AMH",
+            "AOS",
+            "AVLR",
+            "AVTR",
+            "AXON",
+            "BILL",
+            "CHGG",
+            "COLD",
+            "CRL",
+            "CTLT",
+            "CZR",
+            "DT",
+            "ELS",
+            "ENTG",
+            "FIVN",
+            "FND",
+            "FWONK",
+            "G",
+            "GH",
+            "GNRC",
+            "HZNP",
+            "NVCR",
+            "OLED",
+            "PEN",
+            "PFPT",
+            "POOL",
+            "PTC",
+            "RGEN",
+            "RUN",
+            "STE",
+            "TDY",
+            "WEX",
+            "ZNGA"
+        };
+    }
+
     public static String[] midCap() {
         return new String[]{
             "IJH",
-                // GNRC,SEDG,PENN,CZR,MPWR,CGNX,TECH,PTC,CRL,CREE,MASI,FICO,AXON,MPW,RUN,MOH,CDAY,SBNY,GGG,FDS
+            "ACM",
+            "AFG",
+            "ATR",
+            "AZPN",
+            "BLDR",
+            "BRO",
+            "CABO",
+            "CDAY",
+            "CGNX",
+            "CPT",
+            "CREE",
+            "CSL",
+            "DAR",
+            "DECK",
+            "EWBC",
+            "FDS",
+            "FHN",
+            "FICO",
+            "FIVE",
+            "GGG",
+            "HUBB",
+            "JAZZ",
+            "JLL",
+            "LAD",
+            "LEA",
+            "LII",
+            "MASI",
+            "MIDD",
+            "MKSI",
+            "MOH",
+            "MPW",
+            "NDSN",
+            "OC",
+            "PRAH",
+            "RH",
+            "RPM",
+            "RS",
+            "SAM",
+            "SBNY",
+            "SEDG",
+            "STLD",
+            "TECH",
+            "TREX",
+            "TTC",
+            "UGI",
+            "WSM",
+            "WSO",
+            "WTRG",
+            "XPO",
+            "Y"
         };
     }
 
@@ -858,7 +953,7 @@ public class StockMarket {
                 "CMCSA",
                 "CMA",
                 "CAG",
-                "CXO",
+//                "CXO",
                 "COP",
                 "ED",
                 "STZ",
@@ -896,7 +991,7 @@ public class StockMarket {
                 "DRE",
                 "DD",
                 "DXC",
-                "ETFC",
+//                "ETFC",
                 "EMN",
                 "ETN",
                 "EBAY",
@@ -1067,7 +1162,7 @@ public class StockMarket {
                 "MOS",
                 "MSI",
                 "MSCI",
-                "MYL",
+//                "MYL",
                 "NDAQ",
                 "NOV",
                 "NTAP",
@@ -1080,7 +1175,7 @@ public class StockMarket {
                 "NLSN",
                 "NKE",
                 "NI",
-                "NBL",
+//                "NBL",
                 "JWN",
                 "NSC",
                 "NTRS",
@@ -1180,7 +1275,7 @@ public class StockMarket {
                 "TXN",
                 "TXT",
                 "TMO",
-                "TIF",
+//                "TIF",
                 "TJX",
                 "TSCO",
 //                "TT",

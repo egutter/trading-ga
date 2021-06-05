@@ -1,0 +1,196 @@
+[
+  {
+    "sellTargetPrice": 85.12,
+    "sellResistancePrice": 71.81,
+    "stockGroup": {
+      "name": "LW",
+      "description": "1.00(8/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 8,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 80.68,
+    "sellStopLossPercentage": 10.00,
+    "sellTrailingLossPercentage": 11.00,
+    "candidate": ": 01011110111001011101000000100100111011000.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 4,
+        "buzz": 0.5555,
+        "weeklyAverage": 3.0
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6766,
+      "sectorAverageNewsScore": 0.5564,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "LW"
+    },
+    "supportResistance": {
+      "levels": [
+        62.125,
+        65.89,
+        72.615,
+        77.13,
+        80.0,
+        86.41
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 11.974353,
+        "trending": false
+      }
+    },
+    "maxLoss": 12.36000,
+    "stockName": "LW",
+    "expectedReturn": 5.500
+  },
+  {
+    "sellTargetPrice": 290.17,
+    "sellResistancePrice": 244.79,
+    "stockGroup": {
+      "name": "VBK",
+      "description": "1.00(6/0)",
+      "percentageOfOrdersWon": 1.00,
+      "ordersWon": 6,
+      "ordersLost": 0,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 275.040009,
+    "sellStopLossPercentage": 11.00,
+    "sellTrailingLossPercentage": 11.00,
+    "candidate": ": 00100010001000100111001010101000010011100.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 0,
+        "buzz": 0.0,
+        "weeklyAverage": 0.0
+      },
+      "companyNewsScore": 0.0,
+      "sectorAverageBullishPercent": 0.5395,
+      "sectorAverageNewsScore": 0.5006,
+      "symbol": "VBK"
+    },
+    "supportResistance": {
+      "levels": [
+        204.38,
+        233.9866,
+        271.768,
+        304.9299
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 2,
+          "sell": 6,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 22.802816,
+        "trending": false
+      }
+    },
+    "maxLoss": 12.36000,
+    "stockName": "VBK",
+    "expectedReturn": 5.500
+  },
+  {
+    "sellTargetPrice": 77.51,
+    "sellResistancePrice": 65.39,
+    "stockGroup": {
+      "name": "NEE",
+      "description": "0.94(16/1)",
+      "percentageOfOrdersWon": 0.94,
+      "ordersWon": 16,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 73.470001,
+    "sellStopLossPercentage": 11.00,
+    "sellTrailingLossPercentage": 11.00,
+    "candidate": ": 00110011001000101111100010101000011101000.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 12,
+        "buzz": 0.5647,
+        "weeklyAverage": 21.25
+      },
+      "companyNewsScore": 0.5,
+      "sectorAverageBullishPercent": 0.6035,
+      "sectorAverageNewsScore": 0.5152,
+      "sentiment": {
+        "bearishPercent": 0.0,
+        "bullishPercent": 1.0
+      },
+      "symbol": "NEE"
+    },
+    "supportResistance": {
+      "levels": [
+        66.785,
+        70.4975,
+        74.29,
+        79.615,
+        87.69
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 7,
+          "neutral": 8
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 21.03581,
+        "trending": false
+      }
+    },
+    "maxLoss": 12.36000,
+    "stockName": "NEE",
+    "expectedReturn": 5.500
+  }
+]

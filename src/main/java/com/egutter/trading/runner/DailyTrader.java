@@ -342,6 +342,7 @@ public class DailyTrader {
             bestOrder.ifPresent(order -> ordersToTrade.add(new BuyBracketOrder(entry.getKey(),
                     order, orderExpectedReturn(order), orderMaxLoss(order), order.getCandidate(),
                     finnhubClient.newsSentimentFor(entry.getKey()),
+                    finnhubClient.socialSentimentFor(entry.getKey()),
                     finnhubClient.supportResistanceFor(entry.getKey()),
                     finnhubClient.aggregateIndicator(entry.getKey())
             )));

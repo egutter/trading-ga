@@ -2,6 +2,7 @@ package com.egutter.trading.order;
 
 import com.egutter.trading.finnhub.AggregateIndicator;
 import com.egutter.trading.finnhub.NewsSentiment;
+import com.egutter.trading.finnhub.SocialSentiment;
 import com.egutter.trading.finnhub.SupportResistance;
 import com.egutter.trading.stock.StockGroup;
 
@@ -18,6 +19,7 @@ public class BuyBracketOrder {
     private final BigDecimal sellTrailingLossPercentage;
     private String candidate;
     private NewsSentiment newsSentiment;
+    private SocialSentiment socialSentiment;
     private SupportResistance supportResistance;
     private AggregateIndicator aggregateIndicator;
     private BigDecimal maxLoss;
@@ -26,7 +28,8 @@ public class BuyBracketOrder {
 
     public BuyBracketOrder(String stockName, BuyOrderWithPendingSellOrders buyOrderWithPendingSellOrders,
                            BigDecimal expectedReturn, BigDecimal maxLoss, String candidate,
-                           NewsSentiment newsSentiment, SupportResistance supportResistance, AggregateIndicator aggregateIndicator) {
+                           NewsSentiment newsSentiment, SocialSentiment socialSentiment,
+                           SupportResistance supportResistance, AggregateIndicator aggregateIndicator) {
         this.stockName = stockName;
         this.expectedReturn = expectedReturn;
         this.stockGroup = buyOrderWithPendingSellOrders.getStockGroup();
@@ -38,6 +41,7 @@ public class BuyBracketOrder {
         this.closePrice = buyOrderWithPendingSellOrders.getMarketOrder().getPrice();
         this.candidate = candidate;
         this.newsSentiment = newsSentiment;
+        this.socialSentiment = socialSentiment;
         this.supportResistance = supportResistance;
         this.aggregateIndicator = aggregateIndicator;
     }
@@ -81,6 +85,7 @@ public class BuyBracketOrder {
                 .add("sellTrailingLossPercentage=" + sellTrailingLossPercentage)
                 .add("candidate='" + candidate + "'")
                 .add("newsSentiment=" + newsSentiment)
+                .add("socialSentiment=" + socialSentiment)
                 .add("supportResistance=" + supportResistance)
                 .add("aggregateIndicator=" + aggregateIndicator)
                 .add("maxLoss=" + maxLoss)

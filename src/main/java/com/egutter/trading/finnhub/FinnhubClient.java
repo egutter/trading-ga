@@ -20,6 +20,7 @@ public class FinnhubClient {
 
     private final static String BASE_URL = "https://finnhub.io/api/v1/";
     private final static String SENTINMENT_URL = BASE_URL + "news-sentiment";
+    private final static String SOCIAL_SENTINMENT_URL = BASE_URL + "stock/social-sentiment";
     private final static String SUPPORT_RESISTANCE_URL = BASE_URL + "scan/support-resistance";
     private static final String AGGREGATE_INDICATOR_URL = BASE_URL + "scan/technical-indicator";
     private final Gson gson;
@@ -29,13 +30,16 @@ public class FinnhubClient {
     public FinnhubClient() {
         this.client = HttpClients.createDefault();
         this.apiToken = "c0knd0f48v6und6roslg";
-        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
+        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting().setDateFormat("yyyy-MM-dd HH:mm:ss");
         gsonBuilder.registerTypeAdapterFactory(new ClassTypeAdapterFactory());
         this.gson = gsonBuilder.create();
     }
 
     public NewsSentiment newsSentimentFor(String stock) {
         return fetchFinnhubDataFrom(stock, NewsSentiment.class, (symbol) -> buildSentimentUrl(symbol));
+    }
+    public SocialSentiment socialSentimentFor(String stock) {
+        return fetchFinnhubDataFrom(stock, SocialSentiment.class, (symbol) -> buildSocialSentimentUrl(symbol));
     }
 
     public SupportResistance supportResistanceFor(String stock) {
@@ -65,6 +69,9 @@ public class FinnhubClient {
 
     private String buildSentimentUrl(String stock) {
         return addApiToken(SENTINMENT_URL + "?symbol=" +stock);
+    }
+    private String buildSocialSentimentUrl(String stock) {
+        return addApiToken(SOCIAL_SENTINMENT_URL + "?symbol=" +stock);
     }
 
     private String buildSupportResistanceUrl(String stock) {

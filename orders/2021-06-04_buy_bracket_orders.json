@@ -19,23 +19,390 @@
         "day": 25
       }
     },
-    "closePrice": 237.479996,
+    "closePrice": 237.48,
     "sellStopLossPercentage": 11.00,
     "sellTrailingLossPercentage": 11.00,
     "candidate": ": 01001011101111111110001110101000011100000.MovingAverageCrossOverGenerator",
     "newsSentiment": {
       "buzz": {
-        "articlesInLastWeek": 36,
-        "buzz": 0.75,
-        "weeklyAverage": 48.0
+        "articlesInLastWeek": 37,
+        "buzz": 0.7589,
+        "weeklyAverage": 48.75
       },
-      "companyNewsScore": 0.5948,
-      "sectorAverageBullishPercent": 0.6691,
-      "sectorAverageNewsScore": 0.532,
+      "companyNewsScore": 0.6114,
+      "sectorAverageBullishPercent": 0.6714,
+      "sectorAverageNewsScore": 0.5329,
       "sentiment": {
-        "bearishPercent": 0.1819,
-        "bullishPercent": 0.8181
+        "bearishPercent": 0.1667,
+        "bullishPercent": 0.8333
       },
+      "symbol": "CRM"
+    },
+    "socialSentiment": {
+      "reddit": [
+        {
+          "atTime": "Jun 5, 2021, 7:00:00 AM",
+          "mention": 1,
+          "positiveScore": 0.0,
+          "negativeScore": 0.99992454,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.99992454
+        },
+        {
+          "atTime": "Jun 4, 2021, 2:00:00 AM",
+          "mention": 1,
+          "positiveScore": 0.9904398,
+          "negativeScore": 0.0,
+          "positiveMention": 1,
+          "negativeMention": 0,
+          "score": 0.9904398
+        }
+      ],
+      "twitter": [
+        {
+          "atTime": "Jun 5, 2021, 2:00:00 PM",
+          "mention": 8,
+          "positiveScore": 0.83222115,
+          "negativeScore": 0.84516406,
+          "positiveMention": 4,
+          "negativeMention": 4,
+          "score": -0.00647145
+        },
+        {
+          "atTime": "Jun 5, 2021, 1:00:00 PM",
+          "mention": 29,
+          "positiveScore": 0.91881454,
+          "negativeScore": 0.9435798,
+          "positiveMention": 13,
+          "negativeMention": 16,
+          "score": -0.10871338
+        },
+        {
+          "atTime": "Jun 5, 2021, 12:00:00 PM",
+          "mention": 17,
+          "positiveScore": 0.91137826,
+          "negativeScore": 0.9737059,
+          "positiveMention": 11,
+          "negativeMention": 5,
+          "score": 0.32228947
+        },
+        {
+          "atTime": "Jun 5, 2021, 11:00:00 AM",
+          "mention": 27,
+          "positiveScore": 0.88359046,
+          "negativeScore": 0.99993646,
+          "positiveMention": 24,
+          "negativeMention": 1,
+          "score": 0.80824935
+        },
+        {
+          "atTime": "Jun 5, 2021, 10:00:00 AM",
+          "mention": 6,
+          "positiveScore": 0.90143853,
+          "negativeScore": 0.0,
+          "positiveMention": 6,
+          "negativeMention": 0,
+          "score": 0.90143853
+        },
+        {
+          "atTime": "Jun 5, 2021, 9:00:00 AM",
+          "mention": 7,
+          "positiveScore": 0.9843326,
+          "negativeScore": 0.0,
+          "positiveMention": 7,
+          "negativeMention": 0,
+          "score": 0.9843326
+        },
+        {
+          "atTime": "Jun 5, 2021, 8:00:00 AM",
+          "mention": 7,
+          "positiveScore": 0.860694,
+          "negativeScore": 0.8892858,
+          "positiveMention": 5,
+          "negativeMention": 2,
+          "score": 0.36069977
+        },
+        {
+          "atTime": "Jun 5, 2021, 7:00:00 AM",
+          "mention": 7,
+          "positiveScore": 0.9568158,
+          "negativeScore": 0.0,
+          "positiveMention": 7,
+          "negativeMention": 0,
+          "score": 0.9568158
+        },
+        {
+          "atTime": "Jun 5, 2021, 6:00:00 AM",
+          "mention": 11,
+          "positiveScore": 0.9563777,
+          "negativeScore": 0.9965928,
+          "positiveMention": 6,
+          "negativeMention": 3,
+          "score": 0.3053875
+        },
+        {
+          "atTime": "Jun 5, 2021, 5:00:00 AM",
+          "mention": 14,
+          "positiveScore": 0.9422442,
+          "negativeScore": 0.0,
+          "positiveMention": 5,
+          "negativeMention": 0,
+          "score": 0.9422442
+        },
+        {
+          "atTime": "Jun 5, 2021, 4:00:00 AM",
+          "mention": 12,
+          "positiveScore": 0.96148866,
+          "negativeScore": 0.99968225,
+          "positiveMention": 9,
+          "negativeMention": 3,
+          "score": 0.47119594
+        },
+        {
+          "atTime": "Jun 5, 2021, 3:00:00 AM",
+          "mention": 35,
+          "positiveScore": 0.9448851,
+          "negativeScore": 0.93356115,
+          "positiveMention": 19,
+          "negativeMention": 13,
+          "score": 0.18176629
+        },
+        {
+          "atTime": "Jun 5, 2021, 2:00:00 AM",
+          "mention": 45,
+          "positiveScore": 0.93613327,
+          "negativeScore": 0.9930184,
+          "positiveMention": 28,
+          "negativeMention": 10,
+          "score": 0.42846176
+        },
+        {
+          "atTime": "Jun 5, 2021, 1:00:00 AM",
+          "mention": 28,
+          "positiveScore": 0.88409394,
+          "negativeScore": 0.9177747,
+          "positiveMention": 18,
+          "negativeMention": 4,
+          "score": 0.5564815
+        },
+        {
+          "atTime": "Jun 5, 2021, 12:00:00 AM",
+          "mention": 35,
+          "positiveScore": 0.9258664,
+          "negativeScore": 0.9497462,
+          "positiveMention": 21,
+          "negativeMention": 12,
+          "score": 0.24382548
+        },
+        {
+          "atTime": "Jun 4, 2021, 11:00:00 PM",
+          "mention": 23,
+          "positiveScore": 0.9564482,
+          "negativeScore": 0.89975315,
+          "positiveMention": 10,
+          "negativeMention": 7,
+          "score": 0.19213
+        },
+        {
+          "atTime": "Jun 4, 2021, 10:00:00 PM",
+          "mention": 29,
+          "positiveScore": 0.91186625,
+          "negativeScore": 0.9993836,
+          "positiveMention": 9,
+          "negativeMention": 7,
+          "score": 0.0756944
+        },
+        {
+          "atTime": "Jun 4, 2021, 9:00:00 PM",
+          "mention": 49,
+          "positiveScore": 0.96403086,
+          "negativeScore": 0.98824114,
+          "positiveMention": 9,
+          "negativeMention": 30,
+          "score": -0.5377168
+        },
+        {
+          "atTime": "Jun 4, 2021, 8:00:00 PM",
+          "mention": 43,
+          "positiveScore": 0.976034,
+          "negativeScore": 0.9888911,
+          "positiveMention": 15,
+          "negativeMention": 15,
+          "score": -0.0064285668
+        },
+        {
+          "atTime": "Jun 4, 2021, 7:00:00 PM",
+          "mention": 57,
+          "positiveScore": 0.9124869,
+          "negativeScore": 0.97815126,
+          "positiveMention": 28,
+          "negativeMention": 20,
+          "score": 0.124721
+        },
+        {
+          "atTime": "Jun 4, 2021, 6:00:00 PM",
+          "mention": 48,
+          "positiveScore": 0.9178329,
+          "negativeScore": 0.8702182,
+          "positiveMention": 18,
+          "negativeMention": 15,
+          "score": 0.10508239
+        },
+        {
+          "atTime": "Jun 4, 2021, 5:00:00 PM",
+          "mention": 40,
+          "positiveScore": 0.97416735,
+          "negativeScore": 0.95892555,
+          "positiveMention": 8,
+          "negativeMention": 18,
+          "score": -0.36412773
+        },
+        {
+          "atTime": "Jun 4, 2021, 4:00:00 PM",
+          "mention": 64,
+          "positiveScore": 0.9050419,
+          "negativeScore": 0.96212125,
+          "positiveMention": 17,
+          "negativeMention": 36,
+          "score": -0.36321986
+        },
+        {
+          "atTime": "Jun 4, 2021, 3:00:00 PM",
+          "mention": 42,
+          "positiveScore": 0.8752789,
+          "negativeScore": 0.9557495,
+          "positiveMention": 12,
+          "negativeMention": 27,
+          "score": -0.39235616
+        },
+        {
+          "atTime": "Jun 4, 2021, 2:00:00 PM",
+          "mention": 18,
+          "positiveScore": 0.9630049,
+          "negativeScore": 0.9691145,
+          "positiveMention": 9,
+          "negativeMention": 8,
+          "score": 0.053772237
+        },
+        {
+          "atTime": "Jun 4, 2021, 1:00:00 PM",
+          "mention": 20,
+          "positiveScore": 0.9117672,
+          "negativeScore": 0.95772606,
+          "positiveMention": 3,
+          "negativeMention": 9,
+          "score": -0.49035275
+        },
+        {
+          "atTime": "Jun 4, 2021, 12:00:00 PM",
+          "mention": 24,
+          "positiveScore": 0.9361766,
+          "negativeScore": 0.8959965,
+          "positiveMention": 10,
+          "negativeMention": 10,
+          "score": 0.02009005
+        },
+        {
+          "atTime": "Jun 4, 2021, 11:00:00 AM",
+          "mention": 8,
+          "positiveScore": 0.9993356,
+          "negativeScore": 0.9658719,
+          "positiveMention": 3,
+          "negativeMention": 5,
+          "score": -0.22891909
+        },
+        {
+          "atTime": "Jun 4, 2021, 10:00:00 AM",
+          "mention": 19,
+          "positiveScore": 0.8203142,
+          "negativeScore": 0.92043304,
+          "positiveMention": 4,
+          "negativeMention": 8,
+          "score": -0.34018394
+        },
+        {
+          "atTime": "Jun 4, 2021, 9:00:00 AM",
+          "mention": 3,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9794939,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.9794939
+        },
+        {
+          "atTime": "Jun 4, 2021, 8:00:00 AM",
+          "mention": 7,
+          "positiveScore": 0.9282111,
+          "negativeScore": 0.947309,
+          "positiveMention": 3,
+          "negativeMention": 4,
+          "score": -0.1435147
+        },
+        {
+          "atTime": "Jun 4, 2021, 6:00:00 AM",
+          "mention": 5,
+          "positiveScore": 0.0,
+          "negativeScore": 0.96713066,
+          "positiveMention": 0,
+          "negativeMention": 3,
+          "score": -0.96713066
+        },
+        {
+          "atTime": "Jun 4, 2021, 5:00:00 AM",
+          "mention": 1,
+          "positiveScore": 0.0,
+          "negativeScore": 0.94426006,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.94426006
+        },
+        {
+          "atTime": "Jun 4, 2021, 4:00:00 AM",
+          "mention": 1,
+          "positiveScore": 0.8790767,
+          "negativeScore": 0.0,
+          "positiveMention": 1,
+          "negativeMention": 0,
+          "score": 0.8790767
+        },
+        {
+          "atTime": "Jun 4, 2021, 3:00:00 AM",
+          "mention": 3,
+          "positiveScore": 0.9682518,
+          "negativeScore": 0.0,
+          "positiveMention": 3,
+          "negativeMention": 0,
+          "score": 0.9682518
+        },
+        {
+          "atTime": "Jun 4, 2021, 2:00:00 AM",
+          "mention": 20,
+          "positiveScore": 0.98087543,
+          "negativeScore": 0.8939773,
+          "positiveMention": 14,
+          "negativeMention": 4,
+          "score": 0.56424147
+        },
+        {
+          "atTime": "Jun 4, 2021, 1:00:00 AM",
+          "mention": 11,
+          "positiveScore": 0.98958,
+          "negativeScore": 0.0,
+          "positiveMention": 11,
+          "negativeMention": 0,
+          "score": 0.98958
+        },
+        {
+          "atTime": "Jun 4, 2021, 12:00:00 AM",
+          "mention": 18,
+          "positiveScore": 0.9304145,
+          "negativeScore": 0.9394399,
+          "positiveMention": 6,
+          "negativeMention": 9,
+          "score": -0.19149813
+        }
+      ],
       "symbol": "CRM"
     },
     "supportResistance": {
@@ -57,7 +424,7 @@
         "signal": "neutral"
       },
       "trend": {
-        "adx": 21.890675,
+        "adx": 21.893192,
         "trending": false
       }
     },

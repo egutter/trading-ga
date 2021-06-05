@@ -34,7 +34,7 @@ public class OneDayCandidateRunner {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 5, 24);
+        LocalDate tradeOn = new LocalDate(2021, 6, 4);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
@@ -46,6 +46,7 @@ public class OneDayCandidateRunner {
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
         List<String> stockSymbols = StockMarket.allSectorsStockSymbols();
+        System.out.println("Generating orders for [ " + stockSymbols.size() + " ] stocks");
         Map<String, List<BuyOrderWithPendingSellOrders>> allBuyOrderWithPendingSellOrders = new HashMap<>();
         stockSymbols.stream().forEach(stockSymbol -> {
 
@@ -134,6 +135,7 @@ public class OneDayCandidateRunner {
 
     public List<Candidate> candidates() {
         return new CandidatesFileHandler().fromJson("rsi_cross_down_all_candidates.json");
+//        return new CandidatesFileHandler().fromJson("rsi_cross_down_mid_small_cap_candidates.json");
     }
 
     public List<String> getResultBuffer() {

@@ -127,6 +127,7 @@ public class StockMarket {
                 "MJ",
                 "ROBO",
                 "ARKK",
+                "IPO",
         };
     }
 
@@ -1412,9 +1413,25 @@ public class StockMarket {
     }
 
     public static List<StockGroup> allSectorsStockSymbolsAsStockGroups() {
-        return allSectors().stream().map(stockGroup -> Arrays.asList(stockGroup.getStockSymbols())).
+        return allSectorsStockSymbols().stream().
+                map(symbol -> new StockGroup(symbol, new String[]{symbol})).
+                collect(Collectors.toList());
+    }
+
+    public static List<String> allSmallMedCapSymbols() {
+        List<StockGroup> stockGroups = Arrays.asList(
+                new StockGroup("NEW_ETF_CAP", newInnovationSector()),
+                new StockGroup("MEDIUM_CAP", midCap()),
+                new StockGroup("SMALL_CAP", smallCap())
+        );
+        return stockGroups.stream().map(stockGroup -> Arrays.asList(stockGroup.getStockSymbols())).
                 flatMap(Collection::stream).
                 distinct().
+                collect(Collectors.toList());
+    }
+
+    public static List<StockGroup> allSmallMedCapSymbolsAsStockGroups() {
+        return allSmallMedCapSymbols().stream().
                 map(symbol -> new StockGroup(symbol, new String[]{symbol})).
                 collect(Collectors.toList());
     }

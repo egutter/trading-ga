@@ -1,0 +1,6528 @@
+[
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "PRAH",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 11,
+          "day": 13
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "PRAH"
+        ]
+      },
+      {
+        "name": "SBNY",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SBNY"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01101011100000110000010011011100010011100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "SEDG",
+        "description": "0.50(1/1)",
+        "percentageOfOrdersWon": 0.50,
+        "ordersWon": 1,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2015,
+          "month": 3,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SEDG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11000011010010110001100001011000000111111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00000011110010111011110110000000010011011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AZPN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AZPN"
+        ]
+      },
+      {
+        "name": "CPT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CPT"
+        ]
+      },
+      {
+        "name": "DAR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DAR"
+        ]
+      },
+      {
+        "name": "FDS",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FDS"
+        ]
+      },
+      {
+        "name": "FHN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FHN"
+        ]
+      },
+      {
+        "name": "JAZZ",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "JAZZ"
+        ]
+      },
+      {
+        "name": "MASI",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MASI"
+        ]
+      },
+      {
+        "name": "MOH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MOH"
+        ]
+      },
+      {
+        "name": "OC",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "OC"
+        ]
+      },
+      {
+        "name": "SBNY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SBNY"
+        ]
+      },
+      {
+        "name": "WSM",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WSM"
+        ]
+      },
+      {
+        "name": "FWONK",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 7,
+          "day": 8
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FWONK"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      },
+      {
+        "name": "PFPT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 4,
+          "day": 20
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "PFPT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110011111100010010110101111111010110000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00000011110010111011110110000000010011001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011011100010110011011000010000111110001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "FICO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FICO"
+        ]
+      },
+      {
+        "name": "TECH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TECH"
+        ]
+      },
+      {
+        "name": "TTC",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TTC"
+        ]
+      },
+      {
+        "name": "CHGG",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 11,
+          "day": 13
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CHGG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10010110100010100010111101100011110101100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      },
+      {
+        "name": "FND",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2017,
+          "month": 4,
+          "day": 27
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FND"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010111001100100111111110010000010111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "COLD",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110010010100101100000000010100111100100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "EWBC",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "EWBC"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10010110100010100010111101100011110101110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ATR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ATR"
+        ]
+      },
+      {
+        "name": "JLL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "JLL"
+        ]
+      },
+      {
+        "name": "MPW",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MPW"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110011111100010010110101111111010110010",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "RH",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 11,
+          "day": 2
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RH"
+        ]
+      },
+      {
+        "name": "SAM",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SAM"
+        ]
+      },
+      {
+        "name": "G",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "G"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011111110100111011111011111000110010101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      },
+      {
+        "name": "RUN",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 8,
+          "day": 5
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RUN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010011001001101110110011001001110110110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "IJH",
+        "description": "1.00(8/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 8,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "IJH"
+        ]
+      },
+      {
+        "name": "LII",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LII"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010011111111111100110011011000010110100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AFG",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AFG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00100010001000100111001010101000010011111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01100111001100001101001100100000011010000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110011001000101111100010101000011101011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ROBO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 10,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ROBO"
+        ]
+      },
+      {
+        "name": "LAD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LAD"
+        ]
+      },
+      {
+        "name": "CHGG",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 11,
+          "day": 13
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CHGG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01001110000001100111111011110011111110111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CABO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      },
+      {
+        "name": "LII",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LII"
+        ]
+      },
+      {
+        "name": "WSO",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WSO"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01001110000001100111111011110011111110101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CSL",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      },
+      {
+        "name": "FICO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FICO"
+        ]
+      },
+      {
+        "name": "TREX",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TREX"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00101101100100111010000011100100011111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "BILL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 12,
+          "day": 12
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BILL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10001010101010001000001001111011111001011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "WTRG",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WTRG"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00101101100100111010000011100100011111111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ELS",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00100010001000100111001010101000010011101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "FIVN",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 4,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVN"
+        ]
+      },
+      {
+        "name": "GH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 10,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "GH"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10001010101010001000001001111011111001001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AFG",
+        "description": "0.93(13/1)",
+        "percentageOfOrdersWon": 0.93,
+        "ordersWon": 13,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AFG"
+        ]
+      },
+      {
+        "name": "CSL",
+        "description": "0.93(14/1)",
+        "percentageOfOrdersWon": 0.93,
+        "ordersWon": 14,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      },
+      {
+        "name": "Y",
+        "description": "1.00(14/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 14,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "Y"
+        ]
+      },
+      {
+        "name": "BILL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 12,
+          "day": 12
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BILL"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "0.92(11/1)",
+        "percentageOfOrdersWon": 0.92,
+        "ordersWon": 11,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110011001000101111100010101000011101000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "CGNX",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CGNX"
+        ]
+      },
+      {
+        "name": "CSL",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      },
+      {
+        "name": "DAR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DAR"
+        ]
+      },
+      {
+        "name": "FDS",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FDS"
+        ]
+      },
+      {
+        "name": "RH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 11,
+          "day": 2
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RH"
+        ]
+      },
+      {
+        "name": "TECH",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TECH"
+        ]
+      },
+      {
+        "name": "TREX",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TREX"
+        ]
+      },
+      {
+        "name": "TTC",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TTC"
+        ]
+      },
+      {
+        "name": "Y",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "Y"
+        ]
+      },
+      {
+        "name": "AOS",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AOS"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      },
+      {
+        "name": "STE",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "STE"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01001110000001100111111011110011111110100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "G",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "G"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11001110111011111110011110001100100101111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MJ",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 12,
+          "day": 3
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MJ"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11100111001100100110110000000100001101010",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ATR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ATR"
+        ]
+      },
+      {
+        "name": "RPM",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RPM"
+        ]
+      },
+      {
+        "name": "TTC",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TTC"
+        ]
+      },
+      {
+        "name": "AMH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AMH"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01101111101000000001111010001001100110101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "LAD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LAD"
+        ]
+      },
+      {
+        "name": "RS",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RS"
+        ]
+      },
+      {
+        "name": "WEX",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WEX"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110110011101101101100110010000001111110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "LAD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LAD"
+        ]
+      },
+      {
+        "name": "OC",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "OC"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10010110100010100010111101100011110101111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00000011100010111011110110000000010011101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "GH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 10,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "GH"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010011001001101110110011001001110110111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "FND",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2017,
+          "month": 4,
+          "day": 27
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FND"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00100011000010000101110110100000000101001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010010000111011101111001010101010111111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010011111111111100110011011000010110101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MJ",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 12,
+          "day": 3
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MJ"
+        ]
+      },
+      {
+        "name": "AVTR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10101011000111010000001000010011001101001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ROBO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 10,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ROBO"
+        ]
+      },
+      {
+        "name": "HUBB",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "HUBB"
+        ]
+      },
+      {
+        "name": "LAD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LAD"
+        ]
+      },
+      {
+        "name": "NDSN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NDSN"
+        ]
+      },
+      {
+        "name": "RPM",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RPM"
+        ]
+      },
+      {
+        "name": "SBNY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SBNY"
+        ]
+      },
+      {
+        "name": "WSO",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WSO"
+        ]
+      },
+      {
+        "name": "RGEN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RGEN"
+        ]
+      },
+      {
+        "name": "STE",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "STE"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00101101100100111010000011100100011111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AFG",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AFG"
+        ]
+      },
+      {
+        "name": "AZPN",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AZPN"
+        ]
+      },
+      {
+        "name": "FND",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2017,
+          "month": 4,
+          "day": 27
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FND"
+        ]
+      },
+      {
+        "name": "G",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "G"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01011110110010110110001110010111111110000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "IJH",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "IJH"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011011100000100010010100010000100110100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CSL",
+        "description": "1.00(10/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 10,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      },
+      {
+        "name": "FICO",
+        "description": "1.00(9/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 9,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FICO"
+        ]
+      },
+      {
+        "name": "WTRG",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WTRG"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      },
+      {
+        "name": "FND",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2017,
+          "month": 4,
+          "day": 27
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FND"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "1.00(8/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 8,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10001010101010001000001001111011111001000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CSL",
+        "description": "1.00(10/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 10,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      },
+      {
+        "name": "FIVN",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 4,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01001011101111111110001110101000011100001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AFG",
+        "description": "1.00(8/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 8,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AFG"
+        ]
+      },
+      {
+        "name": "CABO",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      },
+      {
+        "name": "CSL",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11000011010010110001100001011000000111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CABO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      },
+      {
+        "name": "CDAY",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "DAR",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DAR"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110111100010110011011000010000111111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "CHGG",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 11,
+          "day": 13
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CHGG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00100010001000100111001010101000010011110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "COLD",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00111011100100110100000110011100110111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "FICO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FICO"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110110100011101011110000011011101001110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "COLD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01011110110010110110001110010111111110011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10000011011110111100000010010100011110001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "FND",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2017,
+          "month": 4,
+          "day": 27
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FND"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01010010110111000011011011001100011111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01111111001101111110000101011001101111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "BILL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 12,
+          "day": 12
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BILL"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01000111101010111001000010011100010010010",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CSL",
+        "description": "0.94(16/1)",
+        "percentageOfOrdersWon": 0.94,
+        "ordersWon": 16,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      },
+      {
+        "name": "BILL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 12,
+          "day": 12
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BILL"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "0.92(12/1)",
+        "percentageOfOrdersWon": 0.92,
+        "ordersWon": 12,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "0.92(12/1)",
+        "percentageOfOrdersWon": 0.92,
+        "ordersWon": 12,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010111001010101111000010110000111011000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "PEN",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 9,
+          "day": 18
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "PEN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110110011101101101100110010000001111111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AZPN",
+        "description": "0.75(3/1)",
+        "percentageOfOrdersWon": 0.75,
+        "ordersWon": 3,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AZPN"
+        ]
+      },
+      {
+        "name": "MIDD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MIDD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11100111001100100110110000000100001101011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "BRO",
+        "description": "0.92(12/1)",
+        "percentageOfOrdersWon": 0.92,
+        "ordersWon": 12,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BRO"
+        ]
+      },
+      {
+        "name": "AVTR",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00000010111101101101000111111000001001001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "RH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 11,
+          "day": 2
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RH"
+        ]
+      },
+      {
+        "name": "XPO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "XPO"
+        ]
+      },
+      {
+        "name": "GH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 10,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "GH"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01101111101000000001111010001001100110110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ENTG",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ENTG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01101111101000000001111010001001100110100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ARKK",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 10,
+          "day": 31
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ARKK"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011111110100111011111011111000110010110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "EWBC",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "EWBC"
+        ]
+      },
+      {
+        "name": "WSO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WSO"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110011111100010010110101111111010110011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      },
+      {
+        "name": "GH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 10,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "GH"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01111011000100000101111001011000101101100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MJ",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 12,
+          "day": 3
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MJ"
+        ]
+      },
+      {
+        "name": "BLDR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BLDR"
+        ]
+      },
+      {
+        "name": "CREE",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CREE"
+        ]
+      },
+      {
+        "name": "LII",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LII"
+        ]
+      },
+      {
+        "name": "NDSN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NDSN"
+        ]
+      },
+      {
+        "name": "TECH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TECH"
+        ]
+      },
+      {
+        "name": "CRL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CRL"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      },
+      {
+        "name": "RUN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 8,
+          "day": 5
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RUN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110011111100010010110101111111010110001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ACM",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ACM"
+        ]
+      },
+      {
+        "name": "CSL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CSL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110110100011101011110000011011101001101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "BRO",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BRO"
+        ]
+      },
+      {
+        "name": "CPT",
+        "description": "1.00(7/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 7,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CPT"
+        ]
+      },
+      {
+        "name": "FICO",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FICO"
+        ]
+      },
+      {
+        "name": "GGG",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "GGG"
+        ]
+      },
+      {
+        "name": "HUBB",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "HUBB"
+        ]
+      },
+      {
+        "name": "LII",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LII"
+        ]
+      },
+      {
+        "name": "RPM",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RPM"
+        ]
+      },
+      {
+        "name": "UGI",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "UGI"
+        ]
+      },
+      {
+        "name": "WTRG",
+        "description": "1.00(7/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 7,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WTRG"
+        ]
+      },
+      {
+        "name": "Y",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "Y"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "0.50(1/1)",
+        "percentageOfOrdersWon": 0.50,
+        "ordersWon": 1,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      },
+      {
+        "name": "CTLT",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 7,
+          "day": 31
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CTLT"
+        ]
+      },
+      {
+        "name": "CZR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 9,
+          "day": 22
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CZR"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      },
+      {
+        "name": "ENTG",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ENTG"
+        ]
+      },
+      {
+        "name": "FIVN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 4,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVN"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "1.00(7/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 7,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      },
+      {
+        "name": "TDY",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TDY"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011111110100111011111011111000110010100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CABO",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00100011000010000101110110100000000101000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "IPO",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 10,
+          "day": 16
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "IPO"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      },
+      {
+        "name": "OLED",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "OLED"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110110011101101101100110010000001111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CABO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11100111001100100110110000000100001101001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10000011011110111100000010010100011100101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "TREX",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TREX"
+        ]
+      },
+      {
+        "name": "AOS",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AOS"
+        ]
+      },
+      {
+        "name": "G",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "G"
+        ]
+      },
+      {
+        "name": "PEN",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 9,
+          "day": 18
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "PEN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110110100011101011110000011011101001111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "BILL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 12,
+          "day": 12
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "BILL"
+        ]
+      },
+      {
+        "name": "ENTG",
+        "description": "0.92(11/1)",
+        "percentageOfOrdersWon": 0.92,
+        "ordersWon": 11,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ENTG"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00111011100100110100000110011100110111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "SEDG",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 3,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SEDG"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "AVTR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01001011101111111110001110101000011100000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "NVCR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110111100010110011011000010000111111110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "IJH",
+        "description": "1.00(7/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 7,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "IJH"
+        ]
+      },
+      {
+        "name": "CDAY",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "TREX",
+        "description": "1.00(5/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 5,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TREX"
+        ]
+      },
+      {
+        "name": "RGEN",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RGEN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010010000111011101111001010101010111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CABO",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01111111001101111110000101011001101110000",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00000010101010001000001011011000011011001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "RPM",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "RPM"
+        ]
+      },
+      {
+        "name": "GNRC",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 2,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "GNRC"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01001110000001100111111011110011111110110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MJ",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 12,
+          "day": 3
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MJ"
+        ]
+      },
+      {
+        "name": "CDAY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "LEA",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LEA"
+        ]
+      },
+      {
+        "name": "WSO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WSO"
+        ]
+      },
+      {
+        "name": "G",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "G"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10010110100010100010111101100011110101101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVTR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 5,
+          "day": 17
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVTR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00000011100010111011110110000000010011111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "ARKK",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 10,
+          "day": 31
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ARKK"
+        ]
+      },
+      {
+        "name": "CGNX",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CGNX"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "11001110111011111110011110001100100101101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      },
+      {
+        "name": "FIVE",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 7,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVE"
+        ]
+      },
+      {
+        "name": "MKSI",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MKSI"
+        ]
+      },
+      {
+        "name": "MPW",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MPW"
+        ]
+      },
+      {
+        "name": "CHGG",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 11,
+          "day": 13
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CHGG"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      },
+      {
+        "name": "FWONK",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 7,
+          "day": 8
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FWONK"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110110011101101101100110010000001111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "UGI",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "UGI"
+        ]
+      },
+      {
+        "name": "FIVN",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 4,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVN"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010010000111011101111001010101010111101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CREE",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CREE"
+        ]
+      },
+      {
+        "name": "LII",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "LII"
+        ]
+      },
+      {
+        "name": "MPW",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MPW"
+        ]
+      },
+      {
+        "name": "TTC",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TTC"
+        ]
+      },
+      {
+        "name": "ELS",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ELS"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00101101100100111010000011100100011111110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CABO",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 6,
+          "day": 11
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CABO"
+        ]
+      },
+      {
+        "name": "WSM",
+        "description": "0.75(3/1)",
+        "percentageOfOrdersWon": 0.75,
+        "ordersWon": 3,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "WSM"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01101111101000000001111010001001100110111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AVLR",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110011001000101111100010101000011101010",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "COLD",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      },
+      {
+        "name": "NVCR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 10,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "NVCR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00010111001100100111111110010000010111100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MJ",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 12,
+          "day": 3
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MJ"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011011100000100010010100010000100110101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "DT",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "10101011000111010000001000010011001101011",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MIDD",
+        "description": "0.75(3/1)",
+        "percentageOfOrdersWon": 0.75,
+        "ordersWon": 3,
+        "ordersLost": 1,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MIDD"
+        ]
+      },
+      {
+        "name": "AVLR",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 6,
+          "day": 15
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AVLR"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00011011100000100010010100010000100110110",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "DT",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00110010101110100011100001011000010101001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "AFG",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AFG"
+        ]
+      },
+      {
+        "name": "ATR",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ATR"
+        ]
+      },
+      {
+        "name": "FIVE",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 7,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVE"
+        ]
+      },
+      {
+        "name": "POOL",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "POOL"
+        ]
+      },
+      {
+        "name": "TDY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "TDY"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01110110100011101011110000011011101001100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CDAY",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 4,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CDAY"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01111011000100000101111001011000101101111",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "MJ",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 12,
+          "day": 3
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "MJ"
+        ]
+      },
+      {
+        "name": "ARKK",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 10,
+          "day": 31
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "ARKK"
+        ]
+      },
+      {
+        "name": "EWBC",
+        "description": "1.00(6/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 6,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "EWBC"
+        ]
+      },
+      {
+        "name": "FIVE",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2012,
+          "month": 7,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "FIVE"
+        ]
+      },
+      {
+        "name": "OC",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "OC"
+        ]
+      },
+      {
+        "name": "PRAH",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2014,
+          "month": 11,
+          "day": 13
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "PRAH"
+        ]
+      },
+      {
+        "name": "SEDG",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2015,
+          "month": 3,
+          "day": 26
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "SEDG"
+        ]
+      },
+      {
+        "name": "AMH",
+        "description": "1.00(4/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 4,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2013,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "AMH"
+        ]
+      },
+      {
+        "name": "COLD",
+        "description": "1.00(1/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 1,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2018,
+          "month": 1,
+          "day": 19
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "COLD"
+        ]
+      },
+      {
+        "name": "DT",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      },
+      {
+        "name": "STE",
+        "description": "1.00(3/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 3,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "STE"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "00100010001000100111001010101000010011100",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "CGNX",
+        "description": "1.00(8/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 8,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2010,
+          "month": 1,
+          "day": 4
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "CGNX"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01101011100000110000010011011100010011101",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  },
+  {
+    "stockGroups": [
+      {
+        "name": "DT",
+        "description": "1.00(2/0)",
+        "percentageOfOrdersWon": 1.00,
+        "ordersWon": 2,
+        "ordersLost": 0,
+        "fromDate": {
+          "year": 2019,
+          "month": 8,
+          "day": 1
+        },
+        "toDate": {
+          "year": 2021,
+          "month": 6,
+          "day": 4
+        },
+        "stockSymbols": [
+          "DT"
+        ]
+      }
+    ],
+    "description": "",
+    "chromosome": "01111110111110100011100001011000010101001",
+    "tradingDecisionGenerators": [
+      "com.egutter.trading.decision.generator.MovingAverageCrossOverGenerator"
+    ]
+  }
+]

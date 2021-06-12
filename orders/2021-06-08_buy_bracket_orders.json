@@ -1,0 +1,877 @@
+[
+  {
+    "sellTargetPrice": 131.81,
+    "sellResistancePrice": 121.67,
+    "stockGroup": {
+      "name": "AAPL",
+      "description": "0.91(10/1)",
+      "percentageOfOrdersWon": 0.91,
+      "ordersWon": 10,
+      "ordersLost": 1,
+      "fromDate": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "toDate": {
+        "year": 2021,
+        "month": 5,
+        "day": 25
+      }
+    },
+    "closePrice": 126.739998,
+    "sellStopLossPercentage": 4.00,
+    "sellTrailingLossPercentage": 4.00,
+    "candidate": ": 01010010110111000011011011001100011111101.MovingAverageCrossOverGenerator",
+    "newsSentiment": {
+      "buzz": {
+        "articlesInLastWeek": 296,
+        "buzz": 1.1619,
+        "weeklyAverage": 254.75
+      },
+      "companyNewsScore": 0.75,
+      "sectorAverageBullishPercent": 0.6831,
+      "sectorAverageNewsScore": 0.5398,
+      "sentiment": {
+        "bearishPercent": 0.1715,
+        "bullishPercent": 0.8285
+      },
+      "symbol": "AAPL"
+    },
+    "socialSentiment": {
+      "reddit": [
+        {
+          "atTime": "Jun 8, 2021, 9:00:00 PM",
+          "mention": 5,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9952697,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.9952697
+        },
+        {
+          "atTime": "Jun 8, 2021, 8:00:00 PM",
+          "mention": 14,
+          "positiveScore": 0.0,
+          "negativeScore": 0.99931496,
+          "positiveMention": 0,
+          "negativeMention": 2,
+          "score": -0.99931496
+        },
+        {
+          "atTime": "Jun 8, 2021, 7:00:00 PM",
+          "mention": 13,
+          "positiveScore": 0.0,
+          "negativeScore": 0.90453744,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.90453744
+        },
+        {
+          "atTime": "Jun 8, 2021, 6:00:00 PM",
+          "mention": 24,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9082011,
+          "positiveMention": 0,
+          "negativeMention": 5,
+          "score": -0.9082011
+        },
+        {
+          "atTime": "Jun 8, 2021, 5:00:00 PM",
+          "mention": 11,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 8, 2021, 4:00:00 PM",
+          "mention": 8,
+          "positiveScore": 0.95795906,
+          "negativeScore": 0.9999801,
+          "positiveMention": 1,
+          "negativeMention": 1,
+          "score": -0.02101052
+        },
+        {
+          "atTime": "Jun 8, 2021, 3:00:00 PM",
+          "mention": 7,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 8, 2021, 2:00:00 PM",
+          "mention": 6,
+          "positiveScore": 0.0,
+          "negativeScore": 0.96508867,
+          "positiveMention": 0,
+          "negativeMention": 3,
+          "score": -0.96508867
+        },
+        {
+          "atTime": "Jun 8, 2021, 1:00:00 PM",
+          "mention": 4,
+          "positiveScore": 0.936753,
+          "negativeScore": 0.99996555,
+          "positiveMention": 3,
+          "negativeMention": 1,
+          "score": 0.45257333
+        },
+        {
+          "atTime": "Jun 8, 2021, 12:00:00 PM",
+          "mention": 2,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 8, 2021, 11:00:00 AM",
+          "mention": 2,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 8, 2021, 10:00:00 AM",
+          "mention": 4,
+          "positiveScore": 0.884169,
+          "negativeScore": 0.9841462,
+          "positiveMention": 2,
+          "negativeMention": 1,
+          "score": 0.26139727
+        },
+        {
+          "atTime": "Jun 8, 2021, 9:00:00 AM",
+          "mention": 3,
+          "positiveScore": 0.93946534,
+          "negativeScore": 0.0,
+          "positiveMention": 1,
+          "negativeMention": 0,
+          "score": 0.93946534
+        },
+        {
+          "atTime": "Jun 8, 2021, 8:00:00 AM",
+          "mention": 7,
+          "positiveScore": 0.91156507,
+          "negativeScore": 0.99846965,
+          "positiveMention": 1,
+          "negativeMention": 3,
+          "score": -0.520961
+        },
+        {
+          "atTime": "Jun 8, 2021, 7:00:00 AM",
+          "mention": 4,
+          "positiveScore": 0.0,
+          "negativeScore": 0.98610353,
+          "positiveMention": 0,
+          "negativeMention": 4,
+          "score": -0.98610353
+        },
+        {
+          "atTime": "Jun 8, 2021, 6:00:00 AM",
+          "mention": 4,
+          "positiveScore": 0.7629221,
+          "negativeScore": 0.9064393,
+          "positiveMention": 1,
+          "negativeMention": 1,
+          "score": -0.0717586
+        },
+        {
+          "atTime": "Jun 8, 2021, 4:00:00 AM",
+          "mention": 3,
+          "positiveScore": 0.98589814,
+          "negativeScore": 0.7303829,
+          "positiveMention": 1,
+          "negativeMention": 1,
+          "score": 0.12775762
+        },
+        {
+          "atTime": "Jun 8, 2021, 3:00:00 AM",
+          "mention": 2,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9899621,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.9899621
+        },
+        {
+          "atTime": "Jun 8, 2021, 2:00:00 AM",
+          "mention": 3,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9961808,
+          "positiveMention": 0,
+          "negativeMention": 2,
+          "score": -0.9961808
+        },
+        {
+          "atTime": "Jun 8, 2021, 1:00:00 AM",
+          "mention": 4,
+          "positiveScore": 0.71363425,
+          "negativeScore": 0.99983686,
+          "positiveMention": 2,
+          "negativeMention": 2,
+          "score": -0.1431013
+        },
+        {
+          "atTime": "Jun 8, 2021, 12:00:00 AM",
+          "mention": 7,
+          "positiveScore": 0.0,
+          "negativeScore": 1.3304876,
+          "positiveMention": 0,
+          "negativeMention": 3,
+          "score": -1.3304876
+        },
+        {
+          "atTime": "Jun 7, 2021, 10:00:00 PM",
+          "mention": 2,
+          "positiveScore": 0.0,
+          "negativeScore": 0.817754,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.817754
+        },
+        {
+          "atTime": "Jun 7, 2021, 9:00:00 PM",
+          "mention": 9,
+          "positiveScore": 0.9320015,
+          "negativeScore": 0.99998796,
+          "positiveMention": 1,
+          "negativeMention": 1,
+          "score": -0.03399323
+        },
+        {
+          "atTime": "Jun 7, 2021, 8:00:00 PM",
+          "mention": 14,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9893334,
+          "positiveMention": 0,
+          "negativeMention": 3,
+          "score": -0.9893334
+        },
+        {
+          "atTime": "Jun 7, 2021, 7:00:00 PM",
+          "mention": 10,
+          "positiveScore": 0.9558282,
+          "negativeScore": 0.9994259,
+          "positiveMention": 2,
+          "negativeMention": 1,
+          "score": 0.30407682
+        },
+        {
+          "atTime": "Jun 7, 2021, 6:00:00 PM",
+          "mention": 10,
+          "positiveScore": 0.86740625,
+          "negativeScore": 0.94966054,
+          "positiveMention": 2,
+          "negativeMention": 2,
+          "score": -0.04112715
+        },
+        {
+          "atTime": "Jun 7, 2021, 5:00:00 PM",
+          "mention": 16,
+          "positiveScore": 0.7986878,
+          "negativeScore": 0.95629793,
+          "positiveMention": 1,
+          "negativeMention": 1,
+          "score": -0.07880507
+        },
+        {
+          "atTime": "Jun 7, 2021, 4:00:00 PM",
+          "mention": 30,
+          "positiveScore": 0.98599863,
+          "negativeScore": 0.99070597,
+          "positiveMention": 2,
+          "negativeMention": 2,
+          "score": -0.00235365
+        },
+        {
+          "atTime": "Jun 7, 2021, 3:00:00 PM",
+          "mention": 22,
+          "positiveScore": 0.0,
+          "negativeScore": 0.98253536,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.98253536
+        },
+        {
+          "atTime": "Jun 7, 2021, 2:00:00 PM",
+          "mention": 18,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 7, 2021, 1:00:00 PM",
+          "mention": 12,
+          "positiveScore": 0.9444538,
+          "negativeScore": 0.0,
+          "positiveMention": 1,
+          "negativeMention": 0,
+          "score": 0.9444538
+        },
+        {
+          "atTime": "Jun 7, 2021, 12:00:00 PM",
+          "mention": 19,
+          "positiveScore": 0.0,
+          "negativeScore": 0.99898463,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.99898463
+        },
+        {
+          "atTime": "Jun 7, 2021, 11:00:00 AM",
+          "mention": 15,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 7, 2021, 10:00:00 AM",
+          "mention": 21,
+          "positiveScore": 0.99844486,
+          "negativeScore": 0.9979589,
+          "positiveMention": 2,
+          "negativeMention": 4,
+          "score": -0.33249098
+        },
+        {
+          "atTime": "Jun 7, 2021, 9:00:00 AM",
+          "mention": 10,
+          "positiveScore": 0.98056054,
+          "negativeScore": 0.9966077,
+          "positiveMention": 1,
+          "negativeMention": 2,
+          "score": -0.33755162
+        },
+        {
+          "atTime": "Jun 7, 2021, 8:00:00 AM",
+          "mention": 9,
+          "positiveScore": 0.0,
+          "negativeScore": 0.95495963,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.95495963
+        },
+        {
+          "atTime": "Jun 7, 2021, 7:00:00 AM",
+          "mention": 4,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 7, 2021, 6:00:00 AM",
+          "mention": 2,
+          "positiveScore": 0.857353,
+          "negativeScore": 0.0,
+          "positiveMention": 1,
+          "negativeMention": 0,
+          "score": 0.857353
+        },
+        {
+          "atTime": "Jun 7, 2021, 5:00:00 AM",
+          "mention": 19,
+          "positiveScore": 0.9949791,
+          "negativeScore": 0.9984402,
+          "positiveMention": 1,
+          "negativeMention": 5,
+          "score": -0.6662037
+        },
+        {
+          "atTime": "Jun 7, 2021, 4:00:00 AM",
+          "mention": 10,
+          "positiveScore": 0.0,
+          "negativeScore": 0.0,
+          "positiveMention": 0,
+          "negativeMention": 0,
+          "score": 0.0
+        },
+        {
+          "atTime": "Jun 7, 2021, 2:00:00 AM",
+          "mention": 1,
+          "positiveScore": 0.98867583,
+          "negativeScore": 0.0,
+          "positiveMention": 1,
+          "negativeMention": 0,
+          "score": 0.98867583
+        },
+        {
+          "atTime": "Jun 7, 2021, 1:00:00 AM",
+          "mention": 2,
+          "positiveScore": 0.0,
+          "negativeScore": 0.9715901,
+          "positiveMention": 0,
+          "negativeMention": 1,
+          "score": -0.9715901
+        },
+        {
+          "atTime": "Jun 7, 2021, 12:00:00 AM",
+          "mention": 5,
+          "positiveScore": 0.99554574,
+          "negativeScore": 0.99993384,
+          "positiveMention": 1,
+          "negativeMention": 1,
+          "score": -0.00219405
+        }
+      ],
+      "twitter": [
+        {
+          "atTime": "Jun 8, 2021, 9:00:00 PM",
+          "mention": 84,
+          "positiveScore": 0.96214885,
+          "negativeScore": 0.8891442,
+          "positiveMention": 34,
+          "negativeMention": 36,
+          "score": 0.010055286
+        },
+        {
+          "atTime": "Jun 8, 2021, 8:00:00 PM",
+          "mention": 408,
+          "positiveScore": 0.9278061,
+          "negativeScore": 0.95416033,
+          "positiveMention": 148,
+          "negativeMention": 182,
+          "score": -0.11012691
+        },
+        {
+          "atTime": "Jun 8, 2021, 7:00:00 PM",
+          "mention": 394,
+          "positiveScore": 0.91986215,
+          "negativeScore": 0.95740074,
+          "positiveMention": 80,
+          "negativeMention": 251,
+          "score": -0.5036816
+        },
+        {
+          "atTime": "Jun 8, 2021, 6:00:00 PM",
+          "mention": 402,
+          "positiveScore": 0.921716,
+          "negativeScore": 0.9468491,
+          "positiveMention": 167,
+          "negativeMention": 138,
+          "score": 0.076266855
+        },
+        {
+          "atTime": "Jun 8, 2021, 5:00:00 PM",
+          "mention": 504,
+          "positiveScore": 0.9646379,
+          "negativeScore": 0.95306927,
+          "positiveMention": 214,
+          "negativeMention": 235,
+          "score": -0.03906187
+        },
+        {
+          "atTime": "Jun 8, 2021, 4:00:00 PM",
+          "mention": 391,
+          "positiveScore": 0.94819105,
+          "negativeScore": 0.9389173,
+          "positiveMention": 182,
+          "negativeMention": 135,
+          "score": 0.14453293
+        },
+        {
+          "atTime": "Jun 8, 2021, 3:00:00 PM",
+          "mention": 315,
+          "positiveScore": 0.9401192,
+          "negativeScore": 0.9386046,
+          "positiveMention": 172,
+          "negativeMention": 91,
+          "score": 0.29006645
+        },
+        {
+          "atTime": "Jun 8, 2021, 2:00:00 PM",
+          "mention": 55,
+          "positiveScore": 0.95415473,
+          "negativeScore": 0.96004885,
+          "positiveMention": 23,
+          "negativeMention": 26,
+          "score": -0.061545122
+        },
+        {
+          "atTime": "Jun 8, 2021, 1:00:00 PM",
+          "mention": 33,
+          "positiveScore": 0.96851057,
+          "negativeScore": 0.90744686,
+          "positiveMention": 13,
+          "negativeMention": 16,
+          "score": -0.06650045
+        },
+        {
+          "atTime": "Jun 8, 2021, 12:00:00 PM",
+          "mention": 306,
+          "positiveScore": 0.9174329,
+          "negativeScore": 0.9439841,
+          "positiveMention": 99,
+          "negativeMention": 145,
+          "score": -0.188737
+        },
+        {
+          "atTime": "Jun 8, 2021, 11:00:00 AM",
+          "mention": 296,
+          "positiveScore": 0.9471588,
+          "negativeScore": 0.95279247,
+          "positiveMention": 95,
+          "negativeMention": 156,
+          "score": -0.23368737
+        },
+        {
+          "atTime": "Jun 8, 2021, 10:00:00 AM",
+          "mention": 269,
+          "positiveScore": 0.9613322,
+          "negativeScore": 0.97074676,
+          "positiveMention": 92,
+          "negativeMention": 154,
+          "score": -0.24818066
+        },
+        {
+          "atTime": "Jun 8, 2021, 9:00:00 AM",
+          "mention": 155,
+          "positiveScore": 0.95225805,
+          "negativeScore": 0.94892794,
+          "positiveMention": 87,
+          "negativeMention": 56,
+          "score": 0.20773765
+        },
+        {
+          "atTime": "Jun 8, 2021, 8:00:00 AM",
+          "mention": 204,
+          "positiveScore": 0.9410167,
+          "negativeScore": 0.94027084,
+          "positiveMention": 80,
+          "negativeMention": 84,
+          "score": -0.02256961
+        },
+        {
+          "atTime": "Jun 8, 2021, 7:00:00 AM",
+          "mention": 123,
+          "positiveScore": 0.95338887,
+          "negativeScore": 0.95812654,
+          "positiveMention": 54,
+          "negativeMention": 50,
+          "score": 0.034391098
+        },
+        {
+          "atTime": "Jun 8, 2021, 6:00:00 AM",
+          "mention": 186,
+          "positiveScore": 0.9764525,
+          "negativeScore": 0.9720385,
+          "positiveMention": 36,
+          "negativeMention": 140,
+          "score": -0.5734835
+        },
+        {
+          "atTime": "Jun 8, 2021, 5:00:00 AM",
+          "mention": 103,
+          "positiveScore": 0.937823,
+          "negativeScore": 0.96033734,
+          "positiveMention": 49,
+          "negativeMention": 46,
+          "score": 0.01871378
+        },
+        {
+          "atTime": "Jun 8, 2021, 4:00:00 AM",
+          "mention": 98,
+          "positiveScore": 0.93331337,
+          "negativeScore": 0.9133722,
+          "positiveMention": 40,
+          "negativeMention": 34,
+          "score": 0.084836215
+        },
+        {
+          "atTime": "Jun 8, 2021, 3:00:00 AM",
+          "mention": 184,
+          "positiveScore": 0.9423551,
+          "negativeScore": 0.9680545,
+          "positiveMention": 88,
+          "negativeMention": 72,
+          "score": 0.082670785
+        },
+        {
+          "atTime": "Jun 8, 2021, 2:00:00 AM",
+          "mention": 185,
+          "positiveScore": 0.9711811,
+          "negativeScore": 0.9554859,
+          "positiveMention": 89,
+          "negativeMention": 73,
+          "score": 0.10299167
+        },
+        {
+          "atTime": "Jun 8, 2021, 1:00:00 AM",
+          "mention": 240,
+          "positiveScore": 0.94366705,
+          "negativeScore": 0.9615455,
+          "positiveMention": 72,
+          "negativeMention": 129,
+          "score": -0.2790813
+        },
+        {
+          "atTime": "Jun 8, 2021, 12:00:00 AM",
+          "mention": 175,
+          "positiveScore": 0.9019131,
+          "negativeScore": 0.9593613,
+          "positiveMention": 37,
+          "negativeMention": 115,
+          "score": -0.50628793
+        },
+        {
+          "atTime": "Jun 7, 2021, 11:00:00 PM",
+          "mention": 260,
+          "positiveScore": 0.90231735,
+          "negativeScore": 0.93435115,
+          "positiveMention": 100,
+          "negativeMention": 94,
+          "score": 0.01238518
+        },
+        {
+          "atTime": "Jun 7, 2021, 10:00:00 PM",
+          "mention": 237,
+          "positiveScore": 0.90736157,
+          "negativeScore": 0.9489112,
+          "positiveMention": 82,
+          "negativeMention": 101,
+          "score": -0.11713869
+        },
+        {
+          "atTime": "Jun 7, 2021, 9:00:00 PM",
+          "mention": 298,
+          "positiveScore": 0.9385258,
+          "negativeScore": 0.947682,
+          "positiveMention": 106,
+          "negativeMention": 138,
+          "score": -0.12826388
+        },
+        {
+          "atTime": "Jun 7, 2021, 8:00:00 PM",
+          "mention": 412,
+          "positiveScore": 0.949758,
+          "negativeScore": 0.9648823,
+          "positiveMention": 115,
+          "negativeMention": 193,
+          "score": -0.2500004
+        },
+        {
+          "atTime": "Jun 7, 2021, 7:00:00 PM",
+          "mention": 442,
+          "positiveScore": 0.9337527,
+          "negativeScore": 0.9516169,
+          "positiveMention": 164,
+          "negativeMention": 223,
+          "score": -0.15264887
+        },
+        {
+          "atTime": "Jun 7, 2021, 6:00:00 PM",
+          "mention": 838,
+          "positiveScore": 0.94532114,
+          "negativeScore": 0.9560847,
+          "positiveMention": 293,
+          "negativeMention": 453,
+          "score": -0.2092859
+        },
+        {
+          "atTime": "Jun 7, 2021, 5:00:00 PM",
+          "mention": 1178,
+          "positiveScore": 0.9232232,
+          "negativeScore": 0.9456045,
+          "positiveMention": 378,
+          "negativeMention": 640,
+          "score": -0.25167832
+        },
+        {
+          "atTime": "Jun 7, 2021, 4:00:00 PM",
+          "mention": 444,
+          "positiveScore": 0.93101877,
+          "negativeScore": 0.9484939,
+          "positiveMention": 178,
+          "negativeMention": 190,
+          "score": -0.039381795
+        },
+        {
+          "atTime": "Jun 7, 2021, 3:00:00 PM",
+          "mention": 278,
+          "positiveScore": 0.939937,
+          "negativeScore": 0.9604474,
+          "positiveMention": 97,
+          "negativeMention": 148,
+          "score": -0.20805028
+        },
+        {
+          "atTime": "Jun 7, 2021, 2:00:00 PM",
+          "mention": 217,
+          "positiveScore": 0.93636656,
+          "negativeScore": 0.94496083,
+          "positiveMention": 93,
+          "negativeMention": 83,
+          "score": 0.04914966
+        },
+        {
+          "atTime": "Jun 7, 2021, 1:00:00 PM",
+          "mention": 225,
+          "positiveScore": 0.9533351,
+          "negativeScore": 0.9510801,
+          "positiveMention": 92,
+          "negativeMention": 102,
+          "score": -0.04795536
+        },
+        {
+          "atTime": "Jun 7, 2021, 12:00:00 PM",
+          "mention": 274,
+          "positiveScore": 0.9336303,
+          "negativeScore": 0.950021,
+          "positiveMention": 110,
+          "negativeMention": 130,
+          "score": -0.08668084
+        },
+        {
+          "atTime": "Jun 7, 2021, 11:00:00 AM",
+          "mention": 242,
+          "positiveScore": 0.9413055,
+          "negativeScore": 0.96470696,
+          "positiveMention": 100,
+          "negativeMention": 116,
+          "score": -0.08229376
+        },
+        {
+          "atTime": "Jun 7, 2021, 10:00:00 AM",
+          "mention": 108,
+          "positiveScore": 0.9751981,
+          "negativeScore": 0.9048111,
+          "positiveMention": 39,
+          "negativeMention": 54,
+          "score": -0.11642015
+        },
+        {
+          "atTime": "Jun 7, 2021, 9:00:00 AM",
+          "mention": 118,
+          "positiveScore": 0.92881614,
+          "negativeScore": 0.9127362,
+          "positiveMention": 42,
+          "negativeMention": 58,
+          "score": -0.13928422
+        },
+        {
+          "atTime": "Jun 7, 2021, 8:00:00 AM",
+          "mention": 45,
+          "positiveScore": 0.96625715,
+          "negativeScore": 0.9511876,
+          "positiveMention": 24,
+          "negativeMention": 16,
+          "score": 0.19927925
+        },
+        {
+          "atTime": "Jun 7, 2021, 7:00:00 AM",
+          "mention": 54,
+          "positiveScore": 0.86444587,
+          "negativeScore": 0.95389825,
+          "positiveMention": 8,
+          "negativeMention": 37,
+          "score": -0.63063705
+        },
+        {
+          "atTime": "Jun 7, 2021, 6:00:00 AM",
+          "mention": 113,
+          "positiveScore": 0.9219465,
+          "negativeScore": 0.96211785,
+          "positiveMention": 33,
+          "negativeMention": 58,
+          "score": -0.2788857
+        },
+        {
+          "atTime": "Jun 7, 2021, 5:00:00 AM",
+          "mention": 123,
+          "positiveScore": 0.9278866,
+          "negativeScore": 0.9398302,
+          "positiveMention": 68,
+          "negativeMention": 34,
+          "score": 0.30531433
+        },
+        {
+          "atTime": "Jun 7, 2021, 4:00:00 AM",
+          "mention": 71,
+          "positiveScore": 0.9094151,
+          "negativeScore": 0.9601269,
+          "positiveMention": 33,
+          "negativeMention": 25,
+          "score": 0.10357807
+        },
+        {
+          "atTime": "Jun 7, 2021, 3:00:00 AM",
+          "mention": 196,
+          "positiveScore": 0.9310252,
+          "negativeScore": 0.96515024,
+          "positiveMention": 78,
+          "negativeMention": 77,
+          "score": -0.010945839
+        },
+        {
+          "atTime": "Jun 7, 2021, 2:00:00 AM",
+          "mention": 186,
+          "positiveScore": 0.9324655,
+          "negativeScore": 0.9432107,
+          "positiveMention": 82,
+          "negativeMention": 66,
+          "score": 0.09601529
+        },
+        {
+          "atTime": "Jun 7, 2021, 1:00:00 AM",
+          "mention": 252,
+          "positiveScore": 0.95261306,
+          "negativeScore": 0.9335485,
+          "positiveMention": 90,
+          "negativeMention": 82,
+          "score": 0.05339649
+        },
+        {
+          "atTime": "Jun 7, 2021, 12:00:00 AM",
+          "mention": 312,
+          "positiveScore": 0.94457984,
+          "negativeScore": 0.9548002,
+          "positiveMention": 165,
+          "negativeMention": 109,
+          "score": 0.18898705
+        }
+      ],
+      "symbol": "AAPL"
+    },
+    "supportResistance": {
+      "levels": [
+        107.32,
+        114.13,
+        122.25,
+        128.72,
+        135.53,
+        145.09
+      ]
+    },
+    "aggregateIndicator": {
+      "technicalAnalysis": {
+        "count": {
+          "buy": 1,
+          "sell": 8,
+          "neutral": 7
+        },
+        "signal": "neutral"
+      },
+      "trend": {
+        "adx": 16.866854,
+        "trending": false
+      }
+    },
+    "maxLoss": 4.16700,
+    "stockName": "AAPL",
+    "expectedReturn": 4.00
+  }
+]

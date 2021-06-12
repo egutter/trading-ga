@@ -158,7 +158,7 @@ public class YahooQuoteImporter {
         from.set(Calendar.DAY_OF_MONTH, fromDate.getDayOfMonth());
 
         try {
-            Map<String, Stock> stocks = YahooFinance.get(stockSymbols, from, to, Interval.DAILY);
+            Map<String, Stock> stocks = fetchStocksWithRetry(stockSymbols, to, from);
 
             System.out.println("Start import from " + from.getTime() + " to " + to.getTime());
             for (Stock stock : stocks.values()) {
@@ -190,6 +190,20 @@ public class YahooQuoteImporter {
             e.printStackTrace();
         }
 
+    }
+
+    public Map<String, Stock> fetchStocksWithRetry(String[] stockSymbols, Calendar to, Calendar from) throws IOException {
+        int tries = 0;
+        IOException lastError;
+        do {
+            try {
+                return YahooFinance.get(stockSymbols, from, to, Interval.DAILY);
+            } catch (IOException e) {
+                tries++;
+                lastError = e;
+            }
+        } while(tries < 3);
+        throw lastError;
     }
 
 }

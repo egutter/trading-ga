@@ -41,7 +41,7 @@ public class DailyTrader {
     private LocalDate tradeOn = LocalDate.now();
     private LocalDate lastTradeAt;
     private String baseOrdersPath;
-    private final static LocalDate today = LocalDate.now().plusDays(1);
+    private final static LocalDate today = LocalDate.now();
 
     public DailyTrader(TdaClient client, LocalDate tradeOn, LocalDate lastTradeAt, String baseOrdersPath) {
         this.client = client;
@@ -138,7 +138,7 @@ public class DailyTrader {
         return (aDate.dayOfWeek().get() == DateTimeConstants.MONDAY);
     }
 
-    private void tradeGeneratedOrders() {
+    public void tradeGeneratedOrders() {
         addOcaSellLimitsForExecutedOrders();
         buyGeneratedOrders();
     }

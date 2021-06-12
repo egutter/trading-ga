@@ -23,19 +23,32 @@ public class OneDayCandidateRunner {
     private final LocalDate fromDate;
     private final LocalDate toDate;
     private final List<String> resultBuffer;
+    private List<String> stockSymbols;
+    private List<Candidate> candidates;
 
     public OneDayCandidateRunner(LocalDate fromDate, LocalDate toDate) {
+        this(fromDate,
+                toDate,
+                StockMarket.allSectorsStockSymbols(),
+                new CandidatesFileHandler().fromJson("rsi_cross_down_all_candidates.json"));
+    }
+
+    public OneDayCandidateRunner(LocalDate fromDate, LocalDate toDate, List<String> stockSymbols, List<Candidate> candidates) {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.resultBuffer = new ArrayList<String>();
+        this.stockSymbols = stockSymbols;
+        this.candidates = candidates;
     }
 
     public static void main(String[] args) {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2020, 1, 1);
 //        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 6, 4);
-        OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn);
+        LocalDate tradeOn = new LocalDate(2021, 6, 11);
+        OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn,
+                StockMarket.allSmallMedCapSymbols(),
+                new CandidatesFileHandler().fromJson("rsi_cross_down_mid_small_cap_candidates.json"));
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
         System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");
@@ -45,7 +58,6 @@ public class OneDayCandidateRunner {
 
         Map<String, Pair<Integer, List<Candidate>>> countStockBought = new HashMap<String, Pair<Integer, List<Candidate>>>();
 
-        List<String> stockSymbols = StockMarket.allSectorsStockSymbols();
         System.out.println("Generating orders for [ " + stockSymbols.size() + " ] stocks");
         Map<String, List<BuyOrderWithPendingSellOrders>> allBuyOrderWithPendingSellOrders = new HashMap<>();
         stockSymbols.stream().forEach(stockSymbol -> {
@@ -134,8 +146,7 @@ public class OneDayCandidateRunner {
     }
 
     public List<Candidate> candidates() {
-        return new CandidatesFileHandler().fromJson("rsi_cross_down_all_candidates.json");
-//        return new CandidatesFileHandler().fromJson("rsi_cross_down_mid_small_cap_candidates.json");
+        return this.candidates;
     }
 
     public List<String> getResultBuffer() {

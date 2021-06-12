@@ -39,7 +39,9 @@ public class FinnhubClient {
         return fetchFinnhubDataFrom(stock, NewsSentiment.class, (symbol) -> buildSentimentUrl(symbol));
     }
     public SocialSentiment socialSentimentFor(String stock) {
-        return fetchFinnhubDataFrom(stock, SocialSentiment.class, (symbol) -> buildSocialSentimentUrl(symbol));
+        // Not very useful so far
+        return new SocialSentiment();
+//        return fetchFinnhubDataFrom(stock, SocialSentiment.class, (symbol) -> buildSocialSentimentUrl(symbol));
     }
 
     public SupportResistance supportResistanceFor(String stock) {

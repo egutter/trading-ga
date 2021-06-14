@@ -4,9 +4,7 @@ import com.egutter.trading.runner.YahooQuoteImporter;
 import org.joda.time.LocalDate;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 

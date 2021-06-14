@@ -99,6 +99,10 @@ public class StockGroup {
         return stockSymbols.contains(stockSymbol);
     }
 
+    public boolean periodIsOver(int years) {
+        return toDate.minusYears(years).isAfter(fromDate);
+    }
+
     public void addStockSymbol(String stockSymbol) {
         this.stockSymbols.add(stockSymbol);
     }

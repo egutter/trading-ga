@@ -37,7 +37,7 @@ public class CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory implemen
 
         Portfolio portfolio = new Portfolio(StockTradingFitnessEvaluator.INITIAL_CASH);
 
-        BitString genome = new BitString("10101011000111010000001000010011001101001");
+        BitString genome = new BitString("00010010000111011101111001010101010111100");
         TriggerBuyConditionalOrderDecision tbcod = new CrossOverTriggerBuyConditionalOrderDecisionStrategyFactory(portfolio, genome,
                 RelativeStrengthIndexCrossDownGenerator.class,
                 Arrays.asList(MovingAverageCrossOverGenerator.class)).generateBuyDecision(StockPrices.empty());

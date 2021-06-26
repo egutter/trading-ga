@@ -242,7 +242,7 @@ public class OneCandidateRunner {
     }
 
     private static void runAllSectorsOnAllCandidates(LocalDate fromDate) {
-        runSectorsWithCandidates(fromDate, TotalStockMarket.allStockGroups(), GlobalStockMarketCandidates.allRsiCrossDownCandidates());
+        runSectorsWithCandidates(fromDate, StockMarket.allMidSmallStockGroups(), GlobalStockMarketCandidates.allRsiCrossDownCandidates());
     }
 
     private static void runSpySectorsOnSomeCandidates(LocalDate fromDate) {

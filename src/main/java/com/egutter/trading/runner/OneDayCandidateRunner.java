@@ -49,8 +49,8 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2020, 1, 1);
-//        LocalDate toDate = LocalDate.now();
-        LocalDate tradeOn = new LocalDate(2021, 6, 11);
+        LocalDate tradeOn = LocalDate.now();
+//        LocalDate tradeOn = new LocalDate(2021, 6, 17);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn,
                 Arrays.asList(TotalStockMarket.all()),
                 new CandidatesFileHandler().fromJson("rsi_cross_down_total_market_candidates.json"));

@@ -1,7 +1,6 @@
 package com.egutter.trading.runner;
 
 import com.egutter.trading.decision.Candidate;
-import com.egutter.trading.decision.technicalanalysis.MacdCrossOver;
 import com.egutter.trading.order.BuyOrderWithPendingSellOrders;
 import com.egutter.trading.out.CandidatesFileHandler;
 import com.egutter.trading.stock.StockGroup;
@@ -49,11 +48,11 @@ public class OneDayCandidateRunner {
     public static void main(String[] args) {
         LocalTime startTime = LocalTime.now();
         LocalDate fromDate = new LocalDate(2020, 1, 1);
-        LocalDate tradeOn = LocalDate.now();
-//        LocalDate tradeOn = new LocalDate(2021, 6, 17);
+//        LocalDate tradeOn = LocalDate.now();
+        LocalDate tradeOn = new LocalDate(2021, 6, 25);
         OneDayCandidateRunner runner = new OneDayCandidateRunner(fromDate, tradeOn,
-                Arrays.asList(TotalStockMarket.all()),
-                new CandidatesFileHandler().fromJson("rsi_cross_down_total_market_candidates.json"));
+                Arrays.asList(StockMarket.allMidSmallCap()),
+                new CandidatesFileHandler().fromJson("rsi_cross_down_all_mid_small_cap_candidates.json"));
         runner.run(tradeOn);
         System.out.println(runner.runOutput("\n"));
         System.out.println("total time elapsed " + Seconds.secondsBetween(startTime, LocalTime.now()).getSeconds() + " seconds");

@@ -105,6 +105,11 @@ public class StockMarket {
                 map(symbol -> new StockGroup(symbol, new String[]{symbol})).
                 collect(Collectors.toList());
     }
+    public static List<StockGroup> ipoStockGroups() {
+        return asList(ipo()).stream().
+                map(symbol -> new StockGroup(symbol, new String[]{symbol})).
+                collect(Collectors.toList());
+    }
 
     public static String[] innovationSector() {
         return new String[]{
